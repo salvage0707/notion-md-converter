@@ -1,0 +1,22 @@
+{
+  "name": "@notion-md-converter/core",
+  "private": true,
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "test": "vitest",
+    "test:once": "vitest run",
+    "typecheck": "tsc --build --pretty"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@notion-md-converter/config": "workspace:*"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types/index.ts",
+    "./test-helper": "./src/test-helper/index.ts"
+  }
+}

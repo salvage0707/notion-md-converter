@@ -1,0 +1,17 @@
+{
+  "name": "@notion-md-converter/example",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "typecheck": "tsc --build --pretty",
+    "example:core": "tsx src/examples/core/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@notion-md-converter/core": "workspace:*",
+    "@notion-md-converter/config": "workspace:*"
+  }
+}

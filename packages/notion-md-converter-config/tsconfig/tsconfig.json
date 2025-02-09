@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "rootDir": "${configDir}/src",
+    "outDir": "${configDir}/dist",
+    /* 基本設定 */
+    "target": "es2020" /* より新しいJavaScript機能をサポート */,
+    "lib": ["es2020", "dom"] /* 基本的なES2020の機能のみをサポート */,
+
+    /* モジュール設定 */
+    "module": "ESNext" /* ESモジュールを使用 */,
+    "moduleResolution": "bundler" /* モダンなモジュール解決方式を使用 */,
+    "baseUrl": "./" /* モジュールのベースパスを設定 */,
+    "resolveJsonModule": true /* JSONファイルのインポートを許可 */,
+
+    /* 出力設定 */
+    "sourceMap": true /* デバッグ用のソースマップを生成 */,
+
+    /* 相互運用性 */
+    "esModuleInterop": true /* CommonJSモジュールとESモジュールの相互運用性を確保 */,
+    "forceConsistentCasingInFileNames": true /* ファイル名の大文字小文字の一貫性を強制 */,
+
+    /* 型チェック */
+    "strict": true /* 厳格な型チェックを有効化 */,
+    "skipLibCheck": true /* 型定義ファイルのチェックをスキップ */,
+    "types": ["vitest/globals"],
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"] /* コンパイル対象のファイルを指定 */,
+  "exclude": ["**node_modules**", "**dist**"] /* コンパイル対象から除外するファイルを指定 */
+}

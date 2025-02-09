@@ -1,0 +1,14 @@
+{
+  "name": "@notion-md-converter/config",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    "./tsconfig/*": "./tsconfig/*"
+  }
+}

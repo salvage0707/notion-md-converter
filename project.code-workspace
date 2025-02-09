@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "all",
+      "path": "."
+    },
+    {
+      "path": "packages/notion-md-converter-core"
+    },
+    {
+      "path": "packages/notion-md-converter-config"
+    },
+    {
+      "path": "packages/notion-md-converter-example"
+    }
+  ],
+  "settings": {
+    "cSpell.words": ["toggleable"],
+    "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    }
+  }
+}
