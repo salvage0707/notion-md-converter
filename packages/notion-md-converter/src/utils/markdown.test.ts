@@ -26,13 +26,13 @@ describe("heading", () => {
   });
 });
 
-describe("convertToBold", () => {
+describe("bold", () => {
   it("テキストを太字に変換できること", () => {
-    expect(MarkdownUtils.convertToBold("Hello")).toBe("**Hello**");
+    expect(MarkdownUtils.bold("Hello")).toBe("**Hello**");
   });
 
   it("空文字を太字に変換できること", () => {
-    expect(MarkdownUtils.convertToBold("")).toBe("****");
+    expect(MarkdownUtils.bold("")).toBe("****");
   });
 });
 
@@ -82,8 +82,12 @@ describe("convertToBulletList", () => {
 
 describe("convertToNumberedList", () => {
   it("番号付きリストに変換できること", () => {
-    expect(MarkdownUtils.convertToNumberedList("First item", 1)).toBe("1. First item");
-    expect(MarkdownUtils.convertToNumberedList("Second item", 2)).toBe("2. Second item");
+    expect(MarkdownUtils.convertToNumberedList("First item", 1)).toBe(
+      "1. First item"
+    );
+    expect(MarkdownUtils.convertToNumberedList("Second item", 2)).toBe(
+      "2. Second item"
+    );
   });
 });
 
@@ -100,36 +104,42 @@ describe("convertToCheckList", () => {
 describe("convertToLink", () => {
   it("テキストとURLからリンクに変換できること", () => {
     expect(MarkdownUtils.convertToLink("Text", "https://example.com")).toBe(
-      "[Text](https://example.com)",
+      "[Text](https://example.com)"
     );
   });
 
   it("空のテキストとURLからリンクに変換できること", () => {
-    expect(MarkdownUtils.convertToLink("", "https://example.com")).toBe("[](https://example.com)");
+    expect(MarkdownUtils.convertToLink("", "https://example.com")).toBe(
+      "[](https://example.com)"
+    );
   });
 });
 
 describe("convertToReferenceLink", () => {
   it("参照リンクに変換できること", () => {
-    expect(MarkdownUtils.convertToReferenceLink("Text", "1", "https://example.com")).toBe(
-      "[Text][1]\n[1]: https://example.com",
-    );
+    expect(
+      MarkdownUtils.convertToReferenceLink("Text", "1", "https://example.com")
+    ).toBe("[Text][1]\n[1]: https://example.com");
   });
 });
 
 describe("convertToCodeBlock", () => {
   it("言語指定ありでコードブロックに変換できること", () => {
     expect(MarkdownUtils.convertToCodeBlock("const x = 1;", "typescript")).toBe(
-      "```typescript\nconst x = 1;\n```",
+      "```typescript\nconst x = 1;\n```"
     );
   });
 
   it("言語指定なしでコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToCodeBlock("const x = 1;")).toBe("```\nconst x = 1;\n```");
+    expect(MarkdownUtils.convertToCodeBlock("const x = 1;")).toBe(
+      "```\nconst x = 1;\n```"
+    );
   });
 
   it("複数行のコードをコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToCodeBlock("line1\nline2")).toBe("```\nline1\nline2\n```");
+    expect(MarkdownUtils.convertToCodeBlock("line1\nline2")).toBe(
+      "```\nline1\nline2\n```"
+    );
   });
 });
 
@@ -139,7 +149,9 @@ describe("convertToIndentedCodeBlock", () => {
   });
 
   it("複数行のテキストをインデント付きコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToIndentedCodeBlock("line1\nline2")).toBe("    line1\n    line2");
+    expect(MarkdownUtils.convertToIndentedCodeBlock("line1\nline2")).toBe(
+      "    line1\n    line2"
+    );
   });
 });
 
@@ -154,7 +166,7 @@ describe("convertToBlockquote", () => {
 
   it("改行を含むテキストを引用に変換できること", () => {
     expect(MarkdownUtils.convertToBlockquote("Line 1\nLine 2\nLine 3")).toBe(
-      "> Line 1\n> Line 2\n> Line 3",
+      "> Line 1\n> Line 2\n> Line 3"
     );
   });
 });
@@ -182,7 +194,10 @@ describe("convertToTable", () => {
   });
 
   it("配置指定なしのテーブルに変換できること", () => {
-    const headers: TableHeader[] = [{ content: "Header1" }, { content: "Header2" }];
+    const headers: TableHeader[] = [
+      { content: "Header1" },
+      { content: "Header2" },
+    ];
     const rows: TableCell[][] = [[{ content: "1" }, { content: "2" }]];
 
     const expected = [
@@ -195,7 +210,10 @@ describe("convertToTable", () => {
   });
 
   it("データ行がない場合は、ヘッダーとセパレータ行のみを返すこと", () => {
-    const headers: TableHeader[] = [{ content: "Header1" }, { content: "Header2" }];
+    const headers: TableHeader[] = [
+      { content: "Header1" },
+      { content: "Header2" },
+    ];
     const rows: TableCell[][] = [];
 
     const expected = [

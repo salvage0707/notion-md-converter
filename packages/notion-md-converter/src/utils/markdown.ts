@@ -15,10 +15,7 @@ export type TableHeader = {
  * Heading
  */
 
-const heading = (
-  text: string,
-  level: 1 | 2 | 3 | 4 | 5 | 6
-): string => {
+const heading = (text: string, level: 1 | 2 | 3 | 4 | 5 | 6): string => {
   return `${"#".repeat(level)} ${text}`;
 };
 
@@ -51,7 +48,7 @@ export const COLOR_MAP: ColorMap = {
   brown_background: "brown",
 };
 
-const convertToBold = (text: string): string => {
+const bold = (text: string): string => {
   return `**${text}**`;
 };
 
@@ -283,7 +280,7 @@ export const convertRichTextsToMarkdown = (
   ): string => {
     let markdown = text.plain_text;
     if (text.annotations.bold && enableAnnotations.bold) {
-      markdown = convertToBold(markdown);
+      markdown = bold(markdown);
     }
     if (text.annotations.italic && enableAnnotations.italic) {
       markdown = convertToItalic(markdown);
@@ -314,7 +311,7 @@ export const convertRichTextsToMarkdown = (
 
 export const MarkdownUtils = {
   heading,
-  convertToBold,
+  bold: bold,
   convertToItalic,
   convertToStrikethrough,
   convertToInlineCode,
