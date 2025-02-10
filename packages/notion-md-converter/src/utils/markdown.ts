@@ -83,7 +83,7 @@ const numberedList = (text: string, number: number): string => {
   return `${number}. ${text}`;
 };
 
-const convertToCheckList = (text: string, checked: boolean): string => {
+const checkList = (text: string, checked: boolean): string => {
   return `- [${checked ? "x" : " "}] ${text}`;
 };
 
@@ -315,7 +315,7 @@ export const MarkdownUtils = {
   underline,
   bulletList,
   numberedList,
-  convertToCheckList,
+  checkList,
   convertToLink,
   convertToReferenceLink,
   convertToImage,

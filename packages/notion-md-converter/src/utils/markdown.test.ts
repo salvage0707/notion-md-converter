@@ -97,13 +97,13 @@ describe("numberedList", () => {
   });
 });
 
-describe("convertToCheckList", () => {
+describe("checkList", () => {
   it("チェック済みのチェックリストに変換できること", () => {
-    expect(MarkdownUtils.convertToCheckList("Task", true)).toBe("- [x] Task");
+    expect(MarkdownUtils.checkList("Task", true)).toBe("- [x] Task");
   });
 
   it("未チェックのチェックリストに変換できること", () => {
-    expect(MarkdownUtils.convertToCheckList("Task", false)).toBe("- [ ] Task");
+    expect(MarkdownUtils.checkList("Task", false)).toBe("- [ ] Task");
   });
 });
 
