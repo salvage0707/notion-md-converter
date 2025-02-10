@@ -56,7 +56,7 @@ const italic = (text: string): string => {
   return `*${text}*`;
 };
 
-const convertToStrikethrough = (text: string): string => {
+const strikethrough = (text: string): string => {
   return `~~${text}~~`;
 };
 
@@ -286,7 +286,7 @@ export const convertRichTextsToMarkdown = (
       markdown = italic(markdown);
     }
     if (text.annotations.strikethrough && enableAnnotations.strikethrough) {
-      markdown = convertToStrikethrough(markdown);
+      markdown = strikethrough(markdown);
     }
     if (text.annotations.underline && enableAnnotations.underline) {
       markdown = convertToUnderline(markdown);
@@ -313,7 +313,7 @@ export const MarkdownUtils = {
   heading,
   bold,
   italic,
-  convertToStrikethrough,
+  strikethrough,
   convertToInlineCode,
   convertToBulletList,
   convertToNumberedList,

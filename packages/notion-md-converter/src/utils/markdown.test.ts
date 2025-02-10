@@ -46,13 +46,13 @@ describe("italic", () => {
   });
 });
 
-describe("convertToStrikethrough", () => {
+describe("strikethrough", () => {
   it("テキストを取り消し線付きに変換できること", () => {
-    expect(MarkdownUtils.convertToStrikethrough("Hello")).toBe("~~Hello~~");
+    expect(MarkdownUtils.strikethrough("Hello")).toBe("~~Hello~~");
   });
 
   it("空文字を取り消し線付きに変換できること", () => {
-    expect(MarkdownUtils.convertToStrikethrough("")).toBe("~~~~");
+    expect(MarkdownUtils.strikethrough("")).toBe("~~~~");
   });
 });
 
