@@ -7,7 +7,7 @@ export const createMarkdownBulletedListItemTransformer = () => {
       block.bulleted_list_item.rich_text
     );
     const formattedChildren = MarkdownUtils.indent(children);
-    const bulletText = MarkdownUtils.convertToBulletList(text);
+    const bulletText = MarkdownUtils.bulletList(text);
 
     if (children === "") {
       return bulletText;

@@ -76,17 +76,17 @@ describe("inlineCode", () => {
   });
 });
 
-describe("convertToBulletList", () => {
+describe("bulletList", () => {
   it("デフォルトスタイル（ハイフン）で箇条書きに変換できること", () => {
-    expect(MarkdownUtils.convertToBulletList("Item")).toBe("- Item");
+    expect(MarkdownUtils.bulletList("Item")).toBe("- Item");
   });
 
   it("アスタリスクスタイルで箇条書きに変換できること", () => {
-    expect(MarkdownUtils.convertToBulletList("Item", "*")).toBe("* Item");
+    expect(MarkdownUtils.bulletList("Item", "*")).toBe("* Item");
   });
 
   it("プラススタイルで箇条書きに変換できること", () => {
-    expect(MarkdownUtils.convertToBulletList("Item", "+")).toBe("+ Item");
+    expect(MarkdownUtils.bulletList("Item", "+")).toBe("+ Item");
   });
 });
 

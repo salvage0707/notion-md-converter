@@ -75,10 +75,7 @@ const convertToColor = (text: string, color: ApiColor): string => {
 /**
  * リスト変換
  */
-const convertToBulletList = (
-  text: string,
-  style: BulletStyle = "-"
-): string => {
+const bulletList = (text: string, style: BulletStyle = "-"): string => {
   return `${style} ${text}`;
 };
 
@@ -316,7 +313,7 @@ export const MarkdownUtils = {
   strikethrough,
   inlineCode,
   underline,
-  convertToBulletList,
+  bulletList,
   convertToNumberedList,
   convertToCheckList,
   convertToLink,
