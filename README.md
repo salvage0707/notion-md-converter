@@ -1,8 +1,5 @@
 <div align="center">
   <h1>Notion to Markdown Converter</h1>
-  <p>
-    <b>This library converts Notion API responses into Markdown. It allows easy customization of the output Markdown.</b>
-  </p>
 </div>
 
 **notion-md-converter** is a library that converts Notion blocks into Markdown text.Markdown syntax varies slightly depending on the platform being used. For example, some platforms recognize equations enclosed in `$$` as equation blocks, while others do not.
