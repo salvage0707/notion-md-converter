@@ -1,8 +1,5 @@
 import type { ApiColor, RichText } from "../types";
 
-/**
- * 見出しに変換
- */
 export type BulletStyle = "-" | "*" | "+";
 
 export type TableCell = {
@@ -14,7 +11,11 @@ export type TableHeader = {
   alignment?: "left" | "center" | "right";
 };
 
-const convertToHeading = (
+/**
+ * Heading
+ */
+
+const heading = (
   text: string,
   level: 1 | 2 | 3 | 4 | 5 | 6
 ): string => {
@@ -312,7 +313,7 @@ export const convertRichTextsToMarkdown = (
 };
 
 export const MarkdownUtils = {
-  convertToHeading,
+  heading,
   convertToBold,
   convertToItalic,
   convertToStrikethrough,

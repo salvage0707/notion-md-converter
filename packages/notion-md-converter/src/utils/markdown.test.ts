@@ -1,28 +1,28 @@
 import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
 
-describe("convertToHeading", () => {
+describe("heading", () => {
   it("レベル1の見出しに変換できること", () => {
-    expect(MarkdownUtils.convertToHeading("Hello", 1)).toBe("# Hello");
+    expect(MarkdownUtils.heading("Hello", 1)).toBe("# Hello");
   });
 
   it("レベル2の見出しに変換できること", () => {
-    expect(MarkdownUtils.convertToHeading("Hello", 2)).toBe("## Hello");
+    expect(MarkdownUtils.heading("Hello", 2)).toBe("## Hello");
   });
 
   it("レベル3の見出しに変換できること", () => {
-    expect(MarkdownUtils.convertToHeading("Hello", 3)).toBe("### Hello");
+    expect(MarkdownUtils.heading("Hello", 3)).toBe("### Hello");
   });
 
   it("レベル4の見出しに変換できること", () => {
-    expect(MarkdownUtils.convertToHeading("Hello", 4)).toBe("#### Hello");
+    expect(MarkdownUtils.heading("Hello", 4)).toBe("#### Hello");
   });
 
   it("レベル5の見出しに変換できること", () => {
-    expect(MarkdownUtils.convertToHeading("Hello", 5)).toBe("##### Hello");
+    expect(MarkdownUtils.heading("Hello", 5)).toBe("##### Hello");
   });
 
   it("レベル6の見出しに変換できること", () => {
-    expect(MarkdownUtils.convertToHeading("Hello", 6)).toBe("###### Hello");
+    expect(MarkdownUtils.heading("Hello", 6)).toBe("###### Hello");
   });
 });
 

@@ -80,7 +80,7 @@ export const createMarkdownCustomHeadingTransformer = () => {
 	// Use a function to create a transformer
   return createBasicHeadingTransformer(({ level, richText }) => {
     const text = MarkdownUtils.convertRichTextsToMarkdown(richText);
-    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.convertToHeading(text, level + 1)); // add 1 level
+    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.heading(text, level + 1)); // add 1 level
   });
 };
 
