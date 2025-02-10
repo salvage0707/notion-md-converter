@@ -56,13 +56,13 @@ describe("strikethrough", () => {
   });
 });
 
-describe("convertToInlineCode", () => {
+describe("inlineCode", () => {
   it("テキストをインラインコードに変換できること", () => {
-    expect(MarkdownUtils.convertToInlineCode("code")).toBe("`code`");
+    expect(MarkdownUtils.inlineCode("code")).toBe("`code`");
   });
 
   it("空文字をインラインコードに変換できること", () => {
-    expect(MarkdownUtils.convertToInlineCode("")).toBe("``");
+    expect(MarkdownUtils.inlineCode("")).toBe("``");
   });
 });
 

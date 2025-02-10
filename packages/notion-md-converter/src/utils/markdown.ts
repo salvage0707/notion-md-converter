@@ -60,7 +60,7 @@ const strikethrough = (text: string): string => {
   return `~~${text}~~`;
 };
 
-const convertToInlineCode = (text: string): string => {
+const inlineCode = (text: string): string => {
   return `\`${text}\``;
 };
 
@@ -292,7 +292,7 @@ export const convertRichTextsToMarkdown = (
       markdown = convertToUnderline(markdown);
     }
     if (text.annotations.code && enableAnnotations.code) {
-      markdown = convertToInlineCode(markdown);
+      markdown = inlineCode(markdown);
     }
     if (
       text.annotations.color &&
@@ -314,7 +314,7 @@ export const MarkdownUtils = {
   bold,
   italic,
   strikethrough,
-  convertToInlineCode,
+  inlineCode,
   convertToBulletList,
   convertToNumberedList,
   convertToCheckList,
