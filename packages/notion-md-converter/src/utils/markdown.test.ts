@@ -36,13 +36,13 @@ describe("bold", () => {
   });
 });
 
-describe("convertToItalic", () => {
+describe("italic", () => {
   it("テキストをイタリックに変換できること", () => {
-    expect(MarkdownUtils.convertToItalic("Hello")).toBe("*Hello*");
+    expect(MarkdownUtils.italic("Hello")).toBe("*Hello*");
   });
 
   it("空文字をイタリックに変換できること", () => {
-    expect(MarkdownUtils.convertToItalic("")).toBe("**");
+    expect(MarkdownUtils.italic("")).toBe("**");
   });
 });
 

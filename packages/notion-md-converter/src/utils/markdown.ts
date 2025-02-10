@@ -52,7 +52,7 @@ const bold = (text: string): string => {
   return `**${text}**`;
 };
 
-const convertToItalic = (text: string): string => {
+const italic = (text: string): string => {
   return `*${text}*`;
 };
 
@@ -283,7 +283,7 @@ export const convertRichTextsToMarkdown = (
       markdown = bold(markdown);
     }
     if (text.annotations.italic && enableAnnotations.italic) {
-      markdown = convertToItalic(markdown);
+      markdown = italic(markdown);
     }
     if (text.annotations.strikethrough && enableAnnotations.strikethrough) {
       markdown = convertToStrikethrough(markdown);
@@ -311,8 +311,8 @@ export const convertRichTextsToMarkdown = (
 
 export const MarkdownUtils = {
   heading,
-  bold: bold,
-  convertToItalic,
+  bold,
+  italic,
   convertToStrikethrough,
   convertToInlineCode,
   convertToBulletList,
