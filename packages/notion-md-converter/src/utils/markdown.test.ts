@@ -90,14 +90,10 @@ describe("bulletList", () => {
   });
 });
 
-describe("convertToNumberedList", () => {
+describe("numberedList", () => {
   it("番号付きリストに変換できること", () => {
-    expect(MarkdownUtils.convertToNumberedList("First item", 1)).toBe(
-      "1. First item"
-    );
-    expect(MarkdownUtils.convertToNumberedList("Second item", 2)).toBe(
-      "2. Second item"
-    );
+    expect(MarkdownUtils.numberedList("First item", 1)).toBe("1. First item");
+    expect(MarkdownUtils.numberedList("Second item", 2)).toBe("2. Second item");
   });
 });
 

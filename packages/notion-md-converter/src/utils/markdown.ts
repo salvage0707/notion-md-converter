@@ -79,7 +79,7 @@ const bulletList = (text: string, style: BulletStyle = "-"): string => {
   return `${style} ${text}`;
 };
 
-const convertToNumberedList = (text: string, number: number): string => {
+const numberedList = (text: string, number: number): string => {
   return `${number}. ${text}`;
 };
 
@@ -314,7 +314,7 @@ export const MarkdownUtils = {
   inlineCode,
   underline,
   bulletList,
-  convertToNumberedList,
+  numberedList,
   convertToCheckList,
   convertToLink,
   convertToReferenceLink,
