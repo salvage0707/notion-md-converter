@@ -1,7 +1,4 @@
-import {
-  createChildDatabaseBlock,
-  createTransformerContext,
-} from "../test-helper";
+import { createChildDatabaseBlock, createTransformerContext } from "../test-helper";
 import { createMarkdownChildDatabaseTransformer } from "./createMarkdownChildDatabaseTransformer";
 
 describe("createMarkdownChildDatabaseTransformer", () => {

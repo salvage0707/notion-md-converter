@@ -15,11 +15,7 @@
     "check:fix": "biome check --write",
     "type-check": "tsc --build --pretty"
   },
-  "keywords": [
-    "notion",
-    "markdown",
-    "converter"
-  ],
+  "keywords": ["notion", "markdown", "converter"],
   "author": "salvage0707",
   "license": "MIT",
   "dependencies": {

@@ -66,21 +66,14 @@ const ROOT_BLOCK_TYPES = [
 ] as const satisfies RootBlockType[];
 
 export const isRootBlock = (block: Block): block is RootBlock => {
-  return (
-    block.object === "block" &&
-    (ROOT_BLOCK_TYPES as readonly string[]).includes(block.type)
-  );
+  return block.object === "block" && (ROOT_BLOCK_TYPES as readonly string[]).includes(block.type);
 };
 
-export const isNotionInternalFile = (
-  file: FileObject
-): file is NotionInternalFile => {
+export const isNotionInternalFile = (file: FileObject): file is NotionInternalFile => {
   return file.type === "file";
 };
 
-export const isNotionExternalFile = (
-  file: FileObject
-): file is NotionExternalFile => {
+export const isNotionExternalFile = (file: FileObject): file is NotionExternalFile => {
   return file.type === "external";
 };
 
@@ -92,9 +85,7 @@ export const isBreadcrumbBlock = (block: Block): block is BreadcrumbBlock => {
   return block.type === "breadcrumb";
 };
 
-export const isBulletedListItemBlock = (
-  block: Block
-): block is BulletedListItemBlock => {
+export const isBulletedListItemBlock = (block: Block): block is BulletedListItemBlock => {
   return block.type === "bulleted_list_item" && Array.isArray(block.children);
 };
 
@@ -146,9 +137,7 @@ export const isLinkPreviewBlock = (block: Block): block is LinkPreviewBlock => {
   return block.type === "link_preview";
 };
 
-export const isNumberedListItemBlock = (
-  block: Block
-): block is NumberedListItemBlock => {
+export const isNumberedListItemBlock = (block: Block): block is NumberedListItemBlock => {
   return block.type === "numbered_list_item" && Array.isArray(block.children);
 };
 
@@ -176,9 +165,7 @@ export const isTableRowBlock = (block: Block): block is TableRowBlock => {
   return block.type === "table_row";
 };
 
-export const isTableOfContentsBlock = (
-  block: Block
-): block is TableOfContentsBlock => {
+export const isTableOfContentsBlock = (block: Block): block is TableOfContentsBlock => {
   return block.type === "table_of_contents";
 };
 

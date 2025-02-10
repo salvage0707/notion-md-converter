@@ -1,8 +1,4 @@
-import {
-  createCodeBlock,
-  createTextRichText,
-  createTransformerContext,
-} from "../test-helper";
+import { createCodeBlock, createTextRichText, createTransformerContext } from "../test-helper";
 import { createMarkdownCodeTransformer } from "./createMarkdownCodeTransformer";
 
 describe("createMarkdownCodeTransformer", () => {

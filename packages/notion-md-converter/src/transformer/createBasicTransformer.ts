@@ -1,63 +1,63 @@
-import { isNumberedListItemBlock } from "../utils";
 import type {
-  BookmarkTransformer,
-  BreadcrumbTransformer,
-  BulletedListItemTransformer,
-  CalloutTransformer,
-  ChildDatabaseTransformer,
-  ChildPageTransformer,
-  CodeTransformer,
-  ColumnListTransformer,
-  DividerTransformer,
-  EmbedTransformer,
-  EquationTransformer,
-  FileTransformer,
-  HeadingTransformer,
-  ImageTransformer,
-  LinkPreviewTransformer,
-  NumberedListItemTransformer,
-  ParagraphTransformer,
-  PdfTransformer,
-  QuoteTransformer,
-  SyncedBlockTransformer,
-  TableOfContentsTransformer,
-  TableTransformer,
-  ToDoTransformer,
-  ToggleTransformer,
-  VideoTransformer,
-  BookmarkBlock,
-  BreadcrumbBlock,
-  BulletedListItemBlock,
-  CalloutBlock,
-  CodeBlock,
   ApiColor,
+  Block,
+  BookmarkBlock,
+  BookmarkTransformer,
+  BreadcrumbBlock,
+  BreadcrumbTransformer,
+  BulletedListItemBlock,
+  BulletedListItemTransformer,
+  CalloutBlock,
+  CalloutTransformer,
+  ChildDatabaseBlock,
+  ChildDatabaseTransformer,
+  ChildPageBlock,
+  ChildPageTransformer,
+  CodeBlock,
+  CodeTransformer,
   ColumnBlock,
   ColumnListBlock,
+  ColumnListTransformer,
   DividerBlock,
+  DividerTransformer,
+  EmbedBlock,
+  EmbedTransformer,
   EquationBlock,
+  EquationTransformer,
   FileBlock,
+  FileTransformer,
   Heading1Block,
   Heading2Block,
   Heading3Block,
+  HeadingTransformer,
   ImageBlock,
+  ImageTransformer,
   LinkPreviewBlock,
+  LinkPreviewTransformer,
   NumberedListItemBlock,
+  NumberedListItemTransformer,
   ParagraphBlock,
+  ParagraphTransformer,
   PdfBlock,
+  PdfTransformer,
   QuoteBlock,
+  QuoteTransformer,
   RichText,
   SyncedBlock,
+  SyncedBlockTransformer,
   TableBlock,
   TableOfContentsBlock,
+  TableOfContentsTransformer,
   TableRowBlock,
+  TableTransformer,
   ToDoBlock,
+  ToDoTransformer,
   ToggleBlock,
+  ToggleTransformer,
   VideoBlock,
-  EmbedBlock,
-  ChildDatabaseBlock,
-  ChildPageBlock,
-  Block,
+  VideoTransformer,
 } from "../types";
+import { isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -66,7 +66,7 @@ export class UnsupportedBlockError extends Error {
 }
 
 export const createBasicBookmarkTransformer = (
-  execute: (args: { block: BookmarkBlock }) => string
+  execute: (args: { block: BookmarkBlock }) => string,
 ): BookmarkTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -74,7 +74,7 @@ export const createBasicBookmarkTransformer = (
 };
 
 export const createBasicBreadcrumbTransformer = (
-  execute: (args: { block: BreadcrumbBlock }) => string
+  execute: (args: { block: BreadcrumbBlock }) => string,
 ): BreadcrumbTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -82,7 +82,7 @@ export const createBasicBreadcrumbTransformer = (
 };
 
 export const createBasicCalloutTransformer = (
-  execute: (args: { block: CalloutBlock; children: string }) => string
+  execute: (args: { block: CalloutBlock; children: string }) => string,
 ): CalloutTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -91,7 +91,7 @@ export const createBasicCalloutTransformer = (
 };
 
 export const createBasicCodeTransformer = (
-  execute: (args: { block: CodeBlock }) => string
+  execute: (args: { block: CodeBlock }) => string,
 ): CodeTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -99,19 +99,17 @@ export const createBasicCodeTransformer = (
 };
 
 export const createBasicColumnListTransformer = (
-  execute: (args: { block: ColumnListBlock; columns: string[] }) => string
+  execute: (args: { block: ColumnListBlock; columns: string[] }) => string,
 ): ColumnListTransformer => {
   return (context) => {
     const columns = context.currentBlock.children as ColumnBlock[];
-    const columnsText = columns.map((column) =>
-      context.execute(column.children)
-    );
+    const columnsText = columns.map((column) => context.execute(column.children));
     return execute({ block: context.currentBlock, columns: columnsText });
   };
 };
 
 export const createBasicDividerTransformer = (
-  execute: (args: { block: DividerBlock }) => string
+  execute: (args: { block: DividerBlock }) => string,
 ): DividerTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -119,7 +117,7 @@ export const createBasicDividerTransformer = (
 };
 
 export const createBasicEquationTransformer = (
-  execute: (args: { block: EquationBlock }) => string
+  execute: (args: { block: EquationBlock }) => string,
 ): EquationTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -127,7 +125,7 @@ export const createBasicEquationTransformer = (
 };
 
 export const createBasicFileTransformer = (
-  execute: (args: { block: FileBlock }) => string
+  execute: (args: { block: FileBlock }) => string,
 ): FileTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -141,7 +139,7 @@ export const createBasicHeadingTransformer = (
     richText: RichText[];
     isToggleable: boolean;
     color: ApiColor;
-  }) => string
+  }) => string,
 ): HeadingTransformer => {
   return (context) => {
     switch (context.currentBlock.type) {
@@ -176,7 +174,7 @@ export const createBasicHeadingTransformer = (
 };
 
 export const createBasicImageTransformer = (
-  execute: (args: { block: ImageBlock }) => string
+  execute: (args: { block: ImageBlock }) => string,
 ): ImageTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -184,7 +182,7 @@ export const createBasicImageTransformer = (
 };
 
 export const createBasicLinkPreviewTransformer = (
-  execute: (args: { block: LinkPreviewBlock }) => string
+  execute: (args: { block: LinkPreviewBlock }) => string,
 ): LinkPreviewTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -192,7 +190,7 @@ export const createBasicLinkPreviewTransformer = (
 };
 
 export const createBasicBulletedListItemTransformer = (
-  execute: (args: { block: BulletedListItemBlock; children: string }) => string
+  execute: (args: { block: BulletedListItemBlock; children: string }) => string,
 ): BulletedListItemTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -205,7 +203,7 @@ export const createBasicNumberedListItemTransformer = (
     block: NumberedListItemBlock;
     children: string;
     index: number;
-  }) => string
+  }) => string,
 ): NumberedListItemTransformer => {
   return (context) => {
     const beforeBlocks = context.blocks.slice(0, context.currentBlockIndex);
@@ -224,7 +222,7 @@ export const createBasicNumberedListItemTransformer = (
 };
 
 export const createBasicTodoTransformer = (
-  execute: (args: { block: ToDoBlock; children: string }) => string
+  execute: (args: { block: ToDoBlock; children: string }) => string,
 ): ToDoTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -233,7 +231,7 @@ export const createBasicTodoTransformer = (
 };
 
 export const createBasicParagraphTransformer = (
-  execute: (args: { block: ParagraphBlock; children: string }) => string
+  execute: (args: { block: ParagraphBlock; children: string }) => string,
 ): ParagraphTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -242,7 +240,7 @@ export const createBasicParagraphTransformer = (
 };
 
 export const createBasicPdfTransformer = (
-  execute: (args: { block: PdfBlock }) => string
+  execute: (args: { block: PdfBlock }) => string,
 ): PdfTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -250,7 +248,7 @@ export const createBasicPdfTransformer = (
 };
 
 export const createBasicQuoteTransformer = (
-  execute: (args: { block: QuoteBlock; children: string }) => string
+  execute: (args: { block: QuoteBlock; children: string }) => string,
 ): QuoteTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -263,12 +261,11 @@ export const createBasicSyncedBlockTransformer = (
     block: SyncedBlock;
     isSynchronizationSource: boolean;
     children: string;
-  }) => string
+  }) => string,
 ): SyncedBlockTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
-    const isSynchronizationSource =
-      context.currentBlock.synced_block.synced_from === null;
+    const isSynchronizationSource = context.currentBlock.synced_block.synced_from === null;
     return execute({
       block: context.currentBlock,
       isSynchronizationSource,
@@ -278,7 +275,7 @@ export const createBasicSyncedBlockTransformer = (
 };
 
 export const createBasicTableOfContentsTransformer = (
-  execute: (args: { block: TableOfContentsBlock }) => string
+  execute: (args: { block: TableOfContentsBlock }) => string,
 ): TableOfContentsTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -290,7 +287,7 @@ export const createBasicTableTransformer = (
     block: TableBlock;
     header: TableRowBlock;
     rows: TableRowBlock[];
-  }) => string
+  }) => string,
 ): TableTransformer => {
   return (context) => {
     const block = context.currentBlock;
@@ -301,7 +298,7 @@ export const createBasicTableTransformer = (
 };
 
 export const createBasicToggleTransformer = (
-  execute: (args: { block: ToggleBlock; children: string }) => string
+  execute: (args: { block: ToggleBlock; children: string }) => string,
 ): ToggleTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -310,7 +307,7 @@ export const createBasicToggleTransformer = (
 };
 
 export const createBasicVideoTransformer = (
-  execute: (args: { block: VideoBlock }) => string
+  execute: (args: { block: VideoBlock }) => string,
 ): VideoTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -318,7 +315,7 @@ export const createBasicVideoTransformer = (
 };
 
 export const createBasicEmbedTransformer = (
-  execute: (args: { block: EmbedBlock }) => string
+  execute: (args: { block: EmbedBlock }) => string,
 ): EmbedTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -326,7 +323,7 @@ export const createBasicEmbedTransformer = (
 };
 
 export const createBasicChildDatabaseTransformer = (
-  execute: (args: { block: ChildDatabaseBlock }) => string
+  execute: (args: { block: ChildDatabaseBlock }) => string,
 ): ChildDatabaseTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
@@ -334,7 +331,7 @@ export const createBasicChildDatabaseTransformer = (
 };
 
 export const createBasicChildPageTransformer = (
-  execute: (args: { block: ChildPageBlock }) => string
+  execute: (args: { block: ChildPageBlock }) => string,
 ): ChildPageTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });

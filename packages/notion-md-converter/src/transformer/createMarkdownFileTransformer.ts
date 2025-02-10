@@ -6,7 +6,7 @@ import { createBasicFileTransformer } from "./createBasicTransformer";
 export const createMarkdownFileTransformer = (
   options: {
     fileAdapter?: FileAdaptor;
-  } = {}
+  } = {},
 ) => {
   return createBasicFileTransformer(({ block }) => {
     const adapter = options.fileAdapter ?? new NoChangeFileObjectAdaptor();

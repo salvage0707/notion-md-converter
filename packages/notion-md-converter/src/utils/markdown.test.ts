@@ -1,6 +1,6 @@
-import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
-import type { RichText } from "../types";
 import { createTextRichText } from "src/test-helper";
+import type { RichText } from "../types";
+import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
 
 describe("heading", () => {
   it("レベル1の見出しに変換できること", () => {
@@ -111,61 +111,47 @@ describe("checkList", () => {
 
 describe("link", () => {
   it("テキストとURLからリンクに変換できること", () => {
-    expect(MarkdownUtils.link("Text", "https://example.com")).toBe(
-      "[Text](https://example.com)"
-    );
+    expect(MarkdownUtils.link("Text", "https://example.com")).toBe("[Text](https://example.com)");
   });
 
   it("空のテキストとURLからリンクに変換できること", () => {
-    expect(MarkdownUtils.link("", "https://example.com")).toBe(
-      "[](https://example.com)"
-    );
+    expect(MarkdownUtils.link("", "https://example.com")).toBe("[](https://example.com)");
   });
 });
 
 describe("color", () => {
   it("赤色のテキストに変換できること", () => {
-    expect(MarkdownUtils.color("Hello", "red")).toBe(
-      '<span style="color: red">Hello</span>'
-    );
+    expect(MarkdownUtils.color("Hello", "red")).toBe('<span style="color: red">Hello</span>');
   });
 
   it("青色のテキストに変換できること", () => {
-    expect(MarkdownUtils.color("World", "blue")).toBe(
-      '<span style="color: blue">World</span>'
-    );
+    expect(MarkdownUtils.color("World", "blue")).toBe('<span style="color: blue">World</span>');
   });
 
   it("背景色付きのテキストに変換できること", () => {
     expect(MarkdownUtils.color("Test", "green_background")).toBe(
-      '<span style="color: green">Test</span>'
+      '<span style="color: green">Test</span>',
     );
   });
 
   it("空文字列を色付きテキストに変換できること", () => {
-    expect(MarkdownUtils.color("", "purple")).toBe(
-      '<span style="color: purple"></span>'
-    );
+    expect(MarkdownUtils.color("", "purple")).toBe('<span style="color: purple"></span>');
   });
 });
 
 describe("codeBlock", () => {
   it("言語指定ありでコードブロックに変換できること", () => {
     expect(MarkdownUtils.codeBlock("const x = 1;", "typescript")).toBe(
-      "```typescript\nconst x = 1;\n```"
+      "```typescript\nconst x = 1;\n```",
     );
   });
 
   it("言語指定なしでコードブロックに変換できること", () => {
-    expect(MarkdownUtils.codeBlock("const x = 1;")).toBe(
-      "```\nconst x = 1;\n```"
-    );
+    expect(MarkdownUtils.codeBlock("const x = 1;")).toBe("```\nconst x = 1;\n```");
   });
 
   it("複数行のコードをコードブロックに変換できること", () => {
-    expect(MarkdownUtils.codeBlock("line1\nline2")).toBe(
-      "```\nline1\nline2\n```"
-    );
+    expect(MarkdownUtils.codeBlock("line1\nline2")).toBe("```\nline1\nline2\n```");
   });
 });
 
@@ -179,9 +165,7 @@ describe("blockquote", () => {
   });
 
   it("改行を含むテキストを引用に変換できること", () => {
-    expect(MarkdownUtils.blockquote("Line 1\nLine 2\nLine 3")).toBe(
-      "> Line 1\n> Line 2\n> Line 3"
-    );
+    expect(MarkdownUtils.blockquote("Line 1\nLine 2\nLine 3")).toBe("> Line 1\n> Line 2\n> Line 3");
   });
 });
 
@@ -208,10 +192,7 @@ describe("table", () => {
   });
 
   it("配置指定なしのテーブルに変換できること", () => {
-    const headers: TableHeader[] = [
-      { content: "Header1" },
-      { content: "Header2" },
-    ];
+    const headers: TableHeader[] = [{ content: "Header1" }, { content: "Header2" }];
     const rows: TableCell[][] = [[{ content: "1" }, { content: "2" }]];
 
     const expected = [
@@ -224,10 +205,7 @@ describe("table", () => {
   });
 
   it("データ行がない場合は、ヘッダーとセパレータ行のみを返すこと", () => {
-    const headers: TableHeader[] = [
-      { content: "Header1" },
-      { content: "Header2" },
-    ];
+    const headers: TableHeader[] = [{ content: "Header1" }, { content: "Header2" }];
     const rows: TableCell[][] = [];
 
     const expected = [
@@ -275,14 +253,14 @@ describe("wrapWithNewLines", () => {
 
 describe("image", () => {
   it("テキストとURLから画像に変換できること", () => {
-    expect(
-      MarkdownUtils.image("Alt text", "https://example.com/image.jpg")
-    ).toBe("![Alt text](https://example.com/image.jpg)");
+    expect(MarkdownUtils.image("Alt text", "https://example.com/image.jpg")).toBe(
+      "![Alt text](https://example.com/image.jpg)",
+    );
   });
 
   it("空のテキストとURLから画像に変換できること", () => {
     expect(MarkdownUtils.image("", "https://example.com/image.jpg")).toBe(
-      "![](https://example.com/image.jpg)"
+      "![](https://example.com/image.jpg)",
     );
   });
 });
@@ -318,7 +296,7 @@ describe("details", () => {
 describe("video", () => {
   it("URLからvideoタグに変換できること", () => {
     expect(MarkdownUtils.video("https://example.com/video.mp4")).toBe(
-      '<video controls src="https://example.com/video.mp4"></video>'
+      '<video controls src="https://example.com/video.mp4"></video>',
     );
   });
 
@@ -378,9 +356,7 @@ describe("richTextsToMarkdown", () => {
         },
       }),
     ] as RichText[];
-    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe(
-      "**Hello** *World*"
-    );
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("**Hello** *World*");
   });
 
   it("アノテーションを無効化できること", () => {
@@ -403,9 +379,7 @@ describe("richTextsToMarkdown", () => {
       code: false,
       color: false,
     };
-    expect(
-      MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)
-    ).toBe("*Hello*");
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)).toBe("*Hello*");
   });
 
   it("空のリッチテキスト配列を処理できること", () => {
@@ -431,8 +405,8 @@ describe("richTextsToMarkdown", () => {
       code: false,
       color: true,
     };
-    expect(
-      MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)
-    ).toBe('<span style="color: red">Colored Text</span>');
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)).toBe(
+      '<span style="color: red">Colored Text</span>',
+    );
   });
 });

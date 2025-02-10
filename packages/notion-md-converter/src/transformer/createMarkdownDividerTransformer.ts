@@ -3,6 +3,6 @@ import { createBasicDividerTransformer } from "./createBasicTransformer";
 
 export const createMarkdownDividerTransformer = () => {
   return createBasicDividerTransformer(() =>
-    MarkdownUtils.wrapWithNewLines(MarkdownUtils.horizontalRule())
+    MarkdownUtils.wrapWithNewLines(MarkdownUtils.horizontalRule()),
   );
 };

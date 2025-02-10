@@ -6,7 +6,7 @@ import { createBasicVideoTransformer } from "./createBasicTransformer";
 export const createMarkdownVideoTransformer = (
   options: {
     fileAdaptor?: FileAdaptor;
-  } = {}
+  } = {},
 ) => {
   return createBasicVideoTransformer(({ block }) => {
     const adaptor = options.fileAdaptor ?? new NoChangeFileObjectAdaptor();

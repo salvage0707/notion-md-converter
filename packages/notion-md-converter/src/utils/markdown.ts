@@ -128,20 +128,13 @@ const blockquote = (text: string): string => {
 const table = (headers: TableHeader[], rows: TableCell[][]): string => {
   // 各列の最大長を計算
   const columnWidths = headers.map((header, index) => {
-    const cellsInColumn = [
-      header.content,
-      ...rows.map((row) => row[index].content),
-    ];
-    const maxLength = Math.max(
-      ...cellsInColumn.map((content) => content.length)
-    );
+    const cellsInColumn = [header.content, ...rows.map((row) => row[index].content)];
+    const maxLength = Math.max(...cellsInColumn.map((content) => content.length));
     return maxLength < 3 ? 3 : maxLength;
   });
 
   // ヘッダー行を生成（パディングを追加）
-  const headerRow = `| ${headers
-    .map((h, i) => h.content.padEnd(columnWidths[i]))
-    .join(" | ")} |`;
+  const headerRow = `| ${headers.map((h, i) => h.content.padEnd(columnWidths[i])).join(" | ")} |`;
 
   // セパレータ行を生成（長さを合わせる）
   const alignmentRow = `| ${headers
@@ -167,12 +160,7 @@ const table = (headers: TableHeader[], rows: TableCell[][]): string => {
 
   // データ行を生成（パディングを追加）
   const dataRows = rows
-    .map(
-      (row) =>
-        `| ${row
-          .map((cell, i) => cell.content.padEnd(columnWidths[i]))
-          .join(" | ")} |`
-    )
+    .map((row) => `| ${row.map((cell, i) => cell.content.padEnd(columnWidths[i])).join(" | ")} |`)
     .join("\n");
 
   return `${headerRow}\n${alignmentRow}\n${dataRows}`;
@@ -181,9 +169,7 @@ const table = (headers: TableHeader[], rows: TableCell[][]): string => {
 /**
  * 水平線変換
  */
-const horizontalRule = (
-  style: "hyphen" | "asterisk" | "underscore" = "hyphen"
-): string => {
+const horizontalRule = (style: "hyphen" | "asterisk" | "underscore" = "hyphen"): string => {
   switch (style) {
     case "hyphen":
       return "---";
@@ -255,12 +241,9 @@ export const richTextsToMarkdown = (
     underline: true,
     code: true,
     color: false, // By default, do not add color
-  }
+  },
 ): string => {
-  const toMarkdown = (
-    text: RichText,
-    enableAnnotations: EnableAnnotations
-  ): string => {
+  const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
     let markdown = text.plain_text;
     if (text.annotations.bold && enableAnnotations.bold) {
       markdown = bold(markdown);
@@ -277,11 +260,7 @@ export const richTextsToMarkdown = (
     if (text.annotations.code && enableAnnotations.code) {
       markdown = inlineCode(markdown);
     }
-    if (
-      text.annotations.color &&
-      text.annotations.color !== "default" &&
-      enableAnnotations.color
-    ) {
+    if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
       markdown = color(markdown, text.annotations.color);
     }
     return markdown;

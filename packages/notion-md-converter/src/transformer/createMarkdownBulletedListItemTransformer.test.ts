@@ -1,7 +1,4 @@
-import {
-  createBulletedListItemBlock,
-  createTextRichText,
-} from "../test-helper";
+import { createBulletedListItemBlock, createTextRichText } from "../test-helper";
 import { createTransformerContext } from "../test-helper";
 import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 

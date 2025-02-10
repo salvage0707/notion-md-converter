@@ -1,8 +1,4 @@
-import {
-  createEmbedBlock,
-  createTextRichText,
-  createTransformerContext,
-} from "../test-helper";
+import { createEmbedBlock, createTextRichText, createTransformerContext } from "../test-helper";
 import { createMarkdownEmbedTransformer } from "./createMarkdownEmbedTransformer";
 
 describe("createMarkdownEmbedTransformer", () => {

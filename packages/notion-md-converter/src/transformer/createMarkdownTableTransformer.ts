@@ -10,11 +10,9 @@ export const createMarkdownTableTransformer = () => {
     const rowsCells: TableCell[][] = rows.map((row) =>
       row.table_row.cells.map((cell) => ({
         content: MarkdownUtils.richTextsToMarkdown(cell),
-      }))
+      })),
     );
     // 改行の数を出力
-    return MarkdownUtils.wrapWithNewLines(
-      MarkdownUtils.table(headerCells, rowsCells)
-    );
+    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.table(headerCells, rowsCells));
   });
 };
