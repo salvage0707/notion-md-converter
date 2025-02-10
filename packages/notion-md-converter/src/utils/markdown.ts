@@ -1,5 +1,9 @@
 import type { ApiColor, RichText } from "../types";
 
+/**
+ * @see https://www.markdownguide.org/basic-syntax/#reference-style-links
+ */
+
 export type BulletStyle = "-" | "*" | "+";
 
 export type TableCell = {
@@ -68,7 +72,7 @@ const underline = (text: string): string => {
   return `_${text}_`;
 };
 
-const convertToColor = (text: string, color: ApiColor): string => {
+const color = (text: string, color: ApiColor): string => {
   return `<span style="color: ${COLOR_MAP[color]}">${text}</span>`;
 };
 
@@ -92,14 +96,6 @@ const checkList = (text: string, checked: boolean): string => {
  */
 const link = (text: string, url: string): string => {
   return `[${text}](${url})`;
-};
-
-const convertToReferenceLink = (
-  text: string,
-  referenceId: string,
-  url: string
-): string => {
-  return `[${text}][${referenceId}]\n[${referenceId}]: ${url}`;
 };
 
 /**
@@ -296,7 +292,7 @@ export const convertRichTextsToMarkdown = (
       text.annotations.color !== "default" &&
       enableAnnotations.color
     ) {
-      markdown = convertToColor(markdown, text.annotations.color);
+      markdown = color(markdown, text.annotations.color);
     }
     return markdown;
   };
@@ -313,11 +309,11 @@ export const MarkdownUtils = {
   strikethrough,
   inlineCode,
   underline,
+  color,
   bulletList,
   numberedList,
   checkList,
   link,
-  convertToReferenceLink,
   convertToImage,
   convertToCodeBlock,
   convertToIndentedCodeBlock,

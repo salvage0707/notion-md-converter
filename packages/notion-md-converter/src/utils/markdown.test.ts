@@ -121,11 +121,29 @@ describe("link", () => {
   });
 });
 
-describe("convertToReferenceLink", () => {
-  it("参照リンクに変換できること", () => {
-    expect(
-      MarkdownUtils.convertToReferenceLink("Text", "1", "https://example.com")
-    ).toBe("[Text][1]\n[1]: https://example.com");
+describe("color", () => {
+  it("赤色のテキストに変換できること", () => {
+    expect(MarkdownUtils.color("Hello", "red")).toBe(
+      '<span style="color: red">Hello</span>'
+    );
+  });
+
+  it("青色のテキストに変換できること", () => {
+    expect(MarkdownUtils.color("World", "blue")).toBe(
+      '<span style="color: blue">World</span>'
+    );
+  });
+
+  it("背景色付きのテキストに変換できること", () => {
+    expect(MarkdownUtils.color("Test", "green_background")).toBe(
+      '<span style="color: green">Test</span>'
+    );
+  });
+
+  it("空文字列を色付きテキストに変換できること", () => {
+    expect(MarkdownUtils.color("", "purple")).toBe(
+      '<span style="color: purple"></span>'
+    );
   });
 });
 
