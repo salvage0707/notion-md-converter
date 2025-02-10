@@ -107,15 +107,15 @@ describe("checkList", () => {
   });
 });
 
-describe("convertToLink", () => {
+describe("link", () => {
   it("テキストとURLからリンクに変換できること", () => {
-    expect(MarkdownUtils.convertToLink("Text", "https://example.com")).toBe(
+    expect(MarkdownUtils.link("Text", "https://example.com")).toBe(
       "[Text](https://example.com)"
     );
   });
 
   it("空のテキストとURLからリンクに変換できること", () => {
-    expect(MarkdownUtils.convertToLink("", "https://example.com")).toBe(
+    expect(MarkdownUtils.link("", "https://example.com")).toBe(
       "[](https://example.com)"
     );
   });

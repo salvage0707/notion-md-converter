@@ -90,7 +90,7 @@ const checkList = (text: string, checked: boolean): string => {
 /**
  * リンク関連
  */
-const convertToLink = (text: string, url: string): string => {
+const link = (text: string, url: string): string => {
   return `[${text}](${url})`;
 };
 
@@ -316,7 +316,7 @@ export const MarkdownUtils = {
   bulletList,
   numberedList,
   checkList,
-  convertToLink,
+  link,
   convertToReferenceLink,
   convertToImage,
   convertToCodeBlock,

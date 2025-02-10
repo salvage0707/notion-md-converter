@@ -6,7 +6,7 @@ export const createMarkdownBookmarkTransformer = () => {
     const caption = MarkdownUtils.convertRichTextsToMarkdown(
       block.bookmark.caption
     );
-    return MarkdownUtils.convertToLink(
+    return MarkdownUtils.link(
       caption || block.bookmark.url,
       block.bookmark.url
     );

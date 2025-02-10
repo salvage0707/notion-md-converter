@@ -7,6 +7,6 @@ export const createMarkdownEmbedTransformer = () => {
       block.embed.caption
     );
     const url = block.embed.url;
-    return MarkdownUtils.convertToLink(caption || url, url);
+    return MarkdownUtils.link(caption || url, url);
   });
 };
