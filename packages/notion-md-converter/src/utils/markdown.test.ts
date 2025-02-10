@@ -1,4 +1,6 @@
 import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
+import type { RichText } from "../types";
+import { createTextRichText } from "src/test-helper";
 
 describe("heading", () => {
   it("レベル1の見出しに変換できること", () => {
@@ -280,5 +282,192 @@ describe("wrapWithNewLines", () => {
   it("should wrap text that already contains newlines", () => {
     const text = "Line 1\nLine 2";
     expect(MarkdownUtils.wrapWithNewLines(text)).toBe("\nLine 1\nLine 2\n");
+  });
+});
+
+describe("convertToImage", () => {
+  it("画像に変換できること", () => {
+    expect(
+      MarkdownUtils.convertToImage("alt text", "https://example.com/image.png")
+    ).toBe("![alt text](https://example.com/image.png)");
+  });
+
+  it("空のテキストと空のURLを処理できること", () => {
+    expect(MarkdownUtils.convertToImage("", "")).toBe("![]()");
+  });
+});
+
+describe("indent", () => {
+  it("単一行のテキストをインデントできること", () => {
+    expect(MarkdownUtils.indent("text")).toBe("  text");
+  });
+
+  it("複数行のテキストをインデントできること", () => {
+    expect(MarkdownUtils.indent("line1\nline2")).toBe("  line1\n  line2");
+  });
+
+  it("カスタムスペース数でインデントできること", () => {
+    expect(MarkdownUtils.indent("text", 4)).toBe("    text");
+  });
+
+  it("空文字列をインデントできること", () => {
+    expect(MarkdownUtils.indent("")).toBe("  ");
+  });
+});
+
+describe("convertToDetails", () => {
+  it("基本的なdetailsタグを生成できること", () => {
+    const expected = [
+      "<details>",
+      "  <summary>",
+      "    Title",
+      "  </summary>",
+      "",
+      "  Content",
+      "</details>",
+    ].join("\n");
+    expect(MarkdownUtils.convertToDetails("Title", "Content")).toBe(expected);
+  });
+
+  it("複数行のコンテンツを処理できること", () => {
+    const expected = [
+      "<details>",
+      "  <summary>",
+      "    Title",
+      "  </summary>",
+      "",
+      "  Line 1",
+      "  Line 2",
+      "</details>",
+    ].join("\n");
+    expect(MarkdownUtils.convertToDetails("Title", "Line 1\nLine 2")).toBe(
+      expected
+    );
+  });
+});
+
+describe("convertToVideo", () => {
+  it("基本的なvideoタグを生成できること", () => {
+    expect(MarkdownUtils.convertToVideo("https://example.com/video.mp4")).toBe(
+      '<video controls src="https://example.com/video.mp4"></video>'
+    );
+  });
+
+  it("空のURLを処理できること", () => {
+    expect(MarkdownUtils.convertToVideo("")).toBe(
+      '<video controls src=""></video>'
+    );
+  });
+});
+
+describe("convertRichTextsToMarkdown", () => {
+  it("単一のリッチテキストを変換できること", () => {
+    const richTexts = [
+      createTextRichText({
+        root: {
+          plain_text: "Hello",
+        },
+      }),
+    ] as RichText[];
+    expect(MarkdownUtils.convertRichTextsToMarkdown(richTexts)).toBe("Hello");
+  });
+
+  it("複数のアノテーションを持つリッチテキストを変換できること", () => {
+    const richTexts = [
+      createTextRichText({
+        root: {
+          plain_text: "Hello",
+        },
+        annotations: {
+          bold: true,
+          italic: true,
+        },
+      }),
+    ] as RichText[];
+    expect(MarkdownUtils.convertRichTextsToMarkdown(richTexts)).toBe(
+      "***Hello***"
+    );
+  });
+
+  it("複数のリッチテキストを結合できること", () => {
+    const richTexts = [
+      createTextRichText({
+        root: {
+          plain_text: "Hello",
+        },
+        annotations: {
+          bold: true,
+        },
+      }),
+      createTextRichText({
+        root: {
+          plain_text: " ",
+        },
+      }),
+      createTextRichText({
+        root: {
+          plain_text: "World",
+        },
+        annotations: {
+          italic: true,
+        },
+      }),
+    ] as RichText[];
+    expect(MarkdownUtils.convertRichTextsToMarkdown(richTexts)).toBe(
+      "**Hello** *World*"
+    );
+  });
+
+  it("アノテーションを無効化できること", () => {
+    const richTexts = [
+      createTextRichText({
+        root: {
+          plain_text: "Hello",
+        },
+        annotations: {
+          bold: true,
+          italic: true,
+        },
+      }),
+    ];
+    const enableAnnotations = {
+      bold: false,
+      italic: true,
+      strikethrough: false,
+      underline: false,
+      code: false,
+      color: false,
+    };
+    expect(
+      MarkdownUtils.convertRichTextsToMarkdown(richTexts, enableAnnotations)
+    ).toBe("*Hello*");
+  });
+
+  it("空のリッチテキスト配列を処理できること", () => {
+    expect(MarkdownUtils.convertRichTextsToMarkdown([])).toBe("");
+  });
+
+  it("カラーアノテーションを処理できること", () => {
+    const richTexts = [
+      createTextRichText({
+        root: {
+          plain_text: "Colored Text",
+        },
+        annotations: {
+          color: "red",
+        },
+      }),
+    ] as RichText[];
+    const enableAnnotations = {
+      bold: false,
+      italic: false,
+      strikethrough: false,
+      underline: false,
+      code: false,
+      color: true,
+    };
+    expect(
+      MarkdownUtils.convertRichTextsToMarkdown(richTexts, enableAnnotations)
+    ).toBe('<span style="color: red">Colored Text</span>');
   });
 });
