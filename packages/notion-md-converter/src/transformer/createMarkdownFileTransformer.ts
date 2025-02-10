@@ -13,7 +13,7 @@ export const createMarkdownFileTransformer = (
     const { url } = adapter.execute(block.file);
     const caption =
       block.file.caption.length > 0
-        ? MarkdownUtils.convertRichTextsToMarkdown(block.file.caption)
+        ? MarkdownUtils.richTextsToMarkdown(block.file.caption)
         : block.file.name;
     return MarkdownUtils.link(caption, url);
   });

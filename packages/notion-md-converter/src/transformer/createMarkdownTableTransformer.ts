@@ -5,14 +5,16 @@ import { createBasicTableTransformer } from "./createBasicTransformer";
 export const createMarkdownTableTransformer = () => {
   return createBasicTableTransformer(({ header, rows }) => {
     const headerCells: TableHeader[] = header.table_row.cells.map((cell) => ({
-      content: MarkdownUtils.convertRichTextsToMarkdown(cell),
+      content: MarkdownUtils.richTextsToMarkdown(cell),
     }));
     const rowsCells: TableCell[][] = rows.map((row) =>
       row.table_row.cells.map((cell) => ({
-        content: MarkdownUtils.convertRichTextsToMarkdown(cell),
-      })),
+        content: MarkdownUtils.richTextsToMarkdown(cell),
+      }))
     );
     // 改行の数を出力
-    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.convertToTable(headerCells, rowsCells));
+    return MarkdownUtils.wrapWithNewLines(
+      MarkdownUtils.table(headerCells, rowsCells)
+    );
   });
 };

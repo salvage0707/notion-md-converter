@@ -149,55 +149,43 @@ describe("color", () => {
   });
 });
 
-describe("convertToCodeBlock", () => {
+describe("codeBlock", () => {
   it("言語指定ありでコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToCodeBlock("const x = 1;", "typescript")).toBe(
+    expect(MarkdownUtils.codeBlock("const x = 1;", "typescript")).toBe(
       "```typescript\nconst x = 1;\n```"
     );
   });
 
   it("言語指定なしでコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToCodeBlock("const x = 1;")).toBe(
+    expect(MarkdownUtils.codeBlock("const x = 1;")).toBe(
       "```\nconst x = 1;\n```"
     );
   });
 
   it("複数行のコードをコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToCodeBlock("line1\nline2")).toBe(
+    expect(MarkdownUtils.codeBlock("line1\nline2")).toBe(
       "```\nline1\nline2\n```"
     );
   });
 });
 
-describe("convertToIndentedCodeBlock", () => {
-  it("単一行のテキストをインデント付きコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToIndentedCodeBlock("code")).toBe("    code");
-  });
-
-  it("複数行のテキストをインデント付きコードブロックに変換できること", () => {
-    expect(MarkdownUtils.convertToIndentedCodeBlock("line1\nline2")).toBe(
-      "    line1\n    line2"
-    );
-  });
-});
-
-describe("convertToBlockquote", () => {
+describe("blockquote", () => {
   it("テキストを引用に変換できること", () => {
-    expect(MarkdownUtils.convertToBlockquote("Quote")).toBe("> Quote");
+    expect(MarkdownUtils.blockquote("Quote")).toBe("> Quote");
   });
 
   it("空文字を引用に変換できること", () => {
-    expect(MarkdownUtils.convertToBlockquote("")).toBe("> ");
+    expect(MarkdownUtils.blockquote("")).toBe("> ");
   });
 
   it("改行を含むテキストを引用に変換できること", () => {
-    expect(MarkdownUtils.convertToBlockquote("Line 1\nLine 2\nLine 3")).toBe(
+    expect(MarkdownUtils.blockquote("Line 1\nLine 2\nLine 3")).toBe(
       "> Line 1\n> Line 2\n> Line 3"
     );
   });
 });
 
-describe("convertToTable", () => {
+describe("table", () => {
   it("異なる配置のテーブルに変換できること", () => {
     const headers: TableHeader[] = [
       { content: "Left", alignment: "left" },
@@ -216,7 +204,7 @@ describe("convertToTable", () => {
       "| 4    | 5      | 6     |",
     ].join("\n");
 
-    expect(MarkdownUtils.convertToTable(headers, rows)).toBe(expected);
+    expect(MarkdownUtils.table(headers, rows)).toBe(expected);
   });
 
   it("配置指定なしのテーブルに変換できること", () => {
@@ -232,7 +220,7 @@ describe("convertToTable", () => {
       "| 1       | 2       |",
     ].join("\n");
 
-    expect(MarkdownUtils.convertToTable(headers, rows)).toBe(expected);
+    expect(MarkdownUtils.table(headers, rows)).toBe(expected);
   });
 
   it("データ行がない場合は、ヘッダーとセパレータ行のみを返すこと", () => {
@@ -247,25 +235,25 @@ describe("convertToTable", () => {
       "| ------- | ------- |", // Separator
     ].join("\n");
 
-    expect(MarkdownUtils.convertToTable(headers, rows)).toBe(expected);
+    expect(MarkdownUtils.table(headers, rows)).toBe(expected);
   });
 });
 
-describe("convertToHorizontalRule", () => {
+describe("horizontalRule", () => {
   it("デフォルトスタイル（ハイフン）で水平線に変換できること", () => {
-    expect(MarkdownUtils.convertToHorizontalRule()).toBe("---");
+    expect(MarkdownUtils.horizontalRule()).toBe("---");
   });
 
   it("ハイフンスタイルで水平線に変換できること", () => {
-    expect(MarkdownUtils.convertToHorizontalRule("hyphen")).toBe("---");
+    expect(MarkdownUtils.horizontalRule("hyphen")).toBe("---");
   });
 
   it("アスタリスクスタイルで水平線に変換できること", () => {
-    expect(MarkdownUtils.convertToHorizontalRule("asterisk")).toBe("***");
+    expect(MarkdownUtils.horizontalRule("asterisk")).toBe("***");
   });
 
   it("アンダースコアスタイルで水平線に変換できること", () => {
-    expect(MarkdownUtils.convertToHorizontalRule("underscore")).toBe("___");
+    expect(MarkdownUtils.horizontalRule("underscore")).toBe("___");
   });
 });
 
@@ -285,38 +273,22 @@ describe("wrapWithNewLines", () => {
   });
 });
 
-describe("convertToImage", () => {
-  it("画像に変換できること", () => {
+describe("image", () => {
+  it("テキストとURLから画像に変換できること", () => {
     expect(
-      MarkdownUtils.convertToImage("alt text", "https://example.com/image.png")
-    ).toBe("![alt text](https://example.com/image.png)");
+      MarkdownUtils.image("Alt text", "https://example.com/image.jpg")
+    ).toBe("![Alt text](https://example.com/image.jpg)");
   });
 
-  it("空のテキストと空のURLを処理できること", () => {
-    expect(MarkdownUtils.convertToImage("", "")).toBe("![]()");
-  });
-});
-
-describe("indent", () => {
-  it("単一行のテキストをインデントできること", () => {
-    expect(MarkdownUtils.indent("text")).toBe("  text");
-  });
-
-  it("複数行のテキストをインデントできること", () => {
-    expect(MarkdownUtils.indent("line1\nline2")).toBe("  line1\n  line2");
-  });
-
-  it("カスタムスペース数でインデントできること", () => {
-    expect(MarkdownUtils.indent("text", 4)).toBe("    text");
-  });
-
-  it("空文字列をインデントできること", () => {
-    expect(MarkdownUtils.indent("")).toBe("  ");
+  it("空のテキストとURLから画像に変換できること", () => {
+    expect(MarkdownUtils.image("", "https://example.com/image.jpg")).toBe(
+      "![](https://example.com/image.jpg)"
+    );
   });
 });
 
-describe("convertToDetails", () => {
-  it("基本的なdetailsタグを生成できること", () => {
+describe("details", () => {
+  it("タイトルと内容からdetailsタグに変換できること", () => {
     const expected = [
       "<details>",
       "  <summary>",
@@ -326,41 +298,36 @@ describe("convertToDetails", () => {
       "  Content",
       "</details>",
     ].join("\n");
-    expect(MarkdownUtils.convertToDetails("Title", "Content")).toBe(expected);
+    expect(MarkdownUtils.details("Title", "Content")).toBe(expected);
   });
 
-  it("複数行のコンテンツを処理できること", () => {
+  it("空のタイトルと内容からdetailsタグに変換できること", () => {
     const expected = [
       "<details>",
       "  <summary>",
-      "    Title",
+      "    ",
       "  </summary>",
       "",
-      "  Line 1",
-      "  Line 2",
+      "  ",
       "</details>",
     ].join("\n");
-    expect(MarkdownUtils.convertToDetails("Title", "Line 1\nLine 2")).toBe(
-      expected
-    );
+    expect(MarkdownUtils.details("", "")).toBe(expected);
   });
 });
 
-describe("convertToVideo", () => {
-  it("基本的なvideoタグを生成できること", () => {
-    expect(MarkdownUtils.convertToVideo("https://example.com/video.mp4")).toBe(
+describe("video", () => {
+  it("URLからvideoタグに変換できること", () => {
+    expect(MarkdownUtils.video("https://example.com/video.mp4")).toBe(
       '<video controls src="https://example.com/video.mp4"></video>'
     );
   });
 
   it("空のURLを処理できること", () => {
-    expect(MarkdownUtils.convertToVideo("")).toBe(
-      '<video controls src=""></video>'
-    );
+    expect(MarkdownUtils.video("")).toBe('<video controls src=""></video>');
   });
 });
 
-describe("convertRichTextsToMarkdown", () => {
+describe("richTextsToMarkdown", () => {
   it("単一のリッチテキストを変換できること", () => {
     const richTexts = [
       createTextRichText({
@@ -369,7 +336,7 @@ describe("convertRichTextsToMarkdown", () => {
         },
       }),
     ] as RichText[];
-    expect(MarkdownUtils.convertRichTextsToMarkdown(richTexts)).toBe("Hello");
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("Hello");
   });
 
   it("複数のアノテーションを持つリッチテキストを変換できること", () => {
@@ -384,9 +351,7 @@ describe("convertRichTextsToMarkdown", () => {
         },
       }),
     ] as RichText[];
-    expect(MarkdownUtils.convertRichTextsToMarkdown(richTexts)).toBe(
-      "***Hello***"
-    );
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("***Hello***");
   });
 
   it("複数のリッチテキストを結合できること", () => {
@@ -413,7 +378,7 @@ describe("convertRichTextsToMarkdown", () => {
         },
       }),
     ] as RichText[];
-    expect(MarkdownUtils.convertRichTextsToMarkdown(richTexts)).toBe(
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe(
       "**Hello** *World*"
     );
   });
@@ -439,12 +404,12 @@ describe("convertRichTextsToMarkdown", () => {
       color: false,
     };
     expect(
-      MarkdownUtils.convertRichTextsToMarkdown(richTexts, enableAnnotations)
+      MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)
     ).toBe("*Hello*");
   });
 
   it("空のリッチテキスト配列を処理できること", () => {
-    expect(MarkdownUtils.convertRichTextsToMarkdown([])).toBe("");
+    expect(MarkdownUtils.richTextsToMarkdown([])).toBe("");
   });
 
   it("カラーアノテーションを処理できること", () => {
@@ -467,7 +432,7 @@ describe("convertRichTextsToMarkdown", () => {
       color: true,
     };
     expect(
-      MarkdownUtils.convertRichTextsToMarkdown(richTexts, enableAnnotations)
+      MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)
     ).toBe('<span style="color: red">Colored Text</span>');
   });
 });

@@ -3,9 +3,7 @@ import { createBasicTodoTransformer } from "./createBasicTransformer";
 
 export const createMarkdownTodoListItemTransformer = () => {
   return createBasicTodoTransformer(({ block, children }) => {
-    const text = MarkdownUtils.convertRichTextsToMarkdown(
-      block.to_do.rich_text
-    );
+    const text = MarkdownUtils.richTextsToMarkdown(block.to_do.rich_text);
     const formattedChildren = MarkdownUtils.indent(children);
     const bulletText = MarkdownUtils.checkList(text, block.to_do.checked);
 

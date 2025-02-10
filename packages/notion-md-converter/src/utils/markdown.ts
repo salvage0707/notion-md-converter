@@ -101,28 +101,21 @@ const link = (text: string, url: string): string => {
 /**
  * 画像変換
  */
-const convertToImage = (text: string, url: string): string => {
+const image = (text: string, url: string): string => {
   return `![${text}](${url})`;
 };
 
 /**
  * コードブロック変換
  */
-const convertToCodeBlock = (code: string, language?: string): string => {
+const codeBlock = (code: string, language?: string): string => {
   return `\`\`\`${language || ""}\n${code}\n\`\`\``;
-};
-
-const convertToIndentedCodeBlock = (code: string): string => {
-  return code
-    .split("\n")
-    .map((line) => `    ${line}`)
-    .join("\n");
 };
 
 /**
  * 引用変換
  */
-const convertToBlockquote = (text: string): string => {
+const blockquote = (text: string): string => {
   return text
     .split("\n")
     .map((line) => `> ${line}`)
@@ -132,10 +125,7 @@ const convertToBlockquote = (text: string): string => {
 /**
  * テーブル変換
  */
-const convertToTable = (
-  headers: TableHeader[],
-  rows: TableCell[][]
-): string => {
+const table = (headers: TableHeader[], rows: TableCell[][]): string => {
   // 各列の最大長を計算
   const columnWidths = headers.map((header, index) => {
     const cellsInColumn = [
@@ -191,7 +181,7 @@ const convertToTable = (
 /**
  * 水平線変換
  */
-const convertToHorizontalRule = (
+const horizontalRule = (
   style: "hyphen" | "asterisk" | "underscore" = "hyphen"
 ): string => {
   switch (style) {
@@ -224,7 +214,7 @@ const indent = (text: string, spaces = 2): string => {
 /**
  * detailsタグに変換
  */
-const convertToDetails = (title: string, content: string): string => {
+const details = (title: string, content: string): string => {
   const result = [
     "<details>",
     indent("<summary>"),
@@ -240,7 +230,7 @@ const convertToDetails = (title: string, content: string): string => {
 /**
  * videoタグに変換
  */
-const convertToVideo = (url: string): string => {
+const video = (url: string): string => {
   return `<video controls src="${url}"></video>`;
 };
 
@@ -256,7 +246,7 @@ export type EnableAnnotations = {
   color: boolean | ColorMap;
 };
 
-export const convertRichTextsToMarkdown = (
+export const richTextsToMarkdown = (
   richTexts: RichText[],
   enableAnnotations: EnableAnnotations = {
     bold: true,
@@ -267,7 +257,7 @@ export const convertRichTextsToMarkdown = (
     color: false, // By default, do not add color
   }
 ): string => {
-  const convertToMarkdown = (
+  const toMarkdown = (
     text: RichText,
     enableAnnotations: EnableAnnotations
   ): string => {
@@ -297,9 +287,7 @@ export const convertRichTextsToMarkdown = (
     return markdown;
   };
 
-  return richTexts
-    .map((text) => convertToMarkdown(text, enableAnnotations))
-    .join("");
+  return richTexts.map((text) => toMarkdown(text, enableAnnotations)).join("");
 };
 
 export const MarkdownUtils = {
@@ -314,15 +302,14 @@ export const MarkdownUtils = {
   numberedList,
   checkList,
   link,
-  convertToImage,
-  convertToCodeBlock,
-  convertToIndentedCodeBlock,
-  convertToBlockquote,
-  convertToTable,
-  convertToHorizontalRule,
+  image,
+  codeBlock,
+  blockquote,
+  table,
+  horizontalRule,
   wrapWithNewLines,
   indent,
-  convertToDetails,
-  convertToVideo,
-  convertRichTextsToMarkdown,
+  details,
+  video,
+  richTextsToMarkdown,
 };

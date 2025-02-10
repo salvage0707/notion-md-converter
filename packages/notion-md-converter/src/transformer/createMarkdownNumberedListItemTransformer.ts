@@ -4,7 +4,7 @@ import { createBasicNumberedListItemTransformer } from "./createBasicTransformer
 export const createMarkdownNumberedListItemTransformer = () => {
   return createBasicNumberedListItemTransformer(
     ({ block, children, index }) => {
-      const text = MarkdownUtils.convertRichTextsToMarkdown(
+      const text = MarkdownUtils.richTextsToMarkdown(
         block.numbered_list_item.rich_text
       );
       const formattedChildren = MarkdownUtils.indent(children);
