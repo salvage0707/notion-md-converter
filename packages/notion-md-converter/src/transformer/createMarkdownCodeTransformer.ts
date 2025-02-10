@@ -16,7 +16,7 @@ export const createMarkdownCodeTransformer = () => {
     );
     const lang = block.code.language;
     return MarkdownUtils.wrapWithNewLines(
-      MarkdownUtils.convertToCodeBlock(text, lang)
+      MarkdownUtils.convertToCodeBlock(text, lang.replace(" ", "_"))
     );
   });
 };

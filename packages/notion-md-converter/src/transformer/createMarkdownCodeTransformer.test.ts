@@ -1,4 +1,8 @@
-import { createCodeBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import {
+  createCodeBlock,
+  createTextRichText,
+  createTransformerContext,
+} from "../test-helper";
 import { createMarkdownCodeTransformer } from "./createMarkdownCodeTransformer";
 
 describe("createMarkdownCodeTransformer", () => {
@@ -21,7 +25,7 @@ describe("createMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```\ntest hoge\n```\n");
+    expect(result).toBe("\n```javascript\ntest hoge\n```\n");
   });
 
   it("言語指定がない場合は言語なしで変換する", () => {
@@ -40,6 +44,6 @@ describe("createMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```\ntest hoge\n```\n");
+    expect(result).toBe("\n```plain_text\ntest hoge\n```\n");
   });
 });

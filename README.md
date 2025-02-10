@@ -51,7 +51,7 @@ npm install notion-to-markdown
 import {
   $getPageFullContent,
   NotionMarkdownConverter,
-} from "@notion-md-converter/core";
+} from "notion-md-converter";
 import { Client } from "@notionhq/client";
 
 const client = new Client({

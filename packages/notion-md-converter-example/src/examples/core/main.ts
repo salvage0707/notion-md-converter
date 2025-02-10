@@ -1,7 +1,7 @@
 import {
   $getPageFullContent,
   NotionMarkdownConverter,
-} from "@notion-md-converter/core";
+} from "notion-md-converter";
 import { Client } from "@notionhq/client";
 import { requiredEnvCheck } from "src/utils/dotenv";
 import { writeFile, writeJsonFile } from "src/utils/file";

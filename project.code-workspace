@@ -5,7 +5,7 @@
       "path": "."
     },
     {
-      "path": "packages/notion-md-converter-core"
+      "path": "packages/notion-md-converter"
     },
     {
       "path": "packages/notion-md-converter-config"

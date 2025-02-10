@@ -1,8 +1,8 @@
 import {
   createNotionInternalFile,
   createVideoBlock,
-} from "@notion-md-converter/core/test-helper";
-import { createTransformerContext } from "@notion-md-converter/core/test-helper";
+} from "notion-md-converter/test-helper";
+import { createTransformerContext } from "notion-md-converter/test-helper";
 import { createMarkdownVideoTransformer } from "./createMarkdownVideoTransformer";
 
 describe("VideoTransformer", () => {

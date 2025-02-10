@@ -1,8 +1,8 @@
 {
-  "name": "@notion-md-converter/core",
+  "name": "notion-md-converter",
   "private": true,
   "version": "0.1.0",
-  "description": "",
+  "description": "Notion to Markdown Converter",
   "scripts": {
     "test": "vitest",
     "test:once": "vitest run",
