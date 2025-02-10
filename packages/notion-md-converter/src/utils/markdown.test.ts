@@ -56,6 +56,16 @@ describe("strikethrough", () => {
   });
 });
 
+describe("underline", () => {
+  it("テキストを下線付きに変換できること", () => {
+    expect(MarkdownUtils.underline("Hello")).toBe("_Hello_");
+  });
+
+  it("空文字を下線付きに変換できること", () => {
+    expect(MarkdownUtils.underline("")).toBe("__");
+  });
+});
+
 describe("inlineCode", () => {
   it("テキストをインラインコードに変換できること", () => {
     expect(MarkdownUtils.inlineCode("code")).toBe("`code`");
