@@ -1,8 +1,4 @@
-import {
-  createCalloutBlock,
-  createTextRichText,
-  createTransformerContext,
-} from "../test-helper";
+import { createCalloutBlock, createTextRichText, createTransformerContext } from "../test-helper";
 import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 
 describe("createMarkdownCalloutTransformer", () => {

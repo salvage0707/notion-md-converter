@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  },
+  "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
   },
   "exports": {

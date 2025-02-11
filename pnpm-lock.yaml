@@ -7,17 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@notionhq/client':
-        specifier: ^2.2.15
-        version: 2.2.15
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
@@ -32,18 +25,29 @@ importers:
 
   packages/notion-md-converter-core:
     dependencies:
+      '@notionhq/client':
+        specifier: ^2.2.15
+        version: 2.2.15
+    devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
         version: link:../notion-md-converter-config
 
   packages/notion-md-converter-example:
     dependencies:
-      '@notion-md-converter/config':
-        specifier: workspace:*
-        version: link:../notion-md-converter-config
       '@notion-md-converter/core':
         specifier: workspace:*
         version: link:../notion-md-converter-core
+      '@notionhq/client':
+        specifier: ^2.2.15
+        version: 2.2.15
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+    devDependencies:
+      '@notion-md-converter/config':
+        specifier: workspace:*
+        version: link:../notion-md-converter-config
 
 packages:
 

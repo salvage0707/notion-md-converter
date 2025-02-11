@@ -314,9 +314,7 @@ export const createImageBlock = (options?: {
     ...createBaseBlock(),
     type: "image",
     image: {
-      caption: options?.caption ?? [
-        createTextRichText({ plainText: "Example" }),
-      ],
+      caption: options?.caption ?? [createTextRichText({ plainText: "Example" })],
       type: "external",
       external: {
         url: options?.url ?? "https://example.com",
@@ -412,9 +410,7 @@ export const createTableRowBlock = (options?: {
     ...createBaseBlock(),
     type: "table_row",
     table_row: {
-      cells: options?.children ?? [
-        [createTextRichText({ plainText: "Example" })],
-      ],
+      cells: options?.children ?? [[createTextRichText({ plainText: "Example" })]],
     },
   };
 };

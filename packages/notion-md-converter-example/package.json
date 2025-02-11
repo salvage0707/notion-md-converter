@@ -11,7 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@notion-md-converter/core": "workspace:*",
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.7",
+    "@notion-md-converter/core": "workspace:*"
+  },
+  "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
   }
 }

@@ -45,8 +45,6 @@ describe("createMarkdownPdfTransformer", () => {
     });
     const result = transformer(context);
 
-    expect(result).toBe(
-      "[https://example.com/test.pdf](https://example.com/test.pdf)"
-    );
+    expect(result).toBe("[https://example.com/test.pdf](https://example.com/test.pdf)");
   });
 });
