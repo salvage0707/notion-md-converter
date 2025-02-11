@@ -1,5 +1,5 @@
+import { createNoChangeFileObjectAdapter } from "../adapter";
 import type { FileAdapter } from "../types";
-import { createNoChangeFileObjectAdaptor } from "../adaptors";
 import { MarkdownUtils } from "../utils";
 import { createBasicVideoTransformer } from "./createBasicTransformer";
 
@@ -9,7 +9,7 @@ export const createMarkdownVideoTransformer = (
   } = {},
 ) => {
   return createBasicVideoTransformer(({ block }) => {
-    const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdaptor();
+    const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
     return MarkdownUtils.wrapWithNewLines(MarkdownUtils.video(url));
   });

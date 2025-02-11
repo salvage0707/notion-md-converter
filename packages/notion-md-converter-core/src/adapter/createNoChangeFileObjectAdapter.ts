@@ -1,6 +1,6 @@
 import { createFileAdapter } from "./createFileAdapter";
 
-export const createNoChangeFileObjectAdaptor = () => {
+export const createNoChangeFileObjectAdapter = () => {
   return createFileAdapter(({ url }) => {
     return {
       url,

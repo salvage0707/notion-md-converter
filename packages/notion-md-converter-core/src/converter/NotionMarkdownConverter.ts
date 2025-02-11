@@ -22,7 +22,7 @@ import {
   createMarkdownToggleTransformer,
   createMarkdownVideoTransformer,
 } from "../transformer";
-import type { Context, TransformerMapping } from "../types/converter";
+import type { Context, TransformerMapping } from "../types";
 import type {
   Block,
   BookmarkBlock,

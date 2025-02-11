@@ -3,15 +3,13 @@ import { createTransformerContext } from "../test-helper";
 import { createMarkdownPdfTransformer } from "./createMarkdownPdfTransformer";
 
 describe("createMarkdownPdfTransformer", () => {
-  const mockAdaptor = {
-    execute: vi.fn(),
-  };
+  const mockAdapter = vi.fn();
   const transformer = createMarkdownPdfTransformer({
-    fileAdaptor: mockAdaptor,
+    fileAdapter: mockAdapter,
   });
 
   beforeEach(() => {
-    mockAdaptor.execute.mockReturnValue({
+    mockAdapter.mockReturnValue({
       url: "https://example.com/test.pdf",
     });
   });
@@ -24,7 +22,7 @@ describe("createMarkdownPdfTransformer", () => {
       blocks: [block],
     });
 
-    mockAdaptor.execute.mockReturnValue({
+    mockAdapter.mockReturnValue({
       url: "https://example.com/test.pdf",
     });
     const result = transformer(context);
@@ -40,7 +38,7 @@ describe("createMarkdownPdfTransformer", () => {
       blocks: [block],
     });
 
-    mockAdaptor.execute.mockReturnValue({
+    mockAdapter.mockReturnValue({
       url: "https://example.com/test.pdf",
     });
     const result = transformer(context);

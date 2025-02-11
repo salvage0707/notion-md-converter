@@ -3,15 +3,13 @@ import { createTransformerContext } from "@notion-md-converter/core/test-helper"
 import { createMarkdownVideoTransformer } from "./createMarkdownVideoTransformer";
 
 describe("VideoTransformer", () => {
-  const mockAdaptor = {
-    execute: vi.fn(),
-  };
+  const mockAdapter = vi.fn();
   const transformer = createMarkdownVideoTransformer({
-    fileAdaptor: mockAdaptor,
+    fileAdapter: mockAdapter,
   });
 
   beforeEach(() => {
-    mockAdaptor.execute.mockReturnValue({
+    mockAdapter.mockReturnValue({
       url: "https://example.com/test.mp4",
     });
   });

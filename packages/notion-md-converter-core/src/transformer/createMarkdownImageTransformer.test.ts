@@ -3,15 +3,13 @@ import { createTransformerContext } from "../test-helper";
 import { createMarkdownImageTransformer } from "./createMarkdownImageTransformer";
 
 describe("createMarkdownImageTransformer", () => {
-  const mockAdaptor = {
-    execute: vi.fn(),
-  };
+  const mockAdapter = vi.fn();
   const transformer = createMarkdownImageTransformer({
-    fileAdaptor: mockAdaptor,
+    fileAdapter: mockAdapter,
   });
 
   beforeEach(() => {
-    mockAdaptor.execute.mockReturnValue({ url: "https://example.com" });
+    mockAdapter.mockReturnValue({ url: "https://example.com" });
   });
 
   it("captionがある場合、captionを含めてimageブロックを変換できる", () => {

@@ -7,15 +7,13 @@ import {
 import { createMarkdownFileTransformer } from "./createMarkdownFileTransformer";
 
 describe("createMarkdownFileTransformer", () => {
-  const mockAdaptor = {
-    execute: vi.fn(),
-  };
+  const mockAdapter = vi.fn();
   const transformer = createMarkdownFileTransformer({
-    fileAdapter: mockAdaptor,
+    fileAdapter: mockAdapter,
   });
 
   beforeEach(() => {
-    mockAdaptor.execute.mockReturnValue({
+    mockAdapter.mockReturnValue({
       url: "https://example.com/file.pdf",
     });
   });

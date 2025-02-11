@@ -45,7 +45,9 @@ export type CodeTransformer = NotionBlockTransformer<CodeBlock>;
 export type ColumnListTransformer = NotionBlockTransformer<ColumnListBlock>;
 export type DividerTransformer = NotionBlockTransformer<DividerBlock>;
 export type EquationTransformer = NotionBlockTransformer<EquationBlock>;
-export type HeadingTransformer = NotionBlockTransformer<Heading1Block | Heading2Block | Heading3Block>;
+export type HeadingTransformer = NotionBlockTransformer<
+  Heading1Block | Heading2Block | Heading3Block
+>;
 export type LinkPreviewTransformer = NotionBlockTransformer<LinkPreviewBlock>;
 export type BulletedListItemTransformer = NotionBlockTransformer<BulletedListItemBlock>;
 export type NumberedListItemTransformer = NotionBlockTransformer<NumberedListItemBlock>;
