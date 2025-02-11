@@ -60,14 +60,10 @@ const createBaseBlock = () => {
   };
 };
 
-type RichTextBaseOption = {
-  root?: Partial<Omit<RichText, "annotations">>;
-  annotations?: Partial<RichText["annotations"]>;
-};
-
 export const createTextRichText = (options: {
-  root?: RichTextBaseOption["root"];
-  annotations?: RichTextBaseOption["annotations"];
+  plainText?: TextRichText["plain_text"];
+  href?: TextRichText["href"];
+  annotations?: Partial<TextRichText["annotations"]>;
 }): TextRichText => {
   return {
     type: "text",
@@ -80,11 +76,11 @@ export const createTextRichText = (options: {
       color: "default",
       ...options.annotations,
     },
-    plain_text: options.root?.plain_text ?? "Example",
+    plain_text: options.plainText ?? "Example",
     href: null,
     text: {
-      content: options.root?.plain_text ?? "Example",
-      link: options.root?.href ? { url: options.root.href } : null,
+      content: options.plainText ?? "Example",
+      link: options.href ? { url: options.href } : null,
     },
   };
 };
@@ -95,9 +91,7 @@ export const createBookmarkBlock = (options?: {
 }): BookmarkBlock => {
   const defaultCaption = [
     createTextRichText({
-      root: {
-        plain_text: "Example",
-      },
+      plainText: "Example",
     }),
   ];
 
@@ -118,9 +112,7 @@ export const createParagraphBlock = (options?: {
 }): ParagraphBlock => {
   const defaultText = [
     createTextRichText({
-      root: {
-        plain_text: "Example",
-      },
+      plainText: "Example",
     }),
   ];
 
@@ -150,9 +142,7 @@ export const createBulletedListItemBlock = (options: {
 }): BulletedListItemBlock => {
   const defaultRichText = [
     createTextRichText({
-      root: {
-        plain_text: "Example",
-      },
+      plainText: "Example",
     }),
   ];
 
@@ -175,9 +165,7 @@ export const createCalloutBlock = (options?: {
 }): CalloutBlock => {
   const defaultRichText = [
     createTextRichText({
-      root: {
-        plain_text: "Example",
-      },
+      plainText: "Example",
     }),
   ];
 
@@ -326,7 +314,9 @@ export const createImageBlock = (options?: {
     ...createBaseBlock(),
     type: "image",
     image: {
-      caption: options?.caption ?? [createTextRichText({ root: { plain_text: "Example" } })],
+      caption: options?.caption ?? [
+        createTextRichText({ plainText: "Example" }),
+      ],
       type: "external",
       external: {
         url: options?.url ?? "https://example.com",
@@ -409,7 +399,7 @@ export const createSyncedBlock = (options?: {
     },
     children: options?.children ?? [
       createParagraphBlock({
-        richText: [createTextRichText({ root: { plain_text: "Example" } })],
+        richText: [createTextRichText({ plainText: "Example" })],
       }),
     ],
   };
@@ -422,7 +412,9 @@ export const createTableRowBlock = (options?: {
     ...createBaseBlock(),
     type: "table_row",
     table_row: {
-      cells: options?.children ?? [[createTextRichText({ root: { plain_text: "Example" } })]],
+      cells: options?.children ?? [
+        [createTextRichText({ plainText: "Example" })],
+      ],
     },
   };
 };
@@ -440,7 +432,7 @@ export const createTableBlock = (options?: {
     },
     children: options?.children ?? [
       createTableRowBlock({
-        children: [[createTextRichText({ root: { plain_text: "Example" } })]],
+        children: [[createTextRichText({ plainText: "Example" })]],
       }),
     ],
   };

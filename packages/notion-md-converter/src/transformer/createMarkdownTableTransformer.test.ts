@@ -6,7 +6,7 @@ const createRow = (plainTexts: string[]) => {
   return createTableRowBlock({
     children: plainTexts.map((plainText) => [
       createTextRichText({
-        root: { plain_text: plainText },
+        plainText: plainText,
       }),
     ]),
   });

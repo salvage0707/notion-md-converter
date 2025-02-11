@@ -1,4 +1,8 @@
-import { createCodeBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import {
+  createCodeBlock,
+  createTextRichText,
+  createTransformerContext,
+} from "../test-helper";
 import { createMarkdownCodeTransformer } from "./createMarkdownCodeTransformer";
 
 describe("createMarkdownCodeTransformer", () => {
@@ -8,9 +12,7 @@ describe("createMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "test hoge",
-          },
+          plainText: "test hoge",
         }),
       ],
       language: "javascript",
@@ -28,9 +30,7 @@ describe("createMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "test hoge",
-          },
+          plainText: "test hoge",
         }),
       ],
     });

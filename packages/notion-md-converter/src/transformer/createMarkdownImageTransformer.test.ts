@@ -17,7 +17,7 @@ describe("createMarkdownImageTransformer", () => {
   it("captionがある場合、captionを含めてimageブロックを変換できる", () => {
     const block = createImageBlock({
       url: "https://example.com",
-      caption: [createTextRichText({ root: { plain_text: "example" } })],
+      caption: [createTextRichText({ plainText: "example" })],
     });
     const context = createTransformerContext({
       blocks: [block],

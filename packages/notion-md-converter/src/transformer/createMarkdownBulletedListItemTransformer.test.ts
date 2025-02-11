@@ -1,4 +1,7 @@
-import { createBulletedListItemBlock, createTextRichText } from "../test-helper";
+import {
+  createBulletedListItemBlock,
+  createTextRichText,
+} from "../test-helper";
 import { createTransformerContext } from "../test-helper";
 import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 
@@ -9,9 +12,7 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     const block = createBulletedListItemBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "テストテキスト",
-          },
+          plainText: "テストテキスト",
         }),
       ],
     });
@@ -28,18 +29,14 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     const block = createBulletedListItemBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "親テキスト",
-          },
+          plainText: "親テキスト",
         }),
       ],
       children: [
         createBulletedListItemBlock({
           richText: [
             createTextRichText({
-              root: {
-                plain_text: "子テキスト",
-              },
+              plainText: "子テキスト",
             }),
           ],
         }),

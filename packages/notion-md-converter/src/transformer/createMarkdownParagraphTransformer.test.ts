@@ -8,9 +8,7 @@ describe("createMarkdownParagraphTransformer", () => {
     const block = createParagraphBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "シンプルなテキストです。",
-          },
+          plainText: "シンプルなテキストです。",
         }),
       ],
     });
@@ -26,7 +24,7 @@ describe("createMarkdownParagraphTransformer", () => {
     const block = createParagraphBlock({
       richText: [
         createTextRichText({
-          root: { plain_text: "シンプルなテキストです。" },
+          plainText: "シンプルなテキストです。",
         }),
       ],
       children: [createParagraphBlock()],
@@ -44,14 +42,14 @@ describe("createMarkdownParagraphTransformer", () => {
     const block = createParagraphBlock({
       richText: [
         createTextRichText({
-          root: { plain_text: "シンプルな" },
+          plainText: "シンプルな",
         }),
         createTextRichText({
-          root: { plain_text: "太字" },
+          plainText: "太字",
           annotations: { bold: true },
         }),
         createTextRichText({
-          root: { plain_text: "テストテキスト" },
+          plainText: "テストテキスト",
         }),
       ],
     });

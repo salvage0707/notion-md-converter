@@ -25,9 +25,7 @@ describe("createMarkdownFileTransformer", () => {
       name: "example.pdf",
       caption: [
         createTextRichText({
-          root: {
-            plain_text: "caption_example.pdf",
-          },
+          plainText: "caption_example.pdf",
         }),
       ],
       fileObject: createNotionInternalFile({

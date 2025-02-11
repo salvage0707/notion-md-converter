@@ -14,9 +14,7 @@ describe("createMarkdownHeadingTransformer", () => {
     const block = createHeading1Block({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "見出し1",
-          },
+          plainText: "見出し1",
         }),
       ],
     });
@@ -32,9 +30,7 @@ describe("createMarkdownHeadingTransformer", () => {
     const block = createHeading2Block({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "見出し2",
-          },
+          plainText: "見出し2",
         }),
       ],
     });
@@ -50,9 +46,7 @@ describe("createMarkdownHeadingTransformer", () => {
     const block = createHeading3Block({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "見出し3",
-          },
+          plainText: "見出し3",
         }),
       ],
     });

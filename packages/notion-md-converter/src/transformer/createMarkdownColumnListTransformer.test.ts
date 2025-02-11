@@ -13,7 +13,7 @@ describe("createMarkdownColumnListTransformer", () => {
   test("3つのカラムを持つcolumn_listブロックを変換できる", () => {
     const generateParagraph = (text: string) =>
       createParagraphBlock({
-        richText: [createTextRichText({ root: { plain_text: text } })],
+        richText: [createTextRichText({ plainText: text })],
       });
     const block = createColumnListBlock({
       children: [

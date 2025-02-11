@@ -1,4 +1,8 @@
-import { createCalloutBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import {
+  createCalloutBlock,
+  createTextRichText,
+  createTransformerContext,
+} from "../test-helper";
 import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 
 describe("createMarkdownCalloutTransformer", () => {
@@ -8,9 +12,7 @@ describe("createMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "テストメッセージ",
-          },
+          plainText: "テストメッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "🚨" },
@@ -42,9 +44,7 @@ describe("createMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          root: {
-            plain_text: "親メッセージ",
-          },
+          plainText: "親メッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "📝" },
@@ -52,9 +52,7 @@ describe("createMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              root: {
-                plain_text: "子メッセージ",
-              },
+              plainText: "子メッセージ",
             }),
           ],
         }),

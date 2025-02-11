@@ -18,7 +18,7 @@ describe("createMarkdownPdfTransformer", () => {
 
   it("captionがある場合、captionを含めてpdfブロックを変換できる", () => {
     const block = createPdfBlock({
-      caption: [createTextRichText({ root: { plain_text: "example.pdf" } })],
+      caption: [createTextRichText({ plainText: "example.pdf" })],
     });
     const context = createTransformerContext({
       blocks: [block],
@@ -45,6 +45,8 @@ describe("createMarkdownPdfTransformer", () => {
     });
     const result = transformer(context);
 
-    expect(result).toBe("[https://example.com/test.pdf](https://example.com/test.pdf)");
+    expect(result).toBe(
+      "[https://example.com/test.pdf](https://example.com/test.pdf)"
+    );
   });
 });

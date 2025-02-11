@@ -9,9 +9,7 @@ describe("createMarkdownEmbedTransformer", () => {
       url: "https://example.com",
       caption: [
         createTextRichText({
-          root: {
-            plain_text: "テストリンク",
-          },
+          plainText: "テストリンク",
         }),
       ],
     });
