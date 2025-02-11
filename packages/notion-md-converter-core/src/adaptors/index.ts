@@ -1,2 +1,2 @@
-export * from "./FileAdaptor";
-export * from "./NoChangeFileObjectAdaptor";
+export * from "./createFileAdapter";
+export * from "./createNoChangeFileObjectAdaptor";

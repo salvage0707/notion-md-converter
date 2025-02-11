@@ -1,19 +1,15 @@
 import { createNotionExternalFile, createNotionInternalFile } from "../test-helper";
-import { NoChangeFileObjectAdaptor } from "./NoChangeFileObjectAdaptor";
+import { createNoChangeFileObjectAdaptor } from "./createNoChangeFileObjectAdaptor";
 
 describe("NoChangeFileObjectAdaptor", () => {
-  let adaptor: NoChangeFileObjectAdaptor;
-
-  beforeEach(() => {
-    adaptor = new NoChangeFileObjectAdaptor();
-  });
+  const adaptor = createNoChangeFileObjectAdaptor();
 
   describe("execute", () => {
     it("should return internal file url", () => {
       const fileObject = createNotionInternalFile({
         url: "https://example.com/internal.pdf",
       });
-      expect(adaptor.execute(fileObject)).toEqual({
+      expect(adaptor(fileObject)).toEqual({
         url: "https://example.com/internal.pdf",
       });
     });
@@ -22,7 +18,7 @@ describe("NoChangeFileObjectAdaptor", () => {
       const fileObject = createNotionExternalFile({
         url: "https://example.com/external.pdf",
       });
-      expect(adaptor.execute(fileObject)).toEqual({
+      expect(adaptor(fileObject)).toEqual({
         url: "https://example.com/external.pdf",
       });
     });

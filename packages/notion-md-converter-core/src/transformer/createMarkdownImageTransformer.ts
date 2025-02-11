@@ -1,16 +1,16 @@
-import type { FileAdaptor } from "../adaptors";
-import { NoChangeFileObjectAdaptor } from "../adaptors";
+import type { FileAdapter } from "../types";
+import { createNoChangeFileObjectAdaptor } from "../adaptors";
 import { MarkdownUtils } from "../utils";
 import { createBasicImageTransformer } from "./createBasicTransformer";
 
 export const createMarkdownImageTransformer = (
   options: {
-    fileAdaptor?: FileAdaptor;
+    fileAdapter?: FileAdapter;
   } = {},
 ) => {
   return createBasicImageTransformer(({ block }) => {
-    const adapter = options.fileAdaptor ?? new NoChangeFileObjectAdaptor();
-    const { url } = adapter.execute(block.image);
+    const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdaptor();
+    const { url } = fileAdapter(block.image);
     const caption =
       block.image.caption.length > 0 ? MarkdownUtils.richTextsToMarkdown(block.image.caption) : url;
     return MarkdownUtils.image(caption ?? url, url);
