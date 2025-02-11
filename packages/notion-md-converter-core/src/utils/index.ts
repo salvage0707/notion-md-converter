@@ -1,2 +1,2 @@
 export * from "./markdown";
-export * from "./notion-helper";
+export * from "./notion";
