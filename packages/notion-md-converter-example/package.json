@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "notion-md-converter": "workspace:*",
+    "@notion-md-converter/core": "workspace:*",
     "@notion-md-converter/config": "workspace:*"
   }
 }

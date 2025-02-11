@@ -8,7 +8,7 @@
   "exclude": ["node_modules", "dist"],
   "references": [
     {
-      "path": "../notion-md-converter"
+      "path": "../notion-md-converter-core"
     }
   ]
 }

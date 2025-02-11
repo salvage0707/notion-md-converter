@@ -28,22 +28,22 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(@types/node@22.10.7)(tsx@4.19.2)
 
-  packages/notion-md-converter:
+  packages/notion-md-converter-config: {}
+
+  packages/notion-md-converter-core:
     dependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
         version: link:../notion-md-converter-config
-
-  packages/notion-md-converter-config: {}
 
   packages/notion-md-converter-example:
     dependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
         version: link:../notion-md-converter-config
-      notion-md-converter:
+      '@notion-md-converter/core':
         specifier: workspace:*
-        version: link:../notion-md-converter
+        version: link:../notion-md-converter-core
 
 packages:
 
