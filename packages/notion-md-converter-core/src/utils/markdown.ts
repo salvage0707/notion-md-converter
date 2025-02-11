@@ -26,11 +26,11 @@ const heading = (text: string, level: 1 | 2 | 3 | 4 | 5 | 6): string => {
 /**
  * テキストスタイル変換
  */
-type ColorMap = {
+export type ColorMap = {
   [key in ApiColor]: string;
 };
 
-export const COLOR_MAP: ColorMap = {
+const COLOR_MAP: ColorMap = {
   default: "no used",
   red: "red",
   red_background: "red",
@@ -232,7 +232,7 @@ export type EnableAnnotations = {
   color: boolean | ColorMap;
 };
 
-export const richTextsToMarkdown = (
+const richTextsToMarkdown = (
   richTexts: RichText[],
   enableAnnotations: EnableAnnotations = {
     bold: true,
