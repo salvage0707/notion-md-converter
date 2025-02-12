@@ -60,6 +60,9 @@ export type ApiColor =
   | "red_background";
 
 export type CodeLanguage = CodeBlockObjectResponse["code"]["language"];
+export type CodeLanguageMapping = {
+  [key in CodeLanguage]: string | undefined;
+};
 
 export type TextRichText = TextRichTextItemResponse;
 export type MentionRichText = MentionRichTextItemResponse;
