@@ -396,3 +396,19 @@ describe("richTextsToMarkdown", () => {
     );
   });
 });
+
+describe("equation", () => {
+  it("数式を正しく変換できること", () => {
+    expect(MarkdownUtils.equation("E = mc^2")).toBe("$$\nE = mc^2\n$$");
+  });
+
+  it("複数行の数式を正しく変換できること", () => {
+    expect(MarkdownUtils.equation("f(x) = ax^2 + bx + c\ny = 2x + 1")).toBe(
+      "$$\nf(x) = ax^2 + bx + c\ny = 2x + 1\n$$",
+    );
+  });
+
+  it("空文字列を数式に変換できること", () => {
+    expect(MarkdownUtils.equation("")).toBe("$$\n\n$$");
+  });
+});

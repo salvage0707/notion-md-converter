@@ -113,6 +113,13 @@ const codeBlock = (code: string, language?: string): string => {
 };
 
 /**
+ * 数式変換
+ */
+const equation = (equation: string): string => {
+  return `$$\n${equation}\n$$`;
+};
+
+/**
  * 引用変換
  */
 const blockquote = (text: string): string => {
@@ -283,6 +290,7 @@ export const MarkdownUtils = {
   link,
   image,
   codeBlock,
+  equation,
   blockquote,
   table,
   horizontalRule,
