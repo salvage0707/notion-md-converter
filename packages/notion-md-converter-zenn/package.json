@@ -1,0 +1,26 @@
+{
+  "name": "@notion-md-converter/zenn",
+  "version": "0.1.0",
+  "description": "Notion to Zenn converter",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "test:once": "vitest run",
+    "typecheck": "tsc --build --pretty"
+  },
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "zenn",
+    "markdown",
+    "converter"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@notion-md-converter/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@notion-md-converter/config": "workspace:*"
+  }
+}

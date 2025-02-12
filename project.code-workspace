@@ -5,10 +5,13 @@
       "path": "."
     },
     {
+      "path": "packages/notion-md-converter-config"
+    },
+    {
       "path": "packages/notion-md-converter-core"
     },
     {
-      "path": "packages/notion-md-converter-config"
+      "path": "packages/notion-md-converter-zenn"
     },
     {
       "path": "packages/notion-md-converter-example"

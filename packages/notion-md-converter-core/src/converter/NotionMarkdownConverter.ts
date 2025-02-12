@@ -77,7 +77,7 @@ export class NotRootBlockError extends Error {
 }
 
 export class NotionMarkdownConverter {
-  private transformers: TransformerMapping;
+  protected transformers: TransformerMapping;
 
   constructor(transformers: TransformerMapping = {}) {
     this.transformers = {
