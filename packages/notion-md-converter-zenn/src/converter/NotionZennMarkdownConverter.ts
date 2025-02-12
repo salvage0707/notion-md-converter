@@ -1,7 +1,6 @@
 import { createMarkdownPdfTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
 import {
   createMarkdownCalloutTransformer,
-  createMarkdownCodeTransformer,
   createMarkdownFileTransformer,
   createMarkdownImageTransformer,
   createMarkdownLinkPreviewTransformer,
@@ -9,6 +8,7 @@ import {
   createMarkdownVideoTransformer,
 } from "@notion-md-converter/core";
 import type { FileAdapter } from "@notion-md-converter/core/types";
+import { createZennMarkdownCodeTransformer } from "src/transfomers";
 
 type ConstructorOptions = {
   file?: {
@@ -28,7 +28,7 @@ type ConstructorOptions = {
 export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
   constructor(options: ConstructorOptions = {}) {
     super({
-      code: createMarkdownCodeTransformer(),
+      code: createZennMarkdownCodeTransformer(),
       callout: createMarkdownCalloutTransformer(),
       link_preview: createMarkdownLinkPreviewTransformer(),
       toggle: createMarkdownToggleTransformer(),
