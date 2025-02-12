@@ -1,8 +1,8 @@
 {
-  "name": "@notion-md-converter/core",
-  "private": true,
+  "name": "@notion-md-converter/zenn",
   "version": "0.1.0",
-  "description": "Notion to Markdown Converter",
+  "description": "Notion to Zenn converter",
+  "main": "index.js",
   "scripts": {
     "test": "vitest",
     "test:once": "vitest run",
@@ -12,14 +12,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@notionhq/client": "^2.2.15"
+    "@notion-md-converter/core": "workspace:*"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
-  },
-  "exports": {
-    ".": "./src/index.ts",
-    "./types": "./src/types/index.ts",
-    "./test-helper": "./src/test-helper/index.ts"
   }
 }
