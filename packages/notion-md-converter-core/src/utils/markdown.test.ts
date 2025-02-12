@@ -397,18 +397,32 @@ describe("richTextsToMarkdown", () => {
   });
 });
 
-describe("equation", () => {
+describe("blockEquation", () => {
   it("数式を正しく変換できること", () => {
-    expect(MarkdownUtils.equation("E = mc^2")).toBe("$$\nE = mc^2\n$$");
+    expect(MarkdownUtils.blockEquation("E = mc^2")).toBe("$$\nE = mc^2\n$$");
   });
 
   it("複数行の数式を正しく変換できること", () => {
-    expect(MarkdownUtils.equation("f(x) = ax^2 + bx + c\ny = 2x + 1")).toBe(
+    expect(MarkdownUtils.blockEquation("f(x) = ax^2 + bx + c\ny = 2x + 1")).toBe(
       "$$\nf(x) = ax^2 + bx + c\ny = 2x + 1\n$$",
     );
   });
 
   it("空文字列を数式に変換できること", () => {
-    expect(MarkdownUtils.equation("")).toBe("$$\n\n$$");
+    expect(MarkdownUtils.blockEquation("")).toBe("$$\n\n$$");
+  });
+});
+
+describe("inlineEquation", () => {
+  it("数式を正しく変換できること", () => {
+    expect(MarkdownUtils.inlineEquation("E = mc^2")).toBe("$E = mc^2$");
+  });
+
+  it("複数の変数を含む数式を正しく変換できること", () => {
+    expect(MarkdownUtils.inlineEquation("x^2 + y^2 = r^2")).toBe("$x^2 + y^2 = r^2$");
+  });
+
+  it("空文字列を数式に変換できること", () => {
+    expect(MarkdownUtils.inlineEquation("")).toBe("$$");
   });
 });

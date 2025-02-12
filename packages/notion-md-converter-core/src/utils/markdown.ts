@@ -115,8 +115,12 @@ const codeBlock = (code: string, language?: string): string => {
 /**
  * 数式変換
  */
-const equation = (equation: string): string => {
+const blockEquation = (equation: string) => {
   return `$$\n${equation}\n$$`;
+};
+
+const inlineEquation = (equation: string) => {
+  return `$${equation}$`;
 };
 
 /**
@@ -290,7 +294,8 @@ export const MarkdownUtils = {
   link,
   image,
   codeBlock,
-  equation,
+  blockEquation,
+  inlineEquation,
   blockquote,
   table,
   horizontalRule,
