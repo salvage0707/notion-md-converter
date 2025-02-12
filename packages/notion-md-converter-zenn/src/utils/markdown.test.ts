@@ -16,9 +16,7 @@ describe("image", () => {
 
 describe("codeBlock", () => {
   it("言語指定ありでコードブロックに変換できること", () => {
-    expect(ZennMarkdownUtils.codeBlock("const x = 1;", false, "typescript")).toBe(
-      "```typescript\nconst x = 1;\n```",
-    );
+    expect(ZennMarkdownUtils.codeBlock("const x = 1;", false, "typescript")).toBe("```typescript\nconst x = 1;\n```");
   });
 
   it("diffモードでコードブロックに変換できること", () => {
@@ -36,15 +34,11 @@ describe("codeBlock", () => {
 
 describe("details", () => {
   it("通常のdetailsに変換できること", () => {
-    expect(ZennMarkdownUtils.details("Title", "Content", false)).toBe(
-      ":::details Title\nContent\n:::",
-    );
+    expect(ZennMarkdownUtils.details("Title", "Content", false)).toBe(":::details Title\nContent\n:::");
   });
 
   it("wrapモードでdetailsに変換できること", () => {
-    expect(ZennMarkdownUtils.details("Title", "Content", true)).toBe(
-      "::::details Title\nContent\n::::",
-    );
+    expect(ZennMarkdownUtils.details("Title", "Content", true)).toBe("::::details Title\nContent\n::::");
   });
 });
 
@@ -54,9 +48,7 @@ describe("message", () => {
   });
 
   it("アラートメッセージに変換できること", () => {
-    expect(ZennMarkdownUtils.message("Warning", true, false)).toBe(
-      ":::message alert\nWarning\n:::",
-    );
+    expect(ZennMarkdownUtils.message("Warning", true, false)).toBe(":::message alert\nWarning\n:::");
   });
 
   it("wrapモードでメッセージに変換できること", () => {
@@ -72,9 +64,7 @@ describe("embedLinkCard", () => {
 
 describe("embedX", () => {
   it("URLをそのまま返すこと", () => {
-    expect(ZennMarkdownUtils.embedX("https://twitter.com/example")).toBe(
-      "https://twitter.com/example",
-    );
+    expect(ZennMarkdownUtils.embedX("https://twitter.com/example")).toBe("https://twitter.com/example");
   });
 });
 
@@ -88,9 +78,7 @@ describe("embedYoutube", () => {
 
 describe("embedGitHub", () => {
   it("URLをそのまま返すこと", () => {
-    expect(ZennMarkdownUtils.embedGitHub("https://github.com/example")).toBe(
-      "https://github.com/example",
-    );
+    expect(ZennMarkdownUtils.embedGitHub("https://github.com/example")).toBe("https://github.com/example");
   });
 });
 
@@ -104,9 +92,7 @@ describe("embedGitHubGist", () => {
 
 describe("embedCodePen", () => {
   it("CodePen URLを正しい形式に変換できること", () => {
-    expect(ZennMarkdownUtils.embedCodePen("https://codepen.io/example")).toBe(
-      "@[codepen](https://codepen.io/example)",
-    );
+    expect(ZennMarkdownUtils.embedCodePen("https://codepen.io/example")).toBe("@[codepen](https://codepen.io/example)");
   });
 });
 
@@ -158,9 +144,7 @@ describe("embedStackBlitz", () => {
 
 describe("embedFigma", () => {
   it("Figma URLを正しい形式に変換できること", () => {
-    expect(ZennMarkdownUtils.embedFigma("https://figma.com/example")).toBe(
-      "@[figma](https://figma.com/example)",
-    );
+    expect(ZennMarkdownUtils.embedFigma("https://figma.com/example")).toBe("@[figma](https://figma.com/example)");
   });
 });
 
