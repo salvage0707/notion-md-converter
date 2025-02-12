@@ -426,3 +426,19 @@ describe("inlineEquation", () => {
     expect(MarkdownUtils.inlineEquation("")).toBe("$$");
   });
 });
+
+describe("comment", () => {
+  it("テキストをHTMLコメントに変換できること", () => {
+    expect(MarkdownUtils.comment("This is a comment")).toBe("<!-- This is a comment -->");
+  });
+
+  it("空文字をHTMLコメントに変換できること", () => {
+    expect(MarkdownUtils.comment("")).toBe("<!--  -->");
+  });
+
+  it("特殊文字を含むテキストをHTMLコメントに変換できること", () => {
+    expect(MarkdownUtils.comment("<script>alert('test')</script>")).toBe(
+      "<!-- <script>alert('test')</script> -->",
+    );
+  });
+});

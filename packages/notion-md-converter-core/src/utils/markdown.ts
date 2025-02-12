@@ -232,6 +232,13 @@ const video = (url: string): string => {
 };
 
 /**
+ * コメント
+ */
+const comment = (text: string): string => {
+  return `<!-- ${text} -->`;
+};
+
+/**
  * リッチテキストをMarkdownに変換
  */
 export type EnableAnnotations = {
@@ -304,4 +311,5 @@ export const MarkdownUtils = {
   details,
   video,
   richTextsToMarkdown,
+  comment,
 };
