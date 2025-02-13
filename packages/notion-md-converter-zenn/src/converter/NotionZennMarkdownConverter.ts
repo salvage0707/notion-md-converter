@@ -1,5 +1,4 @@
 import { NotionMarkdownConverter } from "@notion-md-converter/core";
-import { createMarkdownVideoTransformer } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/core/types";
 import {
   createZennMarkdownCodeTransformer,
@@ -9,6 +8,7 @@ import {
   createZennMarkdownFileTransformer,
   createZennMarkdownImageTransformer,
   createZennMarkdownPDFTransformer,
+  createZennMarkdownVideoTransformer,
 } from "../transformer";
 
 export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
@@ -21,7 +21,7 @@ export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
       file: createZennMarkdownFileTransformer(),
       image: createZennMarkdownImageTransformer(),
       pdf: createZennMarkdownPDFTransformer(),
-      video: createMarkdownVideoTransformer(),
+      video: createZennMarkdownVideoTransformer(),
       ...transformers,
     });
   }

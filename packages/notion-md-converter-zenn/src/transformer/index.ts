@@ -5,3 +5,4 @@ export * from "./createZennMarkdownToggleTransformer";
 export * from "./createZennMarkdownFileTransformer";
 export * from "./createZennMarkdownImageTransformer";
 export * from "./createZennMarkdownPDFTransformer";
+export * from "./createZennMarkdownVideoTransformer";
