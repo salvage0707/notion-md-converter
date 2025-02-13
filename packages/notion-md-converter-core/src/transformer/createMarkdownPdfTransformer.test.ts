@@ -1,10 +1,10 @@
 import { createPdfBlock, createTextRichText } from "../test-helper";
 import { createTransformerContext } from "../test-helper";
-import { createMarkdownPdfTransformer } from "./createMarkdownPdfTransformer";
+import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
 
-describe("createMarkdownPdfTransformer", () => {
+describe("createMarkdownPDFTransformer", () => {
   const mockAdapter = vi.fn();
-  const transformer = createMarkdownPdfTransformer({
+  const transformer = createMarkdownPDFTransformer({
     fileAdapter: mockAdapter,
   });
 

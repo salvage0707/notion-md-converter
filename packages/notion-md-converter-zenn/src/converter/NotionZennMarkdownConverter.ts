@@ -1,4 +1,4 @@
-import { createMarkdownPdfTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
+import { createMarkdownPDFTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
 import { createMarkdownVideoTransformer } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/core/types";
 import {
@@ -19,7 +19,7 @@ export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
       toggle: createZennMarkdownToggleTransformer(),
       file: createZennMarkdownFileTransformer(),
       image: createZennMarkdownImageTransformer(),
-      pdf: createMarkdownPdfTransformer(),
+      pdf: createMarkdownPDFTransformer(),
       video: createMarkdownVideoTransformer(),
       ...transformers,
     });

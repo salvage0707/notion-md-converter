@@ -13,7 +13,7 @@ import {
   createMarkdownLinkPreviewTransformer,
   createMarkdownNumberedListItemTransformer,
   createMarkdownParagraphTransformer,
-  createMarkdownPdfTransformer,
+  createMarkdownPDFTransformer,
   createMarkdownQuoteTransformer,
   createMarkdownSyncedBlockTransformer,
   createMarkdownTableOfContentsTransformer,
@@ -101,7 +101,7 @@ export class NotionMarkdownConverter {
       toggle: createMarkdownToggleTransformer(),
       file: createMarkdownFileTransformer(),
       image: createMarkdownImageTransformer(),
-      pdf: createMarkdownPdfTransformer(),
+      pdf: createMarkdownPDFTransformer(),
       video: createMarkdownVideoTransformer(),
       ...transformers,
     };

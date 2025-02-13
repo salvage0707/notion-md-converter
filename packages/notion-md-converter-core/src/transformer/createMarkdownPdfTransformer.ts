@@ -3,7 +3,7 @@ import type { FileAdapter } from "../types";
 import { MarkdownUtils } from "../utils";
 import { createBasicPdfTransformer } from "./createBasicTransformer";
 
-export const createMarkdownPdfTransformer = (
+export const createMarkdownPDFTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},
