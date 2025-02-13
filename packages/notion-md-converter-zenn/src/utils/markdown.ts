@@ -199,6 +199,11 @@ const embedBlueprintUE = (url: string): string => {
   return `@[blueprintue](${url})`;
 };
 
+const embedByURL = (url: string): string => {
+  // TODO: 実装
+  return url;
+};
+
 /**
  * - code block
  *   - 言語を追加
@@ -224,4 +229,5 @@ export const ZennMarkdownUtils = {
   embedStackBlitz,
   embedFigma,
   embedBlueprintUE,
+  embedByURL,
 };
