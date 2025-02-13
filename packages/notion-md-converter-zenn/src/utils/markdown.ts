@@ -109,9 +109,8 @@ const codeBlock = (code: string, diff = false, language?: CodeLanguage, filename
   if (diff) {
     prefix = "diff ";
   }
-  if (language) {
-    const lang = CODE_LANGUAGE_MAPPING[language];
-    prefix += lang;
+  if (language && CODE_LANGUAGE_MAPPING[language]) {
+    prefix += CODE_LANGUAGE_MAPPING[language];
   }
   if (filename) {
     prefix += `:${filename}`;

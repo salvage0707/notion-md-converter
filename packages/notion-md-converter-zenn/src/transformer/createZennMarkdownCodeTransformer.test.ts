@@ -40,7 +40,7 @@ describe("createZennMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```plain text\ntest hoge\n```\n");
+    expect(result).toBe("\n```\ntest hoge\n```\n");
   });
 
   it("diffが指定されている場合、それを含めて変換する", () => {
