@@ -1,5 +1,5 @@
 import { createBasicCodeTransformer, MarkdownUtils } from "@notion-md-converter/core";
-import { ZennMarkdownUtils } from "src/utils/markdown";
+import { ZennMarkdownUtils } from "../utils/markdown";
 
 export const createZennMarkdownCodeTransformer = () => {
   return createBasicCodeTransformer(({ block, meta: { diff, language, filename } }) => {
@@ -11,8 +11,6 @@ export const createZennMarkdownCodeTransformer = () => {
       code: false,
       color: false,
     });
-    return MarkdownUtils.wrapWithNewLines(
-      ZennMarkdownUtils.codeBlock(text, diff, language, filename),
-    );
+    return MarkdownUtils.wrapWithNewLines(ZennMarkdownUtils.codeBlock(text, diff, language, filename));
   });
 };

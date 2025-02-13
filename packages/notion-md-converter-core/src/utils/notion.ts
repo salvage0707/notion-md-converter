@@ -33,6 +33,7 @@ import type {
   ToggleBlock,
   VideoBlock,
 } from "../types";
+import type { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 
 const ROOT_BLOCK_TYPES = [
   "bookmark",
@@ -202,4 +203,21 @@ export const $getPageFullContent = async (client: Client, blockId: string) => {
     }
   }
   return results as Block[];
+};
+
+export const $getDatabasePages = async (client: Client, databaseId: string) => {
+  const results: QueryDatabaseResponse["results"] = [];
+  let nextCursor: string | undefined = undefined;
+  while (true) {
+    const res = await client.databases.query({
+      database_id: databaseId,
+      start_cursor: nextCursor,
+    });
+    results.push(...res.results);
+    nextCursor = res.next_cursor ?? undefined;
+    if (!nextCursor) {
+      break;
+    }
+  }
+  return results;
 };

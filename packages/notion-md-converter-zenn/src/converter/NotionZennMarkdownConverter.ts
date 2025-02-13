@@ -8,7 +8,7 @@ import {
   createMarkdownVideoTransformer,
 } from "@notion-md-converter/core";
 import type { FileAdapter } from "@notion-md-converter/core/types";
-import { createZennMarkdownCodeTransformer } from "src/transfomers";
+import { createZennMarkdownCodeTransformer } from "../transformer";
 
 type ConstructorOptions = {
   file?: {

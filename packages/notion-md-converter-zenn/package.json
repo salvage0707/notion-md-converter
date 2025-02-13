@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   }
 }
