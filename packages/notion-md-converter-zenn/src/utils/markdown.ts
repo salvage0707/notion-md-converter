@@ -121,16 +121,20 @@ const codeBlock = (code: string, diff = false, language?: CodeLanguage, filename
 /**
  * detailsに変換
  */
-const details = (title: string, content: string, wrap = false): string => {
+const details = (title: string, content: string): string => {
+  const formattedTitle = title.replace(/\n/g, " ");
+
+  const wrap = content.includes(":::");
   const wrapper = wrap ? "::::" : ":::";
-  const details = title ? `details ${title}` : "details";
+  const details = formattedTitle ? `details ${formattedTitle}` : "details";
   return `${wrapper}${details}\n${content}\n${wrapper}`;
 };
 
 /**
  * messageに変換
  */
-const message = (text: string, alert = false, wrap = false): string => {
+const message = (text: string, alert = false): string => {
+  const wrap = text.includes(":::");
   const wrapper = wrap ? "::::" : ":::";
   const message = alert ? "message alert" : "message";
   return `${wrapper}${message}\n${text}\n${wrapper}`;

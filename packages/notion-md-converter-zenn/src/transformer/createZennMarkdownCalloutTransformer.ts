@@ -14,13 +14,11 @@ export const createZennMarkdownCalloutTransformer = (
     const icon = block.callout.icon?.type === "emoji" ? block.callout.icon.emoji : "";
 
     let result = text;
-    let wrap = false;
     if (children !== "") {
       result += `\n${children}`;
-      wrap = children.includes(":::");
     }
 
     const isAlert = options.alertEmojis?.includes(icon as Emoji);
-    return MarkdownUtils.wrapWithNewLines(ZennMarkdownUtils.message(result, isAlert, wrap));
+    return MarkdownUtils.wrapWithNewLines(ZennMarkdownUtils.message(result, isAlert));
   });
 };

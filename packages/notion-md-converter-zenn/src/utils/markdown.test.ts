@@ -34,25 +34,41 @@ describe("codeBlock", () => {
 
 describe("details", () => {
   it("通常のdetailsに変換できること", () => {
-    expect(ZennMarkdownUtils.details("Title", "Content", false)).toBe(":::details Title\nContent\n:::");
+    expect(ZennMarkdownUtils.details("Title", "Content")).toBe(":::details Title\nContent\n:::");
   });
 
-  it("wrapモードでdetailsに変換できること", () => {
-    expect(ZennMarkdownUtils.details("Title", "Content", true)).toBe("::::details Title\nContent\n::::");
+  it("タイトルと内容を持つdetailsを生成できる", () => {
+    const result = ZennMarkdownUtils.details("タイトル", "内容");
+    expect(result).toBe(":::details タイトル\n内容\n:::");
+  });
+
+  it("タイトルが空の場合、detailsのみを生成する", () => {
+    const result = ZennMarkdownUtils.details("", "内容");
+    expect(result).toBe(":::details\n内容\n:::");
+  });
+
+  it("タイトルに改行が含まれる場合、空白に置換する", () => {
+    const result = ZennMarkdownUtils.details("タイトル1\nタイトル2", "内容");
+    expect(result).toBe(":::details タイトル1 タイトル2\n内容\n:::");
+  });
+
+  it("内容に:::が含まれる場合、::::でラップする", () => {
+    const result = ZennMarkdownUtils.details("タイトル", ":::message\n内容\n:::");
+    expect(result).toBe("::::details タイトル\n:::message\n内容\n:::\n::::");
   });
 });
 
 describe("message", () => {
   it("通常のメッセージに変換できること", () => {
-    expect(ZennMarkdownUtils.message("Hello", false, false)).toBe(":::message\nHello\n:::");
+    expect(ZennMarkdownUtils.message("Hello", false)).toBe(":::message\nHello\n:::");
   });
 
   it("アラートメッセージに変換できること", () => {
-    expect(ZennMarkdownUtils.message("Warning", true, false)).toBe(":::message alert\nWarning\n:::");
+    expect(ZennMarkdownUtils.message("Warning", true)).toBe(":::message alert\nWarning\n:::");
   });
 
-  it("wrapモードでメッセージに変換できること", () => {
-    expect(ZennMarkdownUtils.message("Hello", false, true)).toBe("::::message\nHello\n::::");
+  it("内容に:::が含まれる場合、::::でラップする", () => {
+    expect(ZennMarkdownUtils.message(":::message\n内容\n:::", false)).toBe("::::message\n:::message\n内容\n:::\n::::");
   });
 });
 
