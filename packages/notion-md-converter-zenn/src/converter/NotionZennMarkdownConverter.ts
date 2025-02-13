@@ -1,6 +1,5 @@
 import { createMarkdownPdfTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
 import {
-  createMarkdownFileTransformer,
   createMarkdownImageTransformer,
   createMarkdownVideoTransformer,
 } from "@notion-md-converter/core";
@@ -10,6 +9,7 @@ import {
   createZennMarkdownCalloutTransformer,
   createZennMarkdownLinkPreviewTransformer,
   createZennMarkdownToggleTransformer,
+  createZennMarkdownFileTransformer,
 } from "../transformer";
 
 export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
@@ -19,7 +19,7 @@ export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
       callout: createZennMarkdownCalloutTransformer(),
       link_preview: createZennMarkdownLinkPreviewTransformer(),
       toggle: createZennMarkdownToggleTransformer(),
-      file: createMarkdownFileTransformer(),
+      file: createZennMarkdownFileTransformer(),
       image: createMarkdownImageTransformer(),
       pdf: createMarkdownPdfTransformer(),
       video: createMarkdownVideoTransformer(),
