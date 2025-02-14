@@ -13,7 +13,7 @@ export * from "./createMarkdownImageTransformer";
 export * from "./createMarkdownLinkPreviewTransformer";
 export * from "./createMarkdownNumberedListItemTransformer";
 export * from "./createMarkdownParagraphTransformer";
-export * from "./createMarkdownPdfTransformer";
+export * from "./createMarkdownPDFTransformer";
 export * from "./createMarkdownQuoteTransformer";
 export * from "./createMarkdownSyncedBlockTransformer";
 export * from "./createMarkdownTableOfContentsTransformer";

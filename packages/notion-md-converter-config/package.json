@@ -7,7 +7,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "exports": {
     "./tsconfig/*": "./tsconfig/*"
   }

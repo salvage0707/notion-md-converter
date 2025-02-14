@@ -1,9 +1,11 @@
-import { createNoChangeFileObjectAdapter } from "../adapter";
-import type { FileAdapter } from "../types";
-import { MarkdownUtils } from "../utils";
-import { createBasicPdfTransformer } from "./createBasicTransformer";
+import {
+  createBasicPdfTransformer,
+  createNoChangeFileObjectAdapter,
+  MarkdownUtils,
+} from "@notion-md-converter/core";
+import type { FileAdapter } from "@notion-md-converter/core/types";
 
-export const createMarkdownPDFTransformer = (
+export const createZennMarkdownPDFTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},

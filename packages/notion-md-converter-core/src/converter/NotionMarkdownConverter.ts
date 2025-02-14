@@ -13,7 +13,7 @@ import {
   createMarkdownLinkPreviewTransformer,
   createMarkdownNumberedListItemTransformer,
   createMarkdownParagraphTransformer,
-  createMarkdownPdfTransformer,
+  createMarkdownPDFTransformer,
   createMarkdownQuoteTransformer,
   createMarkdownSyncedBlockTransformer,
   createMarkdownTableOfContentsTransformer,
@@ -77,7 +77,7 @@ export class NotRootBlockError extends Error {
 }
 
 export class NotionMarkdownConverter {
-  private transformers: TransformerMapping;
+  protected transformers: TransformerMapping;
 
   constructor(transformers: TransformerMapping = {}) {
     this.transformers = {
@@ -101,7 +101,7 @@ export class NotionMarkdownConverter {
       toggle: createMarkdownToggleTransformer(),
       file: createMarkdownFileTransformer(),
       image: createMarkdownImageTransformer(),
-      pdf: createMarkdownPdfTransformer(),
+      pdf: createMarkdownPDFTransformer(),
       video: createMarkdownVideoTransformer(),
       ...transformers,
     };
