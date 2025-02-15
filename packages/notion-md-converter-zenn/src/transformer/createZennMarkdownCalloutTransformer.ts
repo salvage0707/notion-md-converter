@@ -1,6 +1,6 @@
 import { MarkdownUtils, createBasicCalloutTransformer } from "@notion-md-converter/core";
-import { ZennMarkdownUtils } from "../utils";
 import type { ApiColor } from "@notion-md-converter/core/types";
+import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownCalloutTransformer = (
   options: {

@@ -1,4 +1,4 @@
-import { createBasicToggleTransformer, MarkdownUtils } from "@notion-md-converter/core";
+import { MarkdownUtils, createBasicToggleTransformer } from "@notion-md-converter/core";
 import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownToggleTransformer = () => {

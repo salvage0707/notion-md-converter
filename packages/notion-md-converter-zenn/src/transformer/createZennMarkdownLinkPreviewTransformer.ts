@@ -1,5 +1,5 @@
-import { ZennMarkdownUtils } from "../utils";
 import { createBasicLinkPreviewTransformer } from "@notion-md-converter/core";
+import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownLinkPreviewTransformer = () => {
   return createBasicLinkPreviewTransformer(({ block }) => {

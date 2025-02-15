@@ -1,7 +1,9 @@
 import { MarkdownUtils } from "../utils";
 import { createBasicEquationTransformer } from "./createBasicTransformer";
 
-export const createMarkdownEquationTransformer = ({ type = "equation" }: { type?: "code" | "equation" } = {}) => {
+export const createMarkdownEquationTransformer = ({
+  type = "equation",
+}: { type?: "code" | "equation" } = {}) => {
   return createBasicEquationTransformer(({ block }) => {
     const text = block.equation.expression;
     return MarkdownUtils.wrapWithNewLines(

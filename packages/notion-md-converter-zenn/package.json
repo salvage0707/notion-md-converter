@@ -8,13 +8,7 @@
     "test:once": "vitest run",
     "typecheck": "tsc --build --pretty"
   },
-  "keywords": [
-    "notion-md-converter",
-    "notion",
-    "zenn",
-    "markdown",
-    "converter"
-  ],
+  "keywords": ["notion-md-converter", "notion", "zenn", "markdown", "converter"],
   "author": "",
   "license": "MIT",
   "dependencies": {

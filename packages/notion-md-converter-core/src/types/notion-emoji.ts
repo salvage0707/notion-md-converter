@@ -2,7 +2,7 @@
  * @see @notionhq/client#EmojiRequest
  * @see https://developers.notion.com/reference/emoji-object
  */
-export type Emoji = 
+export type Emoji =
   | "😀"
   | "😃"
   | "😄"
