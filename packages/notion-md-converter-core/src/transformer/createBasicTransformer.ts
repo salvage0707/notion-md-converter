@@ -249,7 +249,7 @@ export const createBasicParagraphTransformer = (
   };
 };
 
-export const createBasicPdfTransformer = (
+export const createBasicPDFTransformer = (
   execute: (args: { block: PdfBlock }) => string,
 ): PdfTransformer => {
   return (context) => {
