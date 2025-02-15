@@ -38,6 +38,7 @@ import type {
   Heading1Block,
   Heading2Block,
   Heading3Block,
+  ImageBlock,
   LinkPreviewBlock,
   NumberedListItemBlock,
   ParagraphBlock,
@@ -62,6 +63,7 @@ import {
   isHeading1Block,
   isHeading2Block,
   isHeading3Block,
+  isImageBlock,
   isLinkPreviewBlock,
   isNumberedListItemBlock,
   isParagraphBlock,
@@ -231,6 +233,11 @@ export class NotionMarkdownConverter {
       if (isEmbedBlock(block)) {
         const ctx = context as Context<EmbedBlock>;
         return this.transformers.embed?.(ctx) ?? "";
+      }
+
+      if (isImageBlock(block)) {
+        const ctx = context as Context<ImageBlock>;
+        return this.transformers.image?.(ctx) ?? "";
       }
 
       if (isVideoBlock(block)) {

@@ -43,7 +43,7 @@ async function main() {
       content: result,
     });
 
-    allContent += `# ${title}\n\n${result}\n\n`;
+    allContent += `## ${title}\n\n${result}\n\n`;
   }
 
   writeFile({
