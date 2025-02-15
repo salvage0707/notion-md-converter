@@ -38,12 +38,25 @@ importers:
       '@notion-md-converter/core':
         specifier: workspace:*
         version: link:../notion-md-converter-core
+      '@notion-md-converter/zenn':
+        specifier: workspace:*
+        version: link:../notion-md-converter-zenn
       '@notionhq/client':
         specifier: ^2.2.15
         version: 2.2.15
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
+    devDependencies:
+      '@notion-md-converter/config':
+        specifier: workspace:*
+        version: link:../notion-md-converter-config
+
+  packages/notion-md-converter-zenn:
+    dependencies:
+      '@notion-md-converter/core':
+        specifier: workspace:*
+        version: link:../notion-md-converter-core
     devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*

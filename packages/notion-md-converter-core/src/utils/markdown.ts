@@ -113,6 +113,17 @@ const codeBlock = (code: string, language?: string): string => {
 };
 
 /**
+ * 数式変換
+ */
+const blockEquation = (equation: string) => {
+  return `$$\n${equation}\n$$`;
+};
+
+const inlineEquation = (equation: string) => {
+  return `$${equation}$`;
+};
+
+/**
  * 引用変換
  */
 const blockquote = (text: string): string => {
@@ -221,15 +232,22 @@ const video = (url: string): string => {
 };
 
 /**
+ * コメント
+ */
+const comment = (text: string): string => {
+  return `<!-- ${text} -->`;
+};
+
+/**
  * リッチテキストをMarkdownに変換
  */
 export type EnableAnnotations = {
-  bold: boolean;
-  italic: boolean;
-  strikethrough: boolean;
-  underline: boolean;
-  code: boolean;
-  color: boolean | ColorMap;
+  bold?: boolean;
+  italic?: boolean;
+  strikethrough?: boolean;
+  underline?: boolean;
+  code?: boolean;
+  color?: boolean | ColorMap;
 };
 
 const richTextsToMarkdown = (
@@ -283,6 +301,8 @@ export const MarkdownUtils = {
   link,
   image,
   codeBlock,
+  blockEquation,
+  inlineEquation,
   blockquote,
   table,
   horizontalRule,
@@ -291,4 +311,5 @@ export const MarkdownUtils = {
   details,
   video,
   richTextsToMarkdown,
+  comment,
 };

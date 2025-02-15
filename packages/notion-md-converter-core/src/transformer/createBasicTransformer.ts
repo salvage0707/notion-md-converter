@@ -14,6 +14,7 @@ import type {
   ChildPageBlock,
   ChildPageTransformer,
   CodeBlock,
+  CodeLanguage,
   CodeTransformer,
   ColumnBlock,
   ColumnListBlock,
@@ -91,10 +92,17 @@ export const createBasicCalloutTransformer = (
 };
 
 export const createBasicCodeTransformer = (
-  execute: (args: { block: CodeBlock }) => string,
+  execute: (args: {
+    block: CodeBlock;
+    meta: { diff: boolean; filename: string; language: CodeLanguage };
+  }) => string,
 ): CodeTransformer => {
   return (context) => {
-    return execute({ block: context.currentBlock });
+    const caption = context.currentBlock.code.caption.map((richText) => richText.plain_text).join("");
+    const diff = caption.startsWith("diff:");
+    const filename = caption.replace("diff:", "").trim();
+    const language = context.currentBlock.code.language;
+    return execute({ block: context.currentBlock, meta: { diff, filename, language } });
   };
 };
 
@@ -124,9 +132,7 @@ export const createBasicEquationTransformer = (
   };
 };
 
-export const createBasicFileTransformer = (
-  execute: (args: { block: FileBlock }) => string,
-): FileTransformer => {
+export const createBasicFileTransformer = (execute: (args: { block: FileBlock }) => string): FileTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };
@@ -173,9 +179,7 @@ export const createBasicHeadingTransformer = (
   };
 };
 
-export const createBasicImageTransformer = (
-  execute: (args: { block: ImageBlock }) => string,
-): ImageTransformer => {
+export const createBasicImageTransformer = (execute: (args: { block: ImageBlock }) => string): ImageTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };
@@ -239,9 +243,7 @@ export const createBasicParagraphTransformer = (
   };
 };
 
-export const createBasicPdfTransformer = (
-  execute: (args: { block: PdfBlock }) => string,
-): PdfTransformer => {
+export const createBasicPdfTransformer = (execute: (args: { block: PdfBlock }) => string): PdfTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };
@@ -306,17 +308,13 @@ export const createBasicToggleTransformer = (
   };
 };
 
-export const createBasicVideoTransformer = (
-  execute: (args: { block: VideoBlock }) => string,
-): VideoTransformer => {
+export const createBasicVideoTransformer = (execute: (args: { block: VideoBlock }) => string): VideoTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };
 };
 
-export const createBasicEmbedTransformer = (
-  execute: (args: { block: EmbedBlock }) => string,
-): EmbedTransformer => {
+export const createBasicEmbedTransformer = (execute: (args: { block: EmbedBlock }) => string): EmbedTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };
