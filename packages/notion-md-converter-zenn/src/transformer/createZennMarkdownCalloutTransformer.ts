@@ -1,24 +1,24 @@
 import { MarkdownUtils, createBasicCalloutTransformer } from "@notion-md-converter/core";
 import { ZennMarkdownUtils } from "../utils";
-import type { Emoji } from "@notion-md-converter/core/types";
+import type { ApiColor } from "@notion-md-converter/core/types";
 
 export const createZennMarkdownCalloutTransformer = (
   options: {
-    alertEmojis?: Emoji[];
+    alertColors?: ApiColor[];
   } = {
-    alertEmojis: ["🚨"],
+    alertColors: ["red", "red_background"],
   },
 ) => {
   return createBasicCalloutTransformer(({ block, children }) => {
     const text = MarkdownUtils.richTextsToMarkdown(block.callout.rich_text);
-    const icon = block.callout.icon?.type === "emoji" ? block.callout.icon.emoji : "";
+    const color = block.callout.color;
 
     let result = text;
     if (children !== "") {
       result += `\n${children}`;
     }
 
-    const isAlert = options.alertEmojis?.includes(icon as Emoji);
+    const isAlert = options.alertColors?.includes(color);
     return MarkdownUtils.wrapWithNewLines(ZennMarkdownUtils.message(result, isAlert));
   });
 };

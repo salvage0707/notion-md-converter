@@ -26,14 +26,14 @@ describe("createZennMarkdownCalloutTransformer", () => {
     expect(result).toBe("\n:::message\nテストメッセージ\n:::\n");
   });
 
-  it("アラート絵文字が設定されている場合はアラートメッセージとして変換する", () => {
+  it("アラートカラーが設定されている場合はアラートメッセージとして変換する", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
           plainText: "アラートメッセージ",
         }),
       ],
-      icon: { type: "emoji", emoji: "🚨" },
+      color: "red",
     });
     const context = createTransformerContext({
       blocks: [block],
@@ -51,7 +51,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
           plainText: "親メッセージ",
         }),
       ],
-      icon: { type: "emoji", emoji: "💡" },
+      color: "blue",
       children: [
         createCalloutBlock({
           richText: [
@@ -102,9 +102,9 @@ describe("createZennMarkdownCalloutTransformer", () => {
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 
-  it("カスタムのアラート絵文字を設定できる", () => {
+  it("カスタムのアラートカラーを設定できる", () => {
     const transformer = createZennMarkdownCalloutTransformer({
-      alertEmojis: ["🚨", "🔔"],
+      alertColors: ["red", "blue"],
     });
     const block = createCalloutBlock({
       richText: [
@@ -112,7 +112,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
           plainText: "アラートメッセージ",
         }),
       ],
-      icon: { type: "emoji", emoji: "🔔" },
+      color: "blue",
     });
     const context = createTransformerContext({
       blocks: [block],
