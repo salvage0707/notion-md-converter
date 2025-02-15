@@ -9,6 +9,7 @@ import type {
   ColumnBlock,
   ColumnListBlock,
   DividerBlock,
+  EmbedBlock,
   EquationBlock,
   FileBlock,
   FileObject,
@@ -180,6 +181,10 @@ export const isToggleBlock = (block: Block): block is ToggleBlock => {
 
 export const isVideoBlock = (block: Block): block is VideoBlock => {
   return block.type === "video";
+};
+
+export const isEmbedBlock = (block: Block): block is EmbedBlock => {
+  return block.type === "embed";
 };
 
 export const $getPageFullContent = async (client: Client, blockId: string) => {

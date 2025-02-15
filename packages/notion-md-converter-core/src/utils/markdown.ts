@@ -242,12 +242,12 @@ const comment = (text: string): string => {
  * リッチテキストをMarkdownに変換
  */
 export type EnableAnnotations = {
-  bold: boolean;
-  italic: boolean;
-  strikethrough: boolean;
-  underline: boolean;
-  code: boolean;
-  color: boolean | ColorMap;
+  bold?: boolean;
+  italic?: boolean;
+  strikethrough?: boolean;
+  underline?: boolean;
+  code?: boolean;
+  color?: boolean | ColorMap;
 };
 
 const richTextsToMarkdown = (

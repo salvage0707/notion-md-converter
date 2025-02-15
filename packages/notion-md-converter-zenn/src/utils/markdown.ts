@@ -203,17 +203,50 @@ const embedBlueprintUE = (url: string): string => {
   return `@[blueprintue](${url})`;
 };
 
-const embedByURL = (url: string): string => {
-  // TODO: 実装
-  return url;
+export type EmbedByUrlOptions = {
+  speakerDeckId?: string;
+};
+const embedByURL = (
+  url: string,
+  options: EmbedByUrlOptions = {},
+): { result: string; isEmbed: boolean } => {
+  const urlObj = new URL(url);
+  const domain = urlObj.hostname;
+  switch (domain) {
+    case "x.com":
+      return { result: embedX(url), isEmbed: true };
+    case "www.youtube.com":
+      return { result: embedYoutube(url), isEmbed: true };
+    case "github.com":
+      return { result: embedGitHub(url), isEmbed: true };
+    case "gist.github.com":
+      return { result: embedGitHubGist(url), isEmbed: true };
+    case "codepen.io":
+      return { result: embedCodePen(url), isEmbed: true };
+    case "slideshare.net":
+      return { result: embedSlideShare(url), isEmbed: true };
+    case "speakerdeck.com":
+      if (options.speakerDeckId) {
+        return { result: embedSpeakerDeck(options.speakerDeckId), isEmbed: true };
+      }
+      return { result: embedLinkCard(url), isEmbed: false };
+    case "docswell.com":
+      return { result: embedDocSwell(url), isEmbed: true };
+    case "jsfiddle.net":
+      return { result: embedJSFiddle(url), isEmbed: true };
+    case "codesandbox.io":
+      return { result: embedCodeSandbox(url), isEmbed: true };
+    case "stackblitz.com":
+      return { result: embedStackBlitz(url), isEmbed: true };
+    case "figma.com":
+      return { result: embedFigma(url), isEmbed: true };
+    case "blueprintue.com":
+      return { result: embedBlueprintUE(url), isEmbed: true };
+    default:
+      return { result: embedLinkCard(url), isEmbed: false };
+  }
 };
 
-/**
- * - code block
- *   - 言語を追加
- * - 脚注
- *   - 脚注を追加
- */
 export const ZennMarkdownUtils = {
   image,
   codeBlock,

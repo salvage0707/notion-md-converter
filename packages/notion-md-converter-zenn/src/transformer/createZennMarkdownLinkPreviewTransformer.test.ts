@@ -1,4 +1,7 @@
-import { createLinkPreviewBlock, createTransformerContext } from "@notion-md-converter/core/test-helper";
+import {
+  createLinkPreviewBlock,
+  createTransformerContext,
+} from "@notion-md-converter/core/test-helper";
 import { createZennMarkdownLinkPreviewTransformer } from "./createZennMarkdownLinkPreviewTransformer";
 
 describe("createZennMarkdownLinkPreviewTransformer", () => {
@@ -28,15 +31,27 @@ describe("createZennMarkdownLinkPreviewTransformer", () => {
     expect(result).toBe("https://www.youtube.com/watch?v=abcd1234");
   });
 
-  it("Twitterのリンクを変換できる", () => {
+  it("GitHub Gist のリンクを変換できる", () => {
     const block = createLinkPreviewBlock({
-      url: "https://twitter.com/user/status/123456789",
+      url: "https://gist.github.com/user/123456789",
     });
     const context = createTransformerContext({
       blocks: [block],
     });
 
     const result = transformer(context);
-    expect(result).toBe("https://twitter.com/user/status/123456789");
+    expect(result).toBe("@[gist](https://gist.github.com/user/123456789)");
+  });
+
+  it("サポートされていないドメインのURLはリンクカードとして変換されること", () => {
+    const block = createLinkPreviewBlock({
+      url: "https://example.com",
+    });
+    const context = createTransformerContext({
+      blocks: [block],
+    });
+
+    const result = transformer(context);
+    expect(result).toBe("https://example.com");
   });
 });

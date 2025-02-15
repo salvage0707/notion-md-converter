@@ -6,6 +6,7 @@ import {
   createMarkdownCodeTransformer,
   createMarkdownColumnListTransformer,
   createMarkdownDividerTransformer,
+  createMarkdownEmbedTransformer,
   createMarkdownEquationTransformer,
   createMarkdownFileTransformer,
   createMarkdownHeadingTransformer,
@@ -32,6 +33,7 @@ import type {
   CodeBlock,
   ColumnListBlock,
   DividerBlock,
+  EmbedBlock,
   EquationBlock,
   Heading1Block,
   Heading2Block,
@@ -45,6 +47,7 @@ import type {
   TableOfContentsBlock,
   ToDoBlock,
   ToggleBlock,
+  VideoBlock,
 } from "../types/notion";
 import {
   isBookmarkBlock,
@@ -54,6 +57,7 @@ import {
   isCodeBlock,
   isColumnListBlock,
   isDividerBlock,
+  isEmbedBlock,
   isEquationBlock,
   isHeading1Block,
   isHeading2Block,
@@ -68,6 +72,7 @@ import {
   isTableOfContentsBlock,
   isToDoBlock,
   isToggleBlock,
+  isVideoBlock,
 } from "../utils";
 
 export class NotRootBlockError extends Error {
@@ -103,6 +108,7 @@ export class NotionMarkdownConverter {
       image: createMarkdownImageTransformer(),
       pdf: createMarkdownPDFTransformer(),
       video: createMarkdownVideoTransformer(),
+      embed: createMarkdownEmbedTransformer(),
       ...transformers,
     };
   }
@@ -220,6 +226,16 @@ export class NotionMarkdownConverter {
       if (isToggleBlock(block)) {
         const ctx = context as Context<ToggleBlock>;
         return this.transformers.toggle?.(ctx) ?? "";
+      }
+
+      if (isEmbedBlock(block)) {
+        const ctx = context as Context<EmbedBlock>;
+        return this.transformers.embed?.(ctx) ?? "";
+      }
+
+      if (isVideoBlock(block)) {
+        const ctx = context as Context<VideoBlock>;
+        return this.transformers.video?.(ctx) ?? "";
       }
     });
 

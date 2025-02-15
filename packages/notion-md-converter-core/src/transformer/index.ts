@@ -21,3 +21,4 @@ export * from "./createMarkdownTableTransformer";
 export * from "./createMarkdownTodoListItemTransformer";
 export * from "./createMarkdownToggleTransformer";
 export * from "./createMarkdownVideoTransformer";
+export * from "./createMarkdownEmbedTransformer";

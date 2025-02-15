@@ -9,6 +9,7 @@ import {
   createZennMarkdownImageTransformer,
   createZennMarkdownPDFTransformer,
   createZennMarkdownVideoTransformer,
+  createZennMarkdownEmbedTransformer,
 } from "../transformer";
 
 export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
@@ -17,6 +18,7 @@ export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
       code: createZennMarkdownCodeTransformer(),
       callout: createZennMarkdownCalloutTransformer(),
       link_preview: createZennMarkdownLinkPreviewTransformer(),
+      embed: createZennMarkdownEmbedTransformer(),
       toggle: createZennMarkdownToggleTransformer(),
       file: createZennMarkdownFileTransformer(),
       image: createZennMarkdownImageTransformer(),
