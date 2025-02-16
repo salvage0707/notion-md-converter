@@ -15,7 +15,7 @@ jobs:
         node-version: [20]
     steps:
       - uses: actions/checkout@v4
-      - uses: ../actions/setup-node-pnpm
+      - uses: ./.github/actions/setup-node-pnpm
         with:
           node-version: ${{ matrix.node-version }}
       - name: Type check
@@ -40,7 +40,7 @@ jobs:
         node-version: [20]
     steps:
       - uses: actions/checkout@v4
-      - uses: ../actions/setup-node-pnpm
+      - uses: ./.github/actions/setup-node-pnpm
         with:
           node-version: ${{ matrix.node-version }}
       - name: Build
