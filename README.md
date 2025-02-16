@@ -101,3 +101,19 @@ const result = executor.execute(content);
 
 This project is licensed under the **MIT License**.
 See LICENSE for details.
+
+## 👥 コミュニティと貢献
+
+このプロジェクトはオープンソースであり、コミュニティからの貢献を歓迎しています。
+
+> 注: 現在は日本語でのコミュニケーションを主としています。将来的に英語でのコミュニケーションにも対応することを検討しています。
+> Note: Currently, we primarily communicate in Japanese. We are considering supporting English communication in the future.
+
+- **バグを見つけた場合**: [Issue](https://github.com/salvage0707/notion-md-converter/issues/new?template=bug_report.md)を作成してください
+- **新機能の提案**: [機能要望](https://github.com/salvage0707/notion-md-converter/issues/new?template=feature_request.md)を作成してください
+- **コードの貢献**: [CONTRIBUTING.md](./CONTRIBUTING.md)をご確認ください
+
+## 🤝 サポート
+
+- プロジェクトに関する質問や議論は[Discussions](https://github.com/salvage0707/notion-md-converter/discussions)をご利用ください
+- バグ報告や機能要望は[Issues](https://github.com/salvage0707/notion-md-converter/issues)をご利用ください
