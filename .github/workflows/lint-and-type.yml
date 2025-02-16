@@ -15,17 +15,9 @@ jobs:
         node-version: [20]
     steps:
       - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.15.1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - uses: ../actions/setup-node-pnpm
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install
       - name: Type check
         run: pnpm run type-check
 
@@ -40,3 +32,16 @@ jobs:
           version: 1.9.4
       - name: Run Biome
         run: biome ci .
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ../actions/setup-node-pnpm
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build
+        run: pnpm run build
