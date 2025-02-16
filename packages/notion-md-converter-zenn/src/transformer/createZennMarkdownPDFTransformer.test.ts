@@ -1,10 +1,10 @@
-import { createPdfBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
-import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
+import { createPdfBlock, createTextRichText } from "@notion-md-converter/core/test-helper";
+import { createTransformerContext } from "@notion-md-converter/core/test-helper";
+import { createZennMarkdownPDFTransformer } from "./createZennMarkdownPDFTransformer";
 
-describe("createMarkdownPDFTransformer", () => {
+describe("createZennMarkdownPDFTransformer", () => {
   const mockAdapter = vi.fn();
-  const transformer = createMarkdownPDFTransformer({
+  const transformer = createZennMarkdownPDFTransformer({
     fileAdapter: mockAdapter,
   });
 

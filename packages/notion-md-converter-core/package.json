@@ -1,25 +1,36 @@
 {
   "name": "@notion-md-converter/core",
-  "private": true,
   "version": "0.1.0",
   "description": "Notion to Markdown Converter",
+  "license": "MIT",
+  "author": "malvageee (https://github.com/salvage0707)",
+  "keywords": ["notion", "notion-api", "markdown", "md", "converter"],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git",
+    "directory": "packages/notion-md-converter-core"
+  },
   "scripts": {
     "test": "vitest",
     "test:once": "vitest run",
-    "typecheck": "tsc --build --pretty"
+    "type-check": "tsc --build --pretty",
+    "build": "tsc --build",
+    "prepublishOnly": "pnpm run build",
+    "publish": "npm publish --access public"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types/index.ts",
+    "./test-helper": "./src/test-helper/index.ts"
+  },
   "dependencies": {
     "@notionhq/client": "^2.2.15"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
-  },
-  "exports": {
-    ".": "./src/index.ts",
-    "./types": "./src/types/index.ts",
-    "./test-helper": "./src/test-helper/index.ts"
   }
 }

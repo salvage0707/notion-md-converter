@@ -3,7 +3,14 @@
   "private": true,
   "version": "0.1.0",
   "description": "Notion to Markdown Converter",
-  "type": "module",
+  "packageManager": "pnpm@9.15.1",
+  "license": "MIT",
+  "author": "salvage0707",
+  "keywords": ["notion-md-converter", "notion", "notion-api", "markdown", "md", "converter"],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git"
+  },
   "scripts": {
     "test": "pnpm run --parallel --recursive --if-present test",
     "test:once": "pnpm run --parallel --recursive --if-present test:once",
@@ -15,9 +22,7 @@
     "check:fix": "biome check --write",
     "type-check": "tsc --build --pretty"
   },
-  "keywords": ["notion", "markdown", "converter"],
-  "author": "salvage0707",
-  "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "tsx": "^4.19.2",

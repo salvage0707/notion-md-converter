@@ -1,23 +1,34 @@
 {
   "name": "@notion-md-converter/zenn",
   "version": "0.1.0",
-  "description": "Notion to Zenn converter",
-  "main": "index.js",
+  "description": "Notion to Zenn Markdown Converter",
+  "license": "MIT",
+  "author": "malvageee (https://github.com/salvage0707)",
+  "keywords": ["notion-md-converter", "notion", "notion-api", "zenn", "markdown", "converter"],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git",
+    "directory": "packages/notion-md-converter-zenn"
+  },
   "scripts": {
     "test": "vitest",
     "test:once": "vitest run",
-    "typecheck": "tsc --build --pretty"
+    "type-check": "tsc --build --pretty",
+    "build": "tsc --build",
+    "prepublishOnly": "pnpm run build",
+    "publish": "npm publish --access public"
   },
-  "keywords": ["notion-md-converter", "notion", "zenn", "markdown", "converter"],
-  "author": "",
-  "license": "MIT",
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "dependencies": {
     "@notion-md-converter/core": "workspace:*"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
-  },
-  "exports": {
-    ".": "./src/index.ts"
   }
 }

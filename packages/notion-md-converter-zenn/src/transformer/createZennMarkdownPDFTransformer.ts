@@ -1,6 +1,6 @@
 import {
   MarkdownUtils,
-  createBasicPdfTransformer,
+  createBasicPDFTransformer,
   createNoChangeFileObjectAdapter,
 } from "@notion-md-converter/core";
 import type { FileAdapter } from "@notion-md-converter/core/types";
@@ -10,7 +10,7 @@ export const createZennMarkdownPDFTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ) => {
-  return createBasicPdfTransformer(({ block }) => {
+  return createBasicPDFTransformer(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.pdf);
     const caption =
