@@ -1,7 +1,7 @@
 {
   "name": "@notion-md-converter/config",
   "version": "0.1.0",
-  "description": "",
+  "description": "Shared configurations for notion-md-converter packages",
   "scripts": {
     "test": "vitest"
   },
@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "exports": {
-    "./tsconfig/*": "./tsconfig/*"
+    "./tsconfig/*": "./tsconfig/*",
+    "./rollup": "./rollup/config.mjs"
   }
 }

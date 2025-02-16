@@ -27,6 +27,6 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["src/**/*"] /* コンパイル対象のファイルを指定 */,
-  "exclude": ["**node_modules**", "**dist**"] /* コンパイル対象から除外するファイルを指定 */
+  "include": ["src/**/*.ts"] /* コンパイル対象のファイルを指定 */,
+  "exclude": ["node_modules", "dist"] /* コンパイル対象から除外するファイルを指定 */
 }
