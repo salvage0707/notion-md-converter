@@ -1,6 +1,6 @@
 import { MarkdownUtils, createBasicCodeTransformer } from "@notion-md-converter/core";
-import { ZennMarkdownUtils } from "../utils/markdown";
 import type { CodeTransformer } from "@notion-md-converter/core/types";
+import { ZennMarkdownUtils } from "../utils/markdown";
 
 export const createZennMarkdownCodeTransformer = (): CodeTransformer => {
   return createBasicCodeTransformer(({ block, meta: { diff, language, filename } }) => {
