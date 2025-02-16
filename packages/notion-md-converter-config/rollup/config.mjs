@@ -1,6 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import terser from "@rollup/plugin-terser";
 import dts from "rollup-plugin-dts";
 
 export function createConfig(pkg, input, output) {
@@ -31,6 +32,7 @@ export function createConfig(pkg, input, output) {
         tsconfig: "./tsconfig.json",
         exclude: ["src/**/*.test.ts", "src/**/*.spec.ts"],
       }),
+      terser(),
     ],
   };
 }
