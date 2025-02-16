@@ -44,9 +44,6 @@ export function createDtsConfig(input, output) {
         tsconfig: "./tsconfig.json",
         compilerOptions: {
           composite: false,
-          baseUrl: ".",
-          include: ["src/**/*.ts"],
-          exclude: ["node_modules", "dist"],
         },
       }),
     ],
