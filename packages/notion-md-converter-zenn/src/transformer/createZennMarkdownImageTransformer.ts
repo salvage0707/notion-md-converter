@@ -3,13 +3,13 @@ import {
   createBasicImageTransformer,
   createNoChangeFileObjectAdapter,
 } from "@notion-md-converter/core";
-import type { FileAdapter } from "@notion-md-converter/core/types";
+import type { FileAdapter, ImageTransformer } from "@notion-md-converter/core/types";
 
 export const createZennMarkdownImageTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},
-) => {
+): ImageTransformer => {
   return createBasicImageTransformer(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);

@@ -3,13 +3,13 @@ import {
   createBasicPDFTransformer,
   createNoChangeFileObjectAdapter,
 } from "@notion-md-converter/core";
-import type { FileAdapter } from "@notion-md-converter/core/types";
+import type { FileAdapter, PDFTransformer } from "@notion-md-converter/core/types";
 
 export const createZennMarkdownPDFTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},
-) => {
+): PDFTransformer => {
   return createBasicPDFTransformer(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.pdf);

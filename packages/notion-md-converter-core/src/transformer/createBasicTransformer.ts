@@ -40,7 +40,7 @@ import type {
   ParagraphBlock,
   ParagraphTransformer,
   PdfBlock,
-  PdfTransformer,
+  PDFTransformer,
   QuoteBlock,
   QuoteTransformer,
   RichText,
@@ -251,7 +251,7 @@ export const createBasicParagraphTransformer = (
 
 export const createBasicPDFTransformer = (
   execute: (args: { block: PdfBlock }) => string,
-): PdfTransformer => {
+): PDFTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };
