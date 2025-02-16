@@ -82,9 +82,6 @@ importers:
       '@notion-md-converter/config':
         specifier: workspace:*
         version: link:../notion-md-converter-config
-      '@rollup/plugin-terser':
-        specifier: ^0.4.4
-        version: 0.4.4(rollup@4.31.0)
 
 packages:
 
