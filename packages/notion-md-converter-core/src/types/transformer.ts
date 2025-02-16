@@ -62,7 +62,7 @@ export type ChildDatabaseTransformer = NotionBlockTransformer<ChildDatabaseBlock
 export type ChildPageTransformer = NotionBlockTransformer<ChildPageBlock>;
 export type VideoTransformer = NotionBlockTransformer<VideoBlock>;
 export type EmbedTransformer = NotionBlockTransformer<EmbedBlock>;
-export type PdfTransformer = NotionBlockTransformer<PdfBlock>;
+export type PDFTransformer = NotionBlockTransformer<PdfBlock>;
 export type FileTransformer = NotionBlockTransformer<FileBlock>;
 export type ImageTransformer = NotionBlockTransformer<ImageBlock>;
 
@@ -89,7 +89,7 @@ export type TransformerMapping = {
   child_page?: ChildPageTransformer;
   video?: VideoTransformer;
   embed?: EmbedTransformer;
-  pdf?: PdfTransformer;
+  pdf?: PDFTransformer;
   file?: FileTransformer;
   image?: ImageTransformer;
 };

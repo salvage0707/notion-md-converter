@@ -1,9 +1,9 @@
 import { MarkdownUtils, createBasicEmbedTransformer } from "@notion-md-converter/core";
-import type { EmbedBlock } from "@notion-md-converter/core/types";
+import type { EmbedBlock, EmbedTransformer } from "@notion-md-converter/core/types";
 import type { EmbedByUrlOptions } from "../utils";
 import { ZennMarkdownUtils } from "../utils";
 
-export const createZennMarkdownEmbedTransformer = () => {
+export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
   return createBasicEmbedTransformer(({ block }) => {
     const getOptions = (block: EmbedBlock) => {
       const urlObj = new URL(block.embed.url);

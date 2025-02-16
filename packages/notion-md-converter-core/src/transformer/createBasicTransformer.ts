@@ -37,10 +37,10 @@ import type {
   LinkPreviewTransformer,
   NumberedListItemBlock,
   NumberedListItemTransformer,
+  PDFTransformer,
   ParagraphBlock,
   ParagraphTransformer,
   PdfBlock,
-  PdfTransformer,
   QuoteBlock,
   QuoteTransformer,
   RichText,
@@ -251,7 +251,7 @@ export const createBasicParagraphTransformer = (
 
 export const createBasicPDFTransformer = (
   execute: (args: { block: PdfBlock }) => string,
-): PdfTransformer => {
+): PDFTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock });
   };

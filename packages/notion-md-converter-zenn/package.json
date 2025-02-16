@@ -14,12 +14,13 @@
     "test": "vitest",
     "test:once": "vitest run",
     "type-check": "tsc --build --pretty",
-    "build": "tsc --build",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
     "prepublishOnly": "pnpm run build",
     "publish": "npm publish --access public"
   },
   "files": ["dist"],
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
