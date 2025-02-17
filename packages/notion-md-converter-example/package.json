@@ -14,8 +14,8 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "dotenv": "^16.4.7",
-    "@notion-md-converter/core": "0.1.1",
-    "@notion-md-converter/zenn": "workspace:*"
+    "@notion-md-converter/core": "0.2.1",
+    "@notion-md-converter/zenn": "0.2.1"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*"
