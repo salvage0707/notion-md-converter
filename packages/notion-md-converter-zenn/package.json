@@ -23,8 +23,7 @@
     "type-check": "tsc --build --pretty",
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
-    "prepublishOnly": "pnpm run build",
-    "publish": "npm publish --access public"
+    "prepublishOnly": "pnpm run build"
   },
   "files": [
     "dist"
