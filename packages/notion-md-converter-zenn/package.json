@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/zenn",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Notion to Zenn Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
@@ -23,7 +23,11 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
   },
   "dependencies": {
     "@notion-md-converter/core": "workspace:*"

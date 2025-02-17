@@ -5,7 +5,7 @@
       "path": "packages/notion-md-converter-core"
     },
     {
-      "path": "packages/notion-md-converter-example"
+      "path": "packages/notion-md-converter-zenn"
     }
   ]
 }
