@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/zenn-example",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "description": "Notion to Zenn Markdown Converter Example",
   "type": "module",
   "scripts": {
