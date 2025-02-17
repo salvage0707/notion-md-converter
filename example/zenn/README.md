@@ -1,6 +1,6 @@
-# @notion-md-converter/core Usage Examples
+# @notion-md-converter/zenn Usage Examples
 
-This directory contains examples demonstrating how to use the @notion-md-converter/core library. The examples show various ways to convert Notion content to Markdown format.
+This directory contains examples demonstrating how to use the @notion-md-converter/zenn library. The examples show how to convert Notion content to Zenn-compatible Markdown format.
 
 ## Prerequisites
 
@@ -18,31 +18,20 @@ This directory contains examples demonstrating how to use the @notion-md-convert
    $ pnpm install
    ```
 
-
 ## Directory Structure
 
 ```
 src/
-  ├── simple-export/      # Basic example of exporting Notion content to Markdown
-  └── custom-export/      # Example of customizing the Markdown conversion process
+  └── simple-export/      # Basic example of exporting Notion content to Zenn Markdown format
 ```
 
 ## Examples
 
 ### Simple Export
 
-A basic example showing how to export Notion content to Markdown format. This example demonstrates the fundamental usage of the library.
+A basic example showing how to export Notion content to Zenn-compatible Markdown format. This example demonstrates the fundamental usage of the library.
 
 ```sh
 # Run the simple export example
-$ pnpm run core:simple-export
-```
-
-### Custom Export
-
-An example demonstrating how to customize the Markdown conversion process. This example shows how to create and use custom transformers to modify the output format.
-
-```sh
-# Run the custom export example
-$ pnpm run core:custom-export
+$ pnpm run zenn:simple-export
 ```
