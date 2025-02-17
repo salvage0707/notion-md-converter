@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Notion to Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
@@ -22,8 +22,7 @@
     "type-check": "tsc --build --pretty",
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
-    "prepublishOnly": "pnpm run build",
-    "publish": "npm publish --access public"
+    "prepublishOnly": "pnpm run build"
   },
   "files": [
     "dist"
