@@ -1,10 +1,16 @@
 {
   "name": "@notion-md-converter/core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Notion to Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
-  "keywords": ["notion", "notion-api", "markdown", "md", "converter"],
+  "keywords": [
+    "notion",
+    "notion-api",
+    "markdown",
+    "md",
+    "converter"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git",
@@ -18,7 +24,9 @@
     "build:watch": "rollup -c -w",
     "prepublishOnly": "pnpm run build"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
