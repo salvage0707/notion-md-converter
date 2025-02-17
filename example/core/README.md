@@ -1,10 +1,6 @@
 # Notion to Markdown Converter Examples
 
-## @notion-md-converter/core
-
-This directory contains examples demonstrating how to use the @notion-md-converter/core library. The examples show various ways to convert Notion content to Markdown format.
-
-### Prerequisites
+## Prerequisites
 
 1. **Environment Variables Setup**
    Copy the `.env.example` file to `.env` and set the following variables:
@@ -20,11 +16,16 @@ This directory contains examples demonstrating how to use the @notion-md-convert
    $ pnpm install
    ```
 
+## @notion-md-converter/core
+
+This directory contains examples demonstrating how to use the @notion-md-converter/core library. The examples show various ways to convert Notion content to Markdown format.
+
 ### Directory Structure
 
 ```
 src/
-  └── simple-export/      # Basic example of exporting Notion content to Markdown
+  ├── simple-export/      # Basic example of exporting Notion content to Markdown
+  └── custom-export/      # Example of customizing the Markdown conversion process
 ```
 
 ### Examples
@@ -35,4 +36,12 @@ A basic example showing how to export Notion content to Markdown format. This ex
 ```sh
 # Run the simple export example
 $ pnpm run core:simple-export
+```
+
+#### Custom Export
+An example demonstrating how to customize the Markdown conversion process. This example shows how to create and use custom transformers to modify the output format.
+
+```sh
+# Run the custom export example
+$ pnpm run core:custom-export
 ```
