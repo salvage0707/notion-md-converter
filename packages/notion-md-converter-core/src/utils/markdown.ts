@@ -204,7 +204,7 @@ const wrapWithNewLines = (text: string): string => {
 const indent = (text: string, spaces = 2): string => {
   return text
     .split("\n")
-    .map((line) => `${" ".repeat(spaces)}${line}`)
+    .map((line) => (line === "" ? line : `${" ".repeat(spaces)}${line}`))
     .join("\n");
 };
 

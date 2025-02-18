@@ -280,15 +280,9 @@ describe("details", () => {
   });
 
   it("空のタイトルと内容からdetailsタグに変換できること", () => {
-    const expected = [
-      "<details>",
-      "  <summary>",
-      "    ",
-      "  </summary>",
-      "",
-      "  ",
-      "</details>",
-    ].join("\n");
+    const expected = ["<details>", "  <summary>", "", "  </summary>", "", "", "</details>"].join(
+      "\n",
+    );
     expect(MarkdownUtils.details("", "")).toBe(expected);
   });
 });
