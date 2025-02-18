@@ -54,25 +54,6 @@ importers:
         specifier: workspace:*
         version: link:../notion-md-converter-config
 
-  packages/notion-md-converter-example:
-    dependencies:
-      '@notion-md-converter/core':
-        specifier: 0.2.1
-        version: 0.2.1
-      '@notion-md-converter/zenn':
-        specifier: 0.2.1
-        version: 0.2.1
-      '@notionhq/client':
-        specifier: ^2.2.15
-        version: 2.2.15
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
-    devDependencies:
-      '@notion-md-converter/config':
-        specifier: workspace:*
-        version: link:../notion-md-converter-config
-
   packages/notion-md-converter-zenn:
     dependencies:
       '@notion-md-converter/core':
@@ -461,12 +442,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@notion-md-converter/core@0.2.1':
-    resolution: {integrity: sha512-UqwtwM2zUZLOZnN5syPUSVqGK3cFGyvevT6E2EtzZvbi+7es/2EKmlYehMFTIj+BmvzN97MZ/bF6SXQNHEywkg==}
-
-  '@notion-md-converter/zenn@0.2.1':
-    resolution: {integrity: sha512-KtDQjYk4udwZqcaL5Ho9Xe0UFywMJOhLW1aWrljvX9+C6f/GvwM7EziExZdOWqZ51ETlUSVmC/vWHhifqtyymQ==}
-
   '@notionhq/client@2.2.15':
     resolution: {integrity: sha512-XhdSY/4B1D34tSco/GION+23GMjaS9S2zszcqYkMHo8RcWInymF6L1x+Gk7EmHdrSxNFva2WM8orhC4BwQCwgw==}
     engines: {node: '>=12'}
@@ -723,10 +698,6 @@ packages:
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
-
-  dotenv@16.4.7:
-    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
-    engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -1302,17 +1273,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@notion-md-converter/core@0.2.1':
-    dependencies:
-      '@notionhq/client': 2.2.15
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - encoding
-
-  '@notion-md-converter/zenn@0.2.1':
-    dependencies:
-      '@notion-md-converter/core': link:packages/notion-md-converter-core
-
   '@notionhq/client@2.2.15':
     dependencies:
       '@types/node-fetch': 2.6.12
@@ -1524,8 +1484,6 @@ snapshots:
   deepmerge@4.3.1: {}
 
   delayed-stream@1.0.0: {}
-
-  dotenv@16.4.7: {}
 
   dunder-proto@1.0.1:
     dependencies:
