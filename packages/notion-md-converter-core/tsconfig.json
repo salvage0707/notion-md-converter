@@ -2,7 +2,7 @@
   "extends": "@notion-md-converter/config/tsconfig/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "node"],
     "rootDir": "src"
   },
   "include": ["src/**/*.ts"],
