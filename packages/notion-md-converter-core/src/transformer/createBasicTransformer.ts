@@ -70,6 +70,9 @@ export const createBasicBookmarkTransformer = (
   execute: (args: { block: BookmarkBlock }) => string,
 ): BookmarkTransformer => {
   return (context) => {
+    if (context.currentBlock.bookmark.url === "") {
+      return "";
+    }
     return execute({ block: context.currentBlock });
   };
 };
