@@ -277,23 +277,6 @@
           },
           "plain_text": "link",
           "href": "https://zenn.dev/zenn/articles/markdown-guide"
-        },
-        {
-          "type": "text",
-          "text": {
-            "content": " ",
-            "link": null
-          },
-          "annotations": {
-            "bold": false,
-            "italic": false,
-            "strikethrough": false,
-            "underline": false,
-            "code": false,
-            "color": "default"
-          },
-          "plain_text": " ",
-          "href": null
         }
       ],
       "icon": {
