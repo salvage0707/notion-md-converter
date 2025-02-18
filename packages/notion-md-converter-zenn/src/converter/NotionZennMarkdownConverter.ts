@@ -4,6 +4,7 @@ import {
 } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/core/types";
 import {
+  createZennMarkdownBookmarkTransformer,
   createZennMarkdownCalloutTransformer,
   createZennMarkdownCodeTransformer,
   createZennMarkdownEmbedTransformer,
@@ -15,8 +16,7 @@ import {
 export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
   constructor(transformers: TransformerMapping = {}) {
     super({
-      // TODO: サポートしたい
-      bookmark: createUnsupportedBlockTransformer(),
+      bookmark: createZennMarkdownBookmarkTransformer(),
       code: createZennMarkdownCodeTransformer(),
       callout: createZennMarkdownCalloutTransformer(),
       link_preview: createZennMarkdownLinkPreviewTransformer(),
