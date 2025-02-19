@@ -42,6 +42,10 @@ describe("NotionMarkdownConverter", () => {
     "pdf",
     "quote",
     "synced_block",
+    "table",
+    "to_do",
+    "toggle",
+    "video",
   ];
 
   // 各ブロックタイプのテストを実行

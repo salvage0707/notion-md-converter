@@ -331,6 +331,11 @@ export const createBasicVideoTransformer = (
   execute: (args: { block: VideoBlock }) => string,
 ): VideoTransformer => {
   return (context) => {
+    const video = context.currentBlock.video;
+    const url = video.type === "external" ? video.external.url : video.file.url;
+    if (!url) {
+      return "";
+    }
     return execute({ block: context.currentBlock });
   };
 };
