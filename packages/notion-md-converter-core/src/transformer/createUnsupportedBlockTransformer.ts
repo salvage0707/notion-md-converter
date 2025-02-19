@@ -1,4 +1,4 @@
-import type { UnsupportedBlockTransformer } from "../types";
+import type { UnsupportedBlockTransformer } from "@notion-md-converter/types";
 
 export const createUnsupportedBlockTransformer = (
   { log } = {

@@ -1,4 +1,4 @@
-import type { FileAdapterFactory } from "../types";
+import type { FileAdapterFactory } from "@notion-md-converter/types";
 import { isNotionInternalFile } from "../utils";
 
 export const createFileAdapter: FileAdapterFactory = (execute) => {

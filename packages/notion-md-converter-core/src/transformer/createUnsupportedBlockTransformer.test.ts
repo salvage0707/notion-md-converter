@@ -1,5 +1,5 @@
-import { createParagraphBlock, createTextRichText } from "@notion-md-converter/core/test-helper";
-import { createTransformerContext } from "@notion-md-converter/core/test-helper";
+import { createParagraphBlock, createTextRichText } from "../test-helper";
+import { createTransformerContext } from "../test-helper";
 import { createUnsupportedBlockTransformer } from "./createUnsupportedBlockTransformer";
 
 describe("createUnsupportedBlockTransformer", () => {

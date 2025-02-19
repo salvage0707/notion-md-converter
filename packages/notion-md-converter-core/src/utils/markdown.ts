@@ -1,4 +1,4 @@
-import type { ApiColor, RichText } from "../types";
+import type { ApiColor, RichText } from "@notion-md-converter/types";
 
 /**
  * @see https://www.markdownguide.org/basic-syntax/#reference-style-links

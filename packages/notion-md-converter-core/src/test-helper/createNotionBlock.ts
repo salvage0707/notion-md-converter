@@ -34,7 +34,7 @@ import type {
   ToDoBlock,
   ToggleBlock,
   VideoBlock,
-} from "../types";
+} from "@notion-md-converter/types";
 
 const createBaseBlock = () => {
   return {

@@ -1,4 +1,4 @@
-import type { RichText } from "../types";
+import type { RichText } from "@notion-md-converter/types";
 import { TransformerUtils } from "./transformer";
 
 describe("getCaptionMetadata", () => {

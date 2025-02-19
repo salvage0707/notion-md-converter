@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { RootBlock, RootBlockType } from "../types";
+import type { RootBlock, RootBlockType } from "@notion-md-converter/types";
 
 /**
  * 対象のブロックタイプのテストデータ一覧を取得する

@@ -1,5 +1,3 @@
-import { type Client, isFullBlock } from "@notionhq/client";
-import type { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import type {
   Block,
   BookmarkBlock,
@@ -35,7 +33,9 @@ import type {
   ToDoBlock,
   ToggleBlock,
   VideoBlock,
-} from "../types";
+} from "@notion-md-converter/types";
+import { type Client, isFullBlock } from "@notionhq/client";
+import type { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 
 const ROOT_BLOCK_TYPES = [
   "bookmark",

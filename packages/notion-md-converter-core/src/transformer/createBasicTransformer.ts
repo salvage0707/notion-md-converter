@@ -58,7 +58,7 @@ import type {
   ToggleTransformer,
   VideoBlock,
   VideoTransformer,
-} from "../types";
+} from "@notion-md-converter/types";
 import { TransformerUtils } from "../utils";
 import { getEmbedProvider, isNumberedListItemBlock } from "../utils";
 

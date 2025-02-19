@@ -1,5 +1,5 @@
+import type { Block, Context } from "@notion-md-converter/types";
 import type { Mock } from "vitest";
-import type { Block, Context } from "../types";
 
 export const createTransformerContext = <T extends Block>(options: {
   blocks: T[];
