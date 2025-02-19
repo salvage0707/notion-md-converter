@@ -274,6 +274,7 @@ const richTextsToMarkdown = (
     if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
       markdown = color(markdown, text.annotations.color);
     }
+
     return markdown;
   };
 
@@ -286,7 +287,10 @@ const richTextsToMarkdown = (
     color: false,
     ...enableAnnotations,
   };
-  return richTexts.map((text) => toMarkdown(text, options)).join("");
+  return richTexts
+    .map((text) => toMarkdown(text, options))
+    .join("")
+    .trim();
 };
 
 export const MarkdownUtils = {

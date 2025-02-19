@@ -19,14 +19,14 @@
     "has_children": false,
     "archived": false,
     "in_trash": false,
-    "type": "image",
-    "image": {
+    "type": "file",
+    "file": {
       "caption": [],
-      "type": "file",
-      "file": {
-        "url": "https://mock-s3.example.com/some/object",
-        "expiry_time": "2025-01-01T00:00:00.000Z"
-      }
+      "type": "external",
+      "external": {
+        "url": ""
+      },
+      "name": ""
     },
     "children": []
   }

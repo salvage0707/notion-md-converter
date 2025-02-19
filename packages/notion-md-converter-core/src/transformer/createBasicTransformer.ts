@@ -1,4 +1,4 @@
-import { TransformerUtils } from "src/utils/transformer";
+import { TransformerUtils } from "../utils";
 import type {
   ApiColor,
   Block,
