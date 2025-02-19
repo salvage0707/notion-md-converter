@@ -6,6 +6,9 @@
     },
     {
       "path": "packages/notion-md-converter-zenn"
+    },
+    {
+      "path": "packages/notion-md-converter-types"
     }
   ]
 }
