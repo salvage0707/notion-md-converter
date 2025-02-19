@@ -229,3 +229,9 @@ export type ToggleBlock = ToggleBlockObjectResponse & {
 };
 
 export type VideoBlock = VideoBlockObjectResponse;
+
+export const EmbedProvider = {
+  speakerDeck: "speakerDeck",
+  x: "x",
+} as const;
+export type EmbedProvider = (typeof EmbedProvider)[keyof typeof EmbedProvider];

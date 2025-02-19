@@ -11,6 +11,7 @@ import type {
   ColumnListBlock,
   DividerBlock,
   EmbedBlock,
+  EmbedProvider,
   EquationBlock,
   FileBlock,
   FileObject,
@@ -185,6 +186,18 @@ export const isVideoBlock = (block: Block): block is VideoBlock => {
 
 export const isEmbedBlock = (block: Block): block is EmbedBlock => {
   return block.type === "embed";
+};
+
+// TODO: サポートするプロバイダを増やす
+export const getEmbedProvider = (block: EmbedBlock): EmbedProvider | undefined => {
+  if (block.embed.url.includes("speakerdeck.com")) {
+    return "speakerDeck";
+  }
+  if (block.embed.url.includes("x.com") || block.embed.url.includes("twitter.com")) {
+    return "x";
+  }
+
+  return undefined;
 };
 
 export const $getPageFullContent = async (client: Client, blockId: string) => {

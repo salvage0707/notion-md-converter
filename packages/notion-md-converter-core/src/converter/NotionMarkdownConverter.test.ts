@@ -31,6 +31,8 @@ describe("NotionMarkdownConverter", () => {
     "child_page",
     "code",
     "column_list",
+    "divider",
+    "embed",
   ];
 
   // 各ブロックタイプのテストを実行

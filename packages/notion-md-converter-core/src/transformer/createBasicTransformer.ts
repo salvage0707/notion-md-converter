@@ -1,3 +1,4 @@
+import { TransformerUtils } from "src/utils/transformer";
 import type {
   ApiColor,
   Block,
@@ -22,6 +23,7 @@ import type {
   DividerBlock,
   DividerTransformer,
   EmbedBlock,
+  EmbedProvider,
   EmbedTransformer,
   EquationBlock,
   EquationTransformer,
@@ -58,7 +60,7 @@ import type {
   VideoBlock,
   VideoTransformer,
 } from "../types";
-import { isNumberedListItemBlock } from "../utils";
+import { getEmbedProvider, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -327,11 +329,41 @@ export const createBasicVideoTransformer = (
   };
 };
 
+export type EmbedMetadata = {
+  speakerDeck?: {
+    id: string | undefined;
+  };
+  // x is no metadata
+  // biome-ignore lint/complexity/noBannedTypes: <explanation>
+  x?: {};
+};
 export const createBasicEmbedTransformer = (
-  execute: (args: { block: EmbedBlock }) => string,
+  execute: (args: {
+    block: EmbedBlock;
+    provider: EmbedProvider | undefined;
+    metadata: EmbedMetadata;
+  }) => string,
 ): EmbedTransformer => {
   return (context) => {
-    return execute({ block: context.currentBlock });
+    const { metadata: meta } = TransformerUtils.getCaptionMetadata(
+      context.currentBlock.embed.caption,
+    );
+
+    const provider = getEmbedProvider(context.currentBlock);
+    const metadata: EmbedMetadata = {};
+    if (provider === "speakerDeck") {
+      metadata.speakerDeck = {
+        id: meta.id,
+      };
+    }
+    if (provider === "x") {
+      metadata.x = {};
+    }
+    return execute({
+      block: context.currentBlock,
+      provider,
+      metadata,
+    });
   };
 };
 

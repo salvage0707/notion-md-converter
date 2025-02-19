@@ -252,14 +252,7 @@ export type EnableAnnotations = {
 
 const richTextsToMarkdown = (
   richTexts: RichText[],
-  enableAnnotations: EnableAnnotations = {
-    bold: true,
-    italic: true,
-    strikethrough: true,
-    underline: true,
-    code: true,
-    color: false, // By default, do not add color
-  },
+  enableAnnotations?: EnableAnnotations,
 ): string => {
   const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
     let markdown = text.plain_text;
@@ -284,7 +277,16 @@ const richTextsToMarkdown = (
     return markdown;
   };
 
-  return richTexts.map((text) => toMarkdown(text, enableAnnotations)).join("");
+  const options = {
+    bold: true,
+    italic: true,
+    strikethrough: true,
+    underline: true,
+    code: true,
+    color: false,
+    ...enableAnnotations,
+  };
+  return richTexts.map((text) => toMarkdown(text, options)).join("");
 };
 
 export const MarkdownUtils = {

@@ -6,8 +6,8 @@
       "type": "page_id",
       "page_id": "00000000-0000-0000-0000-000000000000"
     },
-    "created_time": "2025-02-18T15:32:00.000Z",
-    "last_edited_time": "2025-02-18T15:32:00.000Z",
+    "created_time": "2025-02-18T16:12:00.000Z",
+    "last_edited_time": "2025-02-18T16:13:00.000Z",
     "created_by": {
       "object": "user",
       "id": "00000000-0000-0000-0000-000000000000"
@@ -19,8 +19,8 @@
     "has_children": false,
     "archived": false,
     "in_trash": false,
-    "type": "file",
-    "file": {
+    "type": "bookmark",
+    "bookmark": {
       "caption": [
         {
           "type": "text",
@@ -34,7 +34,7 @@
             "strikethrough": false,
             "underline": false,
             "code": false,
-            "color": "red"
+            "color": "pink"
           },
           "plain_text": "color",
           "href": null
@@ -178,7 +178,7 @@
         {
           "type": "text",
           "text": {
-            "content": " ",
+            "content": "   ",
             "link": null
           },
           "annotations": {
@@ -189,41 +189,7 @@
             "code": false,
             "color": "default"
           },
-          "plain_text": " ",
-          "href": null
-        },
-        {
-          "type": "text",
-          "text": {
-            "content": "code",
-            "link": null
-          },
-          "annotations": {
-            "bold": false,
-            "italic": false,
-            "strikethrough": false,
-            "underline": false,
-            "code": true,
-            "color": "default"
-          },
-          "plain_text": "code",
-          "href": null
-        },
-        {
-          "type": "text",
-          "text": {
-            "content": "  ",
-            "link": null
-          },
-          "annotations": {
-            "bold": false,
-            "italic": false,
-            "strikethrough": false,
-            "underline": false,
-            "code": false,
-            "color": "default"
-          },
-          "plain_text": "  ",
+          "plain_text": "   ",
           "href": null
         },
         {
@@ -296,12 +262,7 @@
           "href": null
         }
       ],
-      "type": "file",
-      "file": {
-        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/3bab809a-b644-41d4-92a4-7ddf3aa52c20/05fcd980-7d11-4959-93f5-9068dbce8d72/sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466YL2IOMT4%2F20250219%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250219T004536Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHEaCXVzLXdlc3QtMiJHMEUCIG%2Fl2e4d%2B64FXzEh%2B4ENXuUW5QWCG6AdUrgTojs5i%2FcVAiEAuHYFH2AlML2%2FMr6oNy6T%2BTxC5TdMkReqBxmjvePR3zkqiAQImv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLkvGNzu5pvHqSimaSrcA6ynLpl7wKz8y3OHSasejrnylL%2BuaO0SSyghkw8tNHr8eJ8d7FwJuELwfzwfq5ybdwAqTgaYKgn0O6Jur%2B2YXrXcTR0UDgUJYUtn64AdawRLAAmt5R1TyGeVFwT89%2Be0NRcPR%2BcBcJNDHtmzwogu3ZYFUzfPjTVFsHF%2FVUMq5DYGvDJRLW9LqK5uWuQkytx%2FE8ml2J8XpfBIWjP41tqYDRrdXhDBt7%2BXx8DItWHUN8bdrLMcg%2FPnOYD23P2aL1AMLjfKcxkouXE5UcshtHHGgsy6j%2BWR6rBkMzvs3yS7DEV4pElcUHwBUQS5j1C7cOOnE1uwhq900sW%2BrGcE%2Bz1dtwuCDp5XOFIxC4mjutNNr3x01M%2F1%2FKnxZp01FC9TsYpNF8Ru%2BkcF%2Bmw119ZJr1gcIF85UhmyS0o5%2FkD%2BmXuzr5hbYd4MP0LXsLLiEdfABn9wkzfg6%2B9MK%2F1IXAQnLB1FJT5u1N5PQZ7UOAPq9qUsz88INVWlZZbYCPY1rLjBtFuFNfV1F9Ohv50dPOPkQFmQZ%2F7Fc3sBP1IzF4dQ9ycUsvIo0MUL7X%2FEGZvC0VQbhhhiXah5vBeEJW%2Bod79mtfWX9C%2BupxLJQYQ5iKrMoTAF8LDK6DT1PRfONdnot0VyMOnL1L0GOqUBEorYPoq9gFRKsASdf%2BCE5P6hf1eb%2FhYJbf%2Fo9CCRaZAVEGKMPzzrkhDWyQCgSnscwpDBE%2Br2jeAZx6X%2FA4p9H6nxza7rUZ7aaVsVhHR0f6EFINNT2yUeVST5AZaYHD0EgK%2FbMx9sMzw3oJcWsEe0ul3HBu191CFOquG42UDWAt0cIM1aRwSWFz1IlIYZqowasYymSQT5udvyYyeFuxo2QC8gnWls&X-Amz-Signature=f65a45402ea1cdb8d0c1443478af6ed5624b04738a0b9a9d50a4bc20727e7d35&X-Amz-SignedHeaders=host&x-id=GetObject",
-        "expiry_time": "2025-02-19T01:45:36.204Z"
-      },
-      "name": "sample.txt"
+      "url": "https://example.com/"
     },
     "children": []
   }
