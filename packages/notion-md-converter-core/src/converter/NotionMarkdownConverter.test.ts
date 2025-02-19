@@ -1,11 +1,10 @@
-import { loadBlockContentFixture, loadMdFixture } from "src/test-helper";
+import { type LoadableBlockType, loadBlockContentFixture, loadMdFixture } from "src/test-helper";
 import { NotionMarkdownConverter } from "./NotionMarkdownConverter";
-import type { RootBlockType } from "src/types/notion";
 
 describe("NotionMarkdownConverter", () => {
   const converter = new NotionMarkdownConverter();
 
-  const testBlockConversion = (blockType: RootBlockType) => {
+  const testBlockConversion = (blockType: LoadableBlockType) => {
     describe(blockType, () => {
       const testData = loadBlockContentFixture(blockType);
 
@@ -22,7 +21,7 @@ describe("NotionMarkdownConverter", () => {
   };
 
   // テストするブロックタイプの配列
-  const blockTypes: RootBlockType[] = [
+  const blockTypes: LoadableBlockType[] = [
     "bookmark",
     "breadcrumb",
     "bulleted_list_item",
@@ -35,6 +34,7 @@ describe("NotionMarkdownConverter", () => {
     "embed",
     "equation",
     "file",
+    "heading",
   ];
 
   // 各ブロックタイプのテストを実行

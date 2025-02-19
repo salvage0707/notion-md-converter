@@ -9,7 +9,8 @@ type ResultContext<T extends RootBlock> = {
   dataType: string;
   content: T[];
 };
-export const loadBlockContentFixture = <T extends RootBlock>(blockType: RootBlockType) => {
+export type LoadableBlockType = RootBlockType | "heading";
+export const loadBlockContentFixture = <T extends RootBlock>(blockType: LoadableBlockType) => {
   const fixtureDir = path.join(__dirname, `__fixtures__/${blockType}`);
   const files = fs.readdirSync(fixtureDir);
   const dataTypes = files.map((file) => file.split(".")[0]);
@@ -27,7 +28,7 @@ export const loadBlockContentFixture = <T extends RootBlock>(blockType: RootBloc
   return result;
 };
 
-export const loadMdFixture = (dirname: string, blockType: RootBlockType, fileName: string) => {
+export const loadMdFixture = (dirname: string, blockType: LoadableBlockType, fileName: string) => {
   const mdPath = path.join(dirname, `__fixtures__/${blockType}/${fileName}.md`);
   const expected = fs.readFileSync(mdPath, "utf-8");
   return expected;
