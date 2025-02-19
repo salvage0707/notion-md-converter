@@ -212,7 +212,7 @@
         {
           "type": "text",
           "text": {
-            "content": "  ",
+            "content": " ",
             "link": null
           },
           "annotations": {
@@ -223,7 +223,7 @@
             "code": false,
             "color": "default"
           },
-          "plain_text": "  ",
+          "plain_text": " ",
           "href": null
         },
         {

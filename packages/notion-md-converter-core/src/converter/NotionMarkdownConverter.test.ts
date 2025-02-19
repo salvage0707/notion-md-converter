@@ -39,6 +39,9 @@ describe("NotionMarkdownConverter", () => {
     "link_preview",
     "numbered_list_item",
     "paragraph",
+    "pdf",
+    "quote",
+    "synced_block",
   ];
 
   // 各ブロックタイプのテストを実行
