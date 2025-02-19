@@ -1,4 +1,3 @@
-import { TransformerUtils } from "../utils";
 import type {
   ApiColor,
   Block,
@@ -60,6 +59,7 @@ import type {
   VideoBlock,
   VideoTransformer,
 } from "../types";
+import { TransformerUtils } from "../utils";
 import { getEmbedProvider, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {

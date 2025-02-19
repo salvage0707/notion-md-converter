@@ -1,5 +1,5 @@
-import { TransformerUtils } from "./transformer";
 import type { RichText } from "../types";
+import { TransformerUtils } from "./transformer";
 
 describe("getCaptionMetadata", () => {
   const createRichText = (text: string): RichText[] => [
