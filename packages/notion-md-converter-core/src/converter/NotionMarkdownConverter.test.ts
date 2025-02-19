@@ -35,6 +35,10 @@ describe("NotionMarkdownConverter", () => {
     "equation",
     "file",
     "heading",
+    "image",
+    "link_preview",
+    "numbered_list_item",
+    "paragraph",
   ];
 
   // 各ブロックタイプのテストを実行

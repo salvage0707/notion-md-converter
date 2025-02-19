@@ -25,9 +25,11 @@
         {
           "type": "mention",
           "mention": {
-            "type": "page",
-            "page": {
-              "id": "00000000-0000-0000-0000-000000000000"
+            "type": "date",
+            "date": {
+              "start": "2025-02-20T09:00:00.000+09:00",
+              "end": null,
+              "time_zone": null
             }
           },
           "annotations": {
@@ -38,8 +40,8 @@
             "code": false,
             "color": "default"
           },
-          "plain_text": "simple",
-          "href": "https://www.notion.so/19e2ad69d3ce80b291a5e817b5df19ac"
+          "plain_text": "2025-02-20T09:00:00.000+09:00",
+          "href": null
         }
       ],
       "color": "default"

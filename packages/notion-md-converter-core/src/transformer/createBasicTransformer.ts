@@ -192,6 +192,12 @@ export const createBasicImageTransformer = (
   execute: (args: { block: ImageBlock }) => string,
 ): ImageTransformer => {
   return (context) => {
+    const image = context.currentBlock.image;
+    const url = image.type === "external" ? image.external.url : image.file.url;
+    if (!url) {
+      return "";
+    }
+
     return execute({ block: context.currentBlock });
   };
 };

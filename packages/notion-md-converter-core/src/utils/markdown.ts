@@ -275,6 +275,10 @@ const richTextsToMarkdown = (
       markdown = color(markdown, text.annotations.color);
     }
 
+    if (text.type === "mention" && text.mention.type === "page" && text.href) {
+      markdown = link(markdown, text.href);
+    }
+
     return markdown;
   };
 
