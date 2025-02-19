@@ -53,6 +53,9 @@ importers:
       '@notion-md-converter/config':
         specifier: workspace:*
         version: link:../notion-md-converter-config
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
 
   packages/notion-md-converter-zenn:
     dependencies:
