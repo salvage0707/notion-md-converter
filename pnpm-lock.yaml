@@ -14,6 +14,9 @@ importers:
       '@rollup/plugin-commonjs':
         specifier: ^25.0.7
         version: 25.0.8(rollup@4.31.0)
+      '@rollup/plugin-json':
+        specifier: ^6.1.0
+        version: 6.1.0(rollup@4.31.0)
       '@rollup/plugin-node-resolve':
         specifier: ^15.2.3
         version: 15.3.1(rollup@4.31.0)
@@ -49,6 +52,18 @@ importers:
       '@notionhq/client':
         specifier: ^2.2.15
         version: 2.2.15
+    devDependencies:
+      '@notion-md-converter/config':
+        specifier: workspace:*
+        version: link:../notion-md-converter-config
+      '@notion-md-converter/types':
+        specifier: workspace:*
+        version: link:../notion-md-converter-types
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
+
+  packages/notion-md-converter-testing:
     devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
@@ -467,6 +482,15 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
+  '@rollup/plugin-json@6.1.0':
+    resolution: {integrity: sha512-EGI2te5ENk1coGeADSIwZ7G2Q8CJS2sF120T7jLw4xFw9n7wIOXHo+kIYRAoVpJAN+kmqZSoO3Fp4JtoNF4ReA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -1364,6 +1388,12 @@ snapshots:
       glob: 8.1.0
       is-reference: 1.2.1
       magic-string: 0.30.17
+    optionalDependencies:
+      rollup: 4.31.0
+
+  '@rollup/plugin-json@6.1.0(rollup@4.31.0)':
+    dependencies:
+      '@rollup/pluginutils': 5.1.4(rollup@4.31.0)
     optionalDependencies:
       rollup: 4.31.0
 

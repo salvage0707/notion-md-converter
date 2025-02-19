@@ -1,0 +1,96 @@
+[
+  {
+    "object": "block",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "parent": {
+      "type": "page_id",
+      "page_id": "00000000-0000-0000-0000-000000000000"
+    },
+    "created_time": "2025-01-01T00:00:00.000Z",
+    "last_edited_time": "2025-01-01T00:00:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "00000000-0000-0000-0000-000000000000"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "00000000-0000-0000-0000-000000000000"
+    },
+    "has_children": true,
+    "archived": false,
+    "in_trash": false,
+    "type": "table",
+    "table": {
+      "table_width": 2,
+      "has_column_header": false,
+      "has_row_header": false
+    },
+    "children": [
+      {
+        "object": "block",
+        "id": "00000000-0000-0000-0000-000000000000",
+        "parent": {
+          "type": "block_id",
+          "block_id": "00000000-0000-0000-0000-000000000000"
+        },
+        "created_time": "2025-01-01T00:00:00.000Z",
+        "last_edited_time": "2025-01-01T00:00:00.000Z",
+        "created_by": {
+          "object": "user",
+          "id": "00000000-0000-0000-0000-000000000000"
+        },
+        "last_edited_by": {
+          "object": "user",
+          "id": "00000000-0000-0000-0000-000000000000"
+        },
+        "has_children": false,
+        "archived": false,
+        "in_trash": false,
+        "type": "table_row",
+        "table_row": {
+          "cells": [
+            [
+              {
+                "type": "text",
+                "text": {
+                  "content": "header1",
+                  "link": null
+                },
+                "annotations": {
+                  "bold": false,
+                  "italic": false,
+                  "strikethrough": false,
+                  "underline": false,
+                  "code": false,
+                  "color": "default"
+                },
+                "plain_text": "header1",
+                "href": null
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "text": {
+                  "content": "header2",
+                  "link": null
+                },
+                "annotations": {
+                  "bold": false,
+                  "italic": false,
+                  "strikethrough": false,
+                  "underline": false,
+                  "code": false,
+                  "color": "default"
+                },
+                "plain_text": "header2",
+                "href": null
+              }
+            ]
+          ]
+        },
+        "children": []
+      }
+    ]
+  }
+]

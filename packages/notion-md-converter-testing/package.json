@@ -1,0 +1,35 @@
+{
+  "name": "@notion-md-converter/testing",
+  "version": "0.2.1",
+  "description": "Notion to Markdown Converter Testing",
+  "license": "MIT",
+  "author": "malvageee (https://github.com/salvage0707)",
+  "keywords": ["notion", "notion-api", "markdown", "md", "converter", "testing"],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git",
+    "directory": "packages/notion-md-converter-testing"
+  },
+  "scripts": {
+    "type-check": "tsc --build --pretty",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "prepublishOnly": "pnpm run build"
+  },
+  "files": ["dist"],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "devDependencies": {
+    "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/types": "workspace:*",
+    "@types/node": "^22.13.4"
+  }
+}

@@ -6,7 +6,14 @@
   "packageManager": "pnpm@9.15.1",
   "license": "MIT",
   "author": "salvage0707",
-  "keywords": ["notion-md-converter", "notion", "notion-api", "markdown", "md", "converter"],
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "notion-api",
+    "markdown",
+    "md",
+    "converter"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git"
@@ -28,6 +35,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.12.0",
