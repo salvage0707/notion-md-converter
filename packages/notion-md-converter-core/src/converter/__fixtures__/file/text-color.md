@@ -1,4 +1,4 @@
-no color
+default
 
 gray
 

@@ -34,6 +34,7 @@ describe("NotionMarkdownConverter", () => {
     "divider",
     "embed",
     "equation",
+    "file",
   ];
 
   // 各ブロックタイプのテストを実行
