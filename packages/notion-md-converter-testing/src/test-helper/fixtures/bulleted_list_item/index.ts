@@ -8,6 +8,4 @@ const bulletedListItemFixture = {
   threeLevels,
 };
 
-export {
-  bulletedListItemFixture,
-}; 
+export { bulletedListItemFixture };

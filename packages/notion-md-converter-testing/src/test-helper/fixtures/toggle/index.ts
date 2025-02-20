@@ -10,6 +10,4 @@ const toggleFixture = {
   simple,
 };
 
-export {
-  toggleFixture,
-};
+export { toggleFixture };

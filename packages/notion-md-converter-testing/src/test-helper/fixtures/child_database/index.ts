@@ -6,6 +6,4 @@ const childDatabaseFixture = {
   inline,
 };
 
-export {
-  childDatabaseFixture,
-}; 
+export { childDatabaseFixture };

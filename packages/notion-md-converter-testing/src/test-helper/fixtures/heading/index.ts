@@ -4,6 +4,4 @@ const headingFixture = {
   simple,
 };
 
-export {
-  headingFixture,
-}; 
+export { headingFixture };

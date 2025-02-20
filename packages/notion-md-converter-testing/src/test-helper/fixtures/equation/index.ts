@@ -4,6 +4,4 @@ const equationFixture = {
   block,
 };
 
-export {
-  equationFixture,
-}; 
+export { equationFixture };

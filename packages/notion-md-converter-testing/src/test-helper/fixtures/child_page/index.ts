@@ -4,6 +4,4 @@ const childPageFixture = {
   simple,
 };
 
-export {
-  childPageFixture,
-}; 
+export { childPageFixture };

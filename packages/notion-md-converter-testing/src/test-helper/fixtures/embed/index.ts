@@ -6,6 +6,4 @@ const embedFixture = {
   xTwitter,
 };
 
-export {
-  embedFixture,
-}; 
+export { embedFixture };

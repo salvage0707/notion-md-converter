@@ -4,6 +4,4 @@ const breadcrumbFixture = {
   simple,
 };
 
-export {
-  breadcrumbFixture,
-}; 
+export { breadcrumbFixture };

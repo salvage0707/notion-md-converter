@@ -4,6 +4,4 @@ const dividerFixture = {
   simple,
 };
 
-export {
-  dividerFixture,
-}; 
+export { dividerFixture };

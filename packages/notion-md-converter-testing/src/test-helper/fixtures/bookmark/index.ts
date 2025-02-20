@@ -10,6 +10,4 @@ const bookmarkFixture = {
   simple,
 };
 
-export {
-  bookmarkFixture,
-};
+export { bookmarkFixture };

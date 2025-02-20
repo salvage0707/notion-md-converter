@@ -4,6 +4,4 @@ const linkPreviewFixture = {
   github,
 };
 
-export {
-  linkPreviewFixture,
-}; 
+export { linkPreviewFixture };

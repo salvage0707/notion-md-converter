@@ -6,6 +6,4 @@ const syncedBlockFixture = {
   syncedTo,
 };
 
-export {
-  syncedBlockFixture,
-}; 
+export { syncedBlockFixture };

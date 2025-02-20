@@ -8,6 +8,4 @@ const toDoFixture = {
   threeLevels,
 };
 
-export {
-  toDoFixture,
-}; 
+export { toDoFixture };

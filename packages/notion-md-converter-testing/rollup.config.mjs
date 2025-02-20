@@ -3,9 +3,9 @@ import {
   createConfig,
   createDtsConfig,
 } from "@notion-md-converter/config/rollup";
+import json from "@rollup/plugin-json";
 import { defineConfig } from "rollup";
 import pkg from "./package.json" assert { type: "json" };
-import json from "@rollup/plugin-json";
 
 const baseConfig = createBaseConfig(pkg);
 const subpathConfigs = [
@@ -19,7 +19,7 @@ const subpathConfigs = [
 baseConfig.plugins.push(
   json({
     preferConst: true,
-  })
+  }),
 );
 
 export default defineConfig([...baseConfig, ...subpathConfigs]);
