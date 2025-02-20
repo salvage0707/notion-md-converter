@@ -37,7 +37,5 @@ export function createConfig(pkg, input, output) {
 }
 
 export function createBaseConfig(pkg) {
-  return [
-    createConfig(pkg, "src/index.ts", "dist/index.js"),
-  ];
+  return [createConfig(pkg, "src/index.ts", "dist/index.js")];
 }

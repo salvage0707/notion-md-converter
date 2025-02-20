@@ -1,7 +1,4 @@
-import {
-  createBaseConfig,
-  createConfig,
-} from "@notion-md-converter/config/rollup";
+import { createBaseConfig, createConfig } from "@notion-md-converter/config/rollup";
 import { defineConfig } from "rollup";
 import pkg from "./package.json" assert { type: "json" };
 
