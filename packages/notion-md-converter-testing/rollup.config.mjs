@@ -17,12 +17,12 @@ export default defineConfig([
     input: "src/index.ts",
     output: [
       {
-        file: "index.cjs",
+        file: "dist/index.cjs",
         format: "cjs",
         sourcemap: true,
       },
       {
-        file: "index.mjs",
+        file: "dist/index.mjs",
         format: "es",
         sourcemap: true,
       },
@@ -43,7 +43,7 @@ export default defineConfig([
   },
   {
     input: "src/index.ts",
-    output: [{ file: "index.d.ts", format: "es" }],
+    output: [{ file: "dist/index.d.ts", format: "es" }],
     plugins: [
       dts({
         tsconfig: "./tsconfig.json",
