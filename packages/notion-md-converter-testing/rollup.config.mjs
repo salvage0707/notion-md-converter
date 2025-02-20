@@ -3,7 +3,6 @@ import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
-import dts from "rollup-plugin-dts";
 import typescript from "rollup-plugin-typescript2";
 
 import pkg from "./package.json" assert { type: "json" };
@@ -39,18 +38,6 @@ export default defineConfig([
         exclude: ["src/**/*.test.ts", "src/**/*.spec.ts"],
       }),
       terser(),
-    ],
-  },
-  {
-    input: "src/index.ts",
-    output: [{ file: "dist/index.d.ts", format: "es" }],
-    plugins: [
-      dts({
-        tsconfig: "./tsconfig.json",
-        compilerOptions: {
-          composite: false,
-        },
-      }),
     ],
   },
 ]);
