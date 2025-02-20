@@ -56,6 +56,9 @@ importers:
       '@notion-md-converter/config':
         specifier: workspace:*
         version: link:../notion-md-converter-config
+      '@notion-md-converter/testing':
+        specifier: workspace:*
+        version: link:../notion-md-converter-testing
       '@notion-md-converter/types':
         specifier: workspace:*
         version: link:../notion-md-converter-types

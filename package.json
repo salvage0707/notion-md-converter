@@ -21,7 +21,11 @@
     "check": "biome check",
     "check:fix": "biome check --write",
     "type-check": "tsc --build --pretty",
-    "build": "pnpm run --recursive --filter=@notion-md-converter/core build && pnpm run --recursive --filter=@notion-md-converter/zenn build",
+    "build:types": "pnpm run --recursive --filter=@notion-md-converter/types build",
+    "build:testing": "pnpm run --recursive --filter=@notion-md-converter/testing build",
+    "build:core": "pnpm run --recursive --filter=@notion-md-converter/core build",
+    "build:zenn": "pnpm run --recursive --filter=@notion-md-converter/zenn build",
+    "build": "pnpm run build:types && pnpm run build:testing && pnpm run build:core && pnpm run build:zenn",
     "build:watch": "pnpm run --parallel --recursive build:watch"
   },
   "type": "module",

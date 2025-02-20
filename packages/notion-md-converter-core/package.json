@@ -48,6 +48,7 @@
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*",
     "@notion-md-converter/types": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*",
     "@types/node": "^22.13.4"
   }
 }

@@ -1,25 +1,56 @@
-import {
-  createBaseConfig,
-  createConfig,
-  createDtsConfig,
-} from "@notion-md-converter/config/rollup";
-import json from "@rollup/plugin-json";
+import commonjs from "@rollup/plugin-commonjs";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import terser from "@rollup/plugin-terser";
+import dts from "rollup-plugin-dts";
+import typescript from "rollup-plugin-typescript2";
 import { defineConfig } from "rollup";
+import json from "@rollup/plugin-json";
+
 import pkg from "./package.json" assert { type: "json" };
 
-const baseConfig = createBaseConfig(pkg);
-const subpathConfigs = [
-  createConfig(pkg, "src/types/index.ts", "dist/types/index.js"),
-  createConfig(pkg, "src/test-helper/index.ts", "dist/test-helper/index.js"),
-  createDtsConfig("src/index.ts", "dist/index.d.ts"),
-  createDtsConfig("src/types/index.ts", "dist/types/index.d.ts"),
-  createDtsConfig("src/test-helper/index.ts", "dist/test-helper/index.d.ts"),
+const external = [
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {}),
 ];
-
-baseConfig.plugins.push(
-  json({
-    preferConst: true,
-  }),
-);
-
-export default defineConfig([...baseConfig, ...subpathConfigs]);
+export default defineConfig([
+  {
+    input: "src/index.ts",
+    output: [
+      {
+        file: "index.cjs",
+        format: "cjs",
+        sourcemap: true,
+      },
+      {
+        file: "index.mjs",
+        format: "es",
+        sourcemap: true,
+      },
+    ],
+    external,
+    plugins: [
+      json({
+        compact: true,
+      }),
+      nodeResolve(),
+      commonjs(),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        exclude: ["src/**/*.test.ts", "src/**/*.spec.ts"],
+      }),
+      terser(),
+    ],
+  },
+  {
+    input: "src/index.ts",
+    output: [{ file: "index.d.ts", format: "es" }],
+    plugins: [
+      dts({
+        tsconfig: "./tsconfig.json",
+        compilerOptions: {
+          composite: false,
+        },
+      }),
+    ],
+  },
+]);
