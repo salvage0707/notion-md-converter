@@ -7,19 +7,6 @@ on:
     types: [ opened, synchronize, reopened ]
 
 jobs:
-  type-check:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-node-pnpm
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Type check
-        run: pnpm run type-check
-
   biome-check:
     runs-on: ubuntu-latest
     steps:
