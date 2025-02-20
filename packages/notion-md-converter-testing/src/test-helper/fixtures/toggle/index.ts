@@ -8,7 +8,7 @@ const toggleFixture = {
   "no-content": noContent as Block[],
   "no-title": noTitle as Block[],
   "other-block-in-content": otherBlockInContent as Block[],
-  "simple": simple as Block[],
+  simple: simple as Block[],
 };
 
 export { toggleFixture };

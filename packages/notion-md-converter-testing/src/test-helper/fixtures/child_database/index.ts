@@ -1,9 +1,9 @@
 import type { Block } from "@notion-md-converter/types";
-import inline from "./inline.json" assert { type: "json" };
 import fullPage from "./full-page.json" assert { type: "json" };
+import inline from "./inline.json" assert { type: "json" };
 
 const childDatabaseFixture = {
-  "inline": inline as Block[],
+  inline: inline as Block[],
   "full-page": fullPage as Block[],
 };
 

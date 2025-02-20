@@ -6,7 +6,7 @@ import simple from "./simple.json" assert { type: "json" };
 const quoteFixture = {
   "other-block-in-quote": otherBlockInQuote as Block[],
   "rich-text": richText as Block[],
-  "simple": simple as Block[],
+  simple: simple as Block[],
 };
 
 export { quoteFixture };

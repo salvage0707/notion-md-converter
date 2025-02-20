@@ -27,7 +27,11 @@ type BlockFixtureType =
   | "toggle"
   | "video";
 
-export const loadMdFixture = (dirname: string, blockType: BlockFixtureType | string, fileName: string) => {
+export const loadMdFixture = (
+  dirname: string,
+  blockType: BlockFixtureType | string,
+  fileName: string,
+) => {
   const mdPath = path.join(dirname, `__fixtures__/${blockType}/${fileName}.md`);
   const expected = fs.readFileSync(mdPath, "utf-8");
   return expected;

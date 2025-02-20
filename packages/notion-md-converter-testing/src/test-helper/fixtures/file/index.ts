@@ -9,13 +9,13 @@ import textColor from "./text-color.json" assert { type: "json" };
 import upload from "./upload.json" assert { type: "json" };
 
 const fileFixture = {
-  "pdf": pdf as Block[],
+  pdf: pdf as Block[],
   "text-color": textColor as Block[],
-  "upload": upload as Block[],
+  upload: upload as Block[],
   "caption-rich-text": captionRichText as Block[],
-  "caption": caption as Block[],
-  "empty": empty as Block[],
-  "external": external as Block[],
+  caption: caption as Block[],
+  empty: empty as Block[],
+  external: external as Block[],
   "bg-color": bgColor as Block[],
 };
 
