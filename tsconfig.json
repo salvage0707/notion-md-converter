@@ -9,6 +9,9 @@
     },
     {
       "path": "packages/notion-md-converter-types"
+    },
+    {
+      "path": "packages/notion-md-converter-testing"
     }
   ]
 }

@@ -6,7 +6,14 @@
   "packageManager": "pnpm@9.15.1",
   "license": "MIT",
   "author": "salvage0707",
-  "keywords": ["notion-md-converter", "notion", "notion-api", "markdown", "md", "converter"],
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "notion-api",
+    "markdown",
+    "md",
+    "converter"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git"
@@ -35,7 +42,6 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.12.0",
-    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.6.2",
     "tsx": "^4.19.2",

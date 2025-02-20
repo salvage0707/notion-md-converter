@@ -1,7 +1,6 @@
 import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
-import dts from "rollup-plugin-dts";
 import typescript from "rollup-plugin-typescript2";
 
 export function createConfig(pkg, input, output) {
@@ -37,24 +36,8 @@ export function createConfig(pkg, input, output) {
   };
 }
 
-export function createDtsConfig(input, output) {
-  return {
-    input,
-    output: [{ file: output, format: "es" }],
-    plugins: [
-      dts({
-        tsconfig: "./tsconfig.json",
-        compilerOptions: {
-          composite: false,
-        },
-      }),
-    ],
-  };
-}
-
 export function createBaseConfig(pkg) {
   return [
     createConfig(pkg, "src/index.ts", "dist/index.js"),
-    createDtsConfig("src/index.ts", "dist/index.d.ts"),
   ];
 }
