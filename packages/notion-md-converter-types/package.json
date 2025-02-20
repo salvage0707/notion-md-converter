@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.15"
+    "@notionhq/client": "^2.2.16"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*"

@@ -15,6 +15,7 @@ export * from "./image";
 export * from "./link_preview";
 export * from "./numbered_list_item";
 export * from "./paragraph";
+export * from "./pdf";
 export * from "./quote";
 export * from "./synced_block";
 export * from "./table";

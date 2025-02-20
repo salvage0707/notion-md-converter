@@ -28,6 +28,7 @@
     }
   },
   "devDependencies": {
+    "@notionhq/client": "^2.2.16",
     "@notion-md-converter/config": "workspace:*",
     "@notion-md-converter/types": "workspace:*",
     "@types/node": "^22.13.4"

@@ -50,8 +50,8 @@ importers:
   packages/notion-md-converter-core:
     dependencies:
       '@notionhq/client':
-        specifier: ^2.2.15
-        version: 2.2.15
+        specifier: ^2.2.16
+        version: 2.2.16
     devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
@@ -74,6 +74,9 @@ importers:
       '@notion-md-converter/types':
         specifier: workspace:*
         version: link:../notion-md-converter-types
+      '@notionhq/client':
+        specifier: ^2.2.16
+        version: 2.2.16
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
@@ -81,8 +84,8 @@ importers:
   packages/notion-md-converter-types:
     dependencies:
       '@notionhq/client':
-        specifier: ^2.2.15
-        version: 2.2.15
+        specifier: ^2.2.16
+        version: 2.2.16
     devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
@@ -476,8 +479,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@notionhq/client@2.2.15':
-    resolution: {integrity: sha512-XhdSY/4B1D34tSco/GION+23GMjaS9S2zszcqYkMHo8RcWInymF6L1x+Gk7EmHdrSxNFva2WM8orhC4BwQCwgw==}
+  '@notionhq/client@2.2.16':
+    resolution: {integrity: sha512-3GlkfhLw8+Jw8U2iFEmHA6WfCgYhZCXLxgPdqDJkYMFotELNpQO+yGSy2QWURsG8ndu21sLt+FEOfDbNcCtFMg==}
     engines: {node: '>=12'}
 
   '@rollup/plugin-commonjs@25.0.8':
@@ -1376,7 +1379,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@notionhq/client@2.2.15':
+  '@notionhq/client@2.2.16':
     dependencies:
       '@types/node-fetch': 2.6.12
       node-fetch: 2.7.0

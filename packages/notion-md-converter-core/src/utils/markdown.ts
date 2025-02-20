@@ -32,6 +32,7 @@ export type ColorMap = {
 
 const COLOR_MAP: ColorMap = {
   default: "no used",
+  default_background: "no used",
   red: "red",
   red_background: "red",
   orange: "orange",
