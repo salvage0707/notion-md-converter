@@ -35,13 +35,13 @@ export default defineConfig([
       nodeResolve(),
       commonjs(),
       typescript({
-        tsconfig: "./tsconfig.json"
+        tsconfig: "./tsconfig.json",
       }),
       terser({
         compress: {
           passes: 2,
-          drop_console: true
-        }
+          drop_console: true,
+        },
       }),
       visualizer(),
     ],
