@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@notionhq/client':
+      specifier: ^2.2.16
+      version: 2.2.16
+
 importers:
 
   .:
@@ -50,7 +56,7 @@ importers:
         specifier: workspace:*
         version: link:../notion-md-converter-types
       '@notionhq/client':
-        specifier: ^2.2.16
+        specifier: 'catalog:'
         version: 2.2.16
     devDependencies:
       '@notion-md-converter/config':
@@ -66,7 +72,7 @@ importers:
   packages/notion-md-converter-testing:
     dependencies:
       '@notionhq/client':
-        specifier: ^2.2.16
+        specifier: 'catalog:'
         version: 2.2.16
     devDependencies:
       '@notion-md-converter/config':
@@ -82,7 +88,7 @@ importers:
   packages/notion-md-converter-types:
     dependencies:
       '@notionhq/client':
-        specifier: ^2.2.16
+        specifier: 'catalog:'
         version: 2.2.16
     devDependencies:
       '@notion-md-converter/config':
