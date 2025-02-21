@@ -4,6 +4,13 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
 import typescript from "rollup-plugin-typescript2";
+import { visualizer } from "rollup-plugin-visualizer";
+import pkg from "./package.json" assert { type: "json" };
+
+const external = [
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {}),
+];
 
 export default defineConfig([
   {
@@ -12,14 +19,15 @@ export default defineConfig([
       {
         file: "dist/index.cjs",
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: "dist/index.mjs",
         format: "es",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
+    external,
     plugins: [
       json({
         compact: true,
@@ -27,10 +35,15 @@ export default defineConfig([
       nodeResolve(),
       commonjs(),
       typescript({
-        tsconfig: "./tsconfig.json",
-        exclude: ["src/**/*.test.ts", "src/**/*.spec.ts"],
+        tsconfig: "./tsconfig.json"
       }),
-      terser(),
+      terser({
+        compress: {
+          passes: 2,
+          drop_console: true
+        }
+      }),
+      visualizer(),
     ],
   },
 ]);

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "types": ["vitest/globals", "node"],
-    "rootDir": "src"
+    "rootDir": "src",
+    "declarationMap": false
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

@@ -27,12 +27,11 @@
       "require": "./dist/index.cjs"
     }
   },
-  "dependencies": {
-    "@notionhq/client": "catalog:"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*",
     "@notion-md-converter/types": "workspace:*",
+    "@notionhq/client": "catalog:",
     "@types/node": "^22.13.4"
   }
 }

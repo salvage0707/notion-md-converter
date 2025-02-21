@@ -13,7 +13,7 @@
     "resolveJsonModule": true /* JSONファイルのインポートを許可 */,
 
     /* 出力設定 */
-    "sourceMap": true /* デバッグ用のソースマップを生成 */,
+    "sourceMap": false /* デバッグ用のソースマップを生成 */,
 
     /* 相互運用性 */
     "esModuleInterop": true /* CommonJSモジュールとESモジュールの相互運用性を確保 */,
@@ -25,7 +25,8 @@
     "types": ["vitest/globals"],
     "composite": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": false,
+    "emitDeclarationOnly": false
   },
   "include": ["src/**/*.ts"] /* コンパイル対象のファイルを指定 */,
   "exclude": ["node_modules", "dist"] /* コンパイル対象から除外するファイルを指定 */
