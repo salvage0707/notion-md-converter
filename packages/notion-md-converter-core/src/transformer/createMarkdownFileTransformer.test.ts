@@ -3,7 +3,7 @@ import {
   createNotionInternalFile,
   createTextRichText,
   createTransformerContext,
-} from "../test-helper";
+} from "@notion-md-converter/testing";
 import { createMarkdownFileTransformer } from "./createMarkdownFileTransformer";
 
 describe("createMarkdownFileTransformer", () => {

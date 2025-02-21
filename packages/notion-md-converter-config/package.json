@@ -9,7 +9,6 @@
   "author": "",
   "license": "MIT",
   "exports": {
-    "./tsconfig/*": "./tsconfig/*",
-    "./rollup": "./rollup/config.mjs"
+    "./tsconfig/*": "./tsconfig/*"
   }
 }

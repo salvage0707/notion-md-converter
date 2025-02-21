@@ -1,4 +1,4 @@
-import { createDividerBlock, createTransformerContext } from "../test-helper";
+import { createDividerBlock, createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownDividerTransformer } from "./createMarkdownDividerTransformer";
 
 describe("createMarkdownDividerTransformer", () => {

@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@notion-md-converter/core": "^0.2.0",
-    "@notion-md-converter/zenn": "^0.2.1",
-    "@notionhq/client": "^2.2.15"
+    "@notion-md-converter/zenn": "^0.2.1"
   }
 }

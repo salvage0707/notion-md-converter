@@ -1,0 +1,12 @@
+{
+  "extends": "@notion-md-converter/config/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["vitest/globals", "node"],
+    "rootDir": "src",
+    "resolveJsonModule": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts", "src/**/*.json"],
+  "exclude": ["node_modules", "dist"]
+}

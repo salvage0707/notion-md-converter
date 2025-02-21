@@ -1,5 +1,5 @@
-import { createPdfBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createPdfBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
 
 describe("createMarkdownPDFTransformer", () => {

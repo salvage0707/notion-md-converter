@@ -1,5 +1,5 @@
-import { createTextRichText } from "src/test-helper";
-import type { RichText } from "../types";
+import { createTextRichText } from "@notion-md-converter/testing";
+import type { RichText } from "@notion-md-converter/types";
 import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
 
 describe("heading", () => {

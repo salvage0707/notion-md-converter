@@ -1,4 +1,4 @@
-import type { RichText } from "../types";
+import type { RichText } from "@notion-md-converter/types";
 import type { EnableAnnotations } from "./markdown";
 import { MarkdownUtils } from "./markdown";
 

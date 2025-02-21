@@ -3,8 +3,8 @@ import {
   createHeading2Block,
   createHeading3Block,
   createTextRichText,
-} from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+} from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownHeadingTransformer } from "./createMarkdownHeadingTransformer";
 
 describe("createMarkdownHeadingTransformer", () => {

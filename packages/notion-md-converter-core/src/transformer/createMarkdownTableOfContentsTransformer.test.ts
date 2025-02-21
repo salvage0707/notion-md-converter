@@ -1,5 +1,5 @@
-import { createTableOfContentsBlock } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createTableOfContentsBlock } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownTableOfContentsTransformer } from "./createMarkdownTableOfContentsTransformer";
 
 describe("createMarkdownTableOfContentsTransformer", () => {

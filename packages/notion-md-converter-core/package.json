@@ -32,19 +32,16 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.mjs",
       "require": "./dist/types/index.cjs"
-    },
-    "./test-helper": {
-      "types": "./dist/test-helper/index.d.ts",
-      "import": "./dist/test-helper/index.mjs",
-      "require": "./dist/test-helper/index.cjs"
     }
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.15",
-    "tslib": "^2.6.2"
+    "@notionhq/client": "catalog:",
+    "@notion-md-converter/types": "workspace:*"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/types": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*",
     "@types/node": "^22.13.4"
   }
 }

@@ -1,5 +1,5 @@
-import { createBulletedListItemBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createBulletedListItemBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 
 describe("createMarkdownBulletedListItemTransformer", () => {

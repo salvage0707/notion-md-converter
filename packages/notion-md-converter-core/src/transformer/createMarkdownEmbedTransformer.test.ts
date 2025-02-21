@@ -1,4 +1,8 @@
-import { createEmbedBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import {
+  createEmbedBlock,
+  createTextRichText,
+  createTransformerContext,
+} from "@notion-md-converter/testing";
 import { createMarkdownEmbedTransformer } from "./createMarkdownEmbedTransformer";
 
 describe("createMarkdownEmbedTransformer", () => {

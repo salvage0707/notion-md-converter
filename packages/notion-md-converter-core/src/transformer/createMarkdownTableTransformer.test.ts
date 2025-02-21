@@ -1,5 +1,9 @@
-import { createTableBlock, createTableRowBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import {
+  createTableBlock,
+  createTableRowBlock,
+  createTextRichText,
+} from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownTableTransformer } from "./createMarkdownTableTransformer";
 
 const createRow = (plainTexts: string[]) => {

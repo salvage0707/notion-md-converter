@@ -1,5 +1,5 @@
-import { createEquationBlock } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createEquationBlock } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownEquationTransformer } from "./createMarkdownEquationTransformer";
 
 describe("createMarkdownEquationTransformer", () => {

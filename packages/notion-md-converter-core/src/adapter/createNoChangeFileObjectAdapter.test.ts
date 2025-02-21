@@ -1,4 +1,4 @@
-import { createNotionExternalFile, createNotionInternalFile } from "../test-helper";
+import { createNotionExternalFile, createNotionInternalFile } from "@notion-md-converter/testing";
 import { createNoChangeFileObjectAdapter } from "./createNoChangeFileObjectAdapter";
 
 describe("NoChangeFileObjectAdapter", () => {

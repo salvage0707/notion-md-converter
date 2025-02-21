@@ -1,0 +1,36 @@
+{
+  "name": "@notion-md-converter/types",
+  "version": "0.2.1",
+  "description": "Notion to Markdown Converter Types",
+  "license": "MIT",
+  "author": "malvageee (https://github.com/salvage0707)",
+  "keywords": ["notion", "notion-api", "markdown", "md", "converter"],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git",
+    "directory": "packages/notion-md-converter-types"
+  },
+  "scripts": {
+    "type-check": "tsc --build --pretty",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "prepublishOnly": "pnpm run build"
+  },
+  "files": ["dist"],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "dependencies": {
+    "@notionhq/client": "catalog:"
+  },
+  "devDependencies": {
+    "@notion-md-converter/config": "workspace:*"
+  }
+}
