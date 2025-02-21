@@ -58,9 +58,6 @@ importers:
 
   packages/notion-md-converter-core:
     dependencies:
-      '@notion-md-converter/types':
-        specifier: workspace:*
-        version: link:../notion-md-converter-types
       '@notionhq/client':
         specifier: 'catalog:'
         version: 2.2.16
@@ -71,6 +68,9 @@ importers:
       '@notion-md-converter/testing':
         specifier: workspace:*
         version: link:../notion-md-converter-testing
+      '@notion-md-converter/types':
+        specifier: workspace:*
+        version: link:../notion-md-converter-types
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
@@ -112,6 +112,9 @@ importers:
       '@notion-md-converter/testing':
         specifier: workspace:*
         version: link:../notion-md-converter-testing
+      '@notion-md-converter/types':
+        specifier: workspace:*
+        version: link:../notion-md-converter-types
 
 packages:
 
