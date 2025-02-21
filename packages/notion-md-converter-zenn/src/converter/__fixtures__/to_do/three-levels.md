@@ -1,0 +1,5 @@
+- [ ] item1
+  - [ ] nested item1
+- [x] item2
+  - [ ] nested item2
+    - [x] nested nested item1
