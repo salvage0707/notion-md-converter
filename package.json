@@ -28,7 +28,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "build:clean": "find . -type d -name 'dist' -not -path '*/node_modules/*' -exec rm -rf {} +",
-    "build:size": "du -sh packages/*/dist",
+    "build:size": "turbo run build:size",
     "test": "turbo run test",
     "test:once": "turbo run test:once",
     "check-types": "turbo run check-types"
