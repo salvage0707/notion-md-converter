@@ -35,9 +35,7 @@
     }
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.16"
-  },
-  "peerDependencies": {
+    "@notionhq/client": "^2.2.16",
     "@notion-md-converter/types": "workspace:*"
   },
   "devDependencies": {
