@@ -11,9 +11,9 @@
     "directory": "packages/notion-md-converter-types"
   },
   "scripts": {
-    "type-check": "tsc --build --pretty",
+    "dev": "rollup -c -w",
+    "check-types": "tsc --noEmit",
     "build": "rollup -c",
-    "build:watch": "rollup -c -w",
     "prepublishOnly": "pnpm run build"
   },
   "files": ["dist"],

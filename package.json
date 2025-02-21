@@ -6,26 +6,30 @@
   "packageManager": "pnpm@9.15.1",
   "license": "MIT",
   "author": "salvage0707",
-  "keywords": ["notion-md-converter", "notion", "notion-api", "markdown", "md", "converter"],
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "notion-api",
+    "markdown",
+    "md",
+    "converter"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git"
   },
   "scripts": {
-    "test": "pnpm run --parallel --recursive --if-present test",
-    "test:once": "pnpm run --parallel --recursive --if-present test:once",
     "format": "biome format",
     "format:fix": "biome format --write",
     "lint": "biome lint",
     "lint:fix": "biome lint --write",
     "check": "biome check",
     "check:fix": "biome check --write",
-    "build:types": "pnpm run --recursive --filter=@notion-md-converter/types build",
-    "build:testing": "pnpm run --recursive --filter=@notion-md-converter/testing build",
-    "build:core": "pnpm run --recursive --filter=@notion-md-converter/core build",
-    "build:zenn": "pnpm run --recursive --filter=@notion-md-converter/zenn build",
-    "build": "pnpm run build:types && pnpm run build:testing && pnpm run build:core && pnpm run build:zenn",
-    "build:watch": "pnpm run --parallel --recursive build:watch"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:once": "turbo run test:once",
+    "check-types": "turbo run check-types"
   },
   "type": "module",
   "devDependencies": {
@@ -38,6 +42,7 @@
     "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.6.2",
     "tsx": "^4.19.2",
+    "turbo": "^2.4.2",
     "typescript": "^5.7.3",
     "vitest": "^3.0.4"
   }
