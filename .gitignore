@@ -40,3 +40,6 @@ pnpm-debug.log*
 # temporary files
 tmp/
 **/tmp/
+
+# turborepo
+.turbo/
