@@ -1,4 +1,4 @@
-import { createBreadcrumbBlock, createTransformerContext } from "../test-helper";
+import { createBreadcrumbBlock, createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownBreadcrumbTransformer } from "./createMarkdownBreadcrumbTransformer";
 
 describe("createMarkdownBreadcrumbTransformer", () => {

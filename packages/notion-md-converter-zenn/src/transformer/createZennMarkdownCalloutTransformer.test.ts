@@ -2,7 +2,7 @@ import {
   createCalloutBlock,
   createTextRichText,
   createTransformerContext,
-} from "@notion-md-converter/core/test-helper";
+} from "@notion-md-converter/testing";
 import { createZennMarkdownCalloutTransformer } from "./createZennMarkdownCalloutTransformer";
 
 describe("createZennMarkdownCalloutTransformer", () => {

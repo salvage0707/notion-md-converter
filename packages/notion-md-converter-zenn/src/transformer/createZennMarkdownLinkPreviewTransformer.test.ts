@@ -1,7 +1,7 @@
 import {
   createLinkPreviewBlock,
   createTransformerContext,
-} from "@notion-md-converter/core/test-helper";
+} from "@notion-md-converter/testing";
 import { createZennMarkdownLinkPreviewTransformer } from "./createZennMarkdownLinkPreviewTransformer";
 
 describe("createZennMarkdownLinkPreviewTransformer", () => {

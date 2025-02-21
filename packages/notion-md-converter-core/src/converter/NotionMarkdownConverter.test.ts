@@ -30,23 +30,6 @@ import { NotionMarkdownConverter } from "./NotionMarkdownConverter";
 describe("NotionMarkdownConverter", () => {
   const converter = new NotionMarkdownConverter();
 
-  // const testBlockConversion = (blockType: LoadableBlockType) => {
-  //   describe(blockType, () => {
-  //     const testData = loadBlockContentFixture(blockType);
-
-  //     for (const data of testData) {
-  //       it(`${data.dataType} の変換が正しいこと`, () => {
-  //         const block = data.content;
-  //         const result = converter.execute(block);
-
-  //         const expected = loadMdFixture(__dirname, blockType, data.dataType);
-  //         expect(result).toBe(expected);
-  //       });
-  //     }
-  //   });
-  // };
-
-  // テストするブロックタイプの配列
   const blockFixtures = [
     { name: "bookmark", data: bookmarkFixture },
     { name: "breadcrumb", data: breadcrumbFixture },

@@ -2,7 +2,7 @@ import {
   createNumberedListItemBlock,
   createTextRichText,
   createTransformerContext,
-} from "../test-helper";
+} from "@notion-md-converter/testing";
 import { createMarkdownNumberedListItemTransformer } from "./createMarkdownNumberedListItemTransformer";
 
 describe("createMarkdownNumberedListItemTransformer", () => {

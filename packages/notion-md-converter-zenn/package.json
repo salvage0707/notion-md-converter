@@ -33,6 +33,7 @@
     "@notion-md-converter/core": "workspace:*"
   },
   "devDependencies": {
-    "@notion-md-converter/config": "workspace:*"
+    "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*"
   }
 }

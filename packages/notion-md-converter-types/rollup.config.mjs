@@ -5,12 +5,6 @@ import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
 import typescript from "rollup-plugin-typescript2";
 
-import pkg from "./package.json" assert { type: "json" };
-
-const external = [
-  ...Object.keys(pkg.dependencies || {}),
-  ...Object.keys(pkg.peerDependencies || {}),
-];
 export default defineConfig([
   {
     input: "src/index.ts",
@@ -26,7 +20,6 @@ export default defineConfig([
         sourcemap: true,
       },
     ],
-    external,
     plugins: [
       json({
         compact: true,

@@ -1,5 +1,5 @@
-import { createImageBlock, createTextRichText } from "@notion-md-converter/core/test-helper";
-import { createTransformerContext } from "@notion-md-converter/core/test-helper";
+import { createImageBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createZennMarkdownImageTransformer } from "./createZennMarkdownImageTransformer";
 
 describe("createZennMarkdownImageTransformer", () => {

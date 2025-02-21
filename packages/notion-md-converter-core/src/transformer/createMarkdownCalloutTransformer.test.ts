@@ -1,4 +1,4 @@
-import { createCalloutBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import { createCalloutBlock, createTextRichText, createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 
 describe("createMarkdownCalloutTransformer", () => {

@@ -1,4 +1,4 @@
-import { createChildDatabaseBlock, createTransformerContext } from "../test-helper";
+import { createChildDatabaseBlock, createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownChildDatabaseTransformer } from "./createMarkdownChildDatabaseTransformer";
 
 describe("createMarkdownChildDatabaseTransformer", () => {

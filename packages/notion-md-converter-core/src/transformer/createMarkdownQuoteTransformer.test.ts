@@ -1,5 +1,5 @@
-import { createQuoteBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createQuoteBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
 
 describe("createMarkdownQuoteTransformer", () => {
