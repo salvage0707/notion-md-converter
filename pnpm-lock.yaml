@@ -64,6 +64,10 @@ importers:
         version: 22.13.4
 
   packages/notion-md-converter-testing:
+    dependencies:
+      '@notionhq/client':
+        specifier: ^2.2.16
+        version: 2.2.16
     devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*
@@ -71,9 +75,6 @@ importers:
       '@notion-md-converter/types':
         specifier: workspace:*
         version: link:../notion-md-converter-types
-      '@notionhq/client':
-        specifier: ^2.2.16
-        version: 2.2.16
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4

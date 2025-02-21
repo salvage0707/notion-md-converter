@@ -1,7 +1,4 @@
-import {
-  createBookmarkBlock,
-  createTransformerContext,
-} from "@notion-md-converter/testing";
+import { createBookmarkBlock, createTransformerContext } from "@notion-md-converter/testing";
 import { createZennMarkdownBookmarkTransformer } from "./createZennMarkdownBookmarkTransformer";
 
 describe("createZennMarkdownBookmarkTransformer", () => {
