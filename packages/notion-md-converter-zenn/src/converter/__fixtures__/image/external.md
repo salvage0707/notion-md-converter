@@ -1,0 +1,1 @@
+![https://placehold.jp/150x150.png](https://placehold.jp/150x150.png)

@@ -1,0 +1,4 @@
+
+:::details title
+content
+:::

@@ -1,0 +1,1 @@
+![https://mock-s3.example.com/some/object](https://mock-s3.example.com/some/object)
