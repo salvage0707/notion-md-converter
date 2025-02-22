@@ -22,9 +22,10 @@
     "build": "turbo run build",
     "build:clean": "find . -type d -name 'dist' -not -path '*/node_modules/*' -exec rm -rf {} +",
     "build:size": "turbo run build:size",
-    "npm:version:patch": "bash scripts/npm-version-patch.sh patch",
-    "npm:version:minor": "bash scripts/npm-version-patch.sh minor",
-    "npm:version:major": "bash scripts/npm-version-patch.sh major",
+    "npm:version:patch": "bash scripts/npm-update-version.sh patch",
+    "npm:version:minor": "bash scripts/npm-update-version.sh minor",
+    "npm:version:major": "bash scripts/npm-update-version.sh major",
+    "npm:publish": "bash scripts/npm-publish.sh",
     "test": "turbo run test",
     "test:once": "turbo run test:once",
     "check-types": "turbo run check-types"

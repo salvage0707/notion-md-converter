@@ -13,25 +13,14 @@ Similarly, checklist syntax (e.g., `- [ ]` or `* [ ]`) may differ, and there may
 
 ## 🚀 Installation
 
-
-### **1️⃣ Clone from GitHub (Current)**
-
-Since this package is not yet available on npm, install it directly from GitHub.
+### **Install via npm**
 
 ```shell
-git clone <https://github.com/salvage0707/notion-md-converter.git>
-cd notion-to-markdown
-npm install  # Install dependencies
-```
+# if JavaScript
+npm install @notion-md-converter/core
 
-
-### **2️⃣ Install via npm (Coming Soon)**
-
-We plan to publish this package to npm in the future.
-Once available, you can install it using:
-
-```shell
-npm install notion-to-markdown
+# if TypeScript
+npm install @notion-md-converter/core @notion-md-converter/types
 ```
 
 
@@ -72,6 +61,8 @@ const result = executor.execute(content);
 If you want to change the conversion of a Heading Block.
 For example, define a custom transformer that increases the number of `#` in a Markdown heading by one.
 
+
+
 ```typescript
 import { MarkdownUtils } from "../utils";
 import { createBasicHeadingTransformer } from "./createBasicTransformer";
@@ -84,6 +75,46 @@ export const createMarkdownCustomHeadingTransformer = () => {
   });
 };
 
+```
+
+
+To simplify writing tests for transformers, we provide the `@notion-md-converter/testing` library.
+This library allows you to easily create Notion block objects and test their conversion results.
+
+```shell
+$ npm install @notion-md-converter/testing
+```
+
+```typescript
+import {
+  createTransformerContext,
+  createHeading1Block,
+  createTextRichText,
+  dedent,
+} from "@notion-md-converter/testing";
+import { createMarkdownCustomHeadingTransformer } from "./createMarkdownCustomHeadingTransformer";
+
+describe("createMarkdownCustomHeadingTransformer", () => {
+  const transformer = createMarkdownCustomHeadingTransformer();
+
+  it("heading_1ブロックを変換できる", () => {
+    const block = createHeading1Block({
+      richText: [
+        createTextRichText({
+          content: "Hello",
+        }),
+      ],
+    });
+    const context = createTransformerContext({
+      blocks: [block],
+    });
+
+    const result = transformer(context);
+    expect(result).toBe(dedent({ wrap: true })`
+      ## Hello
+    `);
+  });
+});
 ```
 
 Define the created transformer in the options of the converter.
