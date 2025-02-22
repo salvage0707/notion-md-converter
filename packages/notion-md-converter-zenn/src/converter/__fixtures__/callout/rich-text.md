@@ -1,4 +1,0 @@
-
-:::message
-color **bold** *italic* ~~strikethrough~~ _underline_ `code`  Equation link
-:::

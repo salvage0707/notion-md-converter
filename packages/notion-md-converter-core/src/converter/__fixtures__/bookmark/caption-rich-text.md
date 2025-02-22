@@ -1,1 +1,0 @@
-[color **bold** *italic* ~~strikethrough~~ _underline_ `code` Equation link](https://example.com/)

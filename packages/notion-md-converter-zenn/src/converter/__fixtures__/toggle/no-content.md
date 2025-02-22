@@ -1,4 +1,0 @@
-
-:::details only title
-
-:::

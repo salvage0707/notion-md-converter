@@ -1,4 +1,0 @@
-
-:::message
-no icon callout
-:::

@@ -1,3 +1,0 @@
-left
-middle
-right
