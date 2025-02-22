@@ -19,5 +19,10 @@
     "emitDeclarationOnly": false
   },
   "include": ["${configDir}/src/**/*.ts"],
-  "exclude": ["node_modules", "${configDir}/dist", "${configDir}/src/**/*.test.ts", "${configDir}/src/**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "${configDir}/dist",
+    "${configDir}/src/**/*.test.ts",
+    "${configDir}/src/**/*.spec.ts"
+  ]
 }
