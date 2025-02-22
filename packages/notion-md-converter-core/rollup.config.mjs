@@ -35,7 +35,7 @@ export default defineConfig([
       nodeResolve(),
       commonjs(),
       typescript({
-        tsconfig: "./tsconfig.json",
+        tsconfig: "./tsconfig.build.json",
       }),
       terser({
         compress: {

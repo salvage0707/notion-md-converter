@@ -28,6 +28,6 @@
     "declarationMap": false,
     "emitDeclarationOnly": false
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "src/**/*.spec.ts"]
+  "include": ["${configDir}/src/**/*.ts"],
+  "exclude": ["node_modules", "${configDir}/dist"]
 }
