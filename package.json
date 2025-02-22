@@ -1,7 +1,7 @@
 {
   "name": "@notion-md-converter/monorepo",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Notion to Markdown Converter",
   "packageManager": "pnpm@9.15.1",
   "license": "MIT",
@@ -22,6 +22,9 @@
     "build": "turbo run build",
     "build:clean": "find . -type d -name 'dist' -not -path '*/node_modules/*' -exec rm -rf {} +",
     "build:size": "turbo run build:size",
+    "npm:version:patch": "bash scripts/npm-version-patch.sh patch",
+    "npm:version:minor": "bash scripts/npm-version-patch.sh minor",
+    "npm:version:major": "bash scripts/npm-version-patch.sh major",
     "test": "turbo run test",
     "test:once": "turbo run test:once",
     "check-types": "turbo run check-types"
