@@ -1,5 +1,5 @@
-import { createTextRichText } from "src/test-helper";
-import type { RichText } from "../types";
+import { createTextRichText } from "@notion-md-converter/testing";
+import type { RichText } from "@notion-md-converter/types";
 import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
 
 describe("heading", () => {
@@ -280,15 +280,9 @@ describe("details", () => {
   });
 
   it("空のタイトルと内容からdetailsタグに変換できること", () => {
-    const expected = [
-      "<details>",
-      "  <summary>",
-      "    ",
-      "  </summary>",
-      "",
-      "  ",
-      "</details>",
-    ].join("\n");
+    const expected = ["<details>", "  <summary>", "", "  </summary>", "", "", "</details>"].join(
+      "\n",
+    );
     expect(MarkdownUtils.details("", "")).toBe(expected);
   });
 });
@@ -309,7 +303,7 @@ describe("richTextsToMarkdown", () => {
   it("単一のリッチテキストを変換できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
       }),
     ] as RichText[];
     expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("Hello");
@@ -318,7 +312,7 @@ describe("richTextsToMarkdown", () => {
   it("複数のアノテーションを持つリッチテキストを変換できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
         annotations: {
           bold: true,
           italic: true,
@@ -331,16 +325,16 @@ describe("richTextsToMarkdown", () => {
   it("複数のリッチテキストを結合できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
         annotations: {
           bold: true,
         },
       }),
       createTextRichText({
-        plainText: " ",
+        content: " ",
       }),
       createTextRichText({
-        plainText: "World",
+        content: "World",
         annotations: {
           italic: true,
         },
@@ -352,7 +346,7 @@ describe("richTextsToMarkdown", () => {
   it("アノテーションを無効化できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
         annotations: {
           bold: true,
           italic: true,
@@ -377,7 +371,7 @@ describe("richTextsToMarkdown", () => {
   it("カラーアノテーションを処理できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Colored Text",
+        content: "Colored Text",
         annotations: {
           color: "red",
         },

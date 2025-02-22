@@ -3,7 +3,7 @@ import {
   createNotionInternalFile,
   createTextRichText,
   createTransformerContext,
-} from "@notion-md-converter/core/test-helper";
+} from "@notion-md-converter/testing";
 import { createZennMarkdownFileTransformer } from "./createZennMarkdownFileTransformer";
 
 describe("createZennMarkdownFileTransformer", () => {
@@ -23,7 +23,7 @@ describe("createZennMarkdownFileTransformer", () => {
       name: "example.pdf",
       caption: [
         createTextRichText({
-          plainText: "caption_example.pdf",
+          content: "caption_example.pdf",
         }),
       ],
       fileObject: createNotionInternalFile({

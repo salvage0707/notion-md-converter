@@ -1,4 +1,4 @@
-import { createChildPageBlock, createTransformerContext } from "../test-helper";
+import { createChildPageBlock, createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownChildPageTransformer } from "./createMarkdownChildPageTransformer";
 
 describe("createMarkdownChildPageTransformer", () => {

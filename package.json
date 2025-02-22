@@ -12,28 +12,33 @@
     "type": "git"
   },
   "scripts": {
-    "test": "pnpm run --parallel --recursive --if-present test",
-    "test:once": "pnpm run --parallel --recursive --if-present test:once",
     "format": "biome format",
     "format:fix": "biome format --write",
     "lint": "biome lint",
     "lint:fix": "biome lint --write",
     "check": "biome check",
     "check:fix": "biome check --write",
-    "type-check": "tsc --build --pretty",
-    "build": "pnpm run --recursive --filter=@notion-md-converter/core build && pnpm run --recursive --filter=@notion-md-converter/zenn build",
-    "build:watch": "pnpm run --parallel --recursive build:watch"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "build:clean": "find . -type d -name 'dist' -not -path '*/node_modules/*' -exec rm -rf {} +",
+    "build:size": "turbo run build:size",
+    "test": "turbo run test",
+    "test:once": "turbo run test:once",
+    "check-types": "turbo run check-types"
   },
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
     "rollup": "^4.12.0",
-    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "rollup-plugin-visualizer": "^5.14.0",
+    "tslib": "^2.6.2",
     "tsx": "^4.19.2",
+    "turbo": "^2.4.2",
     "typescript": "^5.7.3",
     "vitest": "^3.0.4"
   }

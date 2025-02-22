@@ -23,7 +23,6 @@ import type {
   ParagraphBlockObjectResponse,
   PdfBlockObjectResponse,
   QuoteBlockObjectResponse,
-  RichTextItemResponse,
   SyncedBlockBlockObjectResponse,
   TableBlockObjectResponse,
   TableOfContentsBlockObjectResponse,
@@ -49,6 +48,7 @@ export type ApiColor =
   | "purple"
   | "pink"
   | "red"
+  | "default_background"
   | "gray_background"
   | "brown_background"
   | "orange_background"
@@ -64,10 +64,10 @@ export type CodeLanguageMapping = {
   [key in CodeLanguage]: string | undefined;
 };
 
-export type TextRichText = TextRichTextItemResponse;
-export type MentionRichText = MentionRichTextItemResponse;
-export type EquationRichText = EquationRichTextItemResponse;
-export type RichText = RichTextItemResponse;
+export interface TextRichText extends TextRichTextItemResponse {}
+export interface MentionRichText extends MentionRichTextItemResponse {}
+export interface EquationRichText extends EquationRichTextItemResponse {}
+export type RichText = TextRichText | MentionRichText | EquationRichText;
 
 export type NotionInternalFile = {
   type: "file";
@@ -150,82 +150,88 @@ export type RootBlock =
 
 export type RootBlockType = RootBlock["type"];
 
-export type BookmarkBlock = BookmarkBlockObjectResponse;
+export interface BookmarkBlock extends BookmarkBlockObjectResponse {}
 
-export type BreadcrumbBlock = BreadcrumbBlockObjectResponse;
+export interface BreadcrumbBlock extends BreadcrumbBlockObjectResponse {}
 
-export type BulletedListItemBlock = BulletedListItemBlockObjectResponse & {
+export interface BulletedListItemBlock extends BulletedListItemBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type CalloutBlock = CalloutBlockObjectResponse & {
+export interface CalloutBlock extends CalloutBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type ChildDatabaseBlock = ChildDatabaseBlockObjectResponse;
+export interface ChildDatabaseBlock extends ChildDatabaseBlockObjectResponse {}
 
-export type ChildPageBlock = ChildPageBlockObjectResponse;
+export interface ChildPageBlock extends ChildPageBlockObjectResponse {}
 
-export type CodeBlock = CodeBlockObjectResponse;
+export interface CodeBlock extends CodeBlockObjectResponse {}
 
-export type ColumnListBlock = ColumnListBlockObjectResponse & {
+export interface ColumnListBlock extends ColumnListBlockObjectResponse {
   children: ColumnBlock[];
-};
+}
 
-export type ColumnBlock = ColumnBlockObjectResponse & {
+export interface ColumnBlock extends ColumnBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type DividerBlock = DividerBlockObjectResponse;
+export interface DividerBlock extends DividerBlockObjectResponse {}
 
-export type EmbedBlock = EmbedBlockObjectResponse;
+export interface EmbedBlock extends EmbedBlockObjectResponse {}
 
-export type EquationBlock = EquationBlockObjectResponse;
+export interface EquationBlock extends EquationBlockObjectResponse {}
 
-export type FileBlock = FileBlockObjectResponse;
+export interface FileBlock extends FileBlockObjectResponse {}
 
-export type Heading1Block = Heading1BlockObjectResponse;
+export interface Heading1Block extends Heading1BlockObjectResponse {}
 
-export type Heading2Block = Heading2BlockObjectResponse;
+export interface Heading2Block extends Heading2BlockObjectResponse {}
 
-export type Heading3Block = Heading3BlockObjectResponse;
+export interface Heading3Block extends Heading3BlockObjectResponse {}
 
-export type ImageBlock = ImageBlockObjectResponse;
+export interface ImageBlock extends ImageBlockObjectResponse {}
 
-export type LinkPreviewBlock = LinkPreviewBlockObjectResponse;
+export interface LinkPreviewBlock extends LinkPreviewBlockObjectResponse {}
 
-export type NumberedListItemBlock = NumberedListItemBlockObjectResponse & {
+export interface NumberedListItemBlock extends NumberedListItemBlockObjectResponse {
   children: Block[];
-};
+}
 
 export type ParagraphBlock = ParagraphBlockObjectResponse & {
   children: Block[];
 };
 
-export type PdfBlock = PdfBlockObjectResponse;
+export interface PdfBlock extends PdfBlockObjectResponse {}
 
-export type QuoteBlock = QuoteBlockObjectResponse & {
+export interface QuoteBlock extends QuoteBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type SyncedBlock = SyncedBlockBlockObjectResponse & {
+export interface SyncedBlock extends SyncedBlockBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type TableBlock = TableBlockObjectResponse & {
+export interface TableBlock extends TableBlockObjectResponse {
   children: TableRowBlock[];
-};
+}
 
-export type TableRowBlock = TableRowBlockObjectResponse;
+export interface TableRowBlock extends TableRowBlockObjectResponse {}
 
-export type TableOfContentsBlock = TableOfContentsBlockObjectResponse;
+export interface TableOfContentsBlock extends TableOfContentsBlockObjectResponse {}
 
-export type ToDoBlock = ToDoBlockObjectResponse & {
+export interface ToDoBlock extends ToDoBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type ToggleBlock = ToggleBlockObjectResponse & {
+export interface ToggleBlock extends ToggleBlockObjectResponse {
   children: Block[];
-};
+}
 
-export type VideoBlock = VideoBlockObjectResponse;
+export interface VideoBlock extends VideoBlockObjectResponse {}
+
+export const EmbedProvider = {
+  speakerDeck: "speakerDeck",
+  x: "x",
+} as const;
+export type EmbedProvider = (typeof EmbedProvider)[keyof typeof EmbedProvider];

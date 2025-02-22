@@ -1,4 +1,8 @@
-import { createEmbedBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import {
+  createEmbedBlock,
+  createTextRichText,
+  createTransformerContext,
+} from "@notion-md-converter/testing";
 import { createMarkdownEmbedTransformer } from "./createMarkdownEmbedTransformer";
 
 describe("createMarkdownEmbedTransformer", () => {
@@ -9,7 +13,7 @@ describe("createMarkdownEmbedTransformer", () => {
       url: "https://example.com",
       caption: [
         createTextRichText({
-          plainText: "テストリンク",
+          content: "テストリンク",
         }),
       ],
     });

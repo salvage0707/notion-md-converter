@@ -65,6 +65,7 @@ export type EmbedTransformer = NotionBlockTransformer<EmbedBlock>;
 export type PDFTransformer = NotionBlockTransformer<PdfBlock>;
 export type FileTransformer = NotionBlockTransformer<FileBlock>;
 export type ImageTransformer = NotionBlockTransformer<ImageBlock>;
+export type UnsupportedBlockTransformer = NotionBlockTransformer<Block>;
 
 export type TransformerMapping = {
   bookmark?: BookmarkTransformer;

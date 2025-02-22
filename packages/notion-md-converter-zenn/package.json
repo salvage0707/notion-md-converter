@@ -11,11 +11,12 @@
     "directory": "packages/notion-md-converter-zenn"
   },
   "scripts": {
+    "dev": "rollup -c -w",
     "test": "vitest",
     "test:once": "vitest run",
-    "type-check": "tsc --build --pretty",
+    "check-types": "tsc --noEmit",
     "build": "rollup -c",
-    "build:watch": "rollup -c -w",
+    "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'",
     "prepublishOnly": "pnpm run build"
   },
   "files": ["dist"],
@@ -33,6 +34,8 @@
     "@notion-md-converter/core": "workspace:*"
   },
   "devDependencies": {
-    "@notion-md-converter/config": "workspace:*"
+    "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/types": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*"
   }
 }

@@ -17,6 +17,7 @@ const image = (text: string, url: string, caption = ""): string => {
  * コードブロック変換
  */
 const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
+  "ascii art": "ascii",
   abap: "abap",
   agda: "agda",
   arduino: "arduino",
@@ -86,6 +87,8 @@ const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
   ruby: "ruby",
   rust: "rust",
   sass: "sass",
+  hcl: "hcl",
+  smalltalk: "smalltalk",
   scala: "scala",
   scheme: "scheme",
   scss: "scss",

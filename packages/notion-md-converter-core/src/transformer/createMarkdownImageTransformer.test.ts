@@ -1,5 +1,5 @@
-import { createImageBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createImageBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownImageTransformer } from "./createMarkdownImageTransformer";
 
 describe("createMarkdownImageTransformer", () => {
@@ -15,7 +15,7 @@ describe("createMarkdownImageTransformer", () => {
   it("captionがある場合、captionを含めてimageブロックを変換できる", () => {
     const block = createImageBlock({
       url: "https://example.com",
-      caption: [createTextRichText({ plainText: "example" })],
+      caption: [createTextRichText({ content: "example" })],
     });
     const context = createTransformerContext({
       blocks: [block],

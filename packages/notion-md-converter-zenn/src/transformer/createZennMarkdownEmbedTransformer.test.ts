@@ -2,7 +2,7 @@ import {
   createEmbedBlock,
   createTextRichText,
   createTransformerContext,
-} from "@notion-md-converter/core/test-helper";
+} from "@notion-md-converter/testing";
 import { createZennMarkdownEmbedTransformer } from "./createZennMarkdownEmbedTransformer";
 
 describe("createZennMarkdownEmbedTransformer", () => {
@@ -13,7 +13,7 @@ describe("createZennMarkdownEmbedTransformer", () => {
       url: "https://example.com",
       caption: [
         createTextRichText({
-          plainText: "テストリンク",
+          content: "テストリンク",
         }),
       ],
     });

@@ -1,5 +1,5 @@
-import { createTextRichText, createToggleBlock } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createTextRichText, createToggleBlock, dedent } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownToggleTransformer } from "./createMarkdownToggleTransformer";
 
 describe("createMarkdownToggleTransformer", () => {
@@ -9,7 +9,7 @@ describe("createMarkdownToggleTransformer", () => {
     const block = createToggleBlock({
       richText: [
         createTextRichText({
-          plainText: "test title",
+          content: "test title",
         }),
       ],
     });
@@ -19,18 +19,15 @@ describe("createMarkdownToggleTransformer", () => {
 
     context.mockedExecute.mockReturnValue("test content");
     const result = transformer(context);
-    const expected = [
-      "", // 改行
-      "<details>",
-      "  <summary>",
-      "    test title",
-      "  </summary>",
-      "",
-      "  test content",
-      "</details>",
-      "", // 改行
-    ].join("\n");
 
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      <details>
+        <summary>
+          test title
+        </summary>
+
+        test content
+      </details>
+    `);
   });
 });

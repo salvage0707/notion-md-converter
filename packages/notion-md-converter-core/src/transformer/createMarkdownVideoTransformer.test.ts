@@ -1,5 +1,5 @@
-import { createNotionInternalFile, createVideoBlock } from "@notion-md-converter/core/test-helper";
-import { createTransformerContext } from "@notion-md-converter/core/test-helper";
+import { createNotionInternalFile, createVideoBlock, dedent } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownVideoTransformer } from "./createMarkdownVideoTransformer";
 
 describe("VideoTransformer", () => {
@@ -25,6 +25,8 @@ describe("VideoTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe(`\n<video controls src="https://example.com/test.mp4"></video>\n`);
+    expect(result).toBe(dedent({ wrap: true })`
+      <video controls src="https://example.com/test.mp4"></video>
+    `);
   });
 });

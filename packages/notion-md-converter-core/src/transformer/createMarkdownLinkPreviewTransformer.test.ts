@@ -1,5 +1,5 @@
-import { createLinkPreviewBlock } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createLinkPreviewBlock } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownLinkPreviewTransformer } from "./createMarkdownLinkPreviewTransformer";
 
 describe("createMarkdownLinkPreviewTransformer", () => {

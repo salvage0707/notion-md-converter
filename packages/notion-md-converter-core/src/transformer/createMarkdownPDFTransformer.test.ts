@@ -1,5 +1,5 @@
-import { createPdfBlock, createTextRichText } from "../test-helper";
-import { createTransformerContext } from "../test-helper";
+import { createPdfBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
 
 describe("createMarkdownPDFTransformer", () => {
@@ -16,7 +16,7 @@ describe("createMarkdownPDFTransformer", () => {
 
   it("captionがある場合、captionを含めてpdfブロックを変換できる", () => {
     const block = createPdfBlock({
-      caption: [createTextRichText({ plainText: "example.pdf" })],
+      caption: [createTextRichText({ content: "example.pdf" })],
     });
     const context = createTransformerContext({
       blocks: [block],

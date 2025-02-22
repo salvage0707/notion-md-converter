@@ -22,6 +22,7 @@ import type {
   DividerBlock,
   DividerTransformer,
   EmbedBlock,
+  EmbedProvider,
   EmbedTransformer,
   EquationBlock,
   EquationTransformer,
@@ -57,8 +58,9 @@ import type {
   ToggleTransformer,
   VideoBlock,
   VideoTransformer,
-} from "../types";
-import { isNumberedListItemBlock } from "../utils";
+} from "@notion-md-converter/types";
+import { TransformerUtils } from "../utils";
+import { getEmbedProvider, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -70,6 +72,9 @@ export const createBasicBookmarkTransformer = (
   execute: (args: { block: BookmarkBlock }) => string,
 ): BookmarkTransformer => {
   return (context) => {
+    if (context.currentBlock.bookmark.url === "") {
+      return "";
+    }
     return execute({ block: context.currentBlock });
   };
 };
@@ -187,6 +192,12 @@ export const createBasicImageTransformer = (
   execute: (args: { block: ImageBlock }) => string,
 ): ImageTransformer => {
   return (context) => {
+    const image = context.currentBlock.image;
+    const url = image.type === "external" ? image.external.url : image.file.url;
+    if (!url) {
+      return "";
+    }
+
     return execute({ block: context.currentBlock });
   };
 };
@@ -320,15 +331,50 @@ export const createBasicVideoTransformer = (
   execute: (args: { block: VideoBlock }) => string,
 ): VideoTransformer => {
   return (context) => {
+    const video = context.currentBlock.video;
+    const url = video.type === "external" ? video.external.url : video.file.url;
+    if (!url) {
+      return "";
+    }
     return execute({ block: context.currentBlock });
   };
 };
 
+export type EmbedMetadata = {
+  speakerDeck?: {
+    id: string | undefined;
+  };
+  // x is no metadata
+  // biome-ignore lint/complexity/noBannedTypes: <explanation>
+  x?: {};
+};
 export const createBasicEmbedTransformer = (
-  execute: (args: { block: EmbedBlock }) => string,
+  execute: (args: {
+    block: EmbedBlock;
+    provider: EmbedProvider | undefined;
+    metadata: EmbedMetadata;
+  }) => string,
 ): EmbedTransformer => {
   return (context) => {
-    return execute({ block: context.currentBlock });
+    const { metadata: meta } = TransformerUtils.getCaptionMetadata(
+      context.currentBlock.embed.caption,
+    );
+
+    const provider = getEmbedProvider(context.currentBlock);
+    const metadata: EmbedMetadata = {};
+    if (provider === "speakerDeck") {
+      metadata.speakerDeck = {
+        id: meta.id,
+      };
+    }
+    if (provider === "x") {
+      metadata.x = {};
+    }
+    return execute({
+      block: context.currentBlock,
+      provider,
+      metadata,
+    });
   };
 };
 

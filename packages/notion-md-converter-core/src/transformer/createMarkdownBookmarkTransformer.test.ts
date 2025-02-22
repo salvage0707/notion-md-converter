@@ -1,4 +1,8 @@
-import { createBookmarkBlock, createTextRichText, createTransformerContext } from "../test-helper";
+import {
+  createBookmarkBlock,
+  createTextRichText,
+  createTransformerContext,
+} from "@notion-md-converter/testing";
 import { createMarkdownBookmarkTransformer } from "./createMarkdownBookmarkTransformer";
 
 describe("createMarkdownBookmarkTransformer", () => {
@@ -9,7 +13,7 @@ describe("createMarkdownBookmarkTransformer", () => {
       url: "https://example.com",
       caption: [
         createTextRichText({
-          plainText: "テストリンク",
+          content: "テストリンク",
         }),
       ],
     });

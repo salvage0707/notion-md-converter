@@ -1,29 +1,34 @@
-import { NotionMarkdownConverter } from "@notion-md-converter/core";
-import type { TransformerMapping } from "@notion-md-converter/core/types";
 import {
+  NotionMarkdownConverter,
+  createUnsupportedBlockTransformer,
+} from "@notion-md-converter/core";
+import type { TransformerMapping } from "@notion-md-converter/types";
+import {
+  createZennMarkdownBookmarkTransformer,
   createZennMarkdownCalloutTransformer,
   createZennMarkdownCodeTransformer,
   createZennMarkdownEmbedTransformer,
-  createZennMarkdownFileTransformer,
   createZennMarkdownImageTransformer,
   createZennMarkdownLinkPreviewTransformer,
-  createZennMarkdownPDFTransformer,
   createZennMarkdownToggleTransformer,
-  createZennMarkdownVideoTransformer,
 } from "../transformer";
 
 export class NotionZennMarkdownConverter extends NotionMarkdownConverter {
   constructor(transformers: TransformerMapping = {}) {
     super({
+      bookmark: createZennMarkdownBookmarkTransformer(),
       code: createZennMarkdownCodeTransformer(),
       callout: createZennMarkdownCalloutTransformer(),
       link_preview: createZennMarkdownLinkPreviewTransformer(),
       embed: createZennMarkdownEmbedTransformer(),
       toggle: createZennMarkdownToggleTransformer(),
-      file: createZennMarkdownFileTransformer(),
+      // TODO: サポートしたい
+      file: createUnsupportedBlockTransformer(),
       image: createZennMarkdownImageTransformer(),
-      pdf: createZennMarkdownPDFTransformer(),
-      video: createZennMarkdownVideoTransformer(),
+      // TODO: サポートしたい
+      pdf: createUnsupportedBlockTransformer(),
+      // TODO: サポートしたい
+      video: createUnsupportedBlockTransformer(),
       ...transformers,
     });
   }

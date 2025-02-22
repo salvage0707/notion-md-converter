@@ -1,4 +1,4 @@
-import type { ApiColor, RichText } from "../types";
+import type { ApiColor, RichText } from "@notion-md-converter/types";
 
 /**
  * @see https://www.markdownguide.org/basic-syntax/#reference-style-links
@@ -32,6 +32,7 @@ export type ColorMap = {
 
 const COLOR_MAP: ColorMap = {
   default: "no used",
+  default_background: "no used",
   red: "red",
   red_background: "red",
   orange: "orange",
@@ -204,7 +205,7 @@ const wrapWithNewLines = (text: string): string => {
 const indent = (text: string, spaces = 2): string => {
   return text
     .split("\n")
-    .map((line) => `${" ".repeat(spaces)}${line}`)
+    .map((line) => (line === "" ? line : `${" ".repeat(spaces)}${line}`))
     .join("\n");
 };
 
@@ -252,14 +253,7 @@ export type EnableAnnotations = {
 
 const richTextsToMarkdown = (
   richTexts: RichText[],
-  enableAnnotations: EnableAnnotations = {
-    bold: true,
-    italic: true,
-    strikethrough: true,
-    underline: true,
-    code: true,
-    color: false, // By default, do not add color
-  },
+  enableAnnotations?: EnableAnnotations,
 ): string => {
   const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
     let markdown = text.plain_text;
@@ -281,10 +275,27 @@ const richTextsToMarkdown = (
     if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
       markdown = color(markdown, text.annotations.color);
     }
+
+    if (text.type === "mention" && text.mention.type === "page" && text.href) {
+      markdown = link(markdown, text.href);
+    }
+
     return markdown;
   };
 
-  return richTexts.map((text) => toMarkdown(text, enableAnnotations)).join("");
+  const options = {
+    bold: true,
+    italic: true,
+    strikethrough: true,
+    underline: true,
+    code: true,
+    color: false,
+    ...enableAnnotations,
+  };
+  return richTexts
+    .map((text) => toMarkdown(text, options))
+    .join("")
+    .trim();
 };
 
 export const MarkdownUtils = {

@@ -11,11 +11,12 @@
     "directory": "packages/notion-md-converter-core"
   },
   "scripts": {
+    "dev": "rollup -c -w",
     "test": "vitest",
     "test:once": "vitest run",
-    "type-check": "tsc --build --pretty",
+    "check-types": "tsc --noEmit",
     "build": "rollup -c",
-    "build:watch": "rollup -c -w",
+    "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'",
     "prepublishOnly": "pnpm run build"
   },
   "files": ["dist"],
@@ -32,18 +33,15 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.mjs",
       "require": "./dist/types/index.cjs"
-    },
-    "./test-helper": {
-      "types": "./dist/test-helper/index.d.ts",
-      "import": "./dist/test-helper/index.mjs",
-      "require": "./dist/test-helper/index.cjs"
     }
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.15",
-    "tslib": "^2.6.2"
+    "@notionhq/client": "catalog:"
   },
   "devDependencies": {
-    "@notion-md-converter/config": "workspace:*"
+    "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/types": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*",
+    "@types/node": "^22.13.4"
   }
 }
