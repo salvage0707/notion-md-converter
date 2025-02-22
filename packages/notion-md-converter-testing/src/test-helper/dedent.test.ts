@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { dedent } from "./dedent";
 
 describe("dedent", () => {
@@ -78,4 +77,4 @@ const b = 2;
       expect(result).toBe("const a = 1;");
     });
   });
-}); 
+});

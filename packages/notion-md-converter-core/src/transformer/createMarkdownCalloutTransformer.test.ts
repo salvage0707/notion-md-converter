@@ -25,7 +25,7 @@ describe("createMarkdownCalloutTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe(dedent({wrap: true})`
+    expect(result).toBe(dedent({ wrap: true })`
       > テストメッセージ
     `);
   });
@@ -71,7 +71,7 @@ describe("createMarkdownCalloutTransformer", () => {
     context.mockedExecute.mockReturnValue("子メッセージ");
     const result = transformer(context);
 
-    expect(result).toBe(dedent({wrap: true})`
+    expect(result).toBe(dedent({ wrap: true })`
       > 親メッセージ
       > 子メッセージ
     `);

@@ -1,6 +1,6 @@
 /**
  * テンプレートリテラル内のインデントを調整するための関数
- * 
+ *
  * @description
  * この関数は、テンプレートリテラル内のテキストのインデントを整形します。
  * 以下の特徴があります：
@@ -8,7 +8,7 @@
  * - タブ文字は2スペース分として計算
  * - 文字列中間の空行は保持
  * - 文字列の先頭と末尾の空行は削除
- * 
+ *
  * @example
  * ```typescript
  * // 基本的な使用方法
@@ -17,7 +17,7 @@
  *     const b = 2;
  * `;
  * // => "const a = 1;\n  const b = 2;"
- * 
+ *
  * // wrapオプション付きの使用方法
  * const result = dedent({ wrap: true })`
  *   const a = 1;
@@ -46,7 +46,9 @@ type DedentFunction = {
    * @param options インデント調整のオプション
    * @returns テンプレートリテラル関数
    */
-  (options: DedentOptions): (strings: TemplateStringsArray, ...values: (string | number)[]) => string;
+  (
+    options: DedentOptions,
+  ): (strings: TemplateStringsArray, ...values: (string | number)[]) => string;
 };
 
 export const dedent: DedentFunction = ((
@@ -67,12 +69,12 @@ export const dedent: DedentFunction = ((
 
 /**
  * テンプレートリテラルの処理を行う内部関数
- * 
+ *
  * @param strings テンプレートリテラルの文字列部分
  * @param values テンプレートリテラルの変数展開部分
  * @param options インデント調整のオプション
  * @returns 処理された文字列
- * 
+ *
  * @internal
  * この関数は内部実装の詳細です：
  * 1. テンプレートリテラルの文字列を結合
@@ -83,7 +85,7 @@ export const dedent: DedentFunction = ((
 const processTemplate = (
   strings: TemplateStringsArray,
   values: (string | number)[],
-  options: DedentOptions
+  options: DedentOptions,
 ) => {
   // テンプレートリテラルの中身を結合
   const rawString = strings.reduce((acc, str, i) => acc + str + (values[i]?.toString() || ""), "");
