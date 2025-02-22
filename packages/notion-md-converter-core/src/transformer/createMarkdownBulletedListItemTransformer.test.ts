@@ -1,4 +1,4 @@
-import { createBulletedListItemBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createBulletedListItemBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 
@@ -43,10 +43,19 @@ describe("createMarkdownBulletedListItemTransformer", () => {
       blocks: [block],
     });
 
-    context.mockedExecute.mockReturnValue("- 子テキスト\n  - 孫テキスト");
+    const nestedValue = dedent`
+      - 子テキスト
+        - 孫テキスト
+    `;
+    context.mockedExecute.mockReturnValue(nestedValue);
     const result = transformer(context);
 
-    expect(result).toBe("- 親テキスト\n  - 子テキスト\n    - 孫テキスト");
+    const expected = dedent`
+      - 親テキスト
+        - 子テキスト
+          - 孫テキスト
+    `;
+    expect(result).toBe(expected);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 });

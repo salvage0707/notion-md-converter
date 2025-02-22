@@ -3,6 +3,7 @@ import {
   createHeading2Block,
   createHeading3Block,
   createTextRichText,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownHeadingTransformer } from "./createMarkdownHeadingTransformer";
@@ -23,7 +24,9 @@ describe("createMarkdownHeadingTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n# 見出し1\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      # 見出し1
+    `);
   });
 
   it("heading_2ブロックを変換できる", () => {
@@ -39,7 +42,9 @@ describe("createMarkdownHeadingTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n## 見出し2\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      ## 見出し2
+    `);
   });
 
   it("heading_3ブロックを変換できる", () => {
@@ -55,6 +60,8 @@ describe("createMarkdownHeadingTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n### 見出し3\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      ### 見出し3
+    `);
   });
 });

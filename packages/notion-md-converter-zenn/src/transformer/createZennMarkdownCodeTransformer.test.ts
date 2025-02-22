@@ -2,6 +2,7 @@ import {
   createCodeBlock,
   createTextRichText,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createZennMarkdownCodeTransformer } from "./createZennMarkdownCodeTransformer";
 
@@ -23,7 +24,11 @@ describe("createZennMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```javascript\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`javascript
+      test hoge
+      \`\`\`
+    `);
   });
 
   it("言語指定がない場合は言語なしで変換する", () => {
@@ -40,7 +45,11 @@ describe("createZennMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`
+      test hoge
+      \`\`\`
+    `);
   });
 
   it("diffが指定されている場合、それを含めて変換する", () => {
@@ -63,7 +72,11 @@ describe("createZennMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```diff javascript\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`diff javascript
+      test hoge
+      \`\`\`
+    `);
   });
 
   it("diffとファイル名が指定されている場合、それらを含めて変換する", () => {
@@ -86,7 +99,11 @@ describe("createZennMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```diff javascript:hello.js\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`diff javascript:hello.js
+      test hoge
+      \`\`\`
+    `);
   });
 
   it("リッチテキストの装飾は無視される", () => {
@@ -111,6 +128,10 @@ describe("createZennMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```javascript\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`javascript
+      test hoge
+      \`\`\`
+    `);
   });
 });

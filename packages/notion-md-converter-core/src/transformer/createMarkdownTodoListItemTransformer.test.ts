@@ -1,4 +1,4 @@
-import { createTextRichText, createToDoBlock } from "@notion-md-converter/testing";
+import { createTextRichText, createToDoBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownTodoListItemTransformer } from "./createMarkdownTodoListItemTransformer";
 
@@ -52,10 +52,17 @@ describe("createMarkdownTodoListItemTransformer", () => {
       blocks: [block],
     });
 
-    context.mockedExecute.mockReturnValue("- [ ] 子テキスト\n  - [x] 孫テキスト");
+    context.mockedExecute.mockReturnValue(dedent`
+      - [ ] 子テキスト
+        - [x] 孫テキスト
+    `);
     const result = transformer(context);
 
-    expect(result).toBe("- [ ] テストテキスト\n  - [ ] 子テキスト\n    - [x] 孫テキスト");
+    expect(result).toBe(dedent`
+      - [ ] テストテキスト
+        - [ ] 子テキスト
+          - [x] 孫テキスト
+    `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 });

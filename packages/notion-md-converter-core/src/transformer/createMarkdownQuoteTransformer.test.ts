@@ -1,4 +1,4 @@
-import { createQuoteBlock, createTextRichText } from "@notion-md-converter/testing";
+import { CHAR, createQuoteBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
 
@@ -9,7 +9,10 @@ describe("createMarkdownQuoteTransformer", () => {
     const block = createQuoteBlock({
       richText: [
         createTextRichText({
-          content: "テストメッセージ\nテストメッセージ2",
+          content: dedent`
+            テストメッセージ
+            テストメッセージ2
+          `,
         }),
       ],
     });
@@ -19,7 +22,10 @@ describe("createMarkdownQuoteTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n> テストメッセージ\n> テストメッセージ2\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      > テストメッセージ
+      > テストメッセージ2
+    `);
   });
 
   it("空のquoteブロックを変換する", () => {
@@ -32,7 +38,9 @@ describe("createMarkdownQuoteTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n> \n");
+    expect(result).toBe(dedent({ wrap: true })`
+      >${CHAR.SPACE}
+    `);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -60,7 +68,10 @@ describe("createMarkdownQuoteTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n> 親メッセージ\n> > 子メッセージ\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      > 親メッセージ
+      > > 子メッセージ
+    `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 });

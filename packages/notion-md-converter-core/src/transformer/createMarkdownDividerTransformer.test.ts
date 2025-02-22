@@ -1,4 +1,4 @@
-import { createDividerBlock, createTransformerContext } from "@notion-md-converter/testing";
+import { createDividerBlock, createTransformerContext, dedent } from "@notion-md-converter/testing";
 import { createMarkdownDividerTransformer } from "./createMarkdownDividerTransformer";
 
 describe("createMarkdownDividerTransformer", () => {
@@ -11,6 +11,8 @@ describe("createMarkdownDividerTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n---\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      ---
+    `);
   });
 });

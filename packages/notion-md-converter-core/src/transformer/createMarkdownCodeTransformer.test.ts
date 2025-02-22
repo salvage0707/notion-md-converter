@@ -2,6 +2,7 @@ import {
   createCodeBlock,
   createTextRichText,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createMarkdownCodeTransformer } from "./createMarkdownCodeTransformer";
 
@@ -23,7 +24,11 @@ describe("createMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```javascript\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`javascript
+      test hoge
+      \`\`\`
+    `);
   });
 
   it("言語指定がない場合は言語なしで変換する", () => {
@@ -40,6 +45,10 @@ describe("createMarkdownCodeTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n```plain_text\ntest hoge\n```\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      \`\`\`plain_text
+      test hoge
+      \`\`\`
+    `);
   });
 });

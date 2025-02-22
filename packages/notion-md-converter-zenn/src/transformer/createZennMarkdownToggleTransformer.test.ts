@@ -2,6 +2,7 @@ import {
   createTextRichText,
   createToggleBlock,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createZennMarkdownToggleTransformer } from "./createZennMarkdownToggleTransformer";
 
@@ -22,15 +23,12 @@ describe("createZennMarkdownToggleTransformer", () => {
 
     context.mockedExecute.mockReturnValue("テストコンテンツ");
     const result = transformer(context);
-    const expected = [
-      "", // 改行
-      ":::details テストタイトル",
-      "テストコンテンツ",
-      ":::",
-      "", // 改行
-    ].join("\n");
 
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      :::details テストタイトル
+      テストコンテンツ
+      :::
+    `);
   });
 
   it("複数行のテキストを持つtoggleブロックを変換できる", () => {
@@ -47,15 +45,12 @@ describe("createZennMarkdownToggleTransformer", () => {
 
     context.mockedExecute.mockReturnValue("テストコンテンツ");
     const result = transformer(context);
-    const expected = [
-      "", // 改行
-      ":::details タイトル1 タイトル2",
-      "テストコンテンツ",
-      ":::",
-      "", // 改行
-    ].join("\n");
 
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      :::details タイトル1 タイトル2
+      テストコンテンツ
+      :::
+    `);
   });
 
   it("子要素に:::が含まれる場合、内容を<br>でラップする", () => {
@@ -70,19 +65,22 @@ describe("createZennMarkdownToggleTransformer", () => {
       blocks: [block],
     });
 
-    context.mockedExecute.mockReturnValue(":::message\nメッセージ内容\n:::");
+    context.mockedExecute.mockReturnValue(dedent({ wrap: true })`
+      :::message
+      メッセージ内容
+      :::
+    `);
     const result = transformer(context);
-    const expected = [
-      "", // 改行
-      "::::details テストタイトル",
-      ":::message",
-      "メッセージ内容",
-      ":::",
-      "::::",
-      "", // 改行
-    ].join("\n");
 
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      ::::details テストタイトル
+
+      :::message
+      メッセージ内容
+      :::
+
+      ::::
+    `);
   });
 
   it("空のtoggleブロックを変換できる", () => {
@@ -99,14 +97,11 @@ describe("createZennMarkdownToggleTransformer", () => {
 
     context.mockedExecute.mockReturnValue("");
     const result = transformer(context);
-    const expected = [
-      "", // 改行
-      ":::details テストタイトル",
-      "",
-      ":::",
-      "", // 改行
-    ].join("\n");
 
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      :::details テストタイトル
+
+      :::
+    `);
   });
 });

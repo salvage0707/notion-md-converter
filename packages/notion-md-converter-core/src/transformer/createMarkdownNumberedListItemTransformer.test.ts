@@ -2,6 +2,7 @@ import {
   createNumberedListItemBlock,
   createTextRichText,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createMarkdownNumberedListItemTransformer } from "./createMarkdownNumberedListItemTransformer";
 
@@ -71,10 +72,17 @@ describe("createMarkdownNumberedListItemTransformer", () => {
       blocks: [block],
     });
 
-    context.mockedExecute.mockReturnValue("1. 子テキスト\n   1. 孫テキスト");
+    context.mockedExecute.mockReturnValue(dedent`
+      1. 子テキスト
+         1. 孫テキスト
+    `);
     const result = transformer(context);
 
-    expect(result).toBe("1. 親テキスト\n   1. 子テキスト\n      1. 孫テキスト");
+    expect(result).toBe(dedent`
+      1. 親テキスト
+         1. 子テキスト
+            1. 孫テキスト
+    `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 });
