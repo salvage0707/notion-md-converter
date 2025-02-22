@@ -1,7 +1,9 @@
 import {
+  CHAR,
   createCalloutBlock,
   createTextRichText,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 
@@ -12,7 +14,7 @@ describe("createMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "テストメッセージ",
+          content: "テストメッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "🚨" },
@@ -23,7 +25,9 @@ describe("createMarkdownCalloutTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n> テストメッセージ\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      > テストメッセージ
+    `);
   });
 
   it("空のコールアウトブロックを変換する", () => {
@@ -37,14 +41,16 @@ describe("createMarkdownCalloutTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n> \n");
+    expect(result).toBe(dedent({ wrap: true })`
+      >${CHAR.SPACE}
+    `);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "📝" },
@@ -52,7 +58,7 @@ describe("createMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              plainText: "子メッセージ",
+              content: "子メッセージ",
             }),
           ],
         }),
@@ -65,7 +71,10 @@ describe("createMarkdownCalloutTransformer", () => {
     context.mockedExecute.mockReturnValue("子メッセージ");
     const result = transformer(context);
 
-    expect(result).toBe("\n> 親メッセージ\n> 子メッセージ\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      > 親メッセージ
+      > 子メッセージ
+    `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 });

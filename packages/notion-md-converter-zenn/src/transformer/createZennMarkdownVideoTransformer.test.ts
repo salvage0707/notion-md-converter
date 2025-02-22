@@ -1,4 +1,4 @@
-import { createNotionInternalFile, createVideoBlock } from "@notion-md-converter/testing";
+import { createNotionInternalFile, createVideoBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createZennMarkdownVideoTransformer } from "./createZennMarkdownVideoTransformer";
 
@@ -25,6 +25,8 @@ describe("createZennMarkdownVideoTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe(`\n<video controls src="https://example.com/test.mp4"></video>\n`);
+    expect(result).toBe(dedent({ wrap: true })`
+      <video controls src="https://example.com/test.mp4"></video>
+    `);
   });
 });

@@ -15,7 +15,7 @@ describe("createMarkdownSyncedBlockTransformer", () => {
         createParagraphBlock({
           richText: [
             createTextRichText({
-              plainText: "シンプルなテキストです。",
+              content: "シンプルなテキストです。",
             }),
           ],
         }),

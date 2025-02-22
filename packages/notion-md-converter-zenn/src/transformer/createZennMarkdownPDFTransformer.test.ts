@@ -16,7 +16,7 @@ describe("createZennMarkdownPDFTransformer", () => {
 
   it("captionがある場合、captionを含めてpdfブロックを変換できる", () => {
     const block = createPdfBlock({
-      caption: [createTextRichText({ plainText: "example.pdf" })],
+      caption: [createTextRichText({ content: "example.pdf" })],
     });
     const context = createTransformerContext({
       blocks: [block],

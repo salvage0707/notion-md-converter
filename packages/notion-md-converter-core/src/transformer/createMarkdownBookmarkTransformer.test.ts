@@ -13,7 +13,7 @@ describe("createMarkdownBookmarkTransformer", () => {
       url: "https://example.com",
       caption: [
         createTextRichText({
-          plainText: "テストリンク",
+          content: "テストリンク",
         }),
       ],
     });

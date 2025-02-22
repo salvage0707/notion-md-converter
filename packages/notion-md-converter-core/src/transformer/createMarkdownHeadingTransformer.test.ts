@@ -3,6 +3,7 @@ import {
   createHeading2Block,
   createHeading3Block,
   createTextRichText,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownHeadingTransformer } from "./createMarkdownHeadingTransformer";
@@ -14,7 +15,7 @@ describe("createMarkdownHeadingTransformer", () => {
     const block = createHeading1Block({
       richText: [
         createTextRichText({
-          plainText: "見出し1",
+          content: "見出し1",
         }),
       ],
     });
@@ -23,14 +24,16 @@ describe("createMarkdownHeadingTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n# 見出し1\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      # 見出し1
+    `);
   });
 
   it("heading_2ブロックを変換できる", () => {
     const block = createHeading2Block({
       richText: [
         createTextRichText({
-          plainText: "見出し2",
+          content: "見出し2",
         }),
       ],
     });
@@ -39,14 +42,16 @@ describe("createMarkdownHeadingTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n## 見出し2\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      ## 見出し2
+    `);
   });
 
   it("heading_3ブロックを変換できる", () => {
     const block = createHeading3Block({
       richText: [
         createTextRichText({
-          plainText: "見出し3",
+          content: "見出し3",
         }),
       ],
     });
@@ -55,6 +60,8 @@ describe("createMarkdownHeadingTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n### 見出し3\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      ### 見出し3
+    `);
   });
 });

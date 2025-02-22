@@ -1,4 +1,0 @@
-
-:::message
-normal callout
-:::

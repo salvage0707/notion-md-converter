@@ -2,6 +2,7 @@ import {
   createCalloutBlock,
   createTextRichText,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createZennMarkdownCalloutTransformer } from "./createZennMarkdownCalloutTransformer";
 
@@ -12,7 +13,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "テストメッセージ",
+          content: "テストメッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "💡" },
@@ -23,14 +24,18 @@ describe("createZennMarkdownCalloutTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n:::message\nテストメッセージ\n:::\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      :::message
+      テストメッセージ
+      :::
+    `);
   });
 
   it("アラートカラーが設定されている場合はアラートメッセージとして変換する", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "アラートメッセージ",
+          content: "アラートメッセージ",
         }),
       ],
       color: "red",
@@ -41,14 +46,18 @@ describe("createZennMarkdownCalloutTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n:::message alert\nアラートメッセージ\n:::\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      :::message alert
+      アラートメッセージ
+      :::
+    `);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       color: "blue",
@@ -56,7 +65,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              plainText: "子メッセージ",
+              content: "子メッセージ",
             }),
           ],
         }),
@@ -69,7 +78,12 @@ describe("createZennMarkdownCalloutTransformer", () => {
     context.mockedExecute.mockReturnValue("子メッセージ");
     const result = transformer(context);
 
-    expect(result).toBe("\n:::message\n親メッセージ\n子メッセージ\n:::\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      :::message
+      親メッセージ
+      子メッセージ
+      :::
+    `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 
@@ -77,7 +91,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "💡" },
@@ -85,7 +99,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              plainText: ":::message\n子メッセージ\n:::",
+              content: ":::message\n子メッセージ\n:::",
             }),
           ],
         }),
@@ -95,10 +109,23 @@ describe("createZennMarkdownCalloutTransformer", () => {
       blocks: [block],
     });
 
-    context.mockedExecute.mockReturnValue(":::message\n子メッセージ\n:::");
+    context.mockedExecute.mockReturnValue(dedent({ wrap: true })`
+      :::message
+      子メッセージ
+      :::
+    `);
     const result = transformer(context);
 
-    expect(result).toBe("\n::::message\n親メッセージ\n:::message\n子メッセージ\n:::\n::::\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      ::::message
+      親メッセージ
+
+      :::message
+      子メッセージ
+      :::
+
+      ::::
+    `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
 
@@ -109,7 +136,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "アラートメッセージ",
+          content: "アラートメッセージ",
         }),
       ],
       color: "blue",
@@ -120,6 +147,10 @@ describe("createZennMarkdownCalloutTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("\n:::message alert\nアラートメッセージ\n:::\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      :::message alert
+      アラートメッセージ
+      :::
+    `);
   });
 });

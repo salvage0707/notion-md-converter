@@ -4,6 +4,7 @@ import {
   createParagraphBlock,
   createTextRichText,
   createTransformerContext,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createMarkdownColumnListTransformer } from "./createMarkdownColumnListTransformer";
 
@@ -13,7 +14,7 @@ describe("createMarkdownColumnListTransformer", () => {
   test("3つのカラムを持つcolumn_listブロックを変換できる", () => {
     const generateParagraph = (text: string) =>
       createParagraphBlock({
-        richText: [createTextRichText({ plainText: text })],
+        richText: [createTextRichText({ content: text })],
       });
     const block = createColumnListBlock({
       children: [
@@ -37,6 +38,10 @@ describe("createMarkdownColumnListTransformer", () => {
     context.mockedExecute.mockReturnValueOnce("右");
     const result = transformer(context);
 
-    expect(result).toBe("左\n真ん中\n右");
+    expect(result).toBe(dedent`
+      左
+      真ん中
+      右
+    `);
   });
 });

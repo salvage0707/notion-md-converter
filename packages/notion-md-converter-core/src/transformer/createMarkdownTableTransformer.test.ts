@@ -2,6 +2,7 @@ import {
   createTableBlock,
   createTableRowBlock,
   createTextRichText,
+  dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownTableTransformer } from "./createMarkdownTableTransformer";
@@ -10,7 +11,7 @@ const createRow = (plainTexts: string[]) => {
   return createTableRowBlock({
     children: plainTexts.map((plainText) => [
       createTextRichText({
-        plainText: plainText,
+        content: plainText,
       }),
     ]),
   });
@@ -33,15 +34,12 @@ describe("createMarkdownTableTransformer", () => {
 
     const result = transformer(context);
 
-    const expected = [
-      "", // 改行
-      "| Header1  | Header2  |",
-      "| -------- | -------- |",
-      "| Content1 | Content2 |",
-      "| Content3 | Content4 |",
-      "", // 改行
-    ].join("\n");
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      | Header1  | Header2  |
+      | -------- | -------- |
+      | Content1 | Content2 |
+      | Content3 | Content4 |
+    `);
   });
 
   it("1行のtableブロックを変換する", () => {
@@ -54,12 +52,9 @@ describe("createMarkdownTableTransformer", () => {
 
     const result = transformer(context);
 
-    const expected = [
-      "", // 改行
-      "| Header1 | Header2 |",
-      "| ------- | ------- |",
-      "", // 改行
-    ].join("\n");
-    expect(result).toBe(expected);
+    expect(result).toBe(dedent({ wrap: true })`
+      | Header1 | Header2 |
+      | ------- | ------- |
+    `);
   });
 });

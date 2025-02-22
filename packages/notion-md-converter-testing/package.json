@@ -11,6 +11,7 @@
     "directory": "packages/notion-md-converter-testing"
   },
   "scripts": {
+    "test": "vitest",
     "dev": "rollup -c -w",
     "check-types": "tsc --noEmit",
     "build": "rollup -c",

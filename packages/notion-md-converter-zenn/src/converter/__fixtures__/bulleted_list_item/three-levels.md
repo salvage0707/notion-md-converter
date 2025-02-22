@@ -1,5 +1,0 @@
-- item1
-  - nested item1
-- item2
-  - nested item2
-    - nested nested item1

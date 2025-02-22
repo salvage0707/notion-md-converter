@@ -1,4 +1,4 @@
-import { createEquationBlock } from "@notion-md-converter/testing";
+import { createEquationBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownEquationTransformer } from "./createMarkdownEquationTransformer";
 
@@ -15,19 +15,27 @@ describe("createMarkdownEquationTransformer", () => {
       });
 
       const result = transformer(context);
-      expect(result).toBe("\n$$\na = 1 + x\n$$\n");
+      expect(result).toBe(dedent({ wrap: true })`
+        $$
+        a = 1 + x
+        $$
+      `);
     });
 
     test("複雑な数式を変換できる", () => {
       const block = createEquationBlock({
-        expression: "\\frac{1}{2} = \\int_{0}^{1} x dx",
+        expression: "frac{1}{2} = int_{0}^{1} x dx",
       });
       const context = createTransformerContext({
         blocks: [block],
       });
 
       const result = transformer(context);
-      expect(result).toBe("\n$$\n\\frac{1}{2} = \\int_{0}^{1} x dx\n$$\n");
+      expect(result).toBe(dedent({ wrap: true })`
+        $$
+        frac{1}{2} = int_{0}^{1} x dx
+        $$
+      `);
     });
   });
 
@@ -43,7 +51,11 @@ describe("createMarkdownEquationTransformer", () => {
       });
 
       const result = transformer(context);
-      expect(result).toBe("\n```txt\na = 1 + x\n```\n");
+      expect(result).toBe(dedent({ wrap: true })`
+        \`\`\`txt
+        a = 1 + x
+        \`\`\`
+      `);
     });
 
     test("複雑な数式をコードブロックとして変換できる", () => {
@@ -55,7 +67,11 @@ describe("createMarkdownEquationTransformer", () => {
       });
 
       const result = transformer(context);
-      expect(result).toBe("\n```txt\n\\frac{1}{2} = \\int_{0}^{1} x dx\n```\n");
+      expect(result).toBe(dedent({ wrap: true })`
+        \`\`\`txt
+        \\frac{1}{2} = \\int_{0}^{1} x dx
+        \`\`\`
+      `);
     });
   });
 
@@ -69,6 +85,10 @@ describe("createMarkdownEquationTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("\n$$\n\n$$\n");
+    expect(result).toBe(dedent({ wrap: true })`
+      $$
+
+      $$
+    `);
   });
 });
