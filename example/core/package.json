@@ -8,13 +8,14 @@
     "core:custom-export": "tsx src/custom-export/main.ts",
     "core:database-page-exports": "tsx src/database-page-exports/main.ts"
   },
+  "dependencies": {
+    "@notion-md-converter/core": "^0.3.0",
+    "@notionhq/client": "^2.2.16"
+  },
   "devDependencies": {
+    "@types/node": "^22.13.4",
     "dotenv": "^16.4.7",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "@notion-md-converter/core": "^0.2.0",
-    "@notionhq/client": "catalog:"
   }
 }
