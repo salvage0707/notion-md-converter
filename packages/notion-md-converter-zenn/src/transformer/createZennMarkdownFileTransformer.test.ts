@@ -23,7 +23,7 @@ describe("createZennMarkdownFileTransformer", () => {
       name: "example.pdf",
       caption: [
         createTextRichText({
-          plainText: "caption_example.pdf",
+          content: "caption_example.pdf",
         }),
       ],
       fileObject: createNotionInternalFile({

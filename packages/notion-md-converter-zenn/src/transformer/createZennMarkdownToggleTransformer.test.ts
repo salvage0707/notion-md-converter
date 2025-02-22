@@ -12,7 +12,7 @@ describe("createZennMarkdownToggleTransformer", () => {
     const block = createToggleBlock({
       richText: [
         createTextRichText({
-          plainText: "テストタイトル",
+          content: "テストタイトル",
         }),
       ],
     });
@@ -37,7 +37,7 @@ describe("createZennMarkdownToggleTransformer", () => {
     const block = createToggleBlock({
       richText: [
         createTextRichText({
-          plainText: "タイトル1\nタイトル2",
+          content: "タイトル1\nタイトル2",
         }),
       ],
     });
@@ -62,7 +62,7 @@ describe("createZennMarkdownToggleTransformer", () => {
     const block = createToggleBlock({
       richText: [
         createTextRichText({
-          plainText: "テストタイトル",
+          content: "テストタイトル",
         }),
       ],
     });
@@ -89,7 +89,7 @@ describe("createZennMarkdownToggleTransformer", () => {
     const block = createToggleBlock({
       richText: [
         createTextRichText({
-          plainText: "テストタイトル",
+          content: "テストタイトル",
         }),
       ],
     });

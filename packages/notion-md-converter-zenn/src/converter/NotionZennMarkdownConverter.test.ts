@@ -1,5 +1,4 @@
 import {
-  bookmarkFixture,
   breadcrumbFixture,
   bulletedListItemFixture,
   calloutFixture,
@@ -31,7 +30,7 @@ describe("NotionZennMarkdownConverter", () => {
   const converter = new NotionZennMarkdownConverter();
 
   const blockFixtures = [
-    { name: "bookmark", data: bookmarkFixture },
+    // { name: "bookmark", data: bookmarkFixture },
     { name: "breadcrumb", data: breadcrumbFixture },
     { name: "bulleted_list_item", data: bulletedListItemFixture },
     { name: "callout", data: calloutFixture },

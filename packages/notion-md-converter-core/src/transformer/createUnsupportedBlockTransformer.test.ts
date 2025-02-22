@@ -11,7 +11,7 @@ describe("createUnsupportedBlockTransformer", () => {
     const block = createParagraphBlock({
       richText: [
         createTextRichText({
-          plainText: "test",
+          content: "test",
         }),
       ],
     });

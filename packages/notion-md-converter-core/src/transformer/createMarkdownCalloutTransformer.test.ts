@@ -12,7 +12,7 @@ describe("createMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "テストメッセージ",
+          content: "テストメッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "🚨" },
@@ -44,7 +44,7 @@ describe("createMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "📝" },
@@ -52,7 +52,7 @@ describe("createMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              plainText: "子メッセージ",
+              content: "子メッセージ",
             }),
           ],
         }),

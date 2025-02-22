@@ -9,7 +9,7 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     const block = createBulletedListItemBlock({
       richText: [
         createTextRichText({
-          plainText: "テストテキスト",
+          content: "テストテキスト",
         }),
       ],
     });
@@ -26,14 +26,14 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     const block = createBulletedListItemBlock({
       richText: [
         createTextRichText({
-          plainText: "親テキスト",
+          content: "親テキスト",
         }),
       ],
       children: [
         createBulletedListItemBlock({
           richText: [
             createTextRichText({
-              plainText: "子テキスト",
+              content: "子テキスト",
             }),
           ],
         }),

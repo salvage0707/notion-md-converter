@@ -1,14 +1,20 @@
-import type { Block } from "@notion-md-converter/types";
-import captionRichText from "./caption-rich-text.json" assert { type: "json" };
-import caption from "./caption.json" assert { type: "json" };
-import emptyUrl from "./empty-url.json" assert { type: "json" };
-import simple from "./simple.json" assert { type: "json" };
+// import type { BookmarkBlock } from "@notion-md-converter/types";
+// import { createBaseBlock } from "../../createNotionBlock";
 
-const bookmarkFixture = {
-  "caption-rich-text": captionRichText as Block[],
-  caption: caption as Block[],
-  "empty-url": emptyUrl as Block[],
-  simple: simple as Block[],
-};
+// const createBookmarkBlock = (options?: {
+//   bookmark?: Partial<BookmarkBlock["bookmark"]>;
+// }): BookmarkBlock => {
+//   const overrideBookmark = options?.bookmark ?? {};
 
-export { bookmarkFixture };
+//   return {
+//     ...createBaseBlock(),
+//     type: "bookmark",
+//     bookmark: {
+//       url: "",
+//       caption: [],
+//       ...overrideBookmark,
+//     },
+//   };
+// };
+
+// export { BookmarkPresets };

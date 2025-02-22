@@ -303,7 +303,7 @@ describe("richTextsToMarkdown", () => {
   it("単一のリッチテキストを変換できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
       }),
     ] as RichText[];
     expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("Hello");
@@ -312,7 +312,7 @@ describe("richTextsToMarkdown", () => {
   it("複数のアノテーションを持つリッチテキストを変換できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
         annotations: {
           bold: true,
           italic: true,
@@ -325,16 +325,16 @@ describe("richTextsToMarkdown", () => {
   it("複数のリッチテキストを結合できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
         annotations: {
           bold: true,
         },
       }),
       createTextRichText({
-        plainText: " ",
+        content: " ",
       }),
       createTextRichText({
-        plainText: "World",
+        content: "World",
         annotations: {
           italic: true,
         },
@@ -346,7 +346,7 @@ describe("richTextsToMarkdown", () => {
   it("アノテーションを無効化できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Hello",
+        content: "Hello",
         annotations: {
           bold: true,
           italic: true,
@@ -371,7 +371,7 @@ describe("richTextsToMarkdown", () => {
   it("カラーアノテーションを処理できること", () => {
     const richTexts = [
       createTextRichText({
-        plainText: "Colored Text",
+        content: "Colored Text",
         annotations: {
           color: "red",
         },

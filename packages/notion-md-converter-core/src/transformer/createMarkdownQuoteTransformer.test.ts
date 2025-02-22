@@ -9,7 +9,7 @@ describe("createMarkdownQuoteTransformer", () => {
     const block = createQuoteBlock({
       richText: [
         createTextRichText({
-          plainText: "テストメッセージ\nテストメッセージ2",
+          content: "テストメッセージ\nテストメッセージ2",
         }),
       ],
     });
@@ -39,14 +39,14 @@ describe("createMarkdownQuoteTransformer", () => {
     const block = createQuoteBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       children: [
         createQuoteBlock({
           richText: [
             createTextRichText({
-              plainText: "子メッセージ",
+              content: "子メッセージ",
             }),
           ],
         }),

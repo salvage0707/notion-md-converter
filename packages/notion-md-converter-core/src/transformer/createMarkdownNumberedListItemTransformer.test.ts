@@ -12,7 +12,7 @@ describe("createMarkdownNumberedListItemTransformer", () => {
     const block = createNumberedListItemBlock({
       richText: [
         createTextRichText({
-          plainText: "テストテキストone",
+          content: "テストテキストone",
         }),
       ],
     });
@@ -29,14 +29,14 @@ describe("createMarkdownNumberedListItemTransformer", () => {
     const block1 = createNumberedListItemBlock({
       richText: [
         createTextRichText({
-          plainText: "テストテキストone",
+          content: "テストテキストone",
         }),
       ],
     });
     const block2 = createNumberedListItemBlock({
       richText: [
         createTextRichText({
-          plainText: "テストテキストtwo",
+          content: "テストテキストtwo",
         }),
       ],
     });
@@ -54,14 +54,14 @@ describe("createMarkdownNumberedListItemTransformer", () => {
     const block = createNumberedListItemBlock({
       richText: [
         createTextRichText({
-          plainText: "親テキスト",
+          content: "親テキスト",
         }),
       ],
       children: [
         createNumberedListItemBlock({
           richText: [
             createTextRichText({
-              plainText: "子テキスト",
+              content: "子テキスト",
             }),
           ],
         }),

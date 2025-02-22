@@ -9,7 +9,7 @@ describe("createMarkdownTodoListItemTransformer", () => {
     const block = createToDoBlock({
       richText: [
         createTextRichText({
-          plainText: "テストテキスト",
+          content: "テストテキスト",
         }),
       ],
       checked: true,
@@ -26,7 +26,7 @@ describe("createMarkdownTodoListItemTransformer", () => {
     const block = createToDoBlock({
       richText: [
         createTextRichText({
-          plainText: "テストテキスト",
+          content: "テストテキスト",
         }),
       ],
       checked: false,
@@ -41,10 +41,10 @@ describe("createMarkdownTodoListItemTransformer", () => {
 
   it("子要素がある場合は子要素も変換する", () => {
     const block = createToDoBlock({
-      richText: [createTextRichText({ plainText: "テストテキスト" })],
+      richText: [createTextRichText({ content: "テストテキスト" })],
       children: [
         createToDoBlock({
-          richText: [createTextRichText({ plainText: "子テキスト" })],
+          richText: [createTextRichText({ content: "子テキスト" })],
         }),
       ],
     });

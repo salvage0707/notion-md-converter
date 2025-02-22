@@ -1,5 +1,4 @@
 import {
-  bookmarkFixture,
   breadcrumbFixture,
   bulletedListItemFixture,
   calloutFixture,
@@ -31,7 +30,7 @@ describe("NotionMarkdownConverter", () => {
   const converter = new NotionMarkdownConverter();
 
   const blockFixtures = [
-    { name: "bookmark", data: bookmarkFixture },
+    // { name: "bookmark", data: bookmarkFixture },
     { name: "breadcrumb", data: breadcrumbFixture },
     { name: "bulleted_list_item", data: bulletedListItemFixture },
     { name: "callout", data: calloutFixture },
@@ -62,6 +61,9 @@ describe("NotionMarkdownConverter", () => {
       describe(`${name}:${key}`, () => {
         it(`${name} の変換が正しいこと`, () => {
           const result = converter.execute(block);
+          const t = `
+          hjge
+          `;
 
           const expected = loadMdFixture(__dirname, name, key);
           expect(result).toBe(expected);

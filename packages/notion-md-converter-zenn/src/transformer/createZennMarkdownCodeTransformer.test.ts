@@ -12,7 +12,7 @@ describe("createZennMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
         }),
       ],
       language: "javascript",
@@ -30,7 +30,7 @@ describe("createZennMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
         }),
       ],
     });
@@ -47,13 +47,13 @@ describe("createZennMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
         }),
       ],
       language: "javascript",
       caption: [
         createTextRichText({
-          plainText: "diff:",
+          content: "diff:",
         }),
       ],
     });
@@ -70,13 +70,13 @@ describe("createZennMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
         }),
       ],
       language: "javascript",
       caption: [
         createTextRichText({
-          plainText: "diff:hello.js",
+          content: "diff:hello.js",
         }),
       ],
     });
@@ -93,7 +93,7 @@ describe("createZennMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
           annotations: {
             bold: true,
             italic: true,

@@ -1,4 +1,5 @@
 import type {
+  ApiColor,
   Block,
   BookmarkBlock,
   BreadcrumbBlock,
@@ -12,6 +13,7 @@ import type {
   DividerBlock,
   EmbedBlock,
   EquationBlock,
+  EquationRichText,
   FileBlock,
   FileObject,
   Heading1Block,
@@ -19,6 +21,7 @@ import type {
   Heading3Block,
   ImageBlock,
   LinkPreviewBlock,
+  MentionRichText,
   NotionExternalFile,
   NotionInternalFile,
   NumberedListItemBlock,
@@ -36,7 +39,7 @@ import type {
   VideoBlock,
 } from "@notion-md-converter/types";
 
-const createBaseBlock = () => {
+export const createBaseBlock = () => {
   return {
     object: "block" as const,
     id: "1a2b3c4d-1a2b-1a2b-1a2b-c11a2ee936cc",
@@ -60,29 +63,156 @@ const createBaseBlock = () => {
   };
 };
 
-export const createTextRichText = (options: {
-  plainText?: TextRichText["plain_text"];
-  href?: TextRichText["href"];
-  annotations?: Partial<TextRichText["annotations"]>;
-}): TextRichText => {
+export const createBaseRichText = (options: {
+  annotations?: Partial<RichText["annotations"]>;
+  plainText?: string;
+  href?: string | null;
+}) => {
   return {
-    type: "text",
     annotations: {
       bold: false,
       italic: false,
       strikethrough: false,
       underline: false,
       code: false,
-      color: "default",
+      color: "default" as ApiColor,
       ...options.annotations,
     },
-    plain_text: options.plainText ?? "Example",
-    href: null,
+    plain_text: options.plainText === undefined ? "" : options.plainText,
+    href: options.href === undefined ? null : options.href,
+  };
+};
+
+export const createTextRichText = (options: {
+  content: TextRichText["text"]["content"];
+  href?: TextRichText["href"];
+  annotations?: Partial<TextRichText["annotations"]>;
+}): TextRichText => {
+  return {
+    ...createBaseRichText({
+      annotations: options.annotations,
+      plainText: options.content,
+      href: options.href,
+    }),
+    type: "text",
     text: {
-      content: options.plainText ?? "Example",
+      content: options.content,
       link: options.href ? { url: options.href } : null,
     },
   };
+};
+
+export const createMentionRichText = (options: {
+  mention: MentionRichText["mention"];
+  plainText?: MentionRichText["plain_text"];
+  href?: MentionRichText["href"];
+  annotations?: Partial<MentionRichText["annotations"]>;
+}): MentionRichText => {
+  return {
+    ...createBaseRichText({
+      annotations: options.annotations,
+      plainText: options.plainText,
+      href: options.href,
+    }),
+    type: "mention",
+    mention: {
+      type: "user",
+      user: {
+        object: "user",
+        id: "1a2b3c4d-user-user-user-9bd865ee73e4",
+      },
+    },
+  };
+};
+
+export const createEquationRichText = (options: {
+  expression: EquationRichText["plain_text"];
+  annotations?: Partial<EquationRichText["annotations"]>;
+}): EquationRichText => {
+  return {
+    ...createBaseRichText({
+      plainText: options.expression,
+      href: null,
+      annotations: options.annotations,
+    }),
+    type: "equation",
+    equation: {
+      expression: options.expression,
+    },
+  };
+};
+
+// mentionはパターンが多いのでPresetsにしておく
+// MEMO: template_mention??
+export const MentionRichTextPresets = {
+  user: () =>
+    createMentionRichText({
+      mention: {
+        type: "user",
+        user: { object: "user", id: "1a2b3c4d-user-user-user-9bd865ee73e4" },
+      },
+      plainText: "@Anonymous",
+      href: null,
+    }),
+  date: () =>
+    createMentionRichText({
+      mention: {
+        type: "date",
+        date: { start: "2025-01-01", end: null, time_zone: null },
+      },
+      plainText: "2025-01-01",
+      href: null,
+    }),
+
+  rangeDate: () =>
+    createMentionRichText({
+      mention: {
+        type: "date",
+        date: { start: "2025-01-01", end: "2025-01-31", time_zone: null },
+      },
+      plainText: "2025-01-01 → 2025-01-31",
+      href: null,
+    }),
+
+  linkPreview: () =>
+    createMentionRichText({
+      mention: {
+        type: "link_preview",
+        link_preview: { url: "https://example.com/" },
+      },
+      plainText: "https://example.com/",
+      href: null,
+    }),
+
+  linkMention: () =>
+    createMentionRichText({
+      mention: {
+        type: "link_mention",
+        link_mention: { href: "https://example.com/" },
+      },
+      plainText: "https://example.com/",
+      href: null,
+    }),
+
+  page: () =>
+    createMentionRichText({
+      mention: {
+        type: "page",
+        page: { id: "00000000-0000-0000-0000-000000000000" },
+      },
+      plainText: "Page",
+      href: null,
+    }),
+
+  database: () =>
+    createMentionRichText({
+      mention: {
+        type: "database",
+        database: { id: "00000000-0000-0000-0000-000000000000" },
+      },
+      plainText: "Database",
+      href: null,
+    }),
 };
 
 export const createBookmarkBlock = (options?: {
@@ -91,7 +221,7 @@ export const createBookmarkBlock = (options?: {
 }): BookmarkBlock => {
   const defaultCaption = [
     createTextRichText({
-      plainText: "Example",
+      content: "Example",
     }),
   ];
 
@@ -112,7 +242,7 @@ export const createParagraphBlock = (options?: {
 }): ParagraphBlock => {
   const defaultText = [
     createTextRichText({
-      plainText: "Example",
+      content: "Example",
     }),
   ];
 
@@ -142,7 +272,7 @@ export const createBulletedListItemBlock = (options: {
 }): BulletedListItemBlock => {
   const defaultRichText = [
     createTextRichText({
-      plainText: "Example",
+      content: "Example",
     }),
   ];
 
@@ -165,7 +295,7 @@ export const createCalloutBlock = (options?: {
 }): CalloutBlock => {
   const defaultRichText = [
     createTextRichText({
-      plainText: "Example",
+      content: "Example",
     }),
   ];
 
@@ -314,7 +444,7 @@ export const createImageBlock = (options?: {
     ...createBaseBlock(),
     type: "image",
     image: {
-      caption: options?.caption ?? [createTextRichText({ plainText: "Example" })],
+      caption: options?.caption ?? [createTextRichText({ content: "Example" })],
       type: "external",
       external: {
         url: options?.url ?? "https://example.com",
@@ -397,7 +527,7 @@ export const createSyncedBlock = (options?: {
     },
     children: options?.children ?? [
       createParagraphBlock({
-        richText: [createTextRichText({ plainText: "Example" })],
+        richText: [createTextRichText({ content: "Example" })],
       }),
     ],
   };
@@ -410,7 +540,7 @@ export const createTableRowBlock = (options?: {
     ...createBaseBlock(),
     type: "table_row",
     table_row: {
-      cells: options?.children ?? [[createTextRichText({ plainText: "Example" })]],
+      cells: options?.children ?? [[createTextRichText({ content: "Example" })]],
     },
   };
 };
@@ -428,7 +558,7 @@ export const createTableBlock = (options?: {
     },
     children: options?.children ?? [
       createTableRowBlock({
-        children: [[createTextRichText({ plainText: "Example" })]],
+        children: [[createTextRichText({ content: "Example" })]],
       }),
     ],
   };

@@ -12,7 +12,7 @@ describe("createMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
         }),
       ],
       language: "javascript",
@@ -30,7 +30,7 @@ describe("createMarkdownCodeTransformer", () => {
     const block = createCodeBlock({
       richText: [
         createTextRichText({
-          plainText: "test hoge",
+          content: "test hoge",
         }),
       ],
     });

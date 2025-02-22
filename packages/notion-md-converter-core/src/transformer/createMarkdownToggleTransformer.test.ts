@@ -9,7 +9,7 @@ describe("createMarkdownToggleTransformer", () => {
     const block = createToggleBlock({
       richText: [
         createTextRichText({
-          plainText: "test title",
+          content: "test title",
         }),
       ],
     });

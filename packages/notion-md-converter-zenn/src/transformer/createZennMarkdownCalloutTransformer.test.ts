@@ -12,7 +12,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "テストメッセージ",
+          content: "テストメッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "💡" },
@@ -30,7 +30,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "アラートメッセージ",
+          content: "アラートメッセージ",
         }),
       ],
       color: "red",
@@ -48,7 +48,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       color: "blue",
@@ -56,7 +56,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              plainText: "子メッセージ",
+              content: "子メッセージ",
             }),
           ],
         }),
@@ -77,7 +77,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "親メッセージ",
+          content: "親メッセージ",
         }),
       ],
       icon: { type: "emoji", emoji: "💡" },
@@ -85,7 +85,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
         createCalloutBlock({
           richText: [
             createTextRichText({
-              plainText: ":::message\n子メッセージ\n:::",
+              content: ":::message\n子メッセージ\n:::",
             }),
           ],
         }),
@@ -109,7 +109,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const block = createCalloutBlock({
       richText: [
         createTextRichText({
-          plainText: "アラートメッセージ",
+          content: "アラートメッセージ",
         }),
       ],
       color: "blue",
