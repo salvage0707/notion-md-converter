@@ -43,3 +43,6 @@ tmp/
 
 # turborepo
 .turbo/
+
+# visualizer
+**/stats.html

@@ -1,5 +1,4 @@
-import { TransformerUtils } from "src/utils/transformer";
-import { MarkdownUtils } from "../utils";
+import { MarkdownUtils, TransformerUtils } from "../utils";
 import { createBasicEmbedTransformer } from "./createBasicTransformer";
 
 export const createMarkdownEmbedTransformer = () => {

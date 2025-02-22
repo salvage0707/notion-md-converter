@@ -2,7 +2,7 @@ import {
   NotionMarkdownConverter,
   createUnsupportedBlockTransformer,
 } from "@notion-md-converter/core";
-import type { TransformerMapping } from "@notion-md-converter/core/types";
+import type { TransformerMapping } from "@notion-md-converter/types";
 import {
   createZennMarkdownBookmarkTransformer,
   createZennMarkdownCalloutTransformer,

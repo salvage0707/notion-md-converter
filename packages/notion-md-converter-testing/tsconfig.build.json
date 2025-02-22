@@ -1,0 +1,6 @@
+{
+  "extends": "@notion-md-converter/config/tsconfig/tsconfig.build.json",
+  "compilerOptions": {
+    "types": ["vitest/globals", "node"]
+  }
+}

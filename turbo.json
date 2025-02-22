@@ -5,6 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "build:size": {
+      "cache": false
+    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
