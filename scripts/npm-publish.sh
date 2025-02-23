@@ -28,7 +28,7 @@ echo "Start npm publish"
 for package in "${packages[@]}"; do
   echo "Publishing $package..."
   cd "$root/packages/$package"
-  pnpm publish --access public
+  npm publish --access public
 done
 
 cd "$root"
