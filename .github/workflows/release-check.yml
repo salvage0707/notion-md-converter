@@ -3,12 +3,10 @@ name: Release Check
 on:
   pull_request:
     types: [ opened, synchronize, reopened ]
-    branches:
-      - 'release/**'
-      - 'release-*'
 
 jobs:
   example-core-build:
+    if: startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,6 +24,7 @@ jobs:
         run: pnpm run build
 
   example-zenn-build:
+    if: startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
     strategy:
       matrix:
