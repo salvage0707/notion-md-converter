@@ -1,0 +1,43 @@
+name: Release Check
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - 'release/**'
+      - 'release-*'
+
+jobs:
+  example-core-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies in example directory
+        working-directory: ./example/core
+        run: pnpm install
+      - name: Build example
+        working-directory: ./example/core
+        run: pnpm run build
+
+  example-zenn-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies in example directory
+        working-directory: ./example/zenn
+        run: pnpm install
+      - name: Build example
+        working-directory: ./example/zenn
+        run: pnpm run build

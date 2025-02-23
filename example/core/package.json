@@ -4,6 +4,7 @@
   "description": "Notion to Zenn Markdown Converter Example",
   "type": "module",
   "scripts": {
+    "build": "tsc --noEmit",
     "core:simple-export": "tsx src/simple-export/main.ts",
     "core:custom-export": "tsx src/custom-export/main.ts",
     "core:database-page-exports": "tsx src/database-page-exports/main.ts"
