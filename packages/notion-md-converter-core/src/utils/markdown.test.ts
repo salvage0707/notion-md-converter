@@ -1,4 +1,4 @@
-import { createTextRichText } from "@notion-md-converter/testing";
+import { createTextRichText, createEquationRichText } from "@notion-md-converter/testing";
 import type { RichText } from "@notion-md-converter/types";
 import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
 
@@ -388,6 +388,15 @@ describe("richTextsToMarkdown", () => {
     expect(MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)).toBe(
       '<span style="color: red">Colored Text</span>',
     );
+  });
+
+  it("インライン数式を処理できること", () => {
+    const richTexts = [
+      createEquationRichText({
+        expression: "E = mc^2",
+      }),
+    ] as RichText[];
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("$E = mc^2$");
   });
 });
 

@@ -276,6 +276,9 @@ const richTextsToMarkdown = (
       markdown = color(markdown, text.annotations.color);
     }
 
+    if (text.type === "equation" && text.equation) {
+      markdown = inlineEquation(text.equation.expression);
+    }
     if (text.type === "mention" && text.mention.type === "page" && text.href) {
       markdown = link(markdown, text.href);
     }
