@@ -248,6 +248,7 @@ export type EnableAnnotations = {
   strikethrough?: boolean;
   underline?: boolean;
   code?: boolean;
+  equation?: boolean;
   color?: boolean | ColorMap;
 };
 
@@ -257,6 +258,10 @@ const richTextsToMarkdown = (
 ): string => {
   const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
     let markdown = text.plain_text;
+
+    if (text.type === "equation" && enableAnnotations.equation) {
+      markdown = inlineEquation(markdown);
+    }
     if (text.annotations.bold && enableAnnotations.bold) {
       markdown = bold(markdown);
     }
@@ -275,10 +280,6 @@ const richTextsToMarkdown = (
     if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
       markdown = color(markdown, text.annotations.color);
     }
-
-    if (text.type === "equation" && text.equation) {
-      markdown = inlineEquation(text.equation.expression);
-    }
     if (text.type === "mention" && text.mention.type === "page" && text.href) {
       markdown = link(markdown, text.href);
     }
@@ -292,6 +293,7 @@ const richTextsToMarkdown = (
     strikethrough: true,
     underline: true,
     code: true,
+    equation: true,
     color: false,
     ...enableAnnotations,
   };
