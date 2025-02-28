@@ -14,7 +14,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineWidth": 100,
-    "ignore": ["__fixtures__"]
+    "ignore": ["__fixtures__", "**/package.json"]
   },
   "organizeImports": {
     "enabled": true
