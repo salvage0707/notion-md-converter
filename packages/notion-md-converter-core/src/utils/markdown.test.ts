@@ -398,6 +398,18 @@ describe("richTextsToMarkdown", () => {
     ] as RichText[];
     expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("$E = mc^2$");
   });
+
+  it("太字のインライン数式を処理できること", () => {
+    const richTexts = [
+      createEquationRichText({
+        expression: "E = mc^2",
+        annotations: {
+          bold: true,
+        },
+      }),
+    ] as RichText[];
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("**$E = mc^2$**");
+  });
 });
 
 describe("blockEquation", () => {
