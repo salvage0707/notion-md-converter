@@ -32,7 +32,7 @@
     "npm:version:patch": "bash scripts/npm-update-version.sh patch",
     "npm:version:minor": "bash scripts/npm-update-version.sh minor",
     "npm:version:major": "bash scripts/npm-update-version.sh major",
-    "npm:publish": "bash scripts/npm-publish.sh",
+    "npm:publish": "pnpm run build && bash scripts/npm-publish.sh",
     "test": "turbo run test",
     "test:once": "turbo run test:once",
     "check-types": "turbo run check-types"
