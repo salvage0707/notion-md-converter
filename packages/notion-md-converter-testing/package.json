@@ -1,10 +1,17 @@
 {
   "name": "@notion-md-converter/testing",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Notion to Markdown Converter Testing",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
-  "keywords": ["notion", "notion-api", "markdown", "md", "converter", "testing"],
+  "keywords": [
+    "notion",
+    "notion-api",
+    "markdown",
+    "md",
+    "converter",
+    "testing"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git",
@@ -18,7 +25,9 @@
     "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'",
     "prepublishOnly": "pnpm run build"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
