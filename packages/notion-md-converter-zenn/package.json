@@ -23,8 +23,7 @@
     "test:once": "vitest run",
     "check-types": "tsc --noEmit",
     "build": "rollup -c",
-    "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'",
-    "prepublishOnly": "pnpm run build"
+    "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'"
   },
   "files": [
     "dist"
