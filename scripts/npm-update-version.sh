@@ -25,6 +25,9 @@ packages=(
 
 echo "Start npm version $version_type"
 
+echo "Processing root package.json..."
+npm version "$version_type"
+
 # 各パッケージに対してバージョンアップとビルドを実行
 for package in "${packages[@]}"; do
   echo "Processing $package..."
@@ -32,5 +35,5 @@ for package in "${packages[@]}"; do
   npm version "$version_type"
 done
 
-cd "$root"
+
 echo "Done"

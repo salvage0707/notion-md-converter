@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/zenn",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Notion to Zenn Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
