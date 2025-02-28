@@ -1,12 +1,19 @@
 {
   "name": "@notion-md-converter/monorepo",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Notion to Markdown Converter",
   "packageManager": "pnpm@9.15.1",
   "license": "MIT",
   "author": "salvage0707",
-  "keywords": ["notion-md-converter", "notion", "notion-api", "markdown", "md", "converter"],
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "notion-api",
+    "markdown",
+    "md",
+    "converter"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git"
