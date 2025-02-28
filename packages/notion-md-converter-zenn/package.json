@@ -1,10 +1,17 @@
 {
   "name": "@notion-md-converter/zenn",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Notion to Zenn Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
-  "keywords": ["notion-md-converter", "notion", "notion-api", "zenn", "markdown", "converter"],
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "notion-api",
+    "zenn",
+    "markdown",
+    "converter"
+  ],
   "repository": {
     "url": "https://github.com/salvage0707/notion-md-converter.git",
     "type": "git",
@@ -19,7 +26,9 @@
     "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'",
     "prepublishOnly": "pnpm run build"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
