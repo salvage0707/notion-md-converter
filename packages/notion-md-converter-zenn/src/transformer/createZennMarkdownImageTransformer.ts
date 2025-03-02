@@ -21,9 +21,7 @@ export const createZennMarkdownImageTransformer = (
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);
     const caption =
-      block.image.caption.length > 0
-        ? TransformerUtils.getCaptionText(block.image.caption)
-        : url;
+      block.image.caption.length > 0 ? TransformerUtils.getCaptionText(block.image.caption) : url;
     return MarkdownUtils.image(caption ?? url, url, { width });
   });
 };

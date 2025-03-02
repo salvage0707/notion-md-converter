@@ -60,7 +60,7 @@ import type {
   VideoTransformer,
 } from "@notion-md-converter/types";
 import type { CaptionMetadata } from "../utils";
-import { getEmbedProvider, isNumberedListItemBlock, TransformerUtils } from "../utils";
+import { TransformerUtils, getEmbedProvider, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {

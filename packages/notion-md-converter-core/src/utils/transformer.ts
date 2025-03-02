@@ -28,9 +28,7 @@ export type CaptionMetadata = Record<string, string | undefined>;
  * @param caption キャプション
  * @returns メタデータとテキスト
  */
-const getCaptionMetadata = (
-  caption: RichText[],
-): { metadata: CaptionMetadata; text: string } => {
+const getCaptionMetadata = (caption: RichText[]): { metadata: CaptionMetadata; text: string } => {
   const captionText = caption.map((richText) => richText.plain_text).join("");
   const captionTexts = captionText.split(":");
 
