@@ -62,7 +62,7 @@ describe("createZennMarkdownCodeTransformer", () => {
       language: "javascript",
       caption: [
         createTextRichText({
-          content: "diff:",
+          content: "diff=true:",
         }),
       ],
     });
@@ -89,7 +89,7 @@ describe("createZennMarkdownCodeTransformer", () => {
       language: "javascript",
       caption: [
         createTextRichText({
-          content: "diff:hello.js",
+          content: "diff=true:hello.js",
         }),
       ],
     });

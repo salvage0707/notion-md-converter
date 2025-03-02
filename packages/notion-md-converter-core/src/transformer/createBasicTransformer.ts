@@ -99,17 +99,18 @@ export const createBasicCalloutTransformer = (
 export const createBasicCodeTransformer = (
   execute: (args: {
     block: CodeBlock;
-    meta: { diff: boolean; filename: string; language: CodeLanguage };
+    metadata: { filename: string; language: CodeLanguage } & CaptionMetadata;
   }) => string,
 ): CodeTransformer => {
   return (context) => {
-    const caption = context.currentBlock.code.caption
-      .map((richText) => richText.plain_text)
-      .join("");
-    const diff = caption.startsWith("diff:");
-    const filename = caption.replace("diff:", "").trim();
+    const { metadata, text } = TransformerUtils.getCaptionMetadata(
+      context.currentBlock.code.caption,
+    );
     const language = context.currentBlock.code.language;
-    return execute({ block: context.currentBlock, meta: { diff, filename, language } });
+    return execute({
+      block: context.currentBlock,
+      metadata: { ...metadata, filename: text, language },
+    });
   };
 };
 
@@ -345,7 +346,7 @@ export type EmbedMetadata = {
   speakerDeck?: {
     id: string | undefined;
   };
-  // x is no metadata
+  // X(Twitter) is no metadata
   // biome-ignore lint/complexity/noBannedTypes: <explanation>
   x?: {};
 };

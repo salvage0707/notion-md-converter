@@ -7,7 +7,7 @@ import {
 import type { FileAdapter, ImageTransformer } from "@notion-md-converter/core/types";
 
 type ZennImageMetadata = {
-  width: string | undefined;
+  width?: string;
 };
 
 export const createZennMarkdownImageTransformer = (
