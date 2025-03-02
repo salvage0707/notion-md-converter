@@ -200,6 +200,10 @@ export const getEmbedProvider = (block: EmbedBlock): EmbedProvider | undefined =
   return undefined;
 };
 
+/**
+ * @deprecated This function will be removed in a future release as we plan to remove the dependency on @notionhq/client.
+ * Please be aware that the API specification may change significantly.
+ */
 export const $getPageFullContent = async (client: Client, blockId: string) => {
   // biome-ignore lint/suspicious/noExplicitAny: Notion API returns any
   const results: any[] = [];
@@ -223,6 +227,10 @@ export const $getPageFullContent = async (client: Client, blockId: string) => {
   return results as Block[];
 };
 
+/**
+ * @deprecated This function will be removed in a future release as we plan to remove the dependency on @notionhq/client.
+ * Please be aware that the API specification may change significantly.
+ */
 export const $getDatabasePages = async (client: Client, databaseId: string) => {
   const results: QueryDatabaseResponse["results"] = [];
   let nextCursor: string | undefined = undefined;
