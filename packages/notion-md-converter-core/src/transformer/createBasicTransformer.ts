@@ -59,8 +59,8 @@ import type {
   VideoBlock,
   VideoTransformer,
 } from "@notion-md-converter/types";
-import { TransformerUtils } from "../utils";
-import { getEmbedProvider, isNumberedListItemBlock } from "../utils";
+import type { CaptionMetadata } from "../utils";
+import { TransformerUtils, getEmbedProvider, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -99,17 +99,18 @@ export const createBasicCalloutTransformer = (
 export const createBasicCodeTransformer = (
   execute: (args: {
     block: CodeBlock;
-    meta: { diff: boolean; filename: string; language: CodeLanguage };
+    metadata: { filename: string; language: CodeLanguage } & CaptionMetadata;
   }) => string,
 ): CodeTransformer => {
   return (context) => {
-    const caption = context.currentBlock.code.caption
-      .map((richText) => richText.plain_text)
-      .join("");
-    const diff = caption.startsWith("diff:");
-    const filename = caption.replace("diff:", "").trim();
+    const { metadata, text } = TransformerUtils.getCaptionMetadata(
+      context.currentBlock.code.caption,
+    );
     const language = context.currentBlock.code.language;
-    return execute({ block: context.currentBlock, meta: { diff, filename, language } });
+    return execute({
+      block: context.currentBlock,
+      metadata: { ...metadata, filename: text, language },
+    });
   };
 };
 
@@ -189,7 +190,7 @@ export const createBasicHeadingTransformer = (
 };
 
 export const createBasicImageTransformer = (
-  execute: (args: { block: ImageBlock }) => string,
+  execute: (args: { block: ImageBlock; metadata: CaptionMetadata }) => string,
 ): ImageTransformer => {
   return (context) => {
     const image = context.currentBlock.image;
@@ -198,7 +199,8 @@ export const createBasicImageTransformer = (
       return "";
     }
 
-    return execute({ block: context.currentBlock });
+    const { metadata } = TransformerUtils.getCaptionMetadata(context.currentBlock.image.caption);
+    return execute({ block: context.currentBlock, metadata });
   };
 };
 
@@ -344,7 +346,7 @@ export type EmbedMetadata = {
   speakerDeck?: {
     id: string | undefined;
   };
-  // x is no metadata
+  // X(Twitter) is no metadata
   // biome-ignore lint/complexity/noBannedTypes: <explanation>
   x?: {};
 };

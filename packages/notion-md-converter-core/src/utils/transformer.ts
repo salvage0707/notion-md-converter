@@ -2,6 +2,8 @@ import type { RichText } from "@notion-md-converter/types";
 import type { EnableAnnotations } from "./markdown";
 import { MarkdownUtils } from "./markdown";
 
+export type CaptionMetadata = Record<string, string | undefined>;
+
 /**
  * キャプションからメタデータを抽出する
  *
@@ -26,9 +28,7 @@ import { MarkdownUtils } from "./markdown";
  * @param caption キャプション
  * @returns メタデータとテキスト
  */
-const getCaptionMetadata = (
-  caption: RichText[],
-): { metadata: Record<string, string | undefined>; text: string } => {
+const getCaptionMetadata = (caption: RichText[]): { metadata: CaptionMetadata; text: string } => {
   const captionText = caption.map((richText) => richText.plain_text).join("");
   const captionTexts = captionText.split(":");
 

@@ -102,8 +102,13 @@ const link = (text: string, url: string): string => {
 /**
  * 画像変換
  */
-const image = (text: string, url: string): string => {
-  return `![${text}](${url})`;
+const image = (text: string, url: string, options: { width?: string } = {}): string => {
+  const { width } = options;
+  let urlText = url;
+  if (width) {
+    urlText += ` =${width}x`;
+  }
+  return `![${text}](${urlText})`;
 };
 
 /**
