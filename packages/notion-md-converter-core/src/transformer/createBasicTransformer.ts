@@ -59,8 +59,8 @@ import type {
   VideoBlock,
   VideoTransformer,
 } from "@notion-md-converter/types";
-import { TransformerUtils } from "../utils";
-import { getEmbedProvider, isNumberedListItemBlock } from "../utils";
+import type { CaptionMetadata } from "../utils";
+import { getEmbedProvider, isNumberedListItemBlock, TransformerUtils } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -189,7 +189,7 @@ export const createBasicHeadingTransformer = (
 };
 
 export const createBasicImageTransformer = (
-  execute: (args: { block: ImageBlock }) => string,
+  execute: (args: { block: ImageBlock; metadata: CaptionMetadata }) => string,
 ): ImageTransformer => {
   return (context) => {
     const image = context.currentBlock.image;
@@ -198,7 +198,8 @@ export const createBasicImageTransformer = (
       return "";
     }
 
-    return execute({ block: context.currentBlock });
+    const { metadata } = TransformerUtils.getCaptionMetadata(context.currentBlock.image.caption);
+    return execute({ block: context.currentBlock, metadata });
   };
 };
 

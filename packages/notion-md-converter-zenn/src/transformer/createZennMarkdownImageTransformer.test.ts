@@ -37,4 +37,17 @@ describe("createZennMarkdownImageTransformer", () => {
     const result = transformer(context);
     expect(result).toBe("![https://example.com](https://example.com)");
   });
+
+  it("幅指定がある場合、幅指定を含めてimageブロックを変換できる", () => {
+    const block = createImageBlock({
+      url: "https://example.com",
+      caption: [createTextRichText({ content: "width=100:example" })],
+    });
+    const context = createTransformerContext({
+      blocks: [block],
+    });
+
+    const result = transformer(context);
+    expect(result).toBe("![example](https://example.com =100x)");
+  });
 });

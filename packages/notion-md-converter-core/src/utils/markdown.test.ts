@@ -263,6 +263,12 @@ describe("image", () => {
       "![](https://example.com/image.jpg)",
     );
   });
+
+  it("幅指定ありで画像に変換できること", () => {
+    expect(MarkdownUtils.image("Alt text", "https://example.com/image.jpg", { width: "100" })).toBe(
+      "![Alt text](https://example.com/image.jpg =100x)",
+    );
+  });
 });
 
 describe("details", () => {
