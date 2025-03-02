@@ -11,6 +11,10 @@ Similarly, checklist syntax (e.g., `- [ ]` or `* [ ]`) may differ, and there may
 <!-- TODO: version vadge -->
 <!-- [![npm version](https://badge.fury.io/js/myproject.svg)](https://www.npmjs.com/package/myproject) -->
 
+## 🎮 Demo
+
+Try out **notion-md-converter** in action! Visit our [live demo](https://nmc-demo.malvageee.com/) to see how it converts Notion blocks to Markdown in real-time.
+
 ## 🚀 Installation
 
 ### **Install via npm**
