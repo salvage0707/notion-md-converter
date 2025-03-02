@@ -57,8 +57,8 @@ importers:
   example/core:
     dependencies:
       '@notion-md-converter/core':
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.5.0
+        version: 0.5.0
       '@notionhq/client':
         specifier: ^2.2.16
         version: 2.2.16
@@ -79,11 +79,11 @@ importers:
   example/zenn:
     dependencies:
       '@notion-md-converter/core':
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.5.0
+        version: 0.5.0
       '@notion-md-converter/zenn':
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.5.0
+        version: 0.5.0
       '@notionhq/client':
         specifier: ^2.2.16
         version: 2.2.16
@@ -530,11 +530,11 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@notion-md-converter/core@0.4.1':
-    resolution: {integrity: sha512-aaLTQ2QsWxDdl7trLRBYW0rRMMjDI5zallX/Ig4dxL1cFuuhBik9fNGiR9WHzRhBoAUg8QzdSdMlnEN4iw6hRw==}
+  '@notion-md-converter/core@0.5.0':
+    resolution: {integrity: sha512-i6LWNKnZhD/GGXZtdlMZnAGO+y/o7fCWqSNQ4Uno1YY+Kiruxq4Ec6lKbDdRoeghoN77IhG/QsFe4ezBjlhpBA==}
 
-  '@notion-md-converter/zenn@0.4.1':
-    resolution: {integrity: sha512-Y+JaSKYvlRiFo407/IsVEnlSzzROCK/FPEWA5xNWv9U1ofe/rol3XXB9qBRtOF+0zcJtRHZnkMn9MbBGVTBjsw==}
+  '@notion-md-converter/zenn@0.5.0':
+    resolution: {integrity: sha512-CbUsPYjWI1TACzIeoSPJ7xZrcFL2lSr1GKI/qm1oIpX1+7P0LKzVqT77kTDmmydyiGbuAqCZrpgViCGxmqpYzQ==}
 
   '@notionhq/client@2.2.16':
     resolution: {integrity: sha512-3GlkfhLw8+Jw8U2iFEmHA6WfCgYhZCXLxgPdqDJkYMFotELNpQO+yGSy2QWURsG8ndu21sLt+FEOfDbNcCtFMg==}
@@ -1550,15 +1550,15 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@notion-md-converter/core@0.4.1':
+  '@notion-md-converter/core@0.5.0':
     dependencies:
       '@notionhq/client': 2.2.16
     transitivePeerDependencies:
       - encoding
 
-  '@notion-md-converter/zenn@0.4.1':
+  '@notion-md-converter/zenn@0.5.0':
     dependencies:
-      '@notion-md-converter/core': 0.4.1
+      '@notion-md-converter/core': 0.5.0
     transitivePeerDependencies:
       - encoding
 
