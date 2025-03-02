@@ -58,7 +58,8 @@ const executor = new NotionMarkdownConverter();
 const result = executor.execute(content);
 ```
 
-
+> [!WARNING]
+> The APIs `$getPageFullContent` and `$getDatabasePages` may undergo specification changes in the future as we plan to remove the dependency on `@notionhq/client`.
 
 ### Customizing Output Markdown
 
