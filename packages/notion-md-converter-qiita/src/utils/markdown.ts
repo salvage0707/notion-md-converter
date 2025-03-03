@@ -8,11 +8,7 @@ import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/cor
  * Note
  */
 const note = (text: string, color: "info" | "warn" | "alert" = "info") => {
-  return [
-    `:::note ${color}`,
-    text,
-    ":::",
-  ].join("\n");
+  return [`:::note ${color}`, text, ":::"].join("\n");
 };
 
 /**
@@ -110,7 +106,10 @@ const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
   "java/c/c++/c#": "java", // 複合的な言語指定だがjavaとして扱う
 };
 
-const codeBlock = (code: string, options: { diff?: boolean, language?: CodeLanguage, filename?: string } = {}) => {
+const codeBlock = (
+  code: string,
+  options: { diff?: boolean; language?: CodeLanguage; filename?: string } = {},
+) => {
   const { diff = false, language, filename } = options;
 
   let prefix = "";

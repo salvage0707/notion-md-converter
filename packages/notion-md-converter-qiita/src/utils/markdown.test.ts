@@ -56,7 +56,6 @@ describe("codeBlock", () => {
       test
       \`\`\`
     `);
-
   });
 });
 

@@ -84,10 +84,10 @@ describe("createQiitaMarkdownCalloutTransformer", () => {
           content: "メッセージ",
         }),
       ],
-      color: "brown"
+      color: "brown",
     });
     const blueContext = createTransformerContext({
-      blocks: [blueBlock,],
+      blocks: [blueBlock],
     });
     const brownContext = createTransformerContext({
       blocks: [brownBlock],
