@@ -2,6 +2,7 @@ import {
   NotionMarkdownConverter,
   createMarkdownColumnListTransformer,
   createMarkdownDividerTransformer,
+  createMarkdownHeadingTransformer,
   createUnsupportedBlockTransformer,
 } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
@@ -22,6 +23,7 @@ export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
       column_list: createMarkdownColumnListTransformer(),
       divider: createMarkdownDividerTransformer(),
       equation: createQiitaMarkdownEquationTransformer(),
+      heading: createMarkdownHeadingTransformer(),
       ...transformers,
     });
   }
