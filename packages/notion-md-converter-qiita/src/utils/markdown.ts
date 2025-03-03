@@ -5,6 +5,17 @@ import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/cor
  */
 
 /**
+ * Note
+ */
+const note = (text: string, color: "info" | "warn" | "alert" = "info") => {
+  return [
+    `:::note ${color}`,
+    text,
+    ":::",
+  ].join("\n");
+};
+
+/**
  * コードブロック変換
  */
 const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
@@ -114,4 +125,5 @@ const codeBlock = (code: string, diff = false, language?: CodeLanguage, filename
 
 export const QiitaMarkdownUtils = {
   codeBlock,
+  note,
 };
