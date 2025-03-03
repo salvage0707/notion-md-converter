@@ -29,3 +29,33 @@ describe("note", () => {
     `);
   });
 });
+
+describe("codeBlock", () => {
+  it("codeBlock記法になること", () => {
+    const result = QiitaMarkdownUtils.codeBlock("test");
+    expect(result).toBe(dedent`
+      \`\`\`
+      test
+      \`\`\`
+    `);
+  });
+
+  it("diffのcodeBlock記法になること", () => {
+    const result = QiitaMarkdownUtils.codeBlock("test", { diff: true, language: "javascript" });
+    expect(result).toBe(dedent`
+      \`\`\`diff_javascript
+      test
+      \`\`\`
+    `);
+  });
+
+  it("filenameのcodeBlock記法になること", () => {
+    const result = QiitaMarkdownUtils.codeBlock("test", { filename: "test.js" });
+    expect(result).toBe(dedent`
+      \`\`\`:test.js
+      test
+      \`\`\`
+    `);
+
+  });
+});

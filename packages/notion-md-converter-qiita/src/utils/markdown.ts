@@ -19,14 +19,14 @@ const note = (text: string, color: "info" | "warn" | "alert" = "info") => {
  * コードブロック変換
  */
 const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
-  "ascii art": "ascii",
+  "ascii art": undefined, // リストに未対応のため、undefinedにする
   abap: "abap",
-  agda: "agda",
-  arduino: "arduino",
-  assembly: "asm6502",
-  bash: "bash",
-  basic: "basic",
-  bnf: "bnf",
+  agda: undefined, // リストに未対応のため、undefinedにする
+  arduino: undefined, // リストに未対応のため、undefinedにする
+  assembly: "nasm", // 最も近いassembly関連言語としてnasmを使用
+  bash: "shell",
+  basic: "bbcbasic", // BBCBASICをBASICとして使用
+  bnf: undefined, // リストに未対応のため、undefinedにする
   c: "c",
   "c#": "csharp",
   "c++": "cpp",
@@ -35,15 +35,15 @@ const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
   coq: "coq",
   css: "css",
   dart: "dart",
-  dhall: "dhall",
+  dhall: undefined, // リストに未対応のため、undefinedにする
   diff: "diff",
   docker: "docker",
-  ebnf: "ebnf",
+  ebnf: undefined, // リストに未対応のため、undefinedにする
   elixir: "elixir",
   elm: "elm",
   erlang: "erlang",
   "f#": "fsharp",
-  flow: "flow",
+  flow: undefined, // リストに未対応のため、undefinedにする
   fortran: "fortran",
   gherkin: "gherkin",
   glsl: "glsl",
@@ -58,34 +58,34 @@ const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
   json: "json",
   julia: "julia",
   kotlin: "kotlin",
-  latex: "latex",
-  less: "less",
-  lisp: "lisp",
+  latex: "tex", // LaTeXはTeXのサブセット
+  less: undefined, // リストに未対応のため、undefinedにする
+  lisp: "common_lisp",
   livescript: "livescript",
   "llvm ir": "llvm",
   lua: "lua",
-  makefile: "makefile",
+  makefile: "make",
   markdown: "markdown",
-  markup: "markup",
+  markup: "xml", // 汎用マークアップとしてXML
   matlab: "matlab",
-  mathematica: "wolfram",
-  mermaid: "mermaid",
+  mathematica: "mathematica",
+  mermaid: undefined, // リストに未対応のため、undefinedにする
   nix: "nix",
-  "notion formula": undefined,
-  "objective-c": "objectivec",
+  "notion formula": undefined, // リストに未対応のため、undefinedにする
+  "objective-c": "objective_c",
   ocaml: "ocaml",
   pascal: "pascal",
   perl: "perl",
   php: "php",
-  "plain text": undefined,
+  "plain text": "plaintext",
   powershell: "powershell",
   prolog: "prolog",
   protobuf: "protobuf",
-  purescript: "purescript",
+  purescript: undefined, // リストに未対応のため、undefinedにする
   python: "python",
   r: "r",
   racket: "racket",
-  reason: "reason",
+  reason: "reasonml",
   ruby: "ruby",
   rust: "rust",
   sass: "sass",
@@ -95,27 +95,28 @@ const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
   scheme: "scheme",
   scss: "scss",
   shell: "shell",
-  solidity: "solidity",
+  solidity: undefined, // リストに未対応のため、undefinedにする
   sql: "sql",
   swift: "swift",
   toml: "toml",
   typescript: "typescript",
-  "vb.net": "vbnet",
+  "vb.net": "vb", // Visual Basic .NETは一般的にVisual Basicとして扱われる
   verilog: "verilog",
   vhdl: "vhdl",
-  "visual basic": "visual-basic",
-  webassembly: "wasm",
+  "visual basic": "vb",
+  webassembly: undefined, // リストに未対応のため、undefinedにする
   xml: "xml",
   yaml: "yaml",
-  "java/c/c++/c#": "java",
+  "java/c/c++/c#": "java", // 複合的な言語指定だがjavaとして扱う
 };
-const codeBlock = (code: string, diff = false, language?: CodeLanguage, filename = "") => {
+
+const codeBlock = (code: string, options: { diff?: boolean, language?: CodeLanguage, filename?: string } = {}) => {
+  const { diff = false, language, filename } = options;
+
   let prefix = "";
-  if (diff) {
-    prefix = "diff ";
-  }
   if (language && CODE_LANGUAGE_MAPPING[language]) {
-    prefix += CODE_LANGUAGE_MAPPING[language];
+    const lang = CODE_LANGUAGE_MAPPING[language];
+    prefix += diff ? `diff_${lang}` : lang;
   }
   if (filename) {
     prefix += `:${filename}`;
