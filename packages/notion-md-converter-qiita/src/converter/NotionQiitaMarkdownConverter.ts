@@ -5,7 +5,7 @@ import {
   NotionMarkdownConverter,
 } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
-import { createQiitaMarkdownBookmarkTransformer, createQiitaMarkdownCalloutTransformer, createQiitaMarkdownCodeTransformer } from "../transformer";
+import { createQiitaMarkdownBookmarkTransformer, createQiitaMarkdownCalloutTransformer, createQiitaMarkdownCodeTransformer, createQiitaMarkdownEquationTransformer } from "../transformer";
 
 export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
   constructor(transformers: TransformerMapping = {}) {
@@ -16,6 +16,7 @@ export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
       code: createQiitaMarkdownCodeTransformer(),
       column_list: createMarkdownColumnListTransformer(),
       divider: createMarkdownDividerTransformer(),
+      equation: createQiitaMarkdownEquationTransformer(),
       ...transformers,
     });
   }

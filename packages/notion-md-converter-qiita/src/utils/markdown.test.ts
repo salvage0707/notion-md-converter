@@ -59,3 +59,14 @@ describe("codeBlock", () => {
 
   });
 });
+
+describe("equationBlock", () => {
+  it("equationBlock記法になること", () => {
+    const result = QiitaMarkdownUtils.equationBlock("test");
+    expect(result).toBe(dedent`
+      \`\`\`math
+      test
+      \`\`\`
+    `);
+  });
+});

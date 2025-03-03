@@ -124,7 +124,12 @@ const codeBlock = (code: string, options: { diff?: boolean, language?: CodeLangu
   return `\`\`\`${prefix}\n${code}\n\`\`\``;
 };
 
+const equationBlock = (equation: string) => {
+  return `\`\`\`math\n${equation}\n\`\`\``;
+};
+
 export const QiitaMarkdownUtils = {
   codeBlock,
+  equationBlock,
   note,
 };
