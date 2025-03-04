@@ -11,6 +11,7 @@ import {
   createQiitaMarkdownCalloutTransformer,
   createQiitaMarkdownCodeTransformer,
   createQiitaMarkdownEquationTransformer,
+  createQiitaMarkdownLinkPreviewTransformer,
 } from "../transformer";
 
 export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
@@ -24,6 +25,7 @@ export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
       divider: createMarkdownDividerTransformer(),
       equation: createQiitaMarkdownEquationTransformer(),
       heading: createMarkdownHeadingTransformer(),
+      link_preview: createQiitaMarkdownLinkPreviewTransformer(),
       ...transformers,
     });
   }

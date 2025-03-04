@@ -123,12 +123,282 @@ const codeBlock = (
   return `\`\`\`${prefix}\n${code}\n\`\`\``;
 };
 
+const objectToPropertiesStr = (object: Record<string, string | boolean>) => {
+  return Object.entries(object).map(([key, value]) => {
+    if (value === undefined) {
+      return null;
+    }
+    if (typeof value === "boolean") {
+      return value ? key : null;
+    }
+    return `${key}="${value}"`;
+  })
+  .filter((v) => !!v)
+  .join(" ");
+};
+
 const equationBlock = (equation: string) => {
   return `\`\`\`math\n${equation}\n\`\`\``;
+};
+
+const linkCard = (url: string) => {
+  // 上下に空行を入れる必要あり
+  return url;
+};
+
+const embedX = (url: string) => {
+  return url;
+};
+
+const embedCodeSandbox = (url: string) => {
+  return url;
+};
+
+type EmbedCodePenOptions = {
+  height?: number;
+  defaultTab?: string;
+}
+const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
+  // ex) https://codepen.io/tomoasleep/pen/dJgNLK/
+  const u = new URL(url);
+  // ex) ["", "tomoasleep", "pen", "dJgNLK", ""]
+  const paths = u.pathname.split("/");
+  const slugHash = paths[3];
+  const user = paths[1];
+  const properties = {
+    "data-height": options.height || "250",
+    "data-theme-id": "0",
+    "data-slug-hash": slugHash,
+    "data-default-tab": options.defaultTab || "result",
+    "data-user": user,
+    "data-embed-version": "2",
+    "data-pen-title": slugHash,
+    "class": "codepen"
+  };
+  // ex) data-height="300" data-theme-id="0" data-slug-hash="dJgNLK" ...
+  const propertiesStr = Object.entries(properties).map(([key, value]) => `${key}="${value}"`).join(" ");
+  const mountTarget = `<p ${propertiesStr}></p>`;
+  const script = `<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>`;
+  return `${mountTarget}\n${script}`;
+};
+
+const embedGitHubGist = (url: string) => {
+  return url;
+};
+
+const embedAsciinema = (url: string) => {
+  if (!url.endsWith(".js")) {
+    return linkCard(url);
+  }
+
+  const u = new URL(url);
+  const id = u.pathname.split("/")[1].replace(".js", "");
+  const properties = {
+    "id": `asciicast-${id}`,
+    "src": url,
+    "async": ""
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<script ${propertiesStr}></script>`;
+};
+
+type EmbedFigmaOptions = {
+  height?: string;
+  width?: string;
+}
+const embedFigma = (url: string, options: EmbedFigmaOptions = {}) => {
+  const properties = {
+    style: "border: 1px solid rgba(0, 0, 0, 0.1);",
+    height: options.height || "450",
+    width: options.width || "800",
+    src: `https://www.figma.com/embed?embed_host=astra&url=${url}`
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<iframe ${propertiesStr}></iframe>`;
+};
+
+const embedSpeakerDeck = (id: string) => {
+  const properties = {
+    "async": true,
+    "class": "speakerdeck-embed",
+    "data-id": id,
+    "data-ratio": "1.77777777777778",
+    "src": "https://speakerdeck.com/assets/embed.js"
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<script ${propertiesStr}></script>`;
+};
+
+type EmbedSlideShareOptions = {
+  width?: string;
+  height?: string;
+}
+const embedSlideShare = (url: string, options: EmbedSlideShareOptions = {}) => {
+  const properties = {
+    "src": url,
+    "width": options.width || "595",
+    "height": options.height || "485",
+    "frameborder": "0",
+    "marginwidth": "0",
+    "marginheight": "0",
+    "scrolling": "no",
+    "style": "border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;",
+    "loading": "lazy",
+    "allowfullscreen": true
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<iframe ${propertiesStr}></iframe>`;
+};
+
+type EmbedGoogleSlideOptions = {
+  width?: string;
+  height?: string;
+}
+const embedGoogleSlide = (url: string, options: EmbedGoogleSlideOptions = {}) => {
+  const properties = {
+    "src": url,
+    "frameborder": "0",
+    "width": options.width || "960",
+    "height": options.height || "569",
+    "allowfullscreen": true,
+    "mozallowfullscreen": true,
+    "webkitallowfullscreen": true
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<iframe ${propertiesStr}></iframe>`;
+};
+
+const embedDocswell = (url: string) => {
+  const properties = {
+    src: "https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js",
+    async: true,
+    class: "docswell-embed",
+    "data-src": url,
+    "data-aspect": "0.5625",
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<script ${propertiesStr}></script>`;
+};
+
+type EmbedYoutubeOptions = {
+  width?: string;
+  height?: string;
+}
+const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
+  const properties = {
+    "width": options.width || "560",
+    "height": options.height || "315",
+    "src": url,
+    "frameborder": "0",
+    "allow": "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+    "loading": "lazy",
+    "allowfullscreen": true
+  };
+  const propertiesStr = objectToPropertiesStr(properties);
+  return `<iframe ${propertiesStr}></iframe>`;
+};
+
+const getEmbedType = (url: string) => {
+  const urlObj = new URL(url);
+  const domain = urlObj.hostname;
+  const path = urlObj.pathname;
+
+  if (["x.com", "twitter.com"].includes(domain)) {
+    return "x";
+  }
+  if (["codesandbox.io"].includes(domain)) {
+    return "codesandbox";
+  }
+  if (["codepen.io"].includes(domain)) {
+    return "codepen";
+  }
+  if (["gist.github.com"].includes(domain)) {
+    return "github-gist";
+  }
+  if (["asciinema.org"].includes(domain)) {
+    return "asciinema";
+  }
+  if (["www.figma.com"].includes(domain)) {
+    return "figma";
+  }
+  if (["speakerdeck.com"].includes(domain)) {
+    return "speakerdeck";
+  }
+  if (["www.slideshare.net"].includes(domain)) {
+    return "slideshare";
+  }
+  if (["docs.google.com"].includes(domain) && path.startsWith("/presentation/d/")) {
+    return "google-slide";
+  }
+  if (["www.docswell.com"].includes(domain)) {
+    return "docswell";
+  }
+  if (["www.youtube.com"].includes(domain)) {
+    return "youtube";
+  }
+  return null;
+};
+
+/**
+ * @description
+ * unsuporterd embed by url
+ * speakerdeck
+ * 
+ * unsupported embed option type
+ * - codepen
+ * - figma
+ * - google-slide
+ * - youtube
+ */
+const embedByURL = (url: string): { result: string; isEmbed: boolean } => {
+  const type = getEmbedType(url);
+  if (!type) {
+    return { result: url, isEmbed: false };
+  }
+  switch (type) {
+    case "x":
+      return { result: embedX(url), isEmbed: true };
+    case "codesandbox":
+      return { result: embedCodeSandbox(url), isEmbed: true };
+    case "codepen":
+      return { result: embedCodePen(url), isEmbed: true };
+    case "github-gist":
+      return { result: embedGitHubGist(url), isEmbed: true };
+    case "asciinema":
+      return { result: embedAsciinema(url), isEmbed: url.endsWith(".js") };
+    case "figma":
+      return { result: embedFigma(url), isEmbed: true };
+    case "speakerdeck":
+      return { result: url, isEmbed: true };
+    case "slideshare":
+      return { result: embedSlideShare(url), isEmbed: true };
+    case "google-slide":
+      return { result: embedGoogleSlide(url), isEmbed: true };
+    case "docswell":
+      return { result: embedDocswell(url), isEmbed: true };
+    case "youtube":
+      return { result: embedYoutube(url), isEmbed: true };
+    default:
+      return { result: url, isEmbed: false };
+  }
 };
 
 export const QiitaMarkdownUtils = {
   codeBlock,
   equationBlock,
   note,
+  linkCard,
+  embedX,
+  embedCodeSandbox,
+  embedCodePen,
+  embedGitHubGist,
+  embedAsciinema,
+  embedFigma,
+  embedSpeakerDeck,
+  embedSlideShare,
+  embedGoogleSlide,
+  embedDocswell,
+  embedYoutube,
+  getEmbedType,
+  embedByURL,
 };
