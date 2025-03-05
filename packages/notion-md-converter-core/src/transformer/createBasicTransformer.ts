@@ -22,7 +22,6 @@ import type {
   DividerBlock,
   DividerTransformer,
   EmbedBlock,
-  EmbedProvider,
   EmbedTransformer,
   EquationBlock,
   EquationTransformer,
@@ -342,19 +341,10 @@ export const createBasicVideoTransformer = (
   };
 };
 
-export type EmbedMetadata = {
-  speakerDeck?: {
-    id: string | undefined;
-  };
-  // X(Twitter) is no metadata
-  // biome-ignore lint/complexity/noBannedTypes: <explanation>
-  x?: {};
-};
 export const createBasicEmbedTransformer = (
   execute: (args: {
     block: EmbedBlock;
-    provider: EmbedProvider | undefined;
-    metadata: EmbedMetadata;
+    metadata: CaptionMetadata;
   }) => string,
 ): EmbedTransformer => {
   return (context) => {
@@ -363,18 +353,12 @@ export const createBasicEmbedTransformer = (
     );
 
     const provider = getEmbedProvider(context.currentBlock);
-    const metadata: EmbedMetadata = {};
+    const metadata: CaptionMetadata = {};
     if (provider === "speakerDeck") {
-      metadata.speakerDeck = {
-        id: meta.id,
-      };
-    }
-    if (provider === "x") {
-      metadata.x = {};
+      metadata.id = meta.id
     }
     return execute({
       block: context.currentBlock,
-      provider,
       metadata,
     });
   };

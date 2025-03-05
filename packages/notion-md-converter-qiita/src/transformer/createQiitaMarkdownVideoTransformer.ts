@@ -2,6 +2,8 @@ import {
   MarkdownUtils,
   createBasicVideoTransformer,
   createNoChangeFileObjectAdapter,
+  getProvider,
+  isURL,
 } from "@notion-md-converter/core";
 import type { FileAdapter, VideoTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
@@ -12,21 +14,12 @@ export const createQiitaMarkdownVideoTransformer = (
   } = {},
 ): VideoTransformer => {
   return createBasicVideoTransformer(({ block }) => {
-    const checkURL = (url: string) => {
-      try {
-        new URL(url);
-        return true;
-      } catch (error) {
-        return false;
-      }
-    };
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
-    const isURL = checkURL(url);
 
-    if (isURL) {
-      const embedType = QiitaMarkdownUtils.getEmbedType(url);
-      if (embedType === "youtube") {
+    if (isURL(url)) {
+      const provider = getProvider(url);
+      if (provider === "youtube") {
         return QiitaMarkdownUtils.embedYoutube(url);
       }
     }

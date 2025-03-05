@@ -1,3 +1,4 @@
+import { getProvider } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 
 /**
@@ -155,7 +156,7 @@ const embedCodeSandbox = (url: string) => {
 };
 
 type EmbedCodePenOptions = {
-  height?: number;
+  height?: string;
   defaultTab?: string;
 }
 const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
@@ -298,52 +299,11 @@ const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
-const getEmbedType = (url: string) => {
-  const urlObj = new URL(url);
-  const domain = urlObj.hostname;
-  const path = urlObj.pathname;
-
-  if (["x.com", "twitter.com"].includes(domain)) {
-    return "x";
-  }
-  if (["codesandbox.io"].includes(domain)) {
-    return "codesandbox";
-  }
-  if (["codepen.io"].includes(domain)) {
-    return "codepen";
-  }
-  if (["gist.github.com"].includes(domain)) {
-    return "github-gist";
-  }
-  if (["asciinema.org"].includes(domain)) {
-    return "asciinema";
-  }
-  if (["www.figma.com"].includes(domain)) {
-    return "figma";
-  }
-  if (["speakerdeck.com"].includes(domain)) {
-    return "speakerdeck";
-  }
-  if (["www.slideshare.net"].includes(domain)) {
-    return "slideshare";
-  }
-  if (["docs.google.com"].includes(domain) && path.startsWith("/presentation/d/")) {
-    return "google-slide";
-  }
-  if (["www.docswell.com"].includes(domain)) {
-    return "docswell";
-  }
-  if (["www.youtube.com"].includes(domain)) {
-    return "youtube";
-  }
-  return null;
-};
-
 /**
  * @description
  * unsuporterd embed by url
- * speakerdeck
- * 
+ * - speakerdeck
+ *
  * unsupported embed option type
  * - codepen
  * - figma
@@ -351,11 +311,11 @@ const getEmbedType = (url: string) => {
  * - youtube
  */
 const embedByURL = (url: string): { result: string; isEmbed: boolean } => {
-  const type = getEmbedType(url);
-  if (!type) {
+  const provider = getProvider(url);
+  if (!provider) {
     return { result: url, isEmbed: false };
   }
-  switch (type) {
+  switch (provider) {
     case "x":
       return { result: embedX(url), isEmbed: true };
     case "codesandbox":
@@ -399,6 +359,5 @@ export const QiitaMarkdownUtils = {
   embedGoogleSlide,
   embedDocswell,
   embedYoutube,
-  getEmbedType,
   embedByURL,
 };

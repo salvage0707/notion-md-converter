@@ -11,8 +11,8 @@ export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
   return createBasicEmbedTransformer(({ block, metadata }) => {
     const getOptions = () => {
       const options: EmbedByUrlOptions = {};
-      if (metadata.speakerDeck) {
-        options.speakerDeckId = metadata.speakerDeck.id;
+      if (metadata.id) {
+        options.speakerDeckId = metadata.id;
       }
       return options;
     };

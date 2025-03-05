@@ -101,7 +101,7 @@ describe("embedCodePen", () => {
   });
 
   it("heightを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedCodePen("https://codepen.io/tomoasleep/pen/dJgNLK/", { height: 300 });
+    const result = QiitaMarkdownUtils.embedCodePen("https://codepen.io/tomoasleep/pen/dJgNLK/", { height: "300" });
     expect(result).toBe(dedent`
       <p data-height="300" data-theme-id="0" data-slug-hash="dJgNLK" data-default-tab="result" data-user="tomoasleep" data-embed-version="2" data-pen-title="dJgNLK" class="codepen"></p>
       <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>

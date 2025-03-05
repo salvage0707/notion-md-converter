@@ -7,6 +7,7 @@ import {
   createQiitaMarkdownBookmarkTransformer,
   createQiitaMarkdownCalloutTransformer,
   createQiitaMarkdownCodeTransformer,
+  createQiitaMarkdownEmbedTransformer,
   createQiitaMarkdownEquationTransformer,
   createQiitaMarkdownLinkPreviewTransformer,
   createQiitaMarkdownVideoTransformer,
@@ -22,6 +23,7 @@ export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
       equation: createQiitaMarkdownEquationTransformer(),
       link_preview: createQiitaMarkdownLinkPreviewTransformer(),
       video: createQiitaMarkdownVideoTransformer(),
+      embed: createQiitaMarkdownEmbedTransformer(),
       ...transformers,
     });
   }
