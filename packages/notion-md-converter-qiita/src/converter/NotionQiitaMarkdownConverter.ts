@@ -1,8 +1,5 @@
 import {
   NotionMarkdownConverter,
-  createMarkdownColumnListTransformer,
-  createMarkdownDividerTransformer,
-  createMarkdownHeadingTransformer,
   createUnsupportedBlockTransformer,
 } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
@@ -12,6 +9,7 @@ import {
   createQiitaMarkdownCodeTransformer,
   createQiitaMarkdownEquationTransformer,
   createQiitaMarkdownLinkPreviewTransformer,
+  createQiitaMarkdownVideoTransformer,
 } from "../transformer";
 
 export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
@@ -21,11 +19,9 @@ export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
       breadcrumb: createUnsupportedBlockTransformer(),
       callout: createQiitaMarkdownCalloutTransformer(),
       code: createQiitaMarkdownCodeTransformer(),
-      column_list: createMarkdownColumnListTransformer(),
-      divider: createMarkdownDividerTransformer(),
       equation: createQiitaMarkdownEquationTransformer(),
-      heading: createMarkdownHeadingTransformer(),
       link_preview: createQiitaMarkdownLinkPreviewTransformer(),
+      video: createQiitaMarkdownVideoTransformer(),
       ...transformers,
     });
   }
