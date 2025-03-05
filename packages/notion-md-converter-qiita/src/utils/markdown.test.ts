@@ -101,7 +101,9 @@ describe("embedCodePen", () => {
   });
 
   it("heightを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedCodePen("https://codepen.io/tomoasleep/pen/dJgNLK/", { height: "300" });
+    const result = QiitaMarkdownUtils.embedCodePen("https://codepen.io/tomoasleep/pen/dJgNLK/", {
+      height: "300",
+    });
     expect(result).toBe(dedent`
       <p data-height="300" data-theme-id="0" data-slug-hash="dJgNLK" data-default-tab="result" data-user="tomoasleep" data-embed-version="2" data-pen-title="dJgNLK" class="codepen"></p>
       <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
@@ -109,7 +111,9 @@ describe("embedCodePen", () => {
   });
 
   it("defaultTabを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedCodePen("https://codepen.io/tomoasleep/pen/dJgNLK/", { defaultTab: "js,result" });
+    const result = QiitaMarkdownUtils.embedCodePen("https://codepen.io/tomoasleep/pen/dJgNLK/", {
+      defaultTab: "js,result",
+    });
     expect(result).toBe(dedent`
       <p data-height="250" data-theme-id="0" data-slug-hash="dJgNLK" data-default-tab="js,result" data-user="tomoasleep" data-embed-version="2" data-pen-title="dJgNLK" class="codepen"></p>
       <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
@@ -127,7 +131,9 @@ describe("embedGitHubGist", () => {
 describe("embedAsciinema", () => {
   it("jsファイルの場合、script要素になること", () => {
     const result = QiitaMarkdownUtils.embedAsciinema("https://asciinema.org/123456789.js");
-    expect(result).toBe('<script id="asciicast-123456789" src="https://asciinema.org/123456789.js" async=""></script>');
+    expect(result).toBe(
+      '<script id="asciicast-123456789" src="https://asciinema.org/123456789.js" async=""></script>',
+    );
   });
 
   it("jsファイル以外の場合、linkCard記法になること", () => {
@@ -139,61 +145,95 @@ describe("embedAsciinema", () => {
 describe("embedFigma", () => {
   it("デフォルトのサイズでiframe要素になること", () => {
     const result = QiitaMarkdownUtils.embedFigma("https://www.figma.com/file/123456789");
-    expect(result).toBe('<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" height="450" width="800" src="https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/file/123456789"></iframe>');
+    expect(result).toBe(
+      '<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" height="450" width="800" src="https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/file/123456789"></iframe>',
+    );
   });
 
   it("サイズを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedFigma("https://www.figma.com/file/123456789", { height: "600", width: "1000" });
-    expect(result).toBe('<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" height="600" width="1000" src="https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/file/123456789"></iframe>');
+    const result = QiitaMarkdownUtils.embedFigma("https://www.figma.com/file/123456789", {
+      height: "600",
+      width: "1000",
+    });
+    expect(result).toBe(
+      '<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" height="600" width="1000" src="https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/file/123456789"></iframe>',
+    );
   });
 });
 
 describe("embedSpeakerDeck", () => {
   it("script要素になること", () => {
     const result = QiitaMarkdownUtils.embedSpeakerDeck("123456789");
-    expect(result).toBe('<script async class="speakerdeck-embed" data-id="123456789" data-ratio="1.77777777777778" src="https://speakerdeck.com/assets/embed.js"></script>');
+    expect(result).toBe(
+      '<script async class="speakerdeck-embed" data-id="123456789" data-ratio="1.77777777777778" src="https://speakerdeck.com/assets/embed.js"></script>',
+    );
   });
 });
 
 describe("embedSlideShare", () => {
   it("デフォルトのサイズでiframe要素になること", () => {
     const result = QiitaMarkdownUtils.embedSlideShare("https://www.slideshare.net/slide/123456789");
-    expect(result).toBe('<iframe src="https://www.slideshare.net/slide/123456789" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" loading="lazy" allowfullscreen></iframe>');
+    expect(result).toBe(
+      '<iframe src="https://www.slideshare.net/slide/123456789" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" loading="lazy" allowfullscreen></iframe>',
+    );
   });
 
   it("サイズを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedSlideShare("https://www.slideshare.net/slide/123456789", { width: "800", height: "600" });
-    expect(result).toBe('<iframe src="https://www.slideshare.net/slide/123456789" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" loading="lazy" allowfullscreen></iframe>');
+    const result = QiitaMarkdownUtils.embedSlideShare(
+      "https://www.slideshare.net/slide/123456789",
+      { width: "800", height: "600" },
+    );
+    expect(result).toBe(
+      '<iframe src="https://www.slideshare.net/slide/123456789" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" loading="lazy" allowfullscreen></iframe>',
+    );
   });
 });
 
 describe("embedGoogleSlide", () => {
   it("デフォルトのサイズでiframe要素になること", () => {
-    const result = QiitaMarkdownUtils.embedGoogleSlide("https://docs.google.com/presentation/d/123456789");
-    expect(result).toBe('<iframe src="https://docs.google.com/presentation/d/123456789" frameborder="0" width="960" height="569" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>');
+    const result = QiitaMarkdownUtils.embedGoogleSlide(
+      "https://docs.google.com/presentation/d/123456789",
+    );
+    expect(result).toBe(
+      '<iframe src="https://docs.google.com/presentation/d/123456789" frameborder="0" width="960" height="569" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>',
+    );
   });
 
   it("サイズを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedGoogleSlide("https://docs.google.com/presentation/d/123456789", { width: "800", height: "600" });
-    expect(result).toBe('<iframe src="https://docs.google.com/presentation/d/123456789" frameborder="0" width="800" height="600" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>');
+    const result = QiitaMarkdownUtils.embedGoogleSlide(
+      "https://docs.google.com/presentation/d/123456789",
+      { width: "800", height: "600" },
+    );
+    expect(result).toBe(
+      '<iframe src="https://docs.google.com/presentation/d/123456789" frameborder="0" width="800" height="600" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>',
+    );
   });
 });
 
 describe("embedDocswell", () => {
   it("script要素になること", () => {
     const result = QiitaMarkdownUtils.embedDocswell("https://www.docswell.com/s/123456789");
-    expect(result).toBe('<script src="https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js" async class="docswell-embed" data-src="https://www.docswell.com/s/123456789" data-aspect="0.5625"></script>');
+    expect(result).toBe(
+      '<script src="https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js" async class="docswell-embed" data-src="https://www.docswell.com/s/123456789" data-aspect="0.5625"></script>',
+    );
   });
 });
 
 describe("embedYoutube", () => {
   it("デフォルトのサイズでiframe要素になること", () => {
     const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/embed/123456789");
-    expect(result).toBe('<iframe width="560" height="315" src="https://www.youtube.com/embed/123456789" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>');
+    expect(result).toBe(
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/123456789" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>',
+    );
   });
 
   it("サイズを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/embed/123456789", { width: "800", height: "600" });
-    expect(result).toBe('<iframe width="800" height="600" src="https://www.youtube.com/embed/123456789" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>');
+    const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/embed/123456789", {
+      width: "800",
+      height: "600",
+    });
+    expect(result).toBe(
+      '<iframe width="800" height="600" src="https://www.youtube.com/embed/123456789" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>',
+    );
   });
 });

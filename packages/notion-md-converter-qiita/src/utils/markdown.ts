@@ -125,17 +125,18 @@ const codeBlock = (
 };
 
 const objectToPropertiesStr = (object: Record<string, string | boolean>) => {
-  return Object.entries(object).map(([key, value]) => {
-    if (value === undefined) {
-      return null;
-    }
-    if (typeof value === "boolean") {
-      return value ? key : null;
-    }
-    return `${key}="${value}"`;
-  })
-  .filter((v) => !!v)
-  .join(" ");
+  return Object.entries(object)
+    .map(([key, value]) => {
+      if (value === undefined) {
+        return null;
+      }
+      if (typeof value === "boolean") {
+        return value ? key : null;
+      }
+      return `${key}="${value}"`;
+    })
+    .filter((v) => !!v)
+    .join(" ");
 };
 
 const equationBlock = (equation: string) => {
@@ -158,7 +159,7 @@ const embedCodeSandbox = (url: string) => {
 type EmbedCodePenOptions = {
   height?: string;
   defaultTab?: string;
-}
+};
 const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
   // ex) https://codepen.io/tomoasleep/pen/dJgNLK/
   const u = new URL(url);
@@ -174,10 +175,12 @@ const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
     "data-user": user,
     "data-embed-version": "2",
     "data-pen-title": slugHash,
-    "class": "codepen"
+    class: "codepen",
   };
   // ex) data-height="300" data-theme-id="0" data-slug-hash="dJgNLK" ...
-  const propertiesStr = Object.entries(properties).map(([key, value]) => `${key}="${value}"`).join(" ");
+  const propertiesStr = Object.entries(properties)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(" ");
   const mountTarget = `<p ${propertiesStr}></p>`;
   const script = `<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>`;
   return `${mountTarget}\n${script}`;
@@ -195,9 +198,9 @@ const embedAsciinema = (url: string) => {
   const u = new URL(url);
   const id = u.pathname.split("/")[1].replace(".js", "");
   const properties = {
-    "id": `asciicast-${id}`,
-    "src": url,
-    "async": ""
+    id: `asciicast-${id}`,
+    src: url,
+    async: "",
   };
   const propertiesStr = objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
@@ -206,13 +209,13 @@ const embedAsciinema = (url: string) => {
 type EmbedFigmaOptions = {
   height?: string;
   width?: string;
-}
+};
 const embedFigma = (url: string, options: EmbedFigmaOptions = {}) => {
   const properties = {
     style: "border: 1px solid rgba(0, 0, 0, 0.1);",
     height: options.height || "450",
     width: options.width || "800",
-    src: `https://www.figma.com/embed?embed_host=astra&url=${url}`
+    src: `https://www.figma.com/embed?embed_host=astra&url=${url}`,
   };
   const propertiesStr = objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
@@ -220,11 +223,11 @@ const embedFigma = (url: string, options: EmbedFigmaOptions = {}) => {
 
 const embedSpeakerDeck = (id: string) => {
   const properties = {
-    "async": true,
-    "class": "speakerdeck-embed",
+    async: true,
+    class: "speakerdeck-embed",
     "data-id": id,
     "data-ratio": "1.77777777777778",
-    "src": "https://speakerdeck.com/assets/embed.js"
+    src: "https://speakerdeck.com/assets/embed.js",
   };
   const propertiesStr = objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
@@ -233,19 +236,19 @@ const embedSpeakerDeck = (id: string) => {
 type EmbedSlideShareOptions = {
   width?: string;
   height?: string;
-}
+};
 const embedSlideShare = (url: string, options: EmbedSlideShareOptions = {}) => {
   const properties = {
-    "src": url,
-    "width": options.width || "595",
-    "height": options.height || "485",
-    "frameborder": "0",
-    "marginwidth": "0",
-    "marginheight": "0",
-    "scrolling": "no",
-    "style": "border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;",
-    "loading": "lazy",
-    "allowfullscreen": true
+    src: url,
+    width: options.width || "595",
+    height: options.height || "485",
+    frameborder: "0",
+    marginwidth: "0",
+    marginheight: "0",
+    scrolling: "no",
+    style: "border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;",
+    loading: "lazy",
+    allowfullscreen: true,
   };
   const propertiesStr = objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
@@ -254,16 +257,16 @@ const embedSlideShare = (url: string, options: EmbedSlideShareOptions = {}) => {
 type EmbedGoogleSlideOptions = {
   width?: string;
   height?: string;
-}
+};
 const embedGoogleSlide = (url: string, options: EmbedGoogleSlideOptions = {}) => {
   const properties = {
-    "src": url,
-    "frameborder": "0",
-    "width": options.width || "960",
-    "height": options.height || "569",
-    "allowfullscreen": true,
-    "mozallowfullscreen": true,
-    "webkitallowfullscreen": true
+    src: url,
+    frameborder: "0",
+    width: options.width || "960",
+    height: options.height || "569",
+    allowfullscreen: true,
+    mozallowfullscreen: true,
+    webkitallowfullscreen: true,
   };
   const propertiesStr = objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
@@ -284,16 +287,17 @@ const embedDocswell = (url: string) => {
 type EmbedYoutubeOptions = {
   width?: string;
   height?: string;
-}
+};
 const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
   const properties = {
-    "width": options.width || "560",
-    "height": options.height || "315",
-    "src": url,
-    "frameborder": "0",
-    "allow": "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-    "loading": "lazy",
-    "allowfullscreen": true
+    width: options.width || "560",
+    height: options.height || "315",
+    src: url,
+    frameborder: "0",
+    allow:
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+    loading: "lazy",
+    allowfullscreen: true,
   };
   const propertiesStr = objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;

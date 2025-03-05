@@ -1,7 +1,4 @@
-import {
-  createBasicEmbedTransformer,
-  getProvider,
-} from "@notion-md-converter/core";
+import { createBasicEmbedTransformer, getProvider } from "@notion-md-converter/core";
 import type { EmbedTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
 

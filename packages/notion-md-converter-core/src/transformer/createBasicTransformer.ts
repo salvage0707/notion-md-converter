@@ -355,7 +355,7 @@ export const createBasicEmbedTransformer = (
     const provider = getEmbedProvider(context.currentBlock);
     const metadata: CaptionMetadata = {};
     if (provider === "speakerDeck") {
-      metadata.id = meta.id
+      metadata.id = meta.id;
     }
     return execute({
       block: context.currentBlock,

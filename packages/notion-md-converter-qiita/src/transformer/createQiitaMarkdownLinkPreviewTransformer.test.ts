@@ -1,4 +1,8 @@
-import { createLinkPreviewBlock, createTransformerContext, dedent } from "@notion-md-converter/testing";
+import {
+  createLinkPreviewBlock,
+  createTransformerContext,
+  dedent,
+} from "@notion-md-converter/testing";
 import { createQiitaMarkdownLinkPreviewTransformer } from "./createQiitaMarkdownLinkPreviewTransformer";
 
 describe("createQiitaMarkdownLinkPreviewTransformer", () => {
@@ -13,7 +17,7 @@ describe("createQiitaMarkdownLinkPreviewTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe(dedent({wrap: true})`
+    expect(result).toBe(dedent({ wrap: true })`
       https://example.com
     `);
   });
