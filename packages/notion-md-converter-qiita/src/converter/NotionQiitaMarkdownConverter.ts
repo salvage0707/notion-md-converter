@@ -24,6 +24,8 @@ export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
       link_preview: createQiitaMarkdownLinkPreviewTransformer(),
       video: createQiitaMarkdownVideoTransformer(),
       embed: createQiitaMarkdownEmbedTransformer(),
+      pdf: createUnsupportedBlockTransformer(),
+      file: createUnsupportedBlockTransformer(),
       ...transformers,
     });
   }
