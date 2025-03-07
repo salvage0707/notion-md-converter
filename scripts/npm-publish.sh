@@ -5,6 +5,7 @@ echo "- notion-md-converter-types"
 echo "- notion-md-converter-testing"
 echo "- notion-md-converter-core"
 echo "- notion-md-converter-zenn"
+echo "- notion-md-converter-qiita"
 echo ""
 read -p "続行しますか？ (y/N): " yn
 case "$yn" in
@@ -20,6 +21,7 @@ packages=(
   "notion-md-converter-testing"
   "notion-md-converter-core"
   "notion-md-converter-zenn"
+  "notion-md-converter-qiita"
 )
 
 echo "Start npm publish"

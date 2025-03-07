@@ -21,6 +21,7 @@ packages=(
   "notion-md-converter-testing"
   "notion-md-converter-core"
   "notion-md-converter-zenn"
+  "notion-md-converter-qiita"
 )
 
 echo "Start npm version $version_type"
