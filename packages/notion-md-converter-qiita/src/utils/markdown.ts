@@ -1,4 +1,4 @@
-import { getProvider } from "@notion-md-converter/core";
+import { getProvider, getYoutubeVideoIdFromEmbedUrl } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 
 /**
@@ -66,7 +66,7 @@ const CODE_LANGUAGE_MAPPING: CodeLanguageMapping = {
   markup: "xml", // 汎用マークアップとしてXML
   matlab: "matlab",
   mathematica: "mathematica",
-  mermaid: undefined, // リストに未対応のため、undefinedにする
+  mermaid: "mermaid", // リストに未対応のため、undefinedにする
   nix: "nix",
   "notion formula": undefined, // リストに未対応のため、undefinedにする
   "objective-c": "objective_c",
@@ -289,10 +289,15 @@ type EmbedYoutubeOptions = {
   height?: string;
 };
 const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
+  const videoId = getYoutubeVideoIdFromEmbedUrl(url);
+  if (!videoId) {
+    return url;
+  }
+
   const properties = {
     width: options.width || "560",
     height: options.height || "315",
-    src: url,
+    src: `https://www.youtube.com/embed/${videoId}`,
     frameborder: "0",
     allow:
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
@@ -332,7 +337,7 @@ const embedByURL = (url: string): { result: string; isEmbed: boolean } => {
       return { result: embedAsciinema(url), isEmbed: url.endsWith(".js") };
     case "figma":
       return { result: embedFigma(url), isEmbed: true };
-    case "speakerdeck":
+    case "speaker-deck":
       return { result: url, isEmbed: true };
     case "slideshare":
       return { result: embedSlideShare(url), isEmbed: true };

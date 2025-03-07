@@ -30,7 +30,7 @@ export const createQiitaMarkdownEmbedTransformer = (): EmbedTransformer => {
         width: metadata.width,
       });
     }
-    if (provider === "speakerdeck" && metadata.id) {
+    if (provider === "speaker-deck" && metadata.id) {
       return QiitaMarkdownUtils.embedSpeakerDeck(metadata.id);
     }
 

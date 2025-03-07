@@ -34,7 +34,7 @@ export const getProvider = (url: string) => {
     return "figma";
   }
   if (["speakerdeck.com"].includes(domain)) {
-    return "speakerdeck";
+    return "speaker-deck";
   }
   if (["www.slideshare.net", "slideshare.net"].includes(domain)) {
     return "slideshare";
@@ -63,3 +63,9 @@ export const getProvider = (url: string) => {
   return null;
 };
 export type Provider = ReturnType<typeof getProvider>;
+
+export const getYoutubeVideoIdFromEmbedUrl = (url: string) => {
+  const urlObj = new URL(url);
+  const searchParams = new URLSearchParams(urlObj.search);
+  return searchParams.get("v");
+};

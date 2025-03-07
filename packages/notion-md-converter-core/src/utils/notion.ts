@@ -9,7 +9,6 @@ import type {
   ColumnListBlock,
   DividerBlock,
   EmbedBlock,
-  EmbedProvider,
   EquationBlock,
   FileBlock,
   FileObject,
@@ -188,18 +187,6 @@ export const isEmbedBlock = (block: Block): block is EmbedBlock => {
   return block.type === "embed";
 };
 
-// TODO: サポートするプロバイダを増やす
-export const getEmbedProvider = (block: EmbedBlock): EmbedProvider | undefined => {
-  if (block.embed.url.includes("speakerdeck.com")) {
-    return "speakerDeck";
-  }
-  if (block.embed.url.includes("x.com") || block.embed.url.includes("twitter.com")) {
-    return "x";
-  }
-
-  return undefined;
-};
-
 /**
  * @deprecated This function will be removed in a future release as we plan to remove the dependency on @notionhq/client.
  * Please be aware that the API specification may change significantly.
@@ -207,12 +194,20 @@ export const getEmbedProvider = (block: EmbedBlock): EmbedProvider | undefined =
 export const $getPageFullContent = async (client: Client, blockId: string) => {
   // biome-ignore lint/suspicious/noExplicitAny: Notion API returns any
   const results: any[] = [];
-  const res = await client.blocks.children.list({
-    block_id: blockId,
-  });
-  results.push(...res.results);
+  let nextCursor: string | undefined = undefined;
+  while (true) {
+    const res = await client.blocks.children.list({
+      block_id: blockId,
+      start_cursor: nextCursor,
+    });
+    results.push(...res.results);
+    if (!res.has_more) {
+      break;
+    }
+    nextCursor = res.next_cursor ?? undefined;
+  }
 
-  for await (const [index, block] of res.results.entries()) {
+  for await (const [index, block] of results.entries()) {
     if (!isFullBlock(block)) {
       throw new Error("Block is not full");
     }
@@ -224,6 +219,7 @@ export const $getPageFullContent = async (client: Client, blockId: string) => {
       results[index].children = [];
     }
   }
+
   return results as Block[];
 };
 

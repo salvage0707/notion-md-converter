@@ -228,7 +228,7 @@ const embedByURL = (
       return { result: embedCodePen(url), isEmbed: true };
     case "slideshare":
       return { result: embedSlideShare(url), isEmbed: true };
-    case "speakerdeck":
+    case "speaker-deck":
       if (options.speakerDeckId) {
         return { result: embedSpeakerDeck(options.speakerDeckId), isEmbed: true };
       }

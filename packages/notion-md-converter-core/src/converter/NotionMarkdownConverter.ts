@@ -68,7 +68,6 @@ import {
   isNumberedListItemBlock,
   isParagraphBlock,
   isQuoteBlock,
-  isRootBlock,
   isSyncedBlock,
   isTableBlock,
   isTableOfContentsBlock,
@@ -126,9 +125,9 @@ export class NotionMarkdownConverter {
       context.currentBlock = block;
       context.currentBlockIndex = index;
 
-      if (!isRootBlock(block)) {
-        throw new NotRootBlockError(block);
-      }
+      // if (!isRootBlock(block)) {
+      //   throw new NotRootBlockError(block);
+      // }
 
       if (isBookmarkBlock(block)) {
         const ctx = context as Context<BookmarkBlock>;
