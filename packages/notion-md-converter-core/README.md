@@ -149,7 +149,7 @@ In this case:
 
 ## License
 
-MIT
+Distributed under the MIT License. See [LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE) for more information.
 
 ## Author
 

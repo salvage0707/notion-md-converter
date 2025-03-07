@@ -100,7 +100,7 @@ YouTube videos will be displayed as embeds. Other videos will use the video tag.
 
 ## License
 
-MIT
+Distributed under the MIT License. See [LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE) for more information.
 
 ## Author
 

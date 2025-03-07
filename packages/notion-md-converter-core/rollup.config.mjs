@@ -5,6 +5,7 @@ import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
 import typescript from "rollup-plugin-typescript2";
 import { visualizer } from "rollup-plugin-visualizer";
+import copy from "rollup-plugin-copy";
 import pkg from "./package.json" assert { type: "json" };
 
 const external = [
@@ -39,9 +40,13 @@ export default defineConfig([
       }),
       terser({
         compress: {
-          passes: 2,
           drop_console: true,
         },
+      }),
+      copy({
+        targets: [
+          { src: 'README.md', dest: 'dist' }
+        ]
       }),
       visualizer(),
     ],
