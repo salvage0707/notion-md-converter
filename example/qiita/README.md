@@ -1,6 +1,6 @@
-# @notion-md-converter/zenn Usage Examples
+# @notion-md-converter/qiita Usage Examples
 
-This directory contains examples demonstrating how to use the @notion-md-converter/zenn library. The examples show how to convert Notion content to Zenn-compatible Markdown format.
+This directory contains examples demonstrating how to use the @notion-md-converter/qiita library. The examples show how to convert Notion content to Qiita-compatible Markdown format.
 
 ## Prerequisites
 
@@ -22,9 +22,9 @@ This directory contains examples demonstrating how to use the @notion-md-convert
 
 ### Simple Export
 
-A basic example showing how to export Notion content to Zenn-compatible Markdown format. This example demonstrates the fundamental usage of the library.
+A basic example showing how to export Notion content to Qiita-compatible Markdown format. This example demonstrates the fundamental usage of the library.
 
 ```sh
 # Run the simple export example
-$ pnpm run zenn:simple-export
+$ pnpm run qiita:simple-export
 ```

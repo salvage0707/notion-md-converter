@@ -3,9 +3,9 @@ import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
+import copy from "rollup-plugin-copy";
 import typescript from "rollup-plugin-typescript2";
 import { visualizer } from "rollup-plugin-visualizer";
-import copy from "rollup-plugin-copy";
 import pkg from "./package.json" assert { type: "json" };
 
 const external = [
@@ -44,9 +44,7 @@ export default defineConfig([
         },
       }),
       copy({
-        targets: [
-          { src: 'README.md', dest: 'dist' }
-        ]
+        targets: [{ src: "README.md", dest: "dist" }],
       }),
       visualizer(),
     ],
