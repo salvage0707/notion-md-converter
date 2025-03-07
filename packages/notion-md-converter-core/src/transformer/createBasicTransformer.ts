@@ -59,7 +59,7 @@ import type {
   VideoTransformer,
 } from "@notion-md-converter/types";
 import type { CaptionMetadata } from "../utils";
-import { TransformerUtils, getProvider, isNumberedListItemBlock } from "../utils";
+import { TransformerUtils, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -348,15 +348,8 @@ export const createBasicEmbedTransformer = (
   }) => string,
 ): EmbedTransformer => {
   return (context) => {
-    const { metadata: meta } = TransformerUtils.getCaptionMetadata(
-      context.currentBlock.embed.caption,
-    );
+    const { metadata } = TransformerUtils.getCaptionMetadata(context.currentBlock.embed.caption);
 
-    const provider = getProvider(context.currentBlock.embed.url);
-    const metadata: CaptionMetadata = {};
-    if (provider === "speaker-deck") {
-      metadata.id = meta.id;
-    }
     return execute({
       block: context.currentBlock,
       metadata,
