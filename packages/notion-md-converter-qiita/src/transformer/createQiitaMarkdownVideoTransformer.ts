@@ -2,12 +2,13 @@ import {
   MarkdownUtils,
   createBasicVideoTransformer,
   createNoChangeFileObjectAdapter,
+  getProvider,
   isURL,
 } from "@notion-md-converter/core";
 import type { FileAdapter, VideoTransformer } from "@notion-md-converter/core/types";
-import { ZennMarkdownUtils } from "../utils";
+import { QiitaMarkdownUtils } from "../utils";
 
-export const createZennMarkdownVideoTransformer = (
+export const createQiitaMarkdownVideoTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},
@@ -17,10 +18,9 @@ export const createZennMarkdownVideoTransformer = (
     const { url } = fileAdapter(block.video);
 
     if (isURL(url)) {
-      const urlObj = new URL(url);
-      const domain = urlObj.hostname;
-      if (domain === "www.youtube.com") {
-        return ZennMarkdownUtils.embedYoutube(url);
+      const provider = getProvider(url);
+      if (provider === "youtube") {
+        return QiitaMarkdownUtils.embedYoutube(url);
       }
     }
 

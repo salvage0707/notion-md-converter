@@ -1,0 +1,49 @@
+{
+  "name": "@notion-md-converter/qiita",
+  "version": "0.5.0",
+  "description": "Notion to Qiita Markdown Converter",
+  "license": "MIT",
+  "author": "malvageee (https://github.com/salvage0707)",
+  "keywords": [
+    "notion-md-converter",
+    "notion",
+    "notion-api",
+    "qiita",
+    "markdown",
+    "converter"
+  ],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git",
+    "directory": "packages/notion-md-converter-qiita"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "test:once": "vitest run",
+    "check-types": "tsc --noEmit",
+    "build": "rollup -c",
+    "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "dependencies": {
+    "@notion-md-converter/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/types": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*"
+  }
+}

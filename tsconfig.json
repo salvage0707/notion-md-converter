@@ -12,6 +12,9 @@
     },
     {
       "path": "packages/notion-md-converter-testing"
+    },
+    {
+      "path": "packages/notion-md-converter-qiita"
     }
   ]
 }

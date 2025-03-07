@@ -22,7 +22,6 @@ import type {
   DividerBlock,
   DividerTransformer,
   EmbedBlock,
-  EmbedProvider,
   EmbedTransformer,
   EquationBlock,
   EquationTransformer,
@@ -60,7 +59,7 @@ import type {
   VideoTransformer,
 } from "@notion-md-converter/types";
 import type { CaptionMetadata } from "../utils";
-import { TransformerUtils, getEmbedProvider, isNumberedListItemBlock } from "../utils";
+import { TransformerUtils, getProvider, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -342,19 +341,10 @@ export const createBasicVideoTransformer = (
   };
 };
 
-export type EmbedMetadata = {
-  speakerDeck?: {
-    id: string | undefined;
-  };
-  // X(Twitter) is no metadata
-  // biome-ignore lint/complexity/noBannedTypes: <explanation>
-  x?: {};
-};
 export const createBasicEmbedTransformer = (
   execute: (args: {
     block: EmbedBlock;
-    provider: EmbedProvider | undefined;
-    metadata: EmbedMetadata;
+    metadata: CaptionMetadata;
   }) => string,
 ): EmbedTransformer => {
   return (context) => {
@@ -362,19 +352,13 @@ export const createBasicEmbedTransformer = (
       context.currentBlock.embed.caption,
     );
 
-    const provider = getEmbedProvider(context.currentBlock);
-    const metadata: EmbedMetadata = {};
-    if (provider === "speakerDeck") {
-      metadata.speakerDeck = {
-        id: meta.id,
-      };
-    }
-    if (provider === "x") {
-      metadata.x = {};
+    const provider = getProvider(context.currentBlock.embed.url);
+    const metadata: CaptionMetadata = {};
+    if (provider === "speaker-deck") {
+      metadata.id = meta.id;
     }
     return execute({
       block: context.currentBlock,
-      provider,
       metadata,
     });
   };

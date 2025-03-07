@@ -1,3 +1,4 @@
+import { getProvider } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 /**
  * @see https://zenn.dev/zenn/articles/markdown-guide
@@ -213,37 +214,36 @@ const embedByURL = (
   url: string,
   options: EmbedByUrlOptions = {},
 ): { result: string; isEmbed: boolean } => {
-  const urlObj = new URL(url);
-  const domain = urlObj.hostname;
-  switch (domain) {
-    case "x.com":
+  const provider = getProvider(url);
+  switch (provider) {
+    case "x":
       return { result: embedX(url), isEmbed: true };
-    case "www.youtube.com":
+    case "youtube":
       return { result: embedYoutube(url), isEmbed: true };
-    case "github.com":
+    case "github":
       return { result: embedGitHub(url), isEmbed: true };
-    case "gist.github.com":
+    case "github-gist":
       return { result: embedGitHubGist(url), isEmbed: true };
-    case "codepen.io":
+    case "codepen":
       return { result: embedCodePen(url), isEmbed: true };
-    case "slideshare.net":
+    case "slideshare":
       return { result: embedSlideShare(url), isEmbed: true };
-    case "speakerdeck.com":
+    case "speaker-deck":
       if (options.speakerDeckId) {
         return { result: embedSpeakerDeck(options.speakerDeckId), isEmbed: true };
       }
       return { result: embedLinkCard(url), isEmbed: false };
-    case "docswell.com":
+    case "docswell":
       return { result: embedDocSwell(url), isEmbed: true };
-    case "jsfiddle.net":
+    case "jsfiddle":
       return { result: embedJSFiddle(url), isEmbed: true };
-    case "codesandbox.io":
+    case "codesandbox":
       return { result: embedCodeSandbox(url), isEmbed: true };
-    case "stackblitz.com":
+    case "stackblitz":
       return { result: embedStackBlitz(url), isEmbed: true };
-    case "figma.com":
+    case "figma":
       return { result: embedFigma(url), isEmbed: true };
-    case "blueprintue.com":
+    case "blueprintue":
       return { result: embedBlueprintUE(url), isEmbed: true };
     default:
       return { result: embedLinkCard(url), isEmbed: false };
