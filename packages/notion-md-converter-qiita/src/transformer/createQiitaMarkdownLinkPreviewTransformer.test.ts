@@ -32,7 +32,7 @@ describe("createQiitaMarkdownLinkPreviewTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe(
-      '<iframe width="560" height="315" src="https://www.youtube.com/watch?v=abcd1234" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>',
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/abcd1234" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>',
     );
   });
 

@@ -221,14 +221,14 @@ describe("embedDocswell", () => {
 
 describe("embedYoutube", () => {
   it("デフォルトのサイズでiframe要素になること", () => {
-    const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/embed/123456789");
+    const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/watch?v=123456789");
     expect(result).toBe(
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/123456789" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>',
     );
   });
 
   it("サイズを指定できること", () => {
-    const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/embed/123456789", {
+    const result = QiitaMarkdownUtils.embedYoutube("https://www.youtube.com/watch?v=123456789", {
       width: "800",
       height: "600",
     });
