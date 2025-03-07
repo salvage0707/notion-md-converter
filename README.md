@@ -15,6 +15,46 @@ Similarly, checklist syntax (e.g., `- [ ]` or `* [ ]`) may differ, and there may
 
 Try out **notion-md-converter** in action! Visit our [live demo](https://nmc-demo.malvageee.com/) to see how it converts Notion blocks to Markdown in real-time.
 
+## 🌐 Supported Platforms
+
+| Platform                              | Status      | Library                    |
+| ------------------------------------- | ----------- | -------------------------- |
+| [Zenn](https://zenn.dev)              | ✅           | @notion-md-converter/zenn  |
+| [Qiita](https://qiita.com)            | ✅           | @notion-md-converter/qiita |
+| [note](https://note.com)              | Coming Soon | -                          |
+| [Hatena Blog](https://hatenablog.com) | Coming Soon | -                          |
+
+### Platform-specific Markdown Output
+
+| Block Type             | Smple                | Zenn                    | Qiita                    |
+| ---------------------- | -------------------- | ----------------------- | ------------------------ |
+| Bookmark               | Link                 | Zenn link card          | Qiita link card          |
+| Breadcrumb             | -                    | -                       | -                        |
+| Bulleted list item     | Bulleted list        | Bulleted list           | Bulleted list            |
+| Callout                | Quotation            | Zenn message            | Qiita note               |
+| Child database         | -                    | -                       | -                        |
+| Child page             | -                    | -                       | -                        |
+| Code                   | Code                 | Code                    | Code                     |
+| Column list and column | From left to right   | From left to right      | From left to right       |
+| Divider                | Divider              | Divider                 | Divider                  |
+| Embed                  | Link                 | Zenn embed or Link card | Qiita embed or Link card |
+| Equation               | Equation（$$）       | Equation（$$）          | Code（math）             |
+| File                   | Link                 | Link                    | Link                     |
+| Headings               | Headings             | Headings                | Headings                 |
+| Image                  | Image                | Image                   | Image                    |
+| Link Preview           | Link                 | Zenn embed or Link card | Qiita embed or Link card |
+| Mention                | Rich Text            | Rich Text               | Rich Text                |
+| Numbered list item     | Numbered list        | Numbered list           | Numbered list            |
+| Paragraph              | Rich Text            | Rich Text               | Rich Text                |
+| PDF                    | Link                 | Link                    | Link                     |
+| Quote                  | Quote                | Quote                   | Quote                    |
+| Synced block           | Follows inner blocks | Follows inner blocks    | Follows inner blocks     |
+| Table                  | Table                | Table                   | Table                    |
+| Table of contents      | -                    | -                       | -                        |
+| To do                  | ToDo list            | ToDo list               | ToDo list                |
+| Toggle blocks          | details tag          | Zenn toggle             | details tag              |
+| Video                  | video tag            | video tag and Embed     | video tag and Embed      |
+
 ## 🚀 Installation
 
 ### **Install via npm**
@@ -26,7 +66,6 @@ npm install @notion-md-converter/core
 # if TypeScript
 npm install @notion-md-converter/core @notion-md-converter/types
 ```
-
 
 ## 📖 Usage
 
@@ -79,7 +118,6 @@ export const createMarkdownCustomHeadingTransformer = () => {
     return MarkdownUtils.wrapWithNewLines(MarkdownUtils.heading(text, level + 1)); // add 1 level
   });
 };
-
 ```
 
 
@@ -102,7 +140,7 @@ import { createMarkdownCustomHeadingTransformer } from "./createMarkdownCustomHe
 describe("createMarkdownCustomHeadingTransformer", () => {
   const transformer = createMarkdownCustomHeadingTransformer();
 
-  it("heading_1ブロックを変換できる", () => {
+  it("Can convert heading_1 block", () => {
     const block = createHeading1Block({
       richText: [
         createTextRichText({
@@ -130,6 +168,37 @@ const executor = new NotionMarkdownConverter({
 });
 const result = executor.execute(content);
 ```
+
+## Caption Metadata
+
+You can set metadata for captions in blocks such as images, code blocks, and embeds. Metadata is specified in `key=value` format, and the portion from the beginning of the caption to the first `:` is treated as metadata.
+
+### Basic Usage
+
+```
+width=500:This is an image description
+```
+
+In this case:
+- `width=500` is the metadata
+- `This is an image description` is the actual caption
+
+### Multiple Metadata
+
+Multiple metadata can be specified by separating them with `&`:
+
+```
+width=500&height=300:This is an image description
+```
+
+In this case:
+- `width=500` and `height=300` are metadata
+- `This is an image description` is the actual caption
+
+### Usage Examples
+
+- Specifying image width: `width=500:Image description`
+- Setting diff for code blocks: `diff=true:filename.js`
 
 **You got it! 😊**
 
