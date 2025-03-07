@@ -20,16 +20,6 @@ This directory contains examples demonstrating how to use the @notion-md-convert
    $ pnpm install
    ```
 
-
-## Directory Structure
-
-```
-src/
-  ├── simple-export/              # Basic example of exporting Notion content to Markdown
-  ├── custom-export/             # Example of customizing the Markdown conversion process
-  └── database-page-exports/     # Example of exporting all pages from a Notion database
-```
-
 ## Examples
 
 ### Simple Export

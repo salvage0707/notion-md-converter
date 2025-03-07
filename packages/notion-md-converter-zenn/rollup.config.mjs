@@ -3,6 +3,7 @@ import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
+import copy from "rollup-plugin-copy";
 import typescript from "rollup-plugin-typescript2";
 import { visualizer } from "rollup-plugin-visualizer";
 import pkg from "./package.json" assert { type: "json" };
@@ -39,7 +40,9 @@ export default defineConfig([
         compress: {
           drop_console: true,
         },
-        mangle: true,
+      }),
+      copy({
+        targets: [{ src: "README.md", dest: "dist" }],
       }),
       visualizer(),
     ],
