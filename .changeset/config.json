@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "salvage0707/notion-md-converter" }
+  ],
   "commit": true,
   "fixed": [["@notion-md-converter/*"]],
   "linked": [],
