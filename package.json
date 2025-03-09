@@ -29,6 +29,7 @@
     "build": "turbo run build",
     "build:clean": "find . -type d -name 'dist' -not -path '*/node_modules/*' -exec rm -rf {} +",
     "build:size": "turbo run build:size",
+    "update-example": "bash scripts/update-example.sh",
     "npm:version:patch": "bash scripts/npm-update-version.sh patch",
     "npm:version:minor": "bash scripts/npm-update-version.sh minor",
     "npm:version:major": "bash scripts/npm-update-version.sh major",
