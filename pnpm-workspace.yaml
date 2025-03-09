@@ -1,6 +1,5 @@
 packages:
   - 'packages/*'
-  - 'example/*'
 
 catalog:
   "@notionhq/client": "^2.2.16"
