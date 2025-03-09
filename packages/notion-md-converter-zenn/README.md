@@ -53,6 +53,15 @@ You can enable diff display using Callout Metadata
 | diff     | Set to `true` to enable diff display  |
 
 
+### Image
+
+You can set metadata to adjust the image size.
+
+| metadata | value |
+| ------   | ----  |
+| width    | Specifies the width of the image (e.g. `500`) |
+
+
 ### Embed
 
 #### Speaker Deck
