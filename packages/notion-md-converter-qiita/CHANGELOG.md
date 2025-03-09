@@ -1,5 +1,12 @@
 # @notion-md-converter/qiita
 
+## 0.7.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @notion-md-converter/core@0.7.2
+
 ## 0.7.1
 
 ### Patch Changes
