@@ -14,7 +14,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineWidth": 100,
-    "ignore": ["__fixtures__", "**/package.json", ".turbo"]
+    "ignore": ["__fixtures__", "**/package.json", ".turbo", ".changeset/config.json"]
   },
   "organizeImports": {
     "enabled": true
