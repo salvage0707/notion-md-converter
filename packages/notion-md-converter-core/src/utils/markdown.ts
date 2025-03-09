@@ -218,13 +218,14 @@ const indent = (text: string, spaces = 2): string => {
  * detailsタグに変換
  */
 const details = (title: string, content: string): string => {
+  // summaryでインデントを入れるとnest構造がおかしくなる時があるので、インデントを入れない
   const result = [
     "<details>",
-    indent("<summary>"),
-    indent(`${title}`, 4),
-    indent("</summary>"),
+    "<summary>",
+    title,
+    "</summary>",
     "", // 改行
-    indent(content),
+    content,
     "</details>",
   ].join("\n");
   return result;
