@@ -1,4 +1,4 @@
-import { createEquationRichText, createTextRichText } from "@notion-md-converter/testing";
+import { createEquationRichText, createTextRichText, dedent } from "@notion-md-converter/testing";
 import type { RichText } from "@notion-md-converter/types";
 import { MarkdownUtils, type TableCell, type TableHeader } from "./markdown";
 
@@ -273,23 +273,27 @@ describe("image", () => {
 
 describe("details", () => {
   it("タイトルと内容からdetailsタグに変換できること", () => {
-    const expected = [
-      "<details>",
-      "  <summary>",
-      "    Title",
-      "  </summary>",
-      "",
-      "  Content",
-      "</details>",
-    ].join("\n");
-    expect(MarkdownUtils.details("Title", "Content")).toBe(expected);
+    expect(MarkdownUtils.details("Title", "Content")).toBe(dedent`
+      <details>
+      <summary>
+      Title
+      </summary>
+
+      Content
+      </details>
+    `);
   });
 
   it("空のタイトルと内容からdetailsタグに変換できること", () => {
-    const expected = ["<details>", "  <summary>", "", "  </summary>", "", "", "</details>"].join(
-      "\n",
-    );
-    expect(MarkdownUtils.details("", "")).toBe(expected);
+    expect(MarkdownUtils.details("", "")).toBe(dedent`
+    <details>
+    <summary>
+
+    </summary>
+
+
+    </details>
+    `);
   });
 });
 
