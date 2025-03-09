@@ -33,6 +33,7 @@
     "npm:version:minor": "bash scripts/npm-update-version.sh minor",
     "npm:version:major": "bash scripts/npm-update-version.sh major",
     "npm:publish": "pnpm run build && bash scripts/npm-publish.sh",
+    "publish-packages": "pnpm run check && turbo run build test:once && changeset version && changeset publish",
     "test": "turbo run test",
     "test:once": "turbo run test:once",
     "check-types": "turbo run check-types"
@@ -40,6 +41,7 @@
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@changesets/cli": "^2.28.1",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",

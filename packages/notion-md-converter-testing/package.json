@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/testing",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Notion to Markdown Converter Testing",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
@@ -19,6 +19,7 @@
   },
   "scripts": {
     "test": "vitest",
+    "test:once": "vitest run",
     "dev": "rollup -c -w",
     "check-types": "tsc --noEmit",
     "build": "rollup -c",

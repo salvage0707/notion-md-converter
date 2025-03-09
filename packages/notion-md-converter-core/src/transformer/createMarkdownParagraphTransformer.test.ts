@@ -1,4 +1,4 @@
-import { createParagraphBlock, createTextRichText } from "@notion-md-converter/testing";
+import { createParagraphBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownParagraphTransformer } from "./createMarkdownParagraphTransformer";
 
@@ -35,7 +35,10 @@ describe("createMarkdownParagraphTransformer", () => {
 
     context.mockedExecute.mockReturnValue("小要素があります");
     const result = transformer(context);
-    expect(result).toBe("シンプルなテキストです。\n小要素があります");
+    expect(result).toBe(dedent`
+      シンプルなテキストです。
+      小要素があります
+    `);
   });
 
   it("テキストにスタイルがついている場合はスタイルを適用する", () => {
