@@ -1,5 +1,11 @@
 # @notion-md-converter/core
 
+## 0.7.1
+
+### Patch Changes
+
+- [#54](https://github.com/salvage0707/notion-md-converter/pull/54) [`54749e1`](https://github.com/salvage0707/notion-md-converter/commit/54749e1cc46310704933d0a014fa7f7ce533c5af) Thanks [@salvage0707](https://github.com/salvage0707)! - empty release
+
 ## 0.7.0
 
 ### Minor Changes
