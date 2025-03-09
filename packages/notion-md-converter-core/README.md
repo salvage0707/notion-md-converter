@@ -16,7 +16,6 @@ npm install @notion-md-converter/core @notion-md-converter/types
 
 ## 📖 Usage
 
-
 > Follow Notion's Getting Started Guide to obtain an API key.
 
 
