@@ -60,8 +60,8 @@ importers:
   example/core:
     dependencies:
       '@notion-md-converter/core':
-        specifier: ^0.6.1
-        version: 0.6.1
+        specifier: ^0.6.2
+        version: 0.6.2
       '@notionhq/client':
         specifier: ^2.2.16
         version: 2.2.16
@@ -82,11 +82,11 @@ importers:
   example/qiita:
     dependencies:
       '@notion-md-converter/core':
-        specifier: ^0.6.1
-        version: 0.6.1
+        specifier: ^0.6.2
+        version: 0.6.2
       '@notion-md-converter/qiita':
-        specifier: ^0.6.1
-        version: 0.6.1
+        specifier: ^0.6.2
+        version: 0.6.2
       '@notionhq/client':
         specifier: ^2.2.16
         version: 2.2.16
@@ -104,11 +104,11 @@ importers:
   example/zenn:
     dependencies:
       '@notion-md-converter/core':
-        specifier: ^0.6.1
-        version: 0.6.1
+        specifier: ^0.6.2
+        version: 0.6.2
       '@notion-md-converter/zenn':
-        specifier: ^0.6.1
-        version: 0.6.1
+        specifier: ^0.6.2
+        version: 0.6.2
       '@notionhq/client':
         specifier: ^2.2.16
         version: 2.2.16
@@ -583,14 +583,14 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@notion-md-converter/core@0.6.1':
-    resolution: {integrity: sha512-VdnPG9QTOVKr6/DGZ0OLD0ynDLuthbnSti5+ymuADJndGkEIMNiA5XSCIjlB0LdB7jmXd0eJ3TczqTbnQlaX2w==}
+  '@notion-md-converter/core@0.6.2':
+    resolution: {integrity: sha512-8U/+4d5qcEu0DbGCC+oo96CpLOoUMLKhyaKfqcrgMnBWOvM0GbKd7lTIy6mNYQCw5aeb849l6RLAeA7CKSpckw==}
 
-  '@notion-md-converter/qiita@0.6.1':
-    resolution: {integrity: sha512-TzbKN+l4/IlFjJw5fKNNneshWdGaP/1F7CBxw700LDdMxbNMtMEtU2L+gi4v280IDfzGZkEBz6TKW/FVjLIdUQ==}
+  '@notion-md-converter/qiita@0.6.2':
+    resolution: {integrity: sha512-1BtVJpcgIjzTbpeedvoNbf8K5tz4Zw3Un6YSqyQTtGzCz20QkdTWPCnuH1kqQTMBrzBdpDrU15GhtADqhKfEOA==}
 
-  '@notion-md-converter/zenn@0.6.1':
-    resolution: {integrity: sha512-wuDclwukQQD9Zuy+sQSqqzuIpsv8u1d16SYaIlSDLvOcH8pJOfEyRYAE0oUCckLEXFrAPKawU2tF7cyvsPPaUw==}
+  '@notion-md-converter/zenn@0.6.2':
+    resolution: {integrity: sha512-N4rSH13kyby8NkPmEsSKKyEY2D0/N+5hubPEvNbR/qwjJGI1HGJmcd0WnL++IzIOn0kSOGKKTES5SLnR6BGxCA==}
 
   '@notionhq/client@2.2.16':
     resolution: {integrity: sha512-3GlkfhLw8+Jw8U2iFEmHA6WfCgYhZCXLxgPdqDJkYMFotELNpQO+yGSy2QWURsG8ndu21sLt+FEOfDbNcCtFMg==}
@@ -1743,21 +1743,21 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@notion-md-converter/core@0.6.1':
+  '@notion-md-converter/core@0.6.2':
     dependencies:
       '@notionhq/client': 2.2.16
     transitivePeerDependencies:
       - encoding
 
-  '@notion-md-converter/qiita@0.6.1':
+  '@notion-md-converter/qiita@0.6.2':
     dependencies:
-      '@notion-md-converter/core': 0.6.1
+      '@notion-md-converter/core': 0.6.2
     transitivePeerDependencies:
       - encoding
 
-  '@notion-md-converter/zenn@0.6.1':
+  '@notion-md-converter/zenn@0.6.2':
     dependencies:
-      '@notion-md-converter/core': 0.6.1
+      '@notion-md-converter/core': 0.6.2
     transitivePeerDependencies:
       - encoding
 
