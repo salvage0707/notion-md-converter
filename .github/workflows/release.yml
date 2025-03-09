@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: 20
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm run publish-packages
+          commit: "chore: version packages"
+          title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # パッケージがpublishされた場合のみ実行
+      - name: Update example dependencies
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          # 最新のパッケージバージョンを取得
+          NEW_VERSION=$(npm view @notion-md-converter/core version)
+          
+          # exampleパッケージの依存関係を更新
+          for pkg in example/*/package.json; do
+            # @notion-md-converterから始まる依存関係をすべて更新
+            sed -i.bak 's/"@notion-md-converter\/[^"]*": "[^"]*"/"@notion-md-converter\/\0": "^'$NEW_VERSION'"/' $pkg
+            rm "${pkg}.bak"
+          done
+
+          # 変更をコミットしてPRを作成
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          git checkout -b "examples/update-deps-$NEW_VERSION"
+          git add example/*/package.json
+          git commit -m "chore: update example dependencies to version $NEW_VERSION"
+          git push origin "examples/update-deps-$NEW_VERSION"
+          
+          # PRを作成
+          gh pr create \
+            --title "chore: update example dependencies to version $NEW_VERSION" \
+            --body "Update example package dependencies to match the latest published version." \
+            --base main \
+            --head "examples/update-deps-$NEW_VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
