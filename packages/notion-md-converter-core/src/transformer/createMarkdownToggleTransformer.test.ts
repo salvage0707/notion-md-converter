@@ -22,11 +22,11 @@ describe("createMarkdownToggleTransformer", () => {
 
     expect(result).toBe(dedent({ wrap: true })`
       <details>
-        <summary>
-          test title
-        </summary>
+      <summary>
+      test title
+      </summary>
 
-        test content
+      test content
       </details>
     `);
   });
