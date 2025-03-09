@@ -11,8 +11,12 @@
     "check-types": {
       "dependsOn": ["^check-types"]
     },
-    "test": {},
-    "test:once": {},
+    "test": {
+      "dependsOn": ["build"]
+    },
+    "test:once": {
+      "dependsOn": ["build"]
+    },
     "test:watch": {
       "cache": false,
       "persistent": true
