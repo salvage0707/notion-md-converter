@@ -1,5 +1,6 @@
 {
   "name": "@notion-md-converter/config",
+  "private": true,
   "version": "0.1.0",
   "description": "Shared configurations for notion-md-converter packages",
   "scripts": {},
