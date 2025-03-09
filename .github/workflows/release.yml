@@ -34,8 +34,10 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm run publish-packages
+          version: pnpm changeset version && pnpm install --lockfile-only
           commit: "chore: version packages"
           title: "chore: version packages"
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
