@@ -1,7 +1,7 @@
 {
   "name": "@notion-md-converter/core-example",
   "private": true,
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Notion to Zenn Markdown Converter Example",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
     "core:database-page-exports": "tsx src/database-page-exports/main.ts"
   },
   "dependencies": {
-    "@notion-md-converter/core": "^0.6.2",
+    "@notion-md-converter/core": "^0.6.3",
     "@notionhq/client": "^2.2.16"
   },
   "devDependencies": {
