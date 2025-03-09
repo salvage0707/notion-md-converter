@@ -1,4 +1,5 @@
 import type { ApiColor, RichText } from "@notion-md-converter/types";
+import { isURL } from "./utils";
 
 /**
  * @see https://www.markdownguide.org/basic-syntax/#reference-style-links
@@ -256,6 +257,7 @@ export type EnableAnnotations = {
   code?: boolean;
   equation?: boolean;
   color?: boolean | ColorMap;
+  link?: boolean;
 };
 
 const richTextsToMarkdown = (
@@ -286,7 +288,7 @@ const richTextsToMarkdown = (
     if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
       markdown = color(markdown, text.annotations.color);
     }
-    if (text.type === "mention" && text.mention.type === "page" && text.href) {
+    if (text.href && isURL(text.href) && enableAnnotations.link) {
       markdown = link(markdown, text.href);
     }
 
@@ -301,6 +303,7 @@ const richTextsToMarkdown = (
     code: true,
     equation: true,
     color: false,
+    link: true,
     ...enableAnnotations,
   };
   return richTexts

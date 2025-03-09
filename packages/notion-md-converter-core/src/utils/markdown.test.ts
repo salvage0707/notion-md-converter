@@ -420,6 +420,20 @@ describe("richTextsToMarkdown", () => {
     ] as RichText[];
     expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("**$E = mc^2$**");
   });
+
+  it("リンクのテキストを処理できること", () => {
+    const richTexts = [
+      createTextRichText({ content: "Link", href: "https://example.com" }),
+    ] as RichText[];
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("[Link](https://example.com)");
+  });
+
+  it("URL形式ではないリンクのテキストを処理できること", () => {
+    const richTexts = [
+      createTextRichText({ content: "Link", href: "/1af2ad69d3ce80b189a5c816f8caaaaa" }),
+    ] as RichText[];
+    expect(MarkdownUtils.richTextsToMarkdown(richTexts)).toBe("Link");
+  });
 });
 
 describe("blockEquation", () => {
