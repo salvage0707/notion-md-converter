@@ -11,7 +11,7 @@
     "core:database-page-exports": "tsx src/database-page-exports/main.ts"
   },
   "dependencies": {
-    "@notion-md-converter/core": "^0.6.3",
+    "@notion-md-converter/"@notion-md-converter/core": "^0.6.3"": "^0.7.1",
     "@notionhq/client": "^2.2.16"
   },
   "devDependencies": {
