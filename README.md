@@ -55,6 +55,9 @@ Try out **notion-md-converter** in action! Visit our [live demo](https://nmc-dem
 | Toggle blocks          | details tag          | Zenn toggle             | details tag              |
 | Video                  | video tag            | video tag and Embed     | video tag and Embed      |
 
+> [!CAUTION]
+> This library has not yet released a major version (v1.0.0). Therefore, breaking changes may be included in minor version updates. Please be aware that the API is subject to change until we reach v1.0.0.
+
 ## 🚀 Installation
 
 ### **Install via npm**
