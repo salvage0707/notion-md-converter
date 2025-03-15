@@ -1,9 +1,9 @@
 import { MarkdownUtils } from "../utils";
 import type { TableCell, TableHeader } from "../utils";
-import { createBasicTableTransformer } from "./createBasicTransformer";
+import { createTableTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownTableTransformer = () => {
-  return createBasicTableTransformer(({ header, rows }) => {
+  return createTableTransformerFactory(({ header, rows }) => {
     const headerCells: TableHeader[] = header.table_row.cells.map((cell) => ({
       content: MarkdownUtils.richTextsToMarkdown(cell),
     }));

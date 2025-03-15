@@ -1,9 +1,9 @@
-import { MarkdownUtils, createBasicLinkPreviewTransformer } from "@notion-md-converter/core";
+import { MarkdownUtils, createLinkPreviewTransformerFactory } from "@notion-md-converter/core";
 import type { LinkPreviewTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
 
 export const createQiitaMarkdownLinkPreviewTransformer = (): LinkPreviewTransformer => {
-  return createBasicLinkPreviewTransformer(({ block }) => {
+  return createLinkPreviewTransformerFactory(({ block }) => {
     const url = block.link_preview.url;
     const { result, isEmbed } = QiitaMarkdownUtils.embedByURL(url);
     if (isEmbed) {

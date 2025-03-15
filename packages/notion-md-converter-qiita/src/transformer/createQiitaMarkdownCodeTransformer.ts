@@ -1,4 +1,4 @@
-import { MarkdownUtils, createBasicCodeTransformer } from "@notion-md-converter/core";
+import { MarkdownUtils, createCodeTransformerFactory } from "@notion-md-converter/core";
 import type { CodeTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
 
@@ -7,7 +7,7 @@ type QiitaCodeMetadata = {
 };
 
 export const createQiitaMarkdownCodeTransformer = (): CodeTransformer => {
-  return createBasicCodeTransformer(({ block, metadata: { language, filename, ...metadata } }) => {
+  return createCodeTransformerFactory(({ block, metadata: { language, filename, ...metadata } }) => {
     const { diff } = metadata as QiitaCodeMetadata;
 
     const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {

@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicCodeTransformer } from "./createBasicTransformer";
+import { createCodeTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownCodeTransformer = () => {
-  return createBasicCodeTransformer(({ block }) => {
+  return createCodeTransformerFactory(({ block }) => {
     const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {
       bold: false,
       italic: false,

@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicNumberedListItemTransformer } from "./createBasicTransformer";
+import { createNumberedListItemTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownNumberedListItemTransformer = () => {
-  return createBasicNumberedListItemTransformer(({ block, children, index }) => {
+  return createNumberedListItemTransformerFactory(({ block, children, index }) => {
     const text = MarkdownUtils.richTextsToMarkdown(block.numbered_list_item.rich_text);
     const formattedChildren = MarkdownUtils.indent(children, 3);
     const bulletText = MarkdownUtils.numberedList(text, index);

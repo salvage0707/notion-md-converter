@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicHeadingTransformer } from "./createBasicTransformer";
+import { createHeadingTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownHeadingTransformer = () => {
-  return createBasicHeadingTransformer(({ level, richText }) => {
+  return createHeadingTransformerFactory(({ level, richText }) => {
     const text = MarkdownUtils.richTextsToMarkdown(richText);
     return MarkdownUtils.wrapWithNewLines(MarkdownUtils.heading(text, level));
   });

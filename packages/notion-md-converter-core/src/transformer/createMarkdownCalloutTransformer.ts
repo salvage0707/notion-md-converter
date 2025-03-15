@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicCalloutTransformer } from "./createBasicTransformer";
+import { createCalloutTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownCalloutTransformer = () => {
-  return createBasicCalloutTransformer(({ block, children }) => {
+  return createCalloutTransformerFactory(({ block, children }) => {
     const text = MarkdownUtils.richTextsToMarkdown(block.callout.rich_text);
     let result = text;
     if (children !== "") {

@@ -1,7 +1,7 @@
-import { createBasicChildPageTransformer } from "./createBasicTransformer";
+import { createChildPageTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownChildPageTransformer = () => {
-  return createBasicChildPageTransformer(() => {
+  return createChildPageTransformerFactory(() => {
     return "";
   });
 };

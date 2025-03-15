@@ -1,6 +1,6 @@
 import {
   MarkdownUtils,
-  createBasicFileTransformer,
+  createFileTransformerFactory,
   createNoChangeFileObjectAdapter,
 } from "@notion-md-converter/core";
 import type { FileAdapter, FileTransformer } from "@notion-md-converter/core/types";
@@ -11,7 +11,7 @@ export const createZennMarkdownFileTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): FileTransformer => {
-  return createBasicFileTransformer(({ block }) => {
+  return createFileTransformerFactory(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.file);
     const caption =

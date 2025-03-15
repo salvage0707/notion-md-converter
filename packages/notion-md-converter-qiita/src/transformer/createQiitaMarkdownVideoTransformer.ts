@@ -1,6 +1,6 @@
 import {
   MarkdownUtils,
-  createBasicVideoTransformer,
+  createVideoTransformerFactory,
   createNoChangeFileObjectAdapter,
   getProvider,
   isURL,
@@ -13,7 +13,7 @@ export const createQiitaMarkdownVideoTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): VideoTransformer => {
-  return createBasicVideoTransformer(({ block }) => {
+  return createVideoTransformerFactory(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
 

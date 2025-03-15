@@ -1,6 +1,6 @@
 import {
   MarkdownUtils,
-  createBasicVideoTransformer,
+  createVideoTransformerFactory,
   createNoChangeFileObjectAdapter,
   isURL,
 } from "@notion-md-converter/core";
@@ -12,7 +12,7 @@ export const createZennMarkdownVideoTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): VideoTransformer => {
-  return createBasicVideoTransformer(({ block }) => {
+  return createVideoTransformerFactory(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
 

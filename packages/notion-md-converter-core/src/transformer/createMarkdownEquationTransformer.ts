@@ -1,10 +1,10 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicEquationTransformer } from "./createBasicTransformer";
+import { createEquationTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownEquationTransformer = ({
   type = "equation",
 }: { type?: "code" | "equation" } = {}) => {
-  return createBasicEquationTransformer(({ block }) => {
+  return createEquationTransformerFactory(({ block }) => {
     const text = block.equation.expression;
     return MarkdownUtils.wrapWithNewLines(
       type === "code" ? MarkdownUtils.codeBlock(text, "txt") : MarkdownUtils.blockEquation(text),

@@ -1,14 +1,14 @@
 import {
   MarkdownUtils,
   TransformerUtils,
-  createBasicEmbedTransformer,
+  createEmbedTransformerFactory,
 } from "@notion-md-converter/core";
 import type { EmbedTransformer } from "@notion-md-converter/core/types";
 import type { EmbedByUrlOptions } from "../utils";
 import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
-  return createBasicEmbedTransformer(({ block, metadata }) => {
+  return createEmbedTransformerFactory(({ block, metadata }) => {
     const getOptions = () => {
       const options: EmbedByUrlOptions = {};
       if (metadata.id) {

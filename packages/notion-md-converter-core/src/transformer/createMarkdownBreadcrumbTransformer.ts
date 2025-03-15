@@ -1,7 +1,7 @@
-import { createBasicBreadcrumbTransformer } from "./createBasicTransformer";
+import { createBreadcrumbTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownBreadcrumbTransformer = () => {
-  return createBasicBreadcrumbTransformer(() => {
+  return createBreadcrumbTransformerFactory(() => {
     return "";
   });
 };

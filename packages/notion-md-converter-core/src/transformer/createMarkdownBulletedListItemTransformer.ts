@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicBulletedListItemTransformer } from "./createBasicTransformer";
+import { createBulletedListItemTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownBulletedListItemTransformer = () => {
-  return createBasicBulletedListItemTransformer(({ block, children }) => {
+  return createBulletedListItemTransformerFactory(({ block, children }) => {
     const text = MarkdownUtils.richTextsToMarkdown(block.bulleted_list_item.rich_text);
     const formattedChildren = MarkdownUtils.indent(children);
     const bulletText = MarkdownUtils.bulletList(text);

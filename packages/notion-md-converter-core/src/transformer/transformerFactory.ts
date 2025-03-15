@@ -67,7 +67,7 @@ export class UnsupportedBlockError extends Error {
   }
 }
 
-export const createBasicBookmarkTransformer = (
+export const createBookmarkTransformerFactory = (
   execute: (args: { block: BookmarkBlock }) => string,
 ): BookmarkTransformer => {
   return (context) => {
@@ -78,7 +78,7 @@ export const createBasicBookmarkTransformer = (
   };
 };
 
-export const createBasicBreadcrumbTransformer = (
+export const createBreadcrumbTransformerFactory = (
   execute: (args: { block: BreadcrumbBlock }) => string,
 ): BreadcrumbTransformer => {
   return (context) => {
@@ -86,7 +86,7 @@ export const createBasicBreadcrumbTransformer = (
   };
 };
 
-export const createBasicCalloutTransformer = (
+export const createCalloutTransformerFactory = (
   execute: (args: { block: CalloutBlock; children: string }) => string,
 ): CalloutTransformer => {
   return (context) => {
@@ -95,7 +95,7 @@ export const createBasicCalloutTransformer = (
   };
 };
 
-export const createBasicCodeTransformer = (
+export const createCodeTransformerFactory = (
   execute: (args: {
     block: CodeBlock;
     metadata: { filename: string; language: CodeLanguage } & CaptionMetadata;
@@ -113,7 +113,7 @@ export const createBasicCodeTransformer = (
   };
 };
 
-export const createBasicColumnListTransformer = (
+export const createColumnListTransformerFactory = (
   execute: (args: { block: ColumnListBlock; columns: string[] }) => string,
 ): ColumnListTransformer => {
   return (context) => {
@@ -123,7 +123,7 @@ export const createBasicColumnListTransformer = (
   };
 };
 
-export const createBasicDividerTransformer = (
+export const createDividerTransformerFactory = (
   execute: (args: { block: DividerBlock }) => string,
 ): DividerTransformer => {
   return (context) => {
@@ -131,7 +131,7 @@ export const createBasicDividerTransformer = (
   };
 };
 
-export const createBasicEquationTransformer = (
+export const createEquationTransformerFactory = (
   execute: (args: { block: EquationBlock }) => string,
 ): EquationTransformer => {
   return (context) => {
@@ -139,7 +139,7 @@ export const createBasicEquationTransformer = (
   };
 };
 
-export const createBasicFileTransformer = (
+export const createFileTransformerFactory = (
   execute: (args: { block: FileBlock }) => string,
 ): FileTransformer => {
   return (context) => {
@@ -147,7 +147,7 @@ export const createBasicFileTransformer = (
   };
 };
 
-export const createBasicHeadingTransformer = (
+export const createHeadingTransformerFactory = (
   execute: (args: {
     block: Heading1Block | Heading2Block | Heading3Block;
     level: 1 | 2 | 3;
@@ -188,7 +188,7 @@ export const createBasicHeadingTransformer = (
   };
 };
 
-export const createBasicImageTransformer = (
+export const createImageTransformerFactory = (
   execute: (args: { block: ImageBlock; metadata: CaptionMetadata }) => string,
 ): ImageTransformer => {
   return (context) => {
@@ -203,7 +203,7 @@ export const createBasicImageTransformer = (
   };
 };
 
-export const createBasicLinkPreviewTransformer = (
+export const createLinkPreviewTransformerFactory = (
   execute: (args: { block: LinkPreviewBlock }) => string,
 ): LinkPreviewTransformer => {
   return (context) => {
@@ -211,7 +211,7 @@ export const createBasicLinkPreviewTransformer = (
   };
 };
 
-export const createBasicBulletedListItemTransformer = (
+export const createBulletedListItemTransformerFactory = (
   execute: (args: { block: BulletedListItemBlock; children: string }) => string,
 ): BulletedListItemTransformer => {
   return (context) => {
@@ -220,7 +220,7 @@ export const createBasicBulletedListItemTransformer = (
   };
 };
 
-export const createBasicNumberedListItemTransformer = (
+export const createNumberedListItemTransformerFactory = (
   execute: (args: {
     block: NumberedListItemBlock;
     children: string;
@@ -243,7 +243,7 @@ export const createBasicNumberedListItemTransformer = (
   };
 };
 
-export const createBasicTodoTransformer = (
+export const createTodoTransformerFactory = (
   execute: (args: { block: ToDoBlock; children: string }) => string,
 ): ToDoTransformer => {
   return (context) => {
@@ -252,7 +252,7 @@ export const createBasicTodoTransformer = (
   };
 };
 
-export const createBasicParagraphTransformer = (
+export const createParagraphTransformerFactory = (
   execute: (args: { block: ParagraphBlock; children: string }) => string,
 ): ParagraphTransformer => {
   return (context) => {
@@ -261,7 +261,7 @@ export const createBasicParagraphTransformer = (
   };
 };
 
-export const createBasicPDFTransformer = (
+export const createPDFTransformerFactory = (
   execute: (args: { block: PdfBlock }) => string,
 ): PDFTransformer => {
   return (context) => {
@@ -269,7 +269,7 @@ export const createBasicPDFTransformer = (
   };
 };
 
-export const createBasicQuoteTransformer = (
+export const createQuoteTransformerFactory = (
   execute: (args: { block: QuoteBlock; children: string }) => string,
 ): QuoteTransformer => {
   return (context) => {
@@ -278,7 +278,7 @@ export const createBasicQuoteTransformer = (
   };
 };
 
-export const createBasicSyncedBlockTransformer = (
+export const createSyncedBlockTransformerFactory = (
   execute: (args: {
     block: SyncedBlock;
     isSynchronizationSource: boolean;
@@ -296,7 +296,7 @@ export const createBasicSyncedBlockTransformer = (
   };
 };
 
-export const createBasicTableOfContentsTransformer = (
+export const createTableOfContentsTransformerFactory = (
   execute: (args: { block: TableOfContentsBlock }) => string,
 ): TableOfContentsTransformer => {
   return (context) => {
@@ -304,7 +304,7 @@ export const createBasicTableOfContentsTransformer = (
   };
 };
 
-export const createBasicTableTransformer = (
+export const createTableTransformerFactory = (
   execute: (args: {
     block: TableBlock;
     header: TableRowBlock;
@@ -319,7 +319,7 @@ export const createBasicTableTransformer = (
   };
 };
 
-export const createBasicToggleTransformer = (
+export const createToggleTransformerFactory = (
   execute: (args: { block: ToggleBlock; children: string }) => string,
 ): ToggleTransformer => {
   return (context) => {
@@ -328,7 +328,7 @@ export const createBasicToggleTransformer = (
   };
 };
 
-export const createBasicVideoTransformer = (
+export const createVideoTransformerFactory = (
   execute: (args: { block: VideoBlock }) => string,
 ): VideoTransformer => {
   return (context) => {
@@ -341,7 +341,7 @@ export const createBasicVideoTransformer = (
   };
 };
 
-export const createBasicEmbedTransformer = (
+export const createEmbedTransformerFactory = (
   execute: (args: {
     block: EmbedBlock;
     metadata: CaptionMetadata;
@@ -357,7 +357,7 @@ export const createBasicEmbedTransformer = (
   };
 };
 
-export const createBasicChildDatabaseTransformer = (
+export const createChildDatabaseTransformerFactory = (
   execute: (args: { block: ChildDatabaseBlock }) => string,
 ): ChildDatabaseTransformer => {
   return (context) => {
@@ -365,7 +365,7 @@ export const createBasicChildDatabaseTransformer = (
   };
 };
 
-export const createBasicChildPageTransformer = (
+export const createChildPageTransformerFactory = (
   execute: (args: { block: ChildPageBlock }) => string,
 ): ChildPageTransformer => {
   return (context) => {
