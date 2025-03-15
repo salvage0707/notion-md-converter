@@ -1,7 +1,7 @@
-import { createBasicChildDatabaseTransformer } from "./createBasicTransformer";
+import { createChildDatabaseTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownChildDatabaseTransformer = () => {
-  return createBasicChildDatabaseTransformer(() => {
+  return createChildDatabaseTransformerFactory(() => {
     return "";
   });
 };

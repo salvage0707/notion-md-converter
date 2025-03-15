@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicDividerTransformer } from "./createBasicTransformer";
+import { createDividerTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownDividerTransformer = () => {
-  return createBasicDividerTransformer(() =>
+  return createDividerTransformerFactory(() =>
     MarkdownUtils.wrapWithNewLines(MarkdownUtils.horizontalRule()),
   );
 };

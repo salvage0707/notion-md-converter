@@ -1,7 +1,7 @@
 import {
   MarkdownUtils,
   TransformerUtils,
-  createBasicImageTransformer,
+  createImageTransformerFactory,
   createNoChangeFileObjectAdapter,
 } from "@notion-md-converter/core";
 import type { FileAdapter, ImageTransformer } from "@notion-md-converter/core/types";
@@ -15,7 +15,7 @@ export const createZennMarkdownImageTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): ImageTransformer => {
-  return createBasicImageTransformer(({ block, metadata }) => {
+  return createImageTransformerFactory(({ block, metadata }) => {
     const { width } = metadata as ZennImageMetadata;
 
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();

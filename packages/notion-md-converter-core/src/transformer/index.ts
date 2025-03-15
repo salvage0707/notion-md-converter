@@ -1,4 +1,4 @@
-export * from "./createBasicTransformer";
+export * from "./transformerFactory";
 export * from "./createMarkdownBookmarkTransformer";
 export * from "./createMarkdownBreadcrumbTransformer";
 export * from "./createMarkdownBulletedListItemTransformer";

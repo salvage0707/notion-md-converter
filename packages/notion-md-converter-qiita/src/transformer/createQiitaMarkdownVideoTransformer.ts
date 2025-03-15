@@ -1,7 +1,7 @@
 import {
   MarkdownUtils,
-  createBasicVideoTransformer,
   createNoChangeFileObjectAdapter,
+  createVideoTransformerFactory,
   getProvider,
   isURL,
 } from "@notion-md-converter/core";
@@ -13,7 +13,7 @@ export const createQiitaMarkdownVideoTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): VideoTransformer => {
-  return createBasicVideoTransformer(({ block }) => {
+  return createVideoTransformerFactory(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
 

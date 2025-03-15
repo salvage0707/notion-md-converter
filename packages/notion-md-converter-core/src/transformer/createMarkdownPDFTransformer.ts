@@ -1,14 +1,14 @@
 import type { FileAdapter } from "@notion-md-converter/types";
 import { createNoChangeFileObjectAdapter } from "../adapter";
 import { MarkdownUtils } from "../utils";
-import { createBasicPDFTransformer } from "./createBasicTransformer";
+import { createPDFTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownPDFTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},
 ) => {
-  return createBasicPDFTransformer(({ block }) => {
+  return createPDFTransformerFactory(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.pdf);
     const caption =

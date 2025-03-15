@@ -1,14 +1,14 @@
 import type { FileAdapter } from "@notion-md-converter/types";
 import { createNoChangeFileObjectAdapter } from "../adapter";
 import { MarkdownUtils } from "../utils";
-import { createBasicImageTransformer } from "./createBasicTransformer";
+import { createImageTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownImageTransformer = (
   options: {
     fileAdapter?: FileAdapter;
   } = {},
 ) => {
-  return createBasicImageTransformer(({ block }) => {
+  return createImageTransformerFactory(({ block }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);
     const caption =

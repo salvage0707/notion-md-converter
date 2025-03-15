@@ -1,9 +1,9 @@
-import { createBasicEmbedTransformer, getProvider } from "@notion-md-converter/core";
+import { createEmbedTransformerFactory, getProvider } from "@notion-md-converter/core";
 import type { EmbedTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
 
 export const createQiitaMarkdownEmbedTransformer = (): EmbedTransformer => {
-  return createBasicEmbedTransformer(({ block, metadata }) => {
+  return createEmbedTransformerFactory(({ block, metadata }) => {
     const url = block.embed.url;
     const provider = getProvider(url);
     if (provider === "codepen") {

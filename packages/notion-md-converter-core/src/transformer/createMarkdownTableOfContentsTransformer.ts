@@ -1,7 +1,7 @@
-import { createBasicTableOfContentsTransformer } from "./createBasicTransformer";
+import { createTableOfContentsTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownTableOfContentsTransformer = () => {
-  return createBasicTableOfContentsTransformer(() => {
+  return createTableOfContentsTransformerFactory(() => {
     return "";
   });
 };

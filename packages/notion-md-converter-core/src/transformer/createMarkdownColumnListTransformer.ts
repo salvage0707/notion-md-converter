@@ -1,7 +1,7 @@
-import { createBasicColumnListTransformer } from "./createBasicTransformer";
+import { createColumnListTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownColumnListTransformer = () => {
-  return createBasicColumnListTransformer(({ columns }) => {
+  return createColumnListTransformerFactory(({ columns }) => {
     return columns.join("\n");
   });
 };

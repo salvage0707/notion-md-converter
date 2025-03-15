@@ -1,7 +1,7 @@
-import { createBasicSyncedBlockTransformer } from "./createBasicTransformer";
+import { createSyncedBlockTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownSyncedBlockTransformer = () => {
-  return createBasicSyncedBlockTransformer(({ children }) => {
+  return createSyncedBlockTransformerFactory(({ children }) => {
     return children;
   });
 };

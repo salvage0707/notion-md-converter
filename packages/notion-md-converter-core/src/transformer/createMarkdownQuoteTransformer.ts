@@ -1,8 +1,8 @@
 import { MarkdownUtils } from "../utils";
-import { createBasicQuoteTransformer } from "./createBasicTransformer";
+import { createQuoteTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownQuoteTransformer = () => {
-  return createBasicQuoteTransformer(({ block, children }) => {
+  return createQuoteTransformerFactory(({ block, children }) => {
     const text = MarkdownUtils.richTextsToMarkdown(block.quote.rich_text);
     let result = text;
     if (children !== "") {

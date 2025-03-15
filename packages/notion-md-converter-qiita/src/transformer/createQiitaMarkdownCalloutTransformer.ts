@@ -1,4 +1,4 @@
-import { MarkdownUtils, createBasicCalloutTransformer } from "@notion-md-converter/core";
+import { MarkdownUtils, createCalloutTransformerFactory } from "@notion-md-converter/core";
 import type { ApiColor, CalloutTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
 
@@ -11,7 +11,7 @@ export const createQiitaMarkdownCalloutTransformer = (
     alertColors?: ApiColor[];
   } = {},
 ): CalloutTransformer => {
-  return createBasicCalloutTransformer(({ block, children }) => {
+  return createCalloutTransformerFactory(({ block, children }) => {
     const warnColors = options.warnColors ?? DEFAULT_WARN_COLORS;
     const alertColors = options.alertColors ?? DEFAULT_ALERT_COLORS;
 
