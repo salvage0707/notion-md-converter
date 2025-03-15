@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "MEMORY_FILE_PATH=$(pwd)/mcp/tmp/server-memory.json npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    }
+  }
+}
