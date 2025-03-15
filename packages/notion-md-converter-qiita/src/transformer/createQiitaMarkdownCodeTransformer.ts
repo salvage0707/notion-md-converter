@@ -7,20 +7,22 @@ type QiitaCodeMetadata = {
 };
 
 export const createQiitaMarkdownCodeTransformer = (): CodeTransformer => {
-  return createCodeTransformerFactory(({ block, metadata: { language, filename, ...metadata } }) => {
-    const { diff } = metadata as QiitaCodeMetadata;
+  return createCodeTransformerFactory(
+    ({ block, metadata: { language, filename, ...metadata } }) => {
+      const { diff } = metadata as QiitaCodeMetadata;
 
-    const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {
-      bold: false,
-      italic: false,
-      strikethrough: false,
-      underline: false,
-      code: false,
-      color: false,
-    });
+      const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {
+        bold: false,
+        italic: false,
+        strikethrough: false,
+        underline: false,
+        code: false,
+        color: false,
+      });
 
-    return MarkdownUtils.wrapWithNewLines(
-      QiitaMarkdownUtils.codeBlock(text, { diff: diff === "true", language, filename }),
-    );
-  });
+      return MarkdownUtils.wrapWithNewLines(
+        QiitaMarkdownUtils.codeBlock(text, { diff: diff === "true", language, filename }),
+      );
+    },
+  );
 };
