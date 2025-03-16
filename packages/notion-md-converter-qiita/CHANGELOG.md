@@ -1,5 +1,14 @@
 # @notion-md-converter/qiita
 
+## 0.7.3
+
+### Patch Changes
+
+- [#61](https://github.com/salvage0707/notion-md-converter/pull/61) [`3e3b116`](https://github.com/salvage0707/notion-md-converter/commit/3e3b1163f97726c827f828f4af1326e7ba34a6c0) Thanks [@salvage0707](https://github.com/salvage0707)! - factory メソッドの命名を変更し、関数の役割をわかりやすくする
+
+- Updated dependencies [[`3e3b116`](https://github.com/salvage0707/notion-md-converter/commit/3e3b1163f97726c827f828f4af1326e7ba34a6c0)]:
+  - @notion-md-converter/core@0.7.3
+
 ## 0.7.2
 
 ### Patch Changes
