@@ -25,9 +25,9 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const result = transformer(context);
 
     expect(result).toBe(dedent({ wrap: true })`
-      :::message
-      テストメッセージ
-      :::
+      <Callout type="info" title="">
+        テストメッセージ
+      </Callout>
     `);
   });
 
@@ -47,9 +47,9 @@ describe("createZennMarkdownCalloutTransformer", () => {
     const result = transformer(context);
 
     expect(result).toBe(dedent({ wrap: true })`
-      :::message alert
-      アラートメッセージ
-      :::
+      <Callout type="danger" title="">
+        アラートメッセージ
+      </Callout>
     `);
   });
 
