@@ -1,5 +1,11 @@
 # @notion-md-converter/core
 
+## 0.7.4
+
+### Patch Changes
+
+- [#66](https://github.com/salvage0707/notion-md-converter/pull/66) [`1f7e025`](https://github.com/salvage0707/notion-md-converter/commit/1f7e025b5141355786918215590deb904a43ccf5) Thanks [@salvage0707](https://github.com/salvage0707)! - 前後に空白があある場合に RichText のデコレーションが正しく動作しない不具合を修正
+
 ## 0.7.3
 
 ### Patch Changes

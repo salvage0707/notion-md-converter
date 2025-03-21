@@ -1,5 +1,12 @@
 # @notion-md-converter/zenn
 
+## 0.7.4
+
+### Patch Changes
+
+- Updated dependencies [[`1f7e025`](https://github.com/salvage0707/notion-md-converter/commit/1f7e025b5141355786918215590deb904a43ccf5)]:
+  - @notion-md-converter/core@0.7.4
+
 ## 0.7.3
 
 ### Patch Changes
