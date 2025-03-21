@@ -8,7 +8,6 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
       code: createMarkdownCodeTransformer({
         languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING
       }),
-      equation: createUnsupportedBlockTransformer(),
       to_do: createUnsupportedBlockTransformer(),
       paragraph: createUnsupportedBlockTransformer(),
       table_of_contents: createUnsupportedBlockTransformer(),
@@ -16,5 +15,28 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
       pdf: createUnsupportedBlockTransformer(),
       ...transformers,
     });
+  }
+
+  protected onComplete(markdown: string): string {
+    // $が入っていたら数式ありとする
+    const hasEquation = markdown.match(/\$/);
+    if (hasEquation) {
+      const mathjaxScript = [
+        "<!-- script for supporting mathematical notation -->",
+        "<script type='text/x-mathjax-config'>",
+        "  MathJax.Hub.Config({",
+        "    tex2jax: {",
+        "      inlineMath: [ ['$','$'], ['\\(','\\)'] ],",
+        "      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],",
+        "      processEscapes: true",
+        "    }",
+        "  }",
+        "</script>",
+        "<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>",
+      ].join("\n");
+      return [mathjaxScript, markdown].join("\n\n");
+    }
+
+    return markdown;
   }
 }

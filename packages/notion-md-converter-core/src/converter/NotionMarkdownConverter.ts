@@ -125,10 +125,6 @@ export class NotionMarkdownConverter {
       context.currentBlock = block;
       context.currentBlockIndex = index;
 
-      // if (!isRootBlock(block)) {
-      //   throw new NotRootBlockError(block);
-      // }
-
       if (isBookmarkBlock(block)) {
         const ctx = context as Context<BookmarkBlock>;
         return this.transformers.bookmark?.(ctx) ?? "";
@@ -245,6 +241,12 @@ export class NotionMarkdownConverter {
       }
     });
 
-    return transformedBlocks.filter((b) => b !== null).join("\n");
+    const convertedMarkdown = transformedBlocks.filter((b) => b !== null).join("\n");
+    return this.onComplete(convertedMarkdown);
+  }
+
+  protected onComplete(markdown: string): string {
+    // 変換後にカスタマイズしたいときに使用する
+    return markdown;
   }
 }
