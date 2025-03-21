@@ -33,8 +33,8 @@ describe("bold", () => {
     expect(MarkdownUtils.bold("Hello")).toBe("**Hello**");
   });
 
-  it("空文字を太字に変換できること", () => {
-    expect(MarkdownUtils.bold("")).toBe("****");
+  it("空文字は装飾せずそのまま返すこと", () => {
+    expect(MarkdownUtils.bold("")).toBe("");
   });
 });
 
@@ -43,8 +43,8 @@ describe("italic", () => {
     expect(MarkdownUtils.italic("Hello")).toBe("*Hello*");
   });
 
-  it("空文字をイタリックに変換できること", () => {
-    expect(MarkdownUtils.italic("")).toBe("**");
+  it("空文字は装飾せずそのまま返すこと", () => {
+    expect(MarkdownUtils.italic("")).toBe("");
   });
 });
 
@@ -53,8 +53,8 @@ describe("strikethrough", () => {
     expect(MarkdownUtils.strikethrough("Hello")).toBe("~~Hello~~");
   });
 
-  it("空文字を取り消し線付きに変換できること", () => {
-    expect(MarkdownUtils.strikethrough("")).toBe("~~~~");
+  it("空文字は装飾せずそのまま返すこと", () => {
+    expect(MarkdownUtils.strikethrough("")).toBe("");
   });
 });
 
@@ -479,5 +479,50 @@ describe("comment", () => {
     expect(MarkdownUtils.comment("<script>alert('test')</script>")).toBe(
       "<!-- <script>alert('test')</script> -->",
     );
+  });
+});
+
+describe("decoration", () => {
+  it("通常のテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("Hello", { decoration: "**" })).toBe("**Hello**");
+  });
+
+  it("前後に空白があるテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("  Hello  ", { decoration: "**" })).toBe("  **Hello**  ");
+  });
+
+  it("前に空白があるテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("  Hello", { decoration: "**" })).toBe("  **Hello**");
+  });
+
+  it("後に空白があるテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("Hello  ", { decoration: "**" })).toBe("**Hello**  ");
+  });
+
+  it("間に空白があるテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("Hello World", { decoration: "**" })).toBe("**Hello World**");
+  });
+
+  it("複数の空白を含むテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("Hello  World", { decoration: "**" })).toBe("**Hello  World**");
+  });
+
+  it("空文字列は装飾せずそのまま返すこと", () => {
+    expect(MarkdownUtils.decoration("", { decoration: "**" })).toBe("");
+  });
+
+  it("空白のみの文字列は装飾せずそのまま返すこと", () => {
+    expect(MarkdownUtils.decoration("   ", { decoration: "**" })).toBe("   ");
+  });
+
+  it("特殊文字を含むテキストを装飾できること", () => {
+    expect(MarkdownUtils.decoration("Hello, World!", { decoration: "**" })).toBe(
+      "**Hello, World!**",
+    );
+  });
+
+  // italicとboldが同時に適用される場合を考慮して
+  it("同じ装飾で始まるテキストでも装飾がつくこと", () => {
+    expect(MarkdownUtils.decoration("**Hello**", { decoration: "*" })).toBe("***Hello***");
   });
 });
