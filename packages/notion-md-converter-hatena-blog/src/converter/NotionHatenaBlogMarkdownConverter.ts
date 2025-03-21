@@ -1,14 +1,15 @@
 import { createMarkdownCodeTransformer, createUnsupportedBlockTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
 import { HatenaBlogMarkdownUtils } from "../utils";
+import { createHatenaBlogMarkdownTodoListItemTransformer } from "../transformer";
 
 export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
   constructor(transformers: TransformerMapping = {}) {
     super({
       code: createMarkdownCodeTransformer({
-        languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING
+        languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
       }),
-      to_do: createUnsupportedBlockTransformer(),
+      to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
       paragraph: createUnsupportedBlockTransformer(),
       table_of_contents: createUnsupportedBlockTransformer(),
       embed: createUnsupportedBlockTransformer(),
