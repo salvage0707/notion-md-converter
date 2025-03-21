@@ -54,16 +54,43 @@ const COLOR_MAP: ColorMap = {
   brown_background: "brown",
 };
 
+type DecorationFuncOption = {
+  decoration: string;
+}
+const decoration = (text: string, options: DecorationFuncOption) => {
+  // 空文字列や空白のみの場合は処理しない
+  if (!text || !text.trim()) {
+    return text;
+  }
+
+  // 正規表現を使って先頭と末尾の空白をキャプチャしながら内部テキストも取得
+  const match = text.match(/^(\s*)(.+?)(\s*)$/);
+
+  if (!match) {
+    return text; // マッチしない場合は元のテキストを返す
+  }
+
+  const [, leadingSpaces, content, trailingSpaces] = match;
+  const { decoration } = options;
+
+
+  // 前後の空白を保持しつつ、内部テキストを装飾記号で囲む
+  return `${leadingSpaces}${decoration}${content}${decoration}${trailingSpaces}`;
+}
+
 const bold = (text: string): string => {
-  return `**${text}**`;
+  // decoration関数を使用（空文字列や空白のみの場合は内部で処理される）
+  return decoration(text, { decoration: "**" });
 };
 
 const italic = (text: string): string => {
-  return `*${text}*`;
+  // decoration関数を使用（空文字列や空白のみの場合は内部で処理される）
+  return decoration(text, { decoration: "*" });
 };
 
 const strikethrough = (text: string): string => {
-  return `~~${text}~~`;
+  // decoration関数を使用（空文字列や空白のみの場合は内部で処理される）
+  return decoration(text, { decoration: "~~" });
 };
 
 const inlineCode = (text: string): string => {
@@ -267,23 +294,33 @@ const richTextsToMarkdown = (
   const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
     let markdown = text.plain_text;
 
+    if (text.annotations.code && enableAnnotations.code) {
+      markdown = inlineCode(markdown);
+    }
     if (text.type === "equation" && enableAnnotations.equation) {
       markdown = inlineEquation(markdown);
     }
-    if (text.annotations.bold && enableAnnotations.bold) {
-      markdown = bold(markdown);
+    
+    // 太字とイタリックが同時に適用される場合は特殊処理
+    if (text.annotations.bold && text.annotations.italic && 
+        enableAnnotations.bold && enableAnnotations.italic) {
+      // イタリックと太字の両方を適用（***text***）
+      markdown = `***${markdown}***`;
+    } else {
+      // 個別に処理
+      if (text.annotations.bold && enableAnnotations.bold) {
+        markdown = bold(markdown);
+      }
+      if (text.annotations.italic && enableAnnotations.italic) {
+        markdown = italic(markdown);
+      }
     }
-    if (text.annotations.italic && enableAnnotations.italic) {
-      markdown = italic(markdown);
-    }
+    
     if (text.annotations.strikethrough && enableAnnotations.strikethrough) {
       markdown = strikethrough(markdown);
     }
     if (text.annotations.underline && enableAnnotations.underline) {
       markdown = underline(markdown);
-    }
-    if (text.annotations.code && enableAnnotations.code) {
-      markdown = inlineCode(markdown);
     }
     if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
       markdown = color(markdown, text.annotations.color);
@@ -337,4 +374,5 @@ export const MarkdownUtils = {
   video,
   richTextsToMarkdown,
   comment,
+  decoration,
 };
