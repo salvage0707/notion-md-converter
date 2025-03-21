@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/qiita",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Notion to Qiita Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
