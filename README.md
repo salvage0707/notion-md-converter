@@ -111,12 +111,11 @@ For example, define a custom transformer that increases the number of `#` in a M
 
 
 ```typescript
-import { MarkdownUtils } from "../utils";
-import { createBasicHeadingTransformer } from "./createBasicTransformer";
+import { createHeadingTransformerFactory, MarkdownUtils } from "@notion-md-converter/core";
 
 export const createMarkdownCustomHeadingTransformer = () => {
 	// Use a function to create a transformer
-  return createBasicHeadingTransformer(({ level, richText }) => {
+  return createHeadingTransformerFactory(({ level, richText }) => {
     const text = MarkdownUtils.convertRichTextsToMarkdown(richText);
     return MarkdownUtils.wrapWithNewLines(MarkdownUtils.heading(text, level + 1)); // add 1 level
   });
