@@ -516,7 +516,9 @@ describe("decoration", () => {
   });
 
   it("特殊文字を含むテキストを装飾できること", () => {
-    expect(MarkdownUtils.decoration("Hello, World!", { decoration: "**" })).toBe("**Hello, World!**");
+    expect(MarkdownUtils.decoration("Hello, World!", { decoration: "**" })).toBe(
+      "**Hello, World!**",
+    );
   });
 
   // italicとboldが同時に適用される場合を考慮して

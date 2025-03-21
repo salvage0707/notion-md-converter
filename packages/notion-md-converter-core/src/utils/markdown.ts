@@ -56,7 +56,7 @@ const COLOR_MAP: ColorMap = {
 
 type DecorationFuncOption = {
   decoration: string;
-}
+};
 const decoration = (text: string, options: DecorationFuncOption) => {
   // 空文字列や空白のみの場合は処理しない
   if (!text || !text.trim()) {
@@ -73,10 +73,9 @@ const decoration = (text: string, options: DecorationFuncOption) => {
   const [, leadingSpaces, content, trailingSpaces] = match;
   const { decoration } = options;
 
-
   // 前後の空白を保持しつつ、内部テキストを装飾記号で囲む
   return `${leadingSpaces}${decoration}${content}${decoration}${trailingSpaces}`;
-}
+};
 
 const bold = (text: string): string => {
   // decoration関数を使用（空文字列や空白のみの場合は内部で処理される）
@@ -300,10 +299,14 @@ const richTextsToMarkdown = (
     if (text.type === "equation" && enableAnnotations.equation) {
       markdown = inlineEquation(markdown);
     }
-    
+
     // 太字とイタリックが同時に適用される場合は特殊処理
-    if (text.annotations.bold && text.annotations.italic && 
-        enableAnnotations.bold && enableAnnotations.italic) {
+    if (
+      text.annotations.bold &&
+      text.annotations.italic &&
+      enableAnnotations.bold &&
+      enableAnnotations.italic
+    ) {
       // イタリックと太字の両方を適用（***text***）
       markdown = `***${markdown}***`;
     } else {
@@ -315,7 +318,7 @@ const richTextsToMarkdown = (
         markdown = italic(markdown);
       }
     }
-    
+
     if (text.annotations.strikethrough && enableAnnotations.strikethrough) {
       markdown = strikethrough(markdown);
     }
