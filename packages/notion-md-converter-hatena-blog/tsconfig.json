@@ -1,0 +1,8 @@
+{
+  "extends": "@notion-md-converter/config/tsconfig/tsconfig.json",
+  "references": [
+    {
+      "path": "../notion-md-converter-core"
+    }
+  ]
+}
