@@ -1,4 +1,4 @@
-import { getProvider, getYoutubeVideoIdFromEmbedUrl } from "@notion-md-converter/core";
+import { getProvider, getYoutubeVideoIdFromEmbedUrl, HTMLUtils } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 
 /**
@@ -124,21 +124,6 @@ const codeBlock = (
   return `\`\`\`${prefix}\n${code}\n\`\`\``;
 };
 
-const objectToPropertiesStr = (object: Record<string, string | boolean>) => {
-  return Object.entries(object)
-    .map(([key, value]) => {
-      if (value === undefined) {
-        return null;
-      }
-      if (typeof value === "boolean") {
-        return value ? key : null;
-      }
-      return `${key}="${value}"`;
-    })
-    .filter((v) => !!v)
-    .join(" ");
-};
-
 const equationBlock = (equation: string) => {
   return `\`\`\`math\n${equation}\n\`\`\``;
 };
@@ -202,7 +187,7 @@ const embedAsciinema = (url: string) => {
     src: url,
     async: "",
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
 };
 
@@ -217,7 +202,7 @@ const embedFigma = (url: string, options: EmbedFigmaOptions = {}) => {
     width: options.width || "800",
     src: `https://www.figma.com/embed?embed_host=astra&url=${url}`,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
@@ -229,7 +214,7 @@ const embedSpeakerDeck = (id: string) => {
     "data-ratio": "1.77777777777778",
     src: "https://speakerdeck.com/assets/embed.js",
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
 };
 
@@ -250,7 +235,7 @@ const embedSlideShare = (url: string, options: EmbedSlideShareOptions = {}) => {
     loading: "lazy",
     allowfullscreen: true,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
@@ -268,7 +253,7 @@ const embedGoogleSlide = (url: string, options: EmbedGoogleSlideOptions = {}) =>
     mozallowfullscreen: true,
     webkitallowfullscreen: true,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
@@ -280,7 +265,7 @@ const embedDocswell = (url: string) => {
     "data-src": url,
     "data-aspect": "0.5625",
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
 };
 
@@ -304,7 +289,7 @@ const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
     loading: "lazy",
     allowfullscreen: true,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 

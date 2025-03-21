@@ -1,4 +1,4 @@
-import { createMarkdownCodeTransformer, createMarkdownParagraphTransformer, createUnsupportedBlockTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
+import { createMarkdownCodeTransformer, createMarkdownParagraphTransformer, createMarkdownPDFTransformer, createUnsupportedBlockTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
 import { HatenaBlogMarkdownUtils } from "../utils";
 import { createHatenaBlogMarkdownTableOfContentsTransformer, createHatenaBlogMarkdownTodoListItemTransformer } from "../transformer";
@@ -13,7 +13,9 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
       paragraph: createMarkdownParagraphTransformer({ br: true }),
       table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
       embed: createUnsupportedBlockTransformer(),
-      pdf: createUnsupportedBlockTransformer(),
+      pdf: createMarkdownPDFTransformer({
+        outputType: "html-object"
+      }),
       ...transformers,
     });
   }

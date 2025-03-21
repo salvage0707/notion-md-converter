@@ -299,26 +299,12 @@ const richTextsToMarkdown = (
     if (text.type === "equation" && enableAnnotations.equation) {
       markdown = inlineEquation(markdown);
     }
-
-    // 太字とイタリックが同時に適用される場合は特殊処理
-    if (
-      text.annotations.bold &&
-      text.annotations.italic &&
-      enableAnnotations.bold &&
-      enableAnnotations.italic
-    ) {
-      // イタリックと太字の両方を適用（***text***）
-      markdown = `***${markdown}***`;
-    } else {
-      // 個別に処理
-      if (text.annotations.bold && enableAnnotations.bold) {
-        markdown = bold(markdown);
-      }
-      if (text.annotations.italic && enableAnnotations.italic) {
-        markdown = italic(markdown);
-      }
+    if (text.annotations.bold && enableAnnotations.bold) {
+      markdown = bold(markdown);
     }
-
+    if (text.annotations.italic && enableAnnotations.italic) {
+      markdown = italic(markdown);
+    }
     if (text.annotations.strikethrough && enableAnnotations.strikethrough) {
       markdown = strikethrough(markdown);
     }

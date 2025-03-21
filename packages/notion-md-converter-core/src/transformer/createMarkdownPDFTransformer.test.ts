@@ -4,45 +4,92 @@ import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
 
 describe("createMarkdownPDFTransformer", () => {
   const mockAdapter = vi.fn();
-  const transformer = createMarkdownPDFTransformer({
-    fileAdapter: mockAdapter,
-  });
-
+  
   beforeEach(() => {
     mockAdapter.mockReturnValue({
       url: "https://example.com/test.pdf",
     });
   });
 
-  it("captionがある場合、captionを含めてpdfブロックを変換できる", () => {
-    const block = createPdfBlock({
-      caption: [createTextRichText({ content: "example.pdf" })],
-    });
-    const context = createTransformerContext({
-      blocks: [block],
+  describe("outputType: markdown-link", () => {
+    const transformer = createMarkdownPDFTransformer({
+      fileAdapter: mockAdapter,
+      outputType: "markdown-link",
     });
 
-    mockAdapter.mockReturnValue({
-      url: "https://example.com/test.pdf",
-    });
-    const result = transformer(context);
+    it("captionがある場合、captionを含めてpdfブロックを変換できる", () => {
+      const block = createPdfBlock({
+        caption: [createTextRichText({ content: "example.pdf" })],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
 
-    expect(result).toBe("[example.pdf](https://example.com/test.pdf)");
+      mockAdapter.mockReturnValue({
+        url: "https://example.com/test.pdf",
+      });
+      const result = transformer(context);
+
+      expect(result).toBe("[example.pdf](https://example.com/test.pdf)");
+    });
+
+    it("captionがない場合、urlを含めてpdfブロックを変換できる", () => {
+      const block = createPdfBlock({
+        caption: [],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      mockAdapter.mockReturnValue({
+        url: "https://example.com/test.pdf",
+      });
+      const result = transformer(context);
+
+      expect(result).toBe("[https://example.com/test.pdf](https://example.com/test.pdf)");
+    });
   });
 
-  it("captionがない場合、urlを含めてpdfブロックを変換できる", () => {
-    const block = createPdfBlock({
-      caption: [],
-    });
-    const context = createTransformerContext({
-      blocks: [block],
+  describe("outputType: html-object", () => {
+    const transformer = createMarkdownPDFTransformer({
+      fileAdapter: mockAdapter,
+      outputType: "html-object",
     });
 
-    mockAdapter.mockReturnValue({
-      url: "https://example.com/test.pdf",
-    });
-    const result = transformer(context);
+    it("captionのメタデータがある場合、メタデータを含めてpdfブロックを変換できる", () => {
+      const block = createPdfBlock({
+        caption: [createTextRichText({ content: "width=600&height=400:example.pdf" })],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
 
-    expect(result).toBe("[https://example.com/test.pdf](https://example.com/test.pdf)");
+      mockAdapter.mockReturnValue({
+        url: "https://example.com/test.pdf",
+      });
+      const result = transformer(context);
+
+      expect(result).toBe(
+        '<object data="https://example.com/test.pdf" width="600" height="400"></object>',
+      );
+    });
+
+    it("captionのメタデータがない場合、urlを含めてpdfブロックを変換できる", () => {
+      const block = createPdfBlock({
+        caption: [],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      mockAdapter.mockReturnValue({
+        url: "https://example.com/test.pdf",
+      });
+      const result = transformer(context);
+
+      expect(result).toBe(
+        '<object data="https://example.com/test.pdf"></object>',
+      );
+    });
   });
 });
