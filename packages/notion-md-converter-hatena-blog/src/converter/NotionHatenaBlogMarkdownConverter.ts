@@ -4,6 +4,7 @@ import {
   createMarkdownBulletedListItemTransformer,
   createMarkdownCalloutTransformer,
   createMarkdownCodeTransformer,
+  createMarkdownEmbedTransformer,
   createMarkdownFileTransformer,
   createMarkdownHeadingTransformer,
   createMarkdownNumberedListItemTransformer,
@@ -12,7 +13,6 @@ import {
   createMarkdownQuoteTransformer,
   createMarkdownTableTransformer,
   createMarkdownToggleTransformer,
-  createUnsupportedBlockTransformer,
 } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
 import {
@@ -39,7 +39,10 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
       code: createMarkdownCodeTransformer({
         languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
       }),
-      embed: createUnsupportedBlockTransformer(),
+      embed: createMarkdownEmbedTransformer({
+        enableAnnotations,
+        enableEmbed: true,
+      }),
       file: createMarkdownFileTransformer({
         enableAnnotations,
       }),

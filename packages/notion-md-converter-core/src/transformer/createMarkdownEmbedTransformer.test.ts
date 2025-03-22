@@ -43,8 +43,10 @@ describe("createMarkdownEmbedTransformer", () => {
 
   describe("provider embedオプションありの場合", () => {
     const transformer = createMarkdownEmbedTransformer({
-      enableEmbed: {
+      supportedEmbedProviders: {
         youtube: true,
+        codepen: true,
+        asciinema: true,
       },
     });
 

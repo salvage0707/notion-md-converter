@@ -157,23 +157,32 @@ export const ProviderAsciinemaUtils = {
 /**
  * common
  */
-export type EnableEmbed = {
-  [key in ProviderType]?: boolean;
+type SupportedProviderType = Extract<ProviderType, "youtube" | "codepen" | "asciinema">;
+export type SupportedEmbedProviders = {
+  [key in SupportedProviderType]: boolean;
 };
-const embedByUrl = (url: string, metadata: CaptionMetadata = {}, options: { enableEmbed?: EnableEmbed } = {}) => {
-  const enableEmbed = {
+const isSupportedProvider = (provider: ProviderType): provider is SupportedProviderType => {
+  return ["youtube", "codepen", "asciinema"].includes(provider);
+};
+const embedByUrl = (
+  url: string,
+  metadata: CaptionMetadata = {},
+  options: { supportedEmbedProviders?: SupportedEmbedProviders } = {},
+) => {
+  const supportedEmbedProviders = options.supportedEmbedProviders || {
     youtube: true,
     codepen: true,
     asciinema: true,
-    ...options.enableEmbed,
   };
 
-  const provider = ProviderUtils.getType(url);
-  if (!provider || !enableEmbed[provider]) {
+  const providerType = getType(url);
+  if (!providerType || !isSupportedProvider(providerType)) return null;
+  
+  if (!supportedEmbedProviders[providerType]) {
     return null;
   }
 
-  switch (provider) {
+  switch (providerType) {
     case "youtube":
       return ProviderYoutubeUtils.embed(url, metadata);
     case "codepen":

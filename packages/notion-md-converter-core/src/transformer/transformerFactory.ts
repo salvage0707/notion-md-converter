@@ -58,8 +58,8 @@ import type {
   VideoBlock,
   VideoTransformer,
 } from "@notion-md-converter/types";
-import type { CaptionMetadata, ProviderType } from "../utils";
-import { ProviderUtils, TransformerUtils, isNumberedListItemBlock } from "../utils";
+import type { CaptionMetadata } from "../utils";
+import { TransformerUtils, isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -345,17 +345,14 @@ export const createEmbedTransformerFactory = (
   execute: (args: {
     block: EmbedBlock;
     metadata: CaptionMetadata;
-    providerType: ProviderType | null;
   }) => string,
 ): EmbedTransformer => {
   return (context) => {
     const { metadata } = TransformerUtils.getCaptionMetadata(context.currentBlock.embed.caption);
-    const providerType = ProviderUtils.getType(context.currentBlock.embed.url);
 
     return execute({
       block: context.currentBlock,
       metadata,
-      providerType,
     });
   };
 };
