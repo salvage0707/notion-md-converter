@@ -18,7 +18,7 @@ export const createQiitaMarkdownVideoTransformer = (
     const { url } = fileAdapter(block.video);
 
     if (isURL(url)) {
-      const provider = ProviderUtils.helper.getType(url);
+      const provider = ProviderUtils.getType(url);
       if (provider === "youtube") {
         return QiitaMarkdownUtils.embedYoutube(url);
       }

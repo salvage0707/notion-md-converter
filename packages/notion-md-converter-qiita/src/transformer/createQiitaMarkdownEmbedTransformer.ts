@@ -5,7 +5,7 @@ import { QiitaMarkdownUtils } from "../utils";
 export const createQiitaMarkdownEmbedTransformer = (): EmbedTransformer => {
   return createEmbedTransformerFactory(({ block, metadata }) => {
     const url = block.embed.url;
-    const provider = ProviderUtils.helper.getType(url);
+    const provider = ProviderUtils.getType(url);
     if (provider === "codepen") {
       return QiitaMarkdownUtils.embedCodePen(url, {
         height: metadata.height,

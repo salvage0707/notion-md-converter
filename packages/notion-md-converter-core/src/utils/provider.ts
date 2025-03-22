@@ -1,4 +1,5 @@
 import { HTMLUtils } from "./html";
+import type { CaptionMetadata } from "./transformer";
 
 const getType = (url: string) => {
   const urlObj = new URL(url);
@@ -55,7 +56,7 @@ const getType = (url: string) => {
   }
   return null;
 };
-export type ProviderType = ReturnType<typeof getType>;
+export type ProviderType = Exclude<ReturnType<typeof getType>, null>;
 
 /**
  * Youtube
@@ -66,10 +67,39 @@ const getYoutubeVideoIdFromEmbedUrl = (url: string) => {
   return searchParams.get("v");
 };
 
+export type EmbedYoutubeOptions = {
+  width?: string;
+  height?: string;
+};
+const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
+  const videoId = getYoutubeVideoIdFromEmbedUrl(url);
+  if (!videoId) {
+    return null;
+  }
+
+  const properties = {
+    width: options.width || "560",
+    height: options.height || "315",
+    src: `https://www.youtube.com/embed/${videoId}`,
+    frameborder: "0",
+    allow:
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+    loading: "lazy",
+    allowfullscreen: true,
+  };
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
+  return `<iframe ${propertiesStr}></iframe>`;
+};
+
+export const ProviderYoutubeUtils = {
+  getVideoIdFromUrl: getYoutubeVideoIdFromEmbedUrl,
+  embed: embedYoutube,
+};
+
 /**
  * CodePen
  */
-type EmbedCodePenOptions = {
+export type EmbedCodePenOptions = {
   height?: string;
   defaultTab?: string;
 };
@@ -97,14 +127,65 @@ const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
   return `${mountTarget}\n${script}`;
 };
 
+export const ProviderCodePenUtils = {
+  embed: embedCodePen,
+};
+
+/**
+ * Asciinema
+ */
+const embedAsciinema = (url: string) => {
+  if (!url.endsWith(".js")) {
+    return null;
+  }
+
+  const u = new URL(url);
+  const id = u.pathname.split("/")[1].replace(".js", "");
+  const properties = {
+    id: `asciicast-${id}`,
+    src: url,
+    async: true,
+  };
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
+  return `<script ${propertiesStr}></script>`;
+};
+
+export const ProviderAsciinemaUtils = {
+  embed: embedAsciinema,
+};
+
+/**
+ * common
+ */
+export type EnableEmbed = {
+  [key in ProviderType]?: boolean;
+};
+const embedByUrl = (url: string, metadata: CaptionMetadata = {}, options: { enableEmbed?: EnableEmbed } = {}) => {
+  const enableEmbed = {
+    youtube: true,
+    codepen: true,
+    asciinema: true,
+    ...options.enableEmbed,
+  };
+
+  const provider = ProviderUtils.getType(url);
+  if (!provider || !enableEmbed[provider]) {
+    return null;
+  }
+
+  switch (provider) {
+    case "youtube":
+      return ProviderYoutubeUtils.embed(url, metadata);
+    case "codepen":
+      return ProviderCodePenUtils.embed(url, metadata);
+    case "asciinema":
+      return ProviderAsciinemaUtils.embed(url);
+    default:
+      return null;
+  }
+};
+
 export const ProviderUtils = {
-  helper: {
-    getType
-  },
-  youtube: {
-    getVideoIdFromUrl: getYoutubeVideoIdFromEmbedUrl,
-  },
-  codePen: {
-    embed: embedCodePen,
-  },
+  getType,
+  embedByUrl,
 };

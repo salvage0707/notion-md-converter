@@ -214,7 +214,7 @@ const embedByURL = (
   url: string,
   options: EmbedByUrlOptions = {},
 ): { result: string; isEmbed: boolean } => {
-  const provider = ProviderUtils.helper.getType(url);
+  const provider = ProviderUtils.getType(url);
   switch (provider) {
     case "x":
       return { result: embedX(url), isEmbed: true };
