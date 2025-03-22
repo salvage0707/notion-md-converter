@@ -1,7 +1,7 @@
 import { CHAR, createQuoteBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
 
 describe("createMarkdownQuoteTransformer", () => {
   const transformer = createMarkdownQuoteTransformer();

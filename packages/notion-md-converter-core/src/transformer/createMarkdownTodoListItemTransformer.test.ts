@@ -1,7 +1,7 @@
 import { createTextRichText, createToDoBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { createMarkdownTodoListItemTransformer } from "./createMarkdownTodoListItemTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownTodoListItemTransformer } from "./createMarkdownTodoListItemTransformer";
 
 describe("createMarkdownTodoListItemTransformer", () => {
   const transformer = createMarkdownTodoListItemTransformer();

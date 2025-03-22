@@ -4,8 +4,8 @@ import {
   dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 
 describe("createMarkdownBulletedListItemTransformer", () => {
   const transformer = createMarkdownBulletedListItemTransformer();

@@ -1,7 +1,7 @@
 import { createTextRichText, createToggleBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { createMarkdownToggleTransformer } from "./createMarkdownToggleTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownToggleTransformer } from "./createMarkdownToggleTransformer";
 
 describe("createMarkdownToggleTransformer", () => {
   const transformer = createMarkdownToggleTransformer();

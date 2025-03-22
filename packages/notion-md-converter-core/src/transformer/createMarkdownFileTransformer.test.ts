@@ -4,8 +4,8 @@ import {
   createTextRichText,
   createTransformerContext,
 } from "@notion-md-converter/testing";
-import { createMarkdownFileTransformer } from "./createMarkdownFileTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownFileTransformer } from "./createMarkdownFileTransformer";
 
 describe("createMarkdownFileTransformer", () => {
   const mockAdapter = vi.fn();

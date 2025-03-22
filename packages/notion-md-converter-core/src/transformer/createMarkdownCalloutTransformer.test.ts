@@ -5,8 +5,8 @@ import {
   createTransformerContext,
   dedent,
 } from "@notion-md-converter/testing";
-import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 
 describe("createMarkdownCalloutTransformer", () => {
   const transformer = createMarkdownCalloutTransformer();

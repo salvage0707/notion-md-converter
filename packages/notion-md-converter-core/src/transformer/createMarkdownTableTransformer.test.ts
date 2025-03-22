@@ -6,8 +6,8 @@ import {
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import type { TextRichText } from "@notion-md-converter/types";
-import { createMarkdownTableTransformer } from "./createMarkdownTableTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownTableTransformer } from "./createMarkdownTableTransformer";
 
 const createRow = (
   plainTexts: string[],

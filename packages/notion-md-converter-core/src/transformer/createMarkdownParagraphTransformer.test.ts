@@ -1,7 +1,7 @@
 import { createParagraphBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { createMarkdownParagraphTransformer } from "./createMarkdownParagraphTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownParagraphTransformer } from "./createMarkdownParagraphTransformer";
 
 describe("createMarkdownParagraphTransformer", () => {
   const transformer = createMarkdownParagraphTransformer();

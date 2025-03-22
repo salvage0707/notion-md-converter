@@ -122,12 +122,16 @@ describe("link", () => {
 describe("color", () => {
   it("赤色のテキストに変換できること", () => {
     const redColor = MarkdownUtils.COLOR_MAP.red as string;
-    expect(MarkdownUtils.color("Hello", "red")).toBe(`<span style="color: ${redColor};">Hello</span>`);
+    expect(MarkdownUtils.color("Hello", "red")).toBe(
+      `<span style="color: ${redColor};">Hello</span>`,
+    );
   });
 
   it("青色のテキストに変換できること", () => {
     const blueColor = MarkdownUtils.COLOR_MAP.blue as string;
-    expect(MarkdownUtils.color("World", "blue")).toBe(`<span style="color: ${blueColor};">World</span>`);
+    expect(MarkdownUtils.color("World", "blue")).toBe(
+      `<span style="color: ${blueColor};">World</span>`,
+    );
   });
 
   it("背景色付きのテキストに変換できること", () => {

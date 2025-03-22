@@ -3,8 +3,8 @@ import {
   createTextRichText,
   createTransformerContext,
 } from "@notion-md-converter/testing";
-import { createMarkdownEmbedTransformer } from "./createMarkdownEmbedTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownEmbedTransformer } from "./createMarkdownEmbedTransformer";
 
 describe("createMarkdownEmbedTransformer", () => {
   const transformer = createMarkdownEmbedTransformer();
@@ -67,7 +67,9 @@ describe("createMarkdownEmbedTransformer", () => {
       const result = transformer(context);
 
       const redColor = MarkdownUtils.COLOR_MAP.red as string;
-      expect(result).toBe(`[<span style="color: ${redColor};">テストリンク</span>](https://example.com)`);
+      expect(result).toBe(
+        `[<span style="color: ${redColor};">テストリンク</span>](https://example.com)`,
+      );
     });
   });
 });

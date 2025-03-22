@@ -4,8 +4,8 @@ import {
   createTransformerContext,
   dedent,
 } from "@notion-md-converter/testing";
-import { createMarkdownNumberedListItemTransformer } from "./createMarkdownNumberedListItemTransformer";
 import { MarkdownUtils } from "../utils";
+import { createMarkdownNumberedListItemTransformer } from "./createMarkdownNumberedListItemTransformer";
 
 describe("createMarkdownNumberedListItemTransformer", () => {
   const transformer = createMarkdownNumberedListItemTransformer();
