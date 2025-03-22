@@ -1,4 +1,4 @@
-import { HTMLUtils, getProvider, getYoutubeVideoIdFromEmbedUrl } from "@notion-md-converter/core";
+import { HTMLUtils, ProviderUtils } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 
 /**
@@ -163,9 +163,7 @@ const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
     class: "codepen",
   };
   // ex) data-height="300" data-theme-id="0" data-slug-hash="dJgNLK" ...
-  const propertiesStr = Object.entries(properties)
-    .map(([key, value]) => `${key}="${value}"`)
-    .join(" ");
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   const mountTarget = `<p ${propertiesStr}></p>`;
   const script = `<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>`;
   return `${mountTarget}\n${script}`;
@@ -274,7 +272,7 @@ type EmbedYoutubeOptions = {
   height?: string;
 };
 const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
-  const videoId = getYoutubeVideoIdFromEmbedUrl(url);
+  const videoId = ProviderUtils.youtube.getVideoIdFromUrl(url);
   if (!videoId) {
     return url;
   }
@@ -305,7 +303,7 @@ const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
  * - youtube
  */
 const embedByURL = (url: string): { result: string; isEmbed: boolean } => {
-  const provider = getProvider(url);
+  const provider = ProviderUtils.helper.getType(url);
   if (!provider) {
     return { result: url, isEmbed: false };
   }

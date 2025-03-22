@@ -1,4 +1,4 @@
-import { getProvider } from "@notion-md-converter/core";
+import { ProviderUtils } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 /**
  * @see https://zenn.dev/zenn/articles/markdown-guide
@@ -214,7 +214,7 @@ const embedByURL = (
   url: string,
   options: EmbedByUrlOptions = {},
 ): { result: string; isEmbed: boolean } => {
-  const provider = getProvider(url);
+  const provider = ProviderUtils.helper.getType(url);
   switch (provider) {
     case "x":
       return { result: embedX(url), isEmbed: true };
