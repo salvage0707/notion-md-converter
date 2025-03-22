@@ -177,7 +177,7 @@ const embedByUrl = (
 
   const providerType = getType(url);
   if (!providerType || !isSupportedProvider(providerType)) return null;
-  
+
   if (!supportedEmbedProviders[providerType]) {
     return null;
   }
