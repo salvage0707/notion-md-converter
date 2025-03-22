@@ -15,6 +15,9 @@
     },
     {
       "path": "packages/notion-md-converter-qiita"
+    },
+    {
+      "path": "packages/notion-md-converter-hatena-blog"
     }
   ]
 }

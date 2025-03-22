@@ -149,7 +149,7 @@ describe("getCaptionText", () => {
 
   it("アノテーション付きのテキストを正しく処理する", () => {
     const caption = createRichText("id=1234567890:some text", { bold: true });
-    const result = TransformerUtils.getCaptionText(caption, { bold: true });
+    const result = TransformerUtils.getCaptionText(caption, { enableAnnotations: { bold: true } });
     expect(result).toBe("**some text**");
   });
 
@@ -158,7 +158,7 @@ describe("getCaptionText", () => {
       createRichText("id=1234567890:")[0],
       createRichText("some text", { bold: true })[0],
     ];
-    const result = TransformerUtils.getCaptionText(caption, { bold: true });
+    const result = TransformerUtils.getCaptionText(caption, { enableAnnotations: { bold: true } });
     expect(result).toBe("**some text**");
   });
 
@@ -168,7 +168,7 @@ describe("getCaptionText", () => {
       createRichText(" ")[0],
       createRichText("text", { bold: true })[0],
     ];
-    const result = TransformerUtils.getCaptionText(caption, { bold: true });
+    const result = TransformerUtils.getCaptionText(caption, { enableAnnotations: { bold: true } });
     expect(result).toBe("~~some~~ **text**");
   });
 });

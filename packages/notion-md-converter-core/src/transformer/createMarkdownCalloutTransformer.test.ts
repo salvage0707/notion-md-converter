@@ -5,6 +5,7 @@ import {
   createTransformerContext,
   dedent,
 } from "@notion-md-converter/testing";
+import { MarkdownUtils } from "../utils";
 import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
 
 describe("createMarkdownCalloutTransformer", () => {
@@ -76,5 +77,37 @@ describe("createMarkdownCalloutTransformer", () => {
       > 子メッセージ
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
+  });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownCalloutTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createCalloutBlock({
+        richText: [
+          createTextRichText({
+            content: "テストメッセージ",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+        icon: { type: "emoji", emoji: "🚨" },
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(dedent({ wrap: true })`
+        > <span style="color: ${redColor};">テストメッセージ</span>
+      `);
+    });
   });
 });

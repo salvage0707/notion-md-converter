@@ -121,21 +121,28 @@ describe("link", () => {
 
 describe("color", () => {
   it("赤色のテキストに変換できること", () => {
-    expect(MarkdownUtils.color("Hello", "red")).toBe('<span style="color: red">Hello</span>');
-  });
-
-  it("青色のテキストに変換できること", () => {
-    expect(MarkdownUtils.color("World", "blue")).toBe('<span style="color: blue">World</span>');
-  });
-
-  it("背景色付きのテキストに変換できること", () => {
-    expect(MarkdownUtils.color("Test", "green_background")).toBe(
-      '<span style="color: green">Test</span>',
+    const redColor = MarkdownUtils.COLOR_MAP.red as string;
+    expect(MarkdownUtils.color("Hello", "red")).toBe(
+      `<span style="color: ${redColor};">Hello</span>`,
     );
   });
 
-  it("空文字列を色付きテキストに変換できること", () => {
-    expect(MarkdownUtils.color("", "purple")).toBe('<span style="color: purple"></span>');
+  it("青色のテキストに変換できること", () => {
+    const blueColor = MarkdownUtils.COLOR_MAP.blue as string;
+    expect(MarkdownUtils.color("World", "blue")).toBe(
+      `<span style="color: ${blueColor};">World</span>`,
+    );
+  });
+
+  it("背景色付きのテキストに変換できること", () => {
+    const greenBgColor = MarkdownUtils.COLOR_MAP.green_background as string;
+    expect(MarkdownUtils.color("Test", "green_background")).toBe(
+      `<span style="background-color: ${greenBgColor};">Test</span>`,
+    );
+  });
+
+  it("空文字列を空のテキストに変換できること", () => {
+    expect(MarkdownUtils.color("", "purple")).toBe("");
   });
 });
 
@@ -378,7 +385,7 @@ describe("richTextsToMarkdown", () => {
     expect(MarkdownUtils.richTextsToMarkdown([])).toBe("");
   });
 
-  it("カラーアノテーションを処理できること", () => {
+  it("色のアノテーションが有効な場合、色付きのテキストを処理できること", () => {
     const richTexts = [
       createTextRichText({
         content: "Colored Text",
@@ -395,8 +402,9 @@ describe("richTextsToMarkdown", () => {
       code: false,
       color: true,
     };
+    const redColor = MarkdownUtils.COLOR_MAP.red as string;
     expect(MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)).toBe(
-      '<span style="color: red">Colored Text</span>',
+      `<span style="color: ${redColor};">Colored Text</span>`,
     );
   });
 

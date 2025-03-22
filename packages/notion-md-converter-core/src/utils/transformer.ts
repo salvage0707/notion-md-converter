@@ -1,5 +1,5 @@
 import type { RichText } from "@notion-md-converter/types";
-import type { EnableAnnotations } from "./markdown";
+import type { ColorMap, EnableAnnotations } from "./markdown";
 import { MarkdownUtils } from "./markdown";
 
 export type CaptionMetadata = Record<string, string | undefined>;
@@ -53,15 +53,22 @@ const getCaptionMetadata = (caption: RichText[]): { metadata: CaptionMetadata; t
  * キャプションからテキストを抽出する
  *
  * @param caption キャプション
- * @param annotations アノテーション
+ * @param options オプション
+ * @param options.enableAnnotations アノテーション
+ * @param options.colorMap カラーマップ
  * @returns テキスト
  */
-const getCaptionText = (caption: RichText[], annotations?: EnableAnnotations): string => {
+const getCaptionText = (
+  caption: RichText[],
+  options: { enableAnnotations?: EnableAnnotations; colorMap?: ColorMap } = {},
+): string => {
+  const { enableAnnotations, colorMap } = options;
+
   const captionText = caption.map((richText) => richText.plain_text).join("");
   const captionTexts = captionText.split(":");
 
   if (captionTexts.length === 1) {
-    return MarkdownUtils.richTextsToMarkdown(caption, annotations).trim();
+    return MarkdownUtils.richTextsToMarkdown(caption, enableAnnotations, colorMap).trim();
   }
 
   // メタデータを除去したRichTextを作成
@@ -101,7 +108,7 @@ const getCaptionText = (caption: RichText[], annotations?: EnableAnnotations): s
     return acc;
   }, []);
 
-  return MarkdownUtils.richTextsToMarkdown(textRichTexts, annotations).trim();
+  return MarkdownUtils.richTextsToMarkdown(textRichTexts, enableAnnotations, colorMap).trim();
 };
 
 export const TransformerUtils = {
