@@ -79,16 +79,16 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
     if (hasEquation) {
       const mathjaxScript = [
         "<!-- script for supporting mathematical notation -->",
-        "<script type='text/x-mathjax-config'>",
-        "  MathJax.Hub.Config({",
-        "    tex2jax: {",
+        "<script>",
+        "  MathJax = {",
+        "    tex: {",
         "      inlineMath: [ ['$','$'], ['\\(','\\)'] ],",
         "      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],",
         "      processEscapes: true",
         "    }",
         "  }",
         "</script>",
-        "<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>",
+        "<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'></script>",
       ].join("\n");
       return [mathjaxScript, markdown].join("\n\n");
     }
