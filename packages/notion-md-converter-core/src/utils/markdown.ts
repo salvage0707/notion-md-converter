@@ -1,4 +1,5 @@
 import type { ApiColor, RichText } from "@notion-md-converter/types";
+import { HTMLUtils } from "./html";
 import { isURL } from "./utils";
 
 /**
@@ -28,31 +29,54 @@ const heading = (text: string, level: 1 | 2 | 3 | 4 | 5 | 6): string => {
  * テキストスタイル変換
  */
 export type ColorMap = {
-  [key in ApiColor]: string;
+  [key in ApiColor]: string | undefined;
 };
 
 const COLOR_MAP: ColorMap = {
-  default: "no used",
-  default_background: "no used",
-  red: "red",
-  red_background: "red",
-  orange: "orange",
-  orange_background: "orange",
-  yellow: "yellow",
-  yellow_background: "yellow",
-  green: "green",
-  green_background: "green",
-  blue: "blue",
-  blue_background: "blue",
-  purple: "purple",
-  purple_background: "purple",
-  pink: "pink",
-  pink_background: "pink",
-  gray: "gray",
-  gray_background: "gray",
-  brown: "brown",
-  brown_background: "brown",
-};
+  default: undefined,
+  default_background: undefined,
+  red: "#A83232",
+  red_background: "#E8CCCC",
+  orange: "#C17F46",
+  orange_background: "#E8D5C2",
+  yellow: "#9B8D27",
+  yellow_background: "#E6E6C8",
+  brown: "#8B6C55",
+  brown_background: "#E0D5CC",
+  green: "#4E7548",
+  green_background: "#D5E0D1",
+  blue: "#3A6B9F",
+  blue_background: "#D0DEF0",
+  purple: "#6B5B95",
+  purple_background: "#D8D3E6",
+  pink: "#B5787D",
+  pink_background: "#E8D5D8",
+  gray: "#777777",
+  gray_background: "#D0D0D0",
+} as const;
+
+const BACKGROUND_COLOR_KEY = [
+  "red_background",
+  "orange_background",
+  "yellow_background",
+  "green_background",
+  "blue_background",
+  "purple_background",
+  "pink_background",
+  "gray_background",
+  "brown_background",
+];
+const TEXT_COLOR_KEY = [
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "purple",
+  "pink",
+  "gray",
+  "brown",
+];
 
 type DecorationFuncOption = {
   decoration: string;
@@ -100,8 +124,34 @@ const underline = (text: string): string => {
   return `_${text}_`;
 };
 
-const color = (text: string, color: ApiColor): string => {
-  return `<span style="color: ${COLOR_MAP[color]}">${text}</span>`;
+const color = (text: string, color: ApiColor, colorMap: ColorMap = COLOR_MAP): string => {
+  if (!text || !text.trim()) {
+    return text;
+  }
+
+  const spanProps: {
+    style?: string;
+  } = {};
+  if (BACKGROUND_COLOR_KEY.includes(color)) {
+    const bgColor = colorMap[color];
+    if (bgColor) {
+      spanProps.style = `background-color: ${bgColor};`;
+    }
+  }
+
+  if (TEXT_COLOR_KEY.includes(color)) {
+    const textColor = colorMap[color];
+    if (textColor) {
+      spanProps.style = `color: ${textColor};`;
+    }
+  }
+
+  if (Object.keys(spanProps).length > 0) {
+    const propsStr = HTMLUtils.objectToPropertiesStr(spanProps);
+    return `<span ${propsStr}>${text}</span>`;
+  }
+
+  return text;
 };
 
 /**
@@ -289,6 +339,7 @@ export type EnableAnnotations = {
 const richTextsToMarkdown = (
   richTexts: RichText[],
   enableAnnotations?: EnableAnnotations,
+  colorMap?: ColorMap,
 ): string => {
   const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
     let markdown = text.plain_text;
@@ -311,8 +362,8 @@ const richTextsToMarkdown = (
     if (text.annotations.underline && enableAnnotations.underline) {
       markdown = underline(markdown);
     }
-    if (text.annotations.color && text.annotations.color !== "default" && enableAnnotations.color) {
-      markdown = color(markdown, text.annotations.color);
+    if (text.annotations.color && enableAnnotations.color) {
+      markdown = color(markdown, text.annotations.color, colorMap);
     }
     if (text.href && isURL(text.href) && enableAnnotations.link) {
       markdown = link(markdown, text.href);

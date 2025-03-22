@@ -65,4 +65,32 @@ describe("createMarkdownTodoListItemTransformer", () => {
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownTodoListItemTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createToDoBlock({
+        richText: [
+          createTextRichText({
+            content: "テストテキスト",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+        checked: true,
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+      expect(result).toBe('- [x] <span style="color: red;">テストテキスト</span>');
+    });
+  });
 });

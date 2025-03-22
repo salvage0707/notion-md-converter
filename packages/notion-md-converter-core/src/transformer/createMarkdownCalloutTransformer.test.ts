@@ -77,4 +77,35 @@ describe("createMarkdownCalloutTransformer", () => {
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownCalloutTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createCalloutBlock({
+        richText: [
+          createTextRichText({
+            content: "テストメッセージ",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+        icon: { type: "emoji", emoji: "🚨" },
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      expect(result).toBe(dedent({ wrap: true })`
+        > <span style="color: red;">テストメッセージ</span>
+      `);
+    });
+  });
 });

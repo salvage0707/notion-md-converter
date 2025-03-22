@@ -1,4 +1,4 @@
-import { getProvider, getYoutubeVideoIdFromEmbedUrl, HTMLUtils } from "@notion-md-converter/core";
+import { HTMLUtils, getProvider, getYoutubeVideoIdFromEmbedUrl } from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 
 /**

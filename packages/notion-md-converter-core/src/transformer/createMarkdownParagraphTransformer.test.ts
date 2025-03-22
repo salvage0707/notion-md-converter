@@ -104,4 +104,32 @@ describe("createMarkdownParagraphTransformer", () => {
     `);
     });
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownParagraphTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createParagraphBlock({
+        richText: [
+          createTextRichText({
+            content: "シンプルなテキストです。",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      expect(result).toBe('<span style="color: red;">シンプルなテキストです。</span>');
+    });
+  });
 });

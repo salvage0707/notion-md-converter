@@ -2,7 +2,6 @@ import type { CodeLanguageMapping } from "@notion-md-converter/types";
 import { MarkdownUtils } from "../utils";
 import { createCodeTransformerFactory } from "./transformerFactory";
 
-
 type CodeTransformerOptions = {
   languageMapping?: CodeLanguageMapping;
 };

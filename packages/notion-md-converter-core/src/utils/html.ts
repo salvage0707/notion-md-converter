@@ -1,4 +1,3 @@
-
 const objectToPropertiesStr = (object: Record<string, string | boolean>) => {
   return Object.entries(object)
     .map(([key, value]) => {
@@ -18,8 +17,8 @@ type ObjectTagOptions = {
   data: string;
   width?: string;
   height?: string;
-  type: "application/pdf"
-}
+  type: "application/pdf";
+};
 const objectTag = (options: ObjectTagOptions) => {
   const properties = objectToPropertiesStr({
     data: options.data,

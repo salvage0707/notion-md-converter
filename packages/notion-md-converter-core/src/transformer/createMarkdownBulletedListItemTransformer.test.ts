@@ -62,4 +62,32 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     expect(result).toBe(expected);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownBulletedListItemTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createBulletedListItemBlock({
+        richText: [
+          createTextRichText({
+            content: "テストテキスト",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      expect(result).toBe('- <span style="color: red;">テストテキスト</span>');
+    });
+  });
 });

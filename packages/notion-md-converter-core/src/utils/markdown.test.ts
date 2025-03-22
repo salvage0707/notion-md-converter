@@ -121,21 +121,21 @@ describe("link", () => {
 
 describe("color", () => {
   it("赤色のテキストに変換できること", () => {
-    expect(MarkdownUtils.color("Hello", "red")).toBe('<span style="color: red">Hello</span>');
+    expect(MarkdownUtils.color("Hello", "red")).toBe('<span style="color: red;">Hello</span>');
   });
 
   it("青色のテキストに変換できること", () => {
-    expect(MarkdownUtils.color("World", "blue")).toBe('<span style="color: blue">World</span>');
+    expect(MarkdownUtils.color("World", "blue")).toBe('<span style="color: blue;">World</span>');
   });
 
   it("背景色付きのテキストに変換できること", () => {
     expect(MarkdownUtils.color("Test", "green_background")).toBe(
-      '<span style="color: green">Test</span>',
+      '<span style="background-color: green;">Test</span>',
     );
   });
 
-  it("空文字列を色付きテキストに変換できること", () => {
-    expect(MarkdownUtils.color("", "purple")).toBe('<span style="color: purple"></span>');
+  it("空文字列を空のテキストに変換できること", () => {
+    expect(MarkdownUtils.color("", "purple")).toBe("");
   });
 });
 
@@ -396,7 +396,7 @@ describe("richTextsToMarkdown", () => {
       color: true,
     };
     expect(MarkdownUtils.richTextsToMarkdown(richTexts, enableAnnotations)).toBe(
-      '<span style="color: red">Colored Text</span>',
+      '<span style="color: red;">Colored Text</span>',
     );
   });
 

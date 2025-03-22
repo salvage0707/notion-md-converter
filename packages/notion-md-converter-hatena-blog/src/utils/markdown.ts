@@ -99,7 +99,6 @@ const CODE_LANGUAGE_MAPPING = {
   "java/c/c++/c#": "java", // 複合的な言語指定だがjavaとして扱う
 };
 
-
 export const HatenaBlogMarkdownUtils = {
   CODE_LANGUAGE_MAPPING,
 };

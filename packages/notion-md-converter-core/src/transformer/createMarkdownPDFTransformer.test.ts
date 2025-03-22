@@ -4,7 +4,7 @@ import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
 
 describe("createMarkdownPDFTransformer", () => {
   const mockAdapter = vi.fn();
-  
+
   beforeEach(() => {
     mockAdapter.mockReturnValue({
       url: "https://example.com/test.pdf",
@@ -48,6 +48,34 @@ describe("createMarkdownPDFTransformer", () => {
 
       expect(result).toBe("[https://example.com/test.pdf](https://example.com/test.pdf)");
     });
+
+    describe("annotationオプションありの場合", () => {
+      const transformer = createMarkdownPDFTransformer({
+        fileAdapter: mockAdapter,
+        outputType: "markdown-link",
+        enableAnnotations: {
+          color: true,
+        },
+      });
+
+      it("colorがtrueの場合、テキストの色を変更できる", () => {
+        const block = createPdfBlock({
+          caption: [createTextRichText({ content: "example.pdf", annotations: { color: "red" } })],
+        });
+        const context = createTransformerContext({
+          blocks: [block],
+        });
+
+        mockAdapter.mockReturnValue({
+          url: "https://example.com/test.pdf",
+        });
+        const result = transformer(context);
+
+        expect(result).toBe(
+          '[<span style="color: red;">example.pdf</span>](https://example.com/test.pdf)',
+        );
+      });
+    });
   });
 
   describe("outputType: html-object", () => {
@@ -70,7 +98,7 @@ describe("createMarkdownPDFTransformer", () => {
       const result = transformer(context);
 
       expect(result).toBe(
-        '<object data="https://example.com/test.pdf" width="600" height="400"></object>',
+        '<object data="https://example.com/test.pdf" type="application/pdf" width="600" height="400"></object>',
       );
     });
 
@@ -88,7 +116,7 @@ describe("createMarkdownPDFTransformer", () => {
       const result = transformer(context);
 
       expect(result).toBe(
-        '<object data="https://example.com/test.pdf"></object>',
+        '<object data="https://example.com/test.pdf" type="application/pdf" width="100%" height="250"></object>',
       );
     });
   });

@@ -1,20 +1,73 @@
-import { createMarkdownCodeTransformer, createMarkdownParagraphTransformer, createMarkdownPDFTransformer, createUnsupportedBlockTransformer, NotionMarkdownConverter } from "@notion-md-converter/core";
+import {
+  NotionMarkdownConverter,
+  createMarkdownBookmarkTransformer,
+  createMarkdownBulletedListItemTransformer,
+  createMarkdownCalloutTransformer,
+  createMarkdownCodeTransformer,
+  createMarkdownFileTransformer,
+  createMarkdownHeadingTransformer,
+  createMarkdownNumberedListItemTransformer,
+  createMarkdownPDFTransformer,
+  createMarkdownParagraphTransformer,
+  createMarkdownQuoteTransformer,
+  createMarkdownTableTransformer,
+  createMarkdownToggleTransformer,
+  createUnsupportedBlockTransformer,
+} from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
+import {
+  createHatenaBlogMarkdownTableOfContentsTransformer,
+  createHatenaBlogMarkdownTodoListItemTransformer,
+} from "../transformer";
 import { HatenaBlogMarkdownUtils } from "../utils";
-import { createHatenaBlogMarkdownTableOfContentsTransformer, createHatenaBlogMarkdownTodoListItemTransformer } from "../transformer";
 
 export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
   constructor(transformers: TransformerMapping = {}) {
+    const enableAnnotations = {
+      color: true,
+    };
     super({
+      bookmark: createMarkdownBookmarkTransformer({
+        enableAnnotations,
+      }),
+      bulleted_list_item: createMarkdownBulletedListItemTransformer({
+        enableAnnotations,
+      }),
+      callout: createMarkdownCalloutTransformer({
+        enableAnnotations,
+      }),
       code: createMarkdownCodeTransformer({
         languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
       }),
-      to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
-      paragraph: createMarkdownParagraphTransformer({ br: true }),
-      table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
       embed: createUnsupportedBlockTransformer(),
+      file: createMarkdownFileTransformer({
+        enableAnnotations,
+      }),
+      heading: createMarkdownHeadingTransformer({
+        enableAnnotations,
+      }),
+      numbered_list_item: createMarkdownNumberedListItemTransformer({
+        enableAnnotations,
+      }),
+      paragraph: createMarkdownParagraphTransformer({
+        br: true,
+        enableAnnotations: {
+          color: true,
+        },
+      }),
       pdf: createMarkdownPDFTransformer({
-        outputType: "html-object"
+        outputType: "html-object",
+      }),
+      quote: createMarkdownQuoteTransformer({
+        enableAnnotations,
+      }),
+      table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
+      table: createMarkdownTableTransformer({
+        enableAnnotations,
+      }),
+      to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
+      toggle: createMarkdownToggleTransformer({
+        enableAnnotations,
       }),
       ...transformers,
     });

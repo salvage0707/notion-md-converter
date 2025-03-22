@@ -85,4 +85,32 @@ describe("createMarkdownNumberedListItemTransformer", () => {
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownNumberedListItemTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createNumberedListItemBlock({
+        richText: [
+          createTextRichText({
+            content: "テストテキストone",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      expect(result).toBe('1. <span style="color: red;">テストテキストone</span>');
+    });
+  });
 });

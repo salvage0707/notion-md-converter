@@ -64,4 +64,33 @@ describe("createMarkdownHeadingTransformer", () => {
       ### 見出し3
     `);
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownHeadingTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createHeading1Block({
+        richText: [
+          createTextRichText({
+            content: "見出し1",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+      expect(result).toBe(dedent({ wrap: true })`
+        # <span style="color: red;">見出し1</span>
+      `);
+    });
+  });
 });

@@ -1,9 +1,18 @@
-import { MarkdownUtils } from "../utils";
+import { type ColorMap, type EnableAnnotations, MarkdownUtils } from "../utils";
 import { createCalloutTransformerFactory } from "./transformerFactory";
 
-export const createMarkdownCalloutTransformer = () => {
+type CalloutTransformerOptions = {
+  enableAnnotations?: EnableAnnotations;
+  colorMap?: ColorMap;
+};
+
+export const createMarkdownCalloutTransformer = (options: CalloutTransformerOptions = {}) => {
   return createCalloutTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(block.callout.rich_text);
+    const text = MarkdownUtils.richTextsToMarkdown(
+      block.callout.rich_text,
+      options.enableAnnotations,
+      options.colorMap,
+    );
     let result = text;
     if (children !== "") {
       result += `\n${children}`;

@@ -74,4 +74,38 @@ describe("createMarkdownQuoteTransformer", () => {
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownQuoteTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createQuoteBlock({
+        richText: [
+          createTextRichText({
+            content: dedent`
+              テストメッセージ
+              テストメッセージ2
+            `,
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      expect(result).toBe(dedent({ wrap: true })`
+        > <span style="color: red;">テストメッセージ
+        > テストメッセージ2</span>
+      `);
+    });
+  });
 });

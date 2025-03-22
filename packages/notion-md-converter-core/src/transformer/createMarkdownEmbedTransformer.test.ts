@@ -39,4 +39,33 @@ describe("createMarkdownEmbedTransformer", () => {
 
     expect(result).toBe("[https://example.com](https://example.com)");
   });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownEmbedTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createEmbedBlock({
+        url: "https://example.com",
+        caption: [
+          createTextRichText({
+            content: "テストリンク",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      expect(result).toBe('[<span style="color: red;">テストリンク</span>](https://example.com)');
+    });
+  });
 });

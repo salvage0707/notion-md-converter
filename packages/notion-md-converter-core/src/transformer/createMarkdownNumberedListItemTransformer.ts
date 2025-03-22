@@ -1,9 +1,21 @@
-import { MarkdownUtils } from "../utils";
+import { type ColorMap, type EnableAnnotations, MarkdownUtils } from "../utils";
 import { createNumberedListItemTransformerFactory } from "./transformerFactory";
 
-export const createMarkdownNumberedListItemTransformer = () => {
+type NumberedListItemTransformerOptions = {
+  enableAnnotations?: EnableAnnotations;
+  colorMap?: ColorMap;
+};
+
+export const createMarkdownNumberedListItemTransformer = (
+  options: NumberedListItemTransformerOptions = {},
+) => {
+  const { enableAnnotations, colorMap } = options;
   return createNumberedListItemTransformerFactory(({ block, children, index }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(block.numbered_list_item.rich_text);
+    const text = MarkdownUtils.richTextsToMarkdown(
+      block.numbered_list_item.rich_text,
+      enableAnnotations,
+      colorMap,
+    );
     const formattedChildren = MarkdownUtils.indent(children, 3);
     const bulletText = MarkdownUtils.numberedList(text, index);
 
