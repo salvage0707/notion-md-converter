@@ -1,6 +1,7 @@
 import { CHAR, createQuoteBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownQuoteTransformer", () => {
   const transformer = createMarkdownQuoteTransformer();
@@ -102,8 +103,9 @@ describe("createMarkdownQuoteTransformer", () => {
 
       const result = transformer(context);
 
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
       expect(result).toBe(dedent({ wrap: true })`
-        > <span style="color: red;">テストメッセージ
+        > <span style="color: ${redColor};">テストメッセージ
         > テストメッセージ2</span>
       `);
     });

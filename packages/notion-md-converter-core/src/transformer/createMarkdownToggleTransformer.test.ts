@@ -1,6 +1,7 @@
 import { createTextRichText, createToggleBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownToggleTransformer } from "./createMarkdownToggleTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownToggleTransformer", () => {
   const transformer = createMarkdownToggleTransformer();
@@ -56,10 +57,11 @@ describe("createMarkdownToggleTransformer", () => {
       context.mockedExecute.mockReturnValue("test content");
       const result = transformer(context);
 
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
       expect(result).toBe(dedent({ wrap: true })`
       <details>
       <summary>
-      <span style="color: red;">test title</span>
+      <span style="color: ${redColor};">test title</span>
       </summary>
 
       test content

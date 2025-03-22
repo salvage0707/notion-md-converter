@@ -1,6 +1,7 @@
 import { createPdfBlock, createTextRichText } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownPDFTransformer", () => {
   const mockAdapter = vi.fn();
@@ -71,8 +72,9 @@ describe("createMarkdownPDFTransformer", () => {
         });
         const result = transformer(context);
 
+        const redColor = MarkdownUtils.COLOR_MAP.red as string;
         expect(result).toBe(
-          '[<span style="color: red;">example.pdf</span>](https://example.com/test.pdf)',
+          `[<span style="color: ${redColor};">example.pdf</span>](https://example.com/test.pdf)`,
         );
       });
     });

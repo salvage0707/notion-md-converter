@@ -5,6 +5,7 @@ import {
   dedent,
 } from "@notion-md-converter/testing";
 import { createMarkdownNumberedListItemTransformer } from "./createMarkdownNumberedListItemTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownNumberedListItemTransformer", () => {
   const transformer = createMarkdownNumberedListItemTransformer();
@@ -110,7 +111,8 @@ describe("createMarkdownNumberedListItemTransformer", () => {
 
       const result = transformer(context);
 
-      expect(result).toBe('1. <span style="color: red;">テストテキストone</span>');
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(`1. <span style="color: ${redColor};">テストテキストone</span>`);
     });
   });
 });

@@ -1,6 +1,7 @@
 import { createTextRichText, createToDoBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownTodoListItemTransformer } from "./createMarkdownTodoListItemTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownTodoListItemTransformer", () => {
   const transformer = createMarkdownTodoListItemTransformer();
@@ -90,7 +91,8 @@ describe("createMarkdownTodoListItemTransformer", () => {
       });
 
       const result = transformer(context);
-      expect(result).toBe('- [x] <span style="color: red;">テストテキスト</span>');
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(`- [x] <span style="color: ${redColor};">テストテキスト</span>`);
     });
   });
 });

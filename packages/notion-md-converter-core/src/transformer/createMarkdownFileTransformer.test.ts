@@ -5,6 +5,7 @@ import {
   createTransformerContext,
 } from "@notion-md-converter/testing";
 import { createMarkdownFileTransformer } from "./createMarkdownFileTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownFileTransformer", () => {
   const mockAdapter = vi.fn();
@@ -82,8 +83,9 @@ describe("createMarkdownFileTransformer", () => {
       });
 
       const result = transformer(context);
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
       expect(result).toBe(
-        '[<span style="color: red;">caption_example.pdf</span>](https://example.com/file.pdf)',
+        `[<span style="color: ${redColor};">caption_example.pdf</span>](https://example.com/file.pdf)`,
       );
     });
   });

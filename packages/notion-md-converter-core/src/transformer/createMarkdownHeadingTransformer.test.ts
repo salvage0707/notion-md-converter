@@ -7,6 +7,7 @@ import {
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownHeadingTransformer } from "./createMarkdownHeadingTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownHeadingTransformer", () => {
   const transformer = createMarkdownHeadingTransformer();
@@ -88,8 +89,9 @@ describe("createMarkdownHeadingTransformer", () => {
       });
 
       const result = transformer(context);
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
       expect(result).toBe(dedent({ wrap: true })`
-        # <span style="color: red;">見出し1</span>
+        # <span style="color: ${redColor};">見出し1</span>
       `);
     });
   });

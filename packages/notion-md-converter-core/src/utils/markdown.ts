@@ -415,4 +415,5 @@ export const MarkdownUtils = {
   richTextsToMarkdown,
   comment,
   decoration,
+  COLOR_MAP,
 };

@@ -7,6 +7,7 @@ import {
 import { createTransformerContext } from "@notion-md-converter/testing";
 import type { TextRichText } from "@notion-md-converter/types";
 import { createMarkdownTableTransformer } from "./createMarkdownTableTransformer";
+import { MarkdownUtils } from "../utils";
 
 const createRow = (
   plainTexts: string[],
@@ -84,11 +85,12 @@ describe("createMarkdownTableTransformer", () => {
 
       const result = transformer(context);
 
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
       expect(result).toBe(dedent({ wrap: true })`
-      | <span style="color: red;">Header1</span>  | <span style="color: red;">Header2</span>  |
-      | ----------------------------------------- | ----------------------------------------- |
-      | <span style="color: red;">Content1</span> | <span style="color: red;">Content2</span> |
-      | <span style="color: red;">Content3</span> | <span style="color: red;">Content4</span> |
+      | <span style="color: ${redColor};">Header1</span>  | <span style="color: ${redColor};">Header2</span>  |
+      | --------------------------------------------- | --------------------------------------------- |
+      | <span style="color: ${redColor};">Content1</span> | <span style="color: ${redColor};">Content2</span> |
+      | <span style="color: ${redColor};">Content3</span> | <span style="color: ${redColor};">Content4</span> |
     `);
     });
   });

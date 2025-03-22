@@ -6,6 +6,7 @@ import {
   dedent,
 } from "@notion-md-converter/testing";
 import { createMarkdownCalloutTransformer } from "./createMarkdownCalloutTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownCalloutTransformer", () => {
   const transformer = createMarkdownCalloutTransformer();
@@ -103,8 +104,9 @@ describe("createMarkdownCalloutTransformer", () => {
 
       const result = transformer(context);
 
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
       expect(result).toBe(dedent({ wrap: true })`
-        > <span style="color: red;">テストメッセージ</span>
+        > <span style="color: ${redColor};">テストメッセージ</span>
       `);
     });
   });

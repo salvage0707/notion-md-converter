@@ -5,6 +5,7 @@ import {
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownBulletedListItemTransformer", () => {
   const transformer = createMarkdownBulletedListItemTransformer();
@@ -87,7 +88,8 @@ describe("createMarkdownBulletedListItemTransformer", () => {
 
       const result = transformer(context);
 
-      expect(result).toBe('- <span style="color: red;">テストテキスト</span>');
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(`- <span style="color: ${redColor};">テストテキスト</span>`);
     });
   });
 });

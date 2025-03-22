@@ -1,6 +1,7 @@
 import { createParagraphBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownParagraphTransformer } from "./createMarkdownParagraphTransformer";
+import { MarkdownUtils } from "../utils";
 
 describe("createMarkdownParagraphTransformer", () => {
   const transformer = createMarkdownParagraphTransformer();
@@ -129,7 +130,8 @@ describe("createMarkdownParagraphTransformer", () => {
 
       const result = transformer(context);
 
-      expect(result).toBe('<span style="color: red;">シンプルなテキストです。</span>');
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(`<span style="color: ${redColor};">シンプルなテキストです。</span>`);
     });
   });
 });
