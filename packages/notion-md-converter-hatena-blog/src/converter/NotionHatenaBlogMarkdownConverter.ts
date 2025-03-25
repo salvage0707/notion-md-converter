@@ -2,7 +2,6 @@ import {
   NotionMarkdownConverter,
   createMarkdownBookmarkTransformer,
   createMarkdownBulletedListItemTransformer,
-  createMarkdownCalloutTransformer,
   createMarkdownCodeTransformer,
   createMarkdownEmbedTransformer,
   createMarkdownFileTransformer,
@@ -10,12 +9,13 @@ import {
   createMarkdownNumberedListItemTransformer,
   createMarkdownPDFTransformer,
   createMarkdownParagraphTransformer,
-  createMarkdownQuoteTransformer,
   createMarkdownTableTransformer,
   createMarkdownToggleTransformer,
 } from "@notion-md-converter/core";
 import type { TransformerMapping } from "@notion-md-converter/types";
 import {
+  createHatenaBlogMarkdownCalloutTransformer,
+  createHatenaBlogMarkdownQuoteTransformer,
   createHatenaBlogMarkdownTableOfContentsTransformer,
   createHatenaBlogMarkdownTodoListItemTransformer,
 } from "../transformer";
@@ -33,9 +33,7 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
       bulleted_list_item: createMarkdownBulletedListItemTransformer({
         enableAnnotations,
       }),
-      callout: createMarkdownCalloutTransformer({
-        enableAnnotations,
-      }),
+      callout: createHatenaBlogMarkdownCalloutTransformer(),
       code: createMarkdownCodeTransformer({
         languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
       }),
@@ -61,9 +59,7 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
       pdf: createMarkdownPDFTransformer({
         outputType: "html-object",
       }),
-      quote: createMarkdownQuoteTransformer({
-        enableAnnotations,
-      }),
+      quote: createHatenaBlogMarkdownQuoteTransformer(),
       table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
       table: createMarkdownTableTransformer({
         enableAnnotations,

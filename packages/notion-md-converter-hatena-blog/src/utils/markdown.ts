@@ -99,6 +99,20 @@ const CODE_LANGUAGE_MAPPING = {
   "java/c/c++/c#": "java", // 複合的な言語指定だがjavaとして扱う
 };
 
+/**
+ * 引用変換
+ */
+const blockquote = (text: string): string => {
+  const quoteText = text
+    .split("\n")
+    .map((line) => `> ${line}`)
+    .join("\n");
+  // separatorを入れないと連続した引用が結合されて表示されるため追加
+  const separator = "<!------->";
+  return `${quoteText}\n${separator}`;
+};
+
 export const HatenaBlogMarkdownUtils = {
   CODE_LANGUAGE_MAPPING,
+  blockquote,
 };
