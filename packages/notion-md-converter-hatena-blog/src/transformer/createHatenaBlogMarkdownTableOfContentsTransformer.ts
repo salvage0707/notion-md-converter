@@ -1,7 +1,7 @@
-import { createTableOfContentsTransformerFactory } from "@notion-md-converter/core";
+import { MarkdownUtils, createTableOfContentsTransformerFactory } from "@notion-md-converter/core";
 
 export const createHatenaBlogMarkdownTableOfContentsTransformer = () => {
   return createTableOfContentsTransformerFactory(() => {
-    return "[:contents]";
+    return MarkdownUtils.wrapWithNewLines("[:contents]");
   });
 };

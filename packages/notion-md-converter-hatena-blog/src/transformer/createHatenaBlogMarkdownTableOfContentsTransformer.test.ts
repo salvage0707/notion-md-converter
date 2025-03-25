@@ -1,4 +1,4 @@
-import { createTableOfContentsBlock } from "@notion-md-converter/testing";
+import { createTableOfContentsBlock, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createHatenaBlogMarkdownTableOfContentsTransformer } from "./createHatenaBlogMarkdownTableOfContentsTransformer";
 
@@ -12,6 +12,8 @@ describe("createHatenaBlogMarkdownTableOfContentsTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("[:contents]");
+    expect(result).toBe(dedent({ wrap: true })`
+      [:contents]
+    `);
   });
 });
