@@ -1,4 +1,11 @@
-import { getProvider, getYoutubeVideoIdFromEmbedUrl } from "@notion-md-converter/core";
+import {
+  type EmbedYoutubeOptions,
+  HTMLUtils,
+  ProviderAsciinemaUtils,
+  ProviderCodePenUtils,
+  ProviderUtils,
+  ProviderYoutubeUtils,
+} from "@notion-md-converter/core";
 import type { CodeLanguage, CodeLanguageMapping } from "@notion-md-converter/core/types";
 
 /**
@@ -124,21 +131,6 @@ const codeBlock = (
   return `\`\`\`${prefix}\n${code}\n\`\`\``;
 };
 
-const objectToPropertiesStr = (object: Record<string, string | boolean>) => {
-  return Object.entries(object)
-    .map(([key, value]) => {
-      if (value === undefined) {
-        return null;
-      }
-      if (typeof value === "boolean") {
-        return value ? key : null;
-      }
-      return `${key}="${value}"`;
-    })
-    .filter((v) => !!v)
-    .join(" ");
-};
-
 const equationBlock = (equation: string) => {
   return `\`\`\`math\n${equation}\n\`\`\``;
 };
@@ -156,54 +148,17 @@ const embedCodeSandbox = (url: string) => {
   return url;
 };
 
-type EmbedCodePenOptions = {
-  height?: string;
-  defaultTab?: string;
-};
-const embedCodePen = (url: string, options: EmbedCodePenOptions = {}) => {
-  // ex) https://codepen.io/tomoasleep/pen/dJgNLK/
-  const u = new URL(url);
-  // ex) ["", "tomoasleep", "pen", "dJgNLK", ""]
-  const paths = u.pathname.split("/");
-  const slugHash = paths[3];
-  const user = paths[1];
-  const properties = {
-    "data-height": options.height || "250",
-    "data-theme-id": "0",
-    "data-slug-hash": slugHash,
-    "data-default-tab": options.defaultTab || "result",
-    "data-user": user,
-    "data-embed-version": "2",
-    "data-pen-title": slugHash,
-    class: "codepen",
-  };
-  // ex) data-height="300" data-theme-id="0" data-slug-hash="dJgNLK" ...
-  const propertiesStr = Object.entries(properties)
-    .map(([key, value]) => `${key}="${value}"`)
-    .join(" ");
-  const mountTarget = `<p ${propertiesStr}></p>`;
-  const script = `<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>`;
-  return `${mountTarget}\n${script}`;
-};
-
 const embedGitHubGist = (url: string) => {
   return url;
 };
 
 const embedAsciinema = (url: string) => {
-  if (!url.endsWith(".js")) {
+  const result = ProviderAsciinemaUtils.embed(url);
+  if (!result) {
     return linkCard(url);
   }
 
-  const u = new URL(url);
-  const id = u.pathname.split("/")[1].replace(".js", "");
-  const properties = {
-    id: `asciicast-${id}`,
-    src: url,
-    async: "",
-  };
-  const propertiesStr = objectToPropertiesStr(properties);
-  return `<script ${propertiesStr}></script>`;
+  return result;
 };
 
 type EmbedFigmaOptions = {
@@ -217,7 +172,7 @@ const embedFigma = (url: string, options: EmbedFigmaOptions = {}) => {
     width: options.width || "800",
     src: `https://www.figma.com/embed?embed_host=astra&url=${url}`,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
@@ -229,7 +184,7 @@ const embedSpeakerDeck = (id: string) => {
     "data-ratio": "1.77777777777778",
     src: "https://speakerdeck.com/assets/embed.js",
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
 };
 
@@ -250,7 +205,7 @@ const embedSlideShare = (url: string, options: EmbedSlideShareOptions = {}) => {
     loading: "lazy",
     allowfullscreen: true,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
@@ -268,7 +223,7 @@ const embedGoogleSlide = (url: string, options: EmbedGoogleSlideOptions = {}) =>
     mozallowfullscreen: true,
     webkitallowfullscreen: true,
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<iframe ${propertiesStr}></iframe>`;
 };
 
@@ -280,32 +235,17 @@ const embedDocswell = (url: string) => {
     "data-src": url,
     "data-aspect": "0.5625",
   };
-  const propertiesStr = objectToPropertiesStr(properties);
+  const propertiesStr = HTMLUtils.objectToPropertiesStr(properties);
   return `<script ${propertiesStr}></script>`;
 };
 
-type EmbedYoutubeOptions = {
-  width?: string;
-  height?: string;
-};
-const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
-  const videoId = getYoutubeVideoIdFromEmbedUrl(url);
-  if (!videoId) {
+const embedYoutube = (url: string, options?: EmbedYoutubeOptions) => {
+  const result = ProviderYoutubeUtils.embed(url, options);
+  if (!result) {
     return url;
   }
 
-  const properties = {
-    width: options.width || "560",
-    height: options.height || "315",
-    src: `https://www.youtube.com/embed/${videoId}`,
-    frameborder: "0",
-    allow:
-      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-    loading: "lazy",
-    allowfullscreen: true,
-  };
-  const propertiesStr = objectToPropertiesStr(properties);
-  return `<iframe ${propertiesStr}></iframe>`;
+  return result;
 };
 
 /**
@@ -320,7 +260,7 @@ const embedYoutube = (url: string, options: EmbedYoutubeOptions = {}) => {
  * - youtube
  */
 const embedByURL = (url: string): { result: string; isEmbed: boolean } => {
-  const provider = getProvider(url);
+  const provider = ProviderUtils.getType(url);
   if (!provider) {
     return { result: url, isEmbed: false };
   }
@@ -330,7 +270,7 @@ const embedByURL = (url: string): { result: string; isEmbed: boolean } => {
     case "codesandbox":
       return { result: embedCodeSandbox(url), isEmbed: true };
     case "codepen":
-      return { result: embedCodePen(url), isEmbed: true };
+      return { result: ProviderCodePenUtils.embed(url), isEmbed: true };
     case "github-gist":
       return { result: embedGitHubGist(url), isEmbed: true };
     case "asciinema":
@@ -359,7 +299,7 @@ export const QiitaMarkdownUtils = {
   linkCard,
   embedX,
   embedCodeSandbox,
-  embedCodePen,
+  embedCodePen: ProviderCodePenUtils.embed,
   embedGitHubGist,
   embedAsciinema,
   embedFigma,

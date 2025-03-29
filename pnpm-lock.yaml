@@ -84,6 +84,22 @@ importers:
         specifier: ^22.13.4
         version: 22.13.4
 
+  packages/notion-md-converter-hatena-blog:
+    dependencies:
+      '@notion-md-converter/core':
+        specifier: workspace:*
+        version: link:../notion-md-converter-core
+    devDependencies:
+      '@notion-md-converter/config':
+        specifier: workspace:*
+        version: link:../notion-md-converter-config
+      '@notion-md-converter/testing':
+        specifier: workspace:*
+        version: link:../notion-md-converter-testing
+      '@notion-md-converter/types':
+        specifier: workspace:*
+        version: link:../notion-md-converter-types
+
   packages/notion-md-converter-qiita:
     dependencies:
       '@notion-md-converter/core':

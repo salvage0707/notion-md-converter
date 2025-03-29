@@ -4,6 +4,7 @@ import {
   createTextRichText,
   createTransformerContext,
 } from "@notion-md-converter/testing";
+import { MarkdownUtils } from "../utils";
 import { createMarkdownFileTransformer } from "./createMarkdownFileTransformer";
 
 describe("createMarkdownFileTransformer", () => {
@@ -52,5 +53,40 @@ describe("createMarkdownFileTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("[example.pdf](https://example.com/file.pdf)");
+  });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownFileTransformer({
+      fileAdapter: mockAdapter,
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createFileBlock({
+        name: "example.pdf",
+        caption: [
+          createTextRichText({
+            content: "caption_example.pdf",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+        fileObject: createNotionInternalFile({
+          url: "https://example.com/file.pdf",
+        }),
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(
+        `[<span style="color: ${redColor};">caption_example.pdf</span>](https://example.com/file.pdf)`,
+      );
+    });
   });
 });

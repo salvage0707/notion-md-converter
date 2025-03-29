@@ -1,4 +1,4 @@
-import type { Context, TransformerMapping } from "@notion-md-converter/types";
+import type { Context, PdfBlock, TransformerMapping } from "@notion-md-converter/types";
 import type {
   Block,
   BookmarkBlock,
@@ -67,6 +67,7 @@ import {
   isLinkPreviewBlock,
   isNumberedListItemBlock,
   isParagraphBlock,
+  isPdfBlock,
   isQuoteBlock,
   isSyncedBlock,
   isTableBlock,
@@ -115,8 +116,13 @@ export class NotionMarkdownConverter {
   }
 
   execute(blocks: Block[]): string {
+    const convertedMarkdown = this.transformBlocks(blocks);
+    return this.onComplete(convertedMarkdown);
+  }
+
+  private transformBlocks(blocks: Block[]): string {
     const context: Context<Block> = {
-      execute: (blocks) => this.execute(blocks),
+      execute: (blocks) => this.transformBlocks(blocks),
       blocks,
       currentBlock: blocks[0],
       currentBlockIndex: 0,
@@ -124,10 +130,6 @@ export class NotionMarkdownConverter {
     const transformedBlocks = blocks.map((block, index) => {
       context.currentBlock = block;
       context.currentBlockIndex = index;
-
-      // if (!isRootBlock(block)) {
-      //   throw new NotRootBlockError(block);
-      // }
 
       if (isBookmarkBlock(block)) {
         const ctx = context as Context<BookmarkBlock>;
@@ -243,8 +245,18 @@ export class NotionMarkdownConverter {
         const ctx = context as Context<VideoBlock>;
         return this.transformers.video?.(ctx) ?? "";
       }
+
+      if (isPdfBlock(block)) {
+        const ctx = context as Context<PdfBlock>;
+        return this.transformers.pdf?.(ctx) ?? "";
+      }
     });
 
     return transformedBlocks.filter((b) => b !== null).join("\n");
+  }
+
+  protected onComplete(markdown: string): string {
+    // 変換後にカスタマイズしたいときに使用する
+    return markdown;
   }
 }

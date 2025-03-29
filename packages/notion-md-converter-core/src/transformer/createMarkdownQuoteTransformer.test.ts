@@ -1,5 +1,6 @@
 import { CHAR, createQuoteBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
+import { MarkdownUtils } from "../utils";
 import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
 
 describe("createMarkdownQuoteTransformer", () => {
@@ -73,5 +74,40 @@ describe("createMarkdownQuoteTransformer", () => {
       > > 子メッセージ
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
+  });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownQuoteTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createQuoteBlock({
+        richText: [
+          createTextRichText({
+            content: dedent`
+              テストメッセージ
+              テストメッセージ2
+            `,
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(dedent({ wrap: true })`
+        > <span style="color: ${redColor};">テストメッセージ
+        > テストメッセージ2</span>
+      `);
+    });
   });
 });

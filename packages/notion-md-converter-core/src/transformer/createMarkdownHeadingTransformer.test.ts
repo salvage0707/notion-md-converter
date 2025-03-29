@@ -6,6 +6,7 @@ import {
   dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
+import { MarkdownUtils } from "../utils";
 import { createMarkdownHeadingTransformer } from "./createMarkdownHeadingTransformer";
 
 describe("createMarkdownHeadingTransformer", () => {
@@ -63,5 +64,35 @@ describe("createMarkdownHeadingTransformer", () => {
     expect(result).toBe(dedent({ wrap: true })`
       ### 見出し3
     `);
+  });
+
+  describe("annotationオプションありの場合", () => {
+    const transformer = createMarkdownHeadingTransformer({
+      enableAnnotations: {
+        color: true,
+      },
+    });
+
+    it("colorがtrueの場合、テキストの色を変更できる", () => {
+      const block = createHeading1Block({
+        richText: [
+          createTextRichText({
+            content: "見出し1",
+            annotations: {
+              color: "red",
+            },
+          }),
+        ],
+      });
+      const context = createTransformerContext({
+        blocks: [block],
+      });
+
+      const result = transformer(context);
+      const redColor = MarkdownUtils.COLOR_MAP.red as string;
+      expect(result).toBe(dedent({ wrap: true })`
+        # <span style="color: ${redColor};">見出し1</span>
+      `);
+    });
   });
 });
