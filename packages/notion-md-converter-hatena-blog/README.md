@@ -35,8 +35,6 @@ const result = executor.execute(content);
 
 ## Block Options
 
-TODO: 記載する
-
 ## License
 
 Distributed under the MIT License. See [LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE) for more information.
