@@ -1,6 +1,5 @@
 import {
   MarkdownUtils,
-  TransformerUtils,
   createEmbedTransformerFactory,
 } from "@notion-md-converter/core";
 import type { EmbedTransformer } from "@notion-md-converter/core/types";
@@ -23,10 +22,7 @@ export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
     if (isEmbed) {
       return result;
     }
-    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
-      block.embed.caption,
-    );
-    const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
+    const caption = context.tools.richTextFormatter.format(captionMetadata.getText());
     return MarkdownUtils.link(caption || url, url);
   });
 };

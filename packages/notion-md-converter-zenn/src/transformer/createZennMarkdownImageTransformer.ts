@@ -1,6 +1,5 @@
 import {
   MarkdownUtils,
-  TransformerUtils,
   createImageTransformerFactory,
   createNoChangeFileObjectAdapter,
 } from "@notion-md-converter/core";
@@ -23,10 +22,7 @@ export const createZennMarkdownImageTransformer = (
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);
     if (block.image.caption.length > 0) {
-      const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
-        block.image.caption,
-      );
-      const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
+      const caption = context.tools.richTextFormatter.format(captionMetadata.getText());
       return MarkdownUtils.image(caption ?? url, url, metadata);
     }
     return MarkdownUtils.image(url, url, metadata);
