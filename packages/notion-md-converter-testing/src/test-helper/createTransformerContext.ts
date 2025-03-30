@@ -18,6 +18,11 @@ export const createTransformerContext = <T extends Block>(options: {
         .mockImplementation((richTexts, _options, _colorMap) =>
           richTexts.map((richText: RichText) => richText.plain_text).join(""),
         ),
+      plainText: vi
+        .fn()
+        .mockImplementation((richTexts) =>
+          richTexts.map((richText: RichText) => richText.plain_text).join(""),
+        ),
     },
   };
 

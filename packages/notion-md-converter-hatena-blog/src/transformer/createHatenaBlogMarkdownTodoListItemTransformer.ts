@@ -9,8 +9,8 @@ export const createHatenaBlogMarkdownTodoListItemTransformer = (
 ) => {
   const { strikeThroughLine = true } = options;
 
-  return createTodoTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(block.to_do.rich_text, {
+  return createTodoTransformerFactory(({ block, children, context }) => {
+    const text = context.tools.richTextFormatter.format(block.to_do.rich_text, {
       color: true,
     });
     const formattedChildren = MarkdownUtils.indent(children);

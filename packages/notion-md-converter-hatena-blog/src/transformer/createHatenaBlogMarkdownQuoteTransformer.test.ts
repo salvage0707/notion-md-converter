@@ -27,6 +27,7 @@ describe("createHatenaBlogMarkdownQuoteTransformer", () => {
       > テストメッセージ2
       <!------->
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.quote.rich_text);
   });
 
   it("空のquoteブロックを変換する", () => {
@@ -43,6 +44,7 @@ describe("createHatenaBlogMarkdownQuoteTransformer", () => {
       >${CHAR.SPACE}
       <!------->
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.quote.rich_text);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -76,5 +78,6 @@ describe("createHatenaBlogMarkdownQuoteTransformer", () => {
       <!------->
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.quote.rich_text);
   });
 });

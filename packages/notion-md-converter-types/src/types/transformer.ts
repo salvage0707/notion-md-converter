@@ -62,6 +62,13 @@ export interface RichTextFormatter {
    * @returns 整形されたテキスト
    */
   format(richTexts: RichText[], enableAnnotations?: EnableAnnotations, colorMap?: ColorMap): string;
+
+  /**
+   * デコレーションを除いたテキスト
+   * @param richTexts リッチテキスト配列
+   * @returns テキスト
+   */
+  plainText(richTexts: RichText[]): string;
 }
 
 /**

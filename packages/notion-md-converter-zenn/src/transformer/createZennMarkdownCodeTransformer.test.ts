@@ -29,6 +29,7 @@ describe("createZennMarkdownCodeTransformer", () => {
       test hoge
       \`\`\`
     `);
+    expect(context.tools.richTextFormatter.plainText).toHaveBeenCalledWith(block.code.rich_text);
   });
 
   it("言語指定がない場合は言語なしで変換する", () => {
@@ -50,6 +51,7 @@ describe("createZennMarkdownCodeTransformer", () => {
       test hoge
       \`\`\`
     `);
+    expect(context.tools.richTextFormatter.plainText).toHaveBeenCalledWith(block.code.rich_text);
   });
 
   it("diffが指定されている場合、それを含めて変換する", () => {
@@ -77,6 +79,7 @@ describe("createZennMarkdownCodeTransformer", () => {
       test hoge
       \`\`\`
     `);
+    expect(context.tools.richTextFormatter.plainText).toHaveBeenCalledWith(block.code.rich_text);
   });
 
   it("diffとファイル名が指定されている場合、それらを含めて変換する", () => {

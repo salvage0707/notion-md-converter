@@ -28,6 +28,7 @@ describe("createZennMarkdownPDFTransformer", () => {
     const result = transformer(context);
 
     expect(result).toBe("[example.pdf](https://example.com/test.pdf)");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.pdf.caption);
   });
 
   it("captionがない場合、urlを含めてpdfブロックを変換できる", () => {

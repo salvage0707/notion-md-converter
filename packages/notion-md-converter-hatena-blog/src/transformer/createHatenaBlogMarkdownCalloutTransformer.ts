@@ -2,8 +2,8 @@ import { MarkdownUtils, createCalloutTransformerFactory } from "@notion-md-conve
 import { HatenaBlogMarkdownUtils } from "../utils";
 
 export const createHatenaBlogMarkdownCalloutTransformer = () => {
-  return createCalloutTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(block.callout.rich_text, {
+  return createCalloutTransformerFactory(({ block, children, context }) => {
+    const text = context.tools.richTextFormatter.format(block.callout.rich_text, {
       color: true,
     });
     let result = text;

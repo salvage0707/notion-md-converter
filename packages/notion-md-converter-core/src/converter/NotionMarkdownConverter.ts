@@ -30,6 +30,7 @@ import type {
   ToggleBlock,
   VideoBlock,
 } from "@notion-md-converter/types";
+import { BasicRichTextFormatter } from "../rich-text";
 import {
   createMarkdownBookmarkTransformer,
   createMarkdownBreadcrumbTransformer,
@@ -81,7 +82,6 @@ import {
   isToggleBlock,
   isVideoBlock,
 } from "../utils";
-import { BasicRichTextFormatter } from "../utils/markdown";
 
 export class NotRootBlockError extends Error {
   constructor(block: Block) {

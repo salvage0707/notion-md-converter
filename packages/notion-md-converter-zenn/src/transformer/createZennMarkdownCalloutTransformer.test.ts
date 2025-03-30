@@ -29,6 +29,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
       テストメッセージ
       :::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.callout.rich_text);
   });
 
   it("アラートカラーが設定されている場合はアラートメッセージとして変換する", () => {
@@ -51,6 +52,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
       アラートメッセージ
       :::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.callout.rich_text);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -85,6 +87,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
       :::
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.callout.rich_text);
   });
 
   it("子要素に:::が含まれる場合、wrapオプションを有効にして変換する", () => {
@@ -127,6 +130,7 @@ describe("createZennMarkdownCalloutTransformer", () => {
       ::::
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.callout.rich_text);
   });
 
   it("カスタムのアラートカラーを設定できる", () => {
@@ -152,5 +156,6 @@ describe("createZennMarkdownCalloutTransformer", () => {
       アラートメッセージ
       :::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.callout.rich_text);
   });
 });
