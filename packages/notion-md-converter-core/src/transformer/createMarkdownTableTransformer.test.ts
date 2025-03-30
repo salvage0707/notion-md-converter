@@ -6,7 +6,6 @@ import {
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import type { TextRichText } from "@notion-md-converter/types";
-import { MarkdownUtils } from "../utils";
 import { createMarkdownTableTransformer } from "./createMarkdownTableTransformer";
 
 const createRow = (
@@ -46,8 +45,28 @@ describe("createMarkdownTableTransformer", () => {
       | Content1 | Content2 |
       | Content3 | Content4 |
     `);
+    // Header
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[0].table_row.cells[0],
+    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[0].table_row.cells[1],
+    );
+    // Row1
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[1].table_row.cells[0],
+    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[1].table_row.cells[1],
+    );
+    // Row2
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[2].table_row.cells[0],
+    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[2].table_row.cells[1],
+    );
   });
-
   it("1行のtableブロックを変換する", () => {
     const block = createTableBlock({
       children: [createRow(["Header1", "Header2"])],
@@ -62,36 +81,13 @@ describe("createMarkdownTableTransformer", () => {
       | Header1 | Header2 |
       | ------- | ------- |
     `);
-  });
 
-  describe("annotationオプションありの場合", () => {
-    const transformer = createMarkdownTableTransformer({
-      enableAnnotations: {
-        color: true,
-      },
-    });
-
-    it("colorがtrueの場合、テキストの色を変更できる", () => {
-      const block = createTableBlock({
-        children: [
-          createRow(["Header1", "Header2"], { color: "red" }),
-          createRow(["Content1", "Content2"], { color: "red" }),
-          createRow(["Content3", "Content4"], { color: "red" }),
-        ],
-      });
-      const context = createTransformerContext({
-        blocks: [block],
-      });
-
-      const result = transformer(context);
-
-      const redColor = MarkdownUtils.COLOR_MAP.red as string;
-      expect(result).toBe(dedent({ wrap: true })`
-      | <span style="color: ${redColor};">Header1</span>  | <span style="color: ${redColor};">Header2</span>  |
-      | --------------------------------------------- | --------------------------------------------- |
-      | <span style="color: ${redColor};">Content1</span> | <span style="color: ${redColor};">Content2</span> |
-      | <span style="color: ${redColor};">Content3</span> | <span style="color: ${redColor};">Content4</span> |
-    `);
-    });
+    // Header
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[0].table_row.cells[0],
+    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.children[0].table_row.cells[1],
+    );
   });
 });

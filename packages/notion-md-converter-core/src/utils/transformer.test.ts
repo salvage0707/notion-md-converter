@@ -1,5 +1,6 @@
 import type { RichText } from "@notion-md-converter/types";
 import { TransformerUtils } from "./transformer";
+import { createTextRichText } from "@notion-md-converter/testing";
 
 describe("getCaptionMetadata", () => {
   const createRichText = (text: string): RichText[] => [
@@ -101,74 +102,57 @@ describe("getCaptionMetadata", () => {
   });
 });
 
-describe("getCaptionText", () => {
-  const createRichText = (
-    text: string,
-    annotations: Partial<RichText["annotations"]> = {},
-  ): RichText[] => [
-    {
-      type: "text",
-      text: { content: text, link: null },
-      annotations: {
-        bold: false,
-        italic: false,
-        strikethrough: false,
-        underline: false,
-        code: false,
-        color: "default",
-        ...annotations,
-      },
-      plain_text: text,
-      href: null,
-    },
-  ];
-
+describe("getExtractedMetadataRichText", () => {
   it("メタデータがない場合、テキストをそのまま返す", () => {
-    const caption = createRichText("some text");
-    const result = TransformerUtils.getCaptionText(caption);
-    expect(result).toBe("some text");
+    const caption = [createTextRichText({ content: "some text" })];
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual(caption);
   });
 
   it("メタデータがある場合、メタデータを除いたテキストを返す", () => {
-    const caption = createRichText("id=1234567890:some text");
-    const result = TransformerUtils.getCaptionText(caption);
-    expect(result).toBe("some text");
+    const caption = [createTextRichText({ content: "id=1234567890:some text" })];
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual([createTextRichText({ content: "some text" })]);
   });
 
   it("テキストに:が含まれる場合、正しく処理する", () => {
-    const caption = createRichText("id=1234567890:text:with:colons");
-    const result = TransformerUtils.getCaptionText(caption);
-    expect(result).toBe("text:with:colons");
+    const caption = [createTextRichText({ content: "id=1234567890:text:with:colons" })];
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual([createTextRichText({ content: "text:with:colons" })]);
   });
 
   it("テキストが空の場合、空文字を返す", () => {
-    const caption = createRichText("id=1234567890:");
-    const result = TransformerUtils.getCaptionText(caption);
-    expect(result).toBe("");
+    const caption = [createTextRichText({ content: "id=1234567890:" })];
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual([]);
   });
 
   it("アノテーション付きのテキストを正しく処理する", () => {
-    const caption = createRichText("id=1234567890:some text", { bold: true });
-    const result = TransformerUtils.getCaptionText(caption, { enableAnnotations: { bold: true } });
-    expect(result).toBe("**some text**");
+    const caption = [createTextRichText({ content: "id=1234567890:some text", annotations: { bold: true } })];
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual([createTextRichText({ content: "some text", annotations: { bold: true } })]);
   });
 
   it("複数のRichTextを結合して処理する", () => {
     const caption = [
-      createRichText("id=1234567890:")[0],
-      createRichText("some text", { bold: true })[0],
+      createTextRichText({ content: "id=1234567890:" }),
+      createTextRichText({ content: "some text", annotations: { bold: true } }),
     ];
-    const result = TransformerUtils.getCaptionText(caption, { enableAnnotations: { bold: true } });
-    expect(result).toBe("**some text**");
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual([createTextRichText({ content: "some text", annotations: { bold: true } })]);
   });
 
   it("複数のRichTextでメタデータとテキストのアノテーションがまたがる場合、正しく処理する", () => {
     const caption = [
-      createRichText("id=1234567890:some", { strikethrough: true })[0],
-      createRichText(" ")[0],
-      createRichText("text", { bold: true })[0],
+      createTextRichText({ content: "id=1234567890:some", annotations: { strikethrough: true } }),
+      createTextRichText({ content: " " }),
+      createTextRichText({ content: "text", annotations: { bold: true } }),
     ];
-    const result = TransformerUtils.getCaptionText(caption, { enableAnnotations: { bold: true } });
-    expect(result).toBe("~~some~~ **text**");
+    const result = TransformerUtils.getExtractedMetadataRichText(caption);
+    expect(result).toEqual([
+      createTextRichText({ content: "some", annotations: { strikethrough: true } }),
+      createTextRichText({ content: " " }),
+      createTextRichText({ content: "text", annotations: { bold: true } }),
+    ]);
   });
 });

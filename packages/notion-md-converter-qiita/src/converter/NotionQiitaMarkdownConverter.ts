@@ -2,7 +2,6 @@ import {
   NotionMarkdownConverter,
   createUnsupportedBlockTransformer,
 } from "@notion-md-converter/core";
-import type { TransformerMapping } from "@notion-md-converter/types";
 import {
   createQiitaMarkdownBookmarkTransformer,
   createQiitaMarkdownCalloutTransformer,
@@ -14,19 +13,20 @@ import {
 } from "../transformer";
 
 export class NotionQiitaMarkdownConverter extends NotionMarkdownConverter {
-  constructor(transformers: TransformerMapping = {}) {
+  constructor() {
     super({
-      bookmark: createQiitaMarkdownBookmarkTransformer(),
-      breadcrumb: createUnsupportedBlockTransformer(),
-      callout: createQiitaMarkdownCalloutTransformer(),
-      code: createQiitaMarkdownCodeTransformer(),
-      equation: createQiitaMarkdownEquationTransformer(),
-      link_preview: createQiitaMarkdownLinkPreviewTransformer(),
-      video: createQiitaMarkdownVideoTransformer(),
-      embed: createQiitaMarkdownEmbedTransformer(),
-      pdf: createUnsupportedBlockTransformer(),
-      file: createUnsupportedBlockTransformer(),
-      ...transformers,
+      transformers: {
+        bookmark: createQiitaMarkdownBookmarkTransformer(),
+        breadcrumb: createUnsupportedBlockTransformer(),
+        callout: createQiitaMarkdownCalloutTransformer(),
+        code: createQiitaMarkdownCodeTransformer(),
+        equation: createQiitaMarkdownEquationTransformer(),
+        link_preview: createQiitaMarkdownLinkPreviewTransformer(),
+        video: createQiitaMarkdownVideoTransformer(),
+        embed: createQiitaMarkdownEmbedTransformer(),
+        pdf: createUnsupportedBlockTransformer(),
+        file: createUnsupportedBlockTransformer(),
+      },
     });
   }
 }

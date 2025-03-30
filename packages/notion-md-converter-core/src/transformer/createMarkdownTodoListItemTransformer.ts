@@ -1,22 +1,9 @@
 import { MarkdownUtils } from "../utils";
-import type { ColorMap, EnableAnnotations } from "../utils";
 import { createTodoTransformerFactory } from "./transformerFactory";
 
-type TodoListItemTransformerOptions = {
-  enableAnnotations?: EnableAnnotations;
-  colorMap?: ColorMap;
-};
-
-export const createMarkdownTodoListItemTransformer = (
-  options: TodoListItemTransformerOptions = {},
-) => {
-  const { enableAnnotations, colorMap } = options;
-  return createTodoTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(
-      block.to_do.rich_text,
-      enableAnnotations,
-      colorMap,
-    );
+export const createMarkdownTodoListItemTransformer = () => {
+  return createTodoTransformerFactory(({ block, children, context }) => {
+    const text = context.tools.richTextFormatter.format(block.to_do.rich_text);
     const formattedChildren = MarkdownUtils.indent(children);
     const bulletText = MarkdownUtils.checkList(text, block.to_do.checked);
 

@@ -1,19 +1,10 @@
-import { type ColorMap, type EnableAnnotations, MarkdownUtils } from "../utils";
+
+import { MarkdownUtils } from "../utils";
 import { createQuoteTransformerFactory } from "./transformerFactory";
 
-type QuoteTransformerOptions = {
-  enableAnnotations?: EnableAnnotations;
-  colorMap?: ColorMap;
-};
-
-export const createMarkdownQuoteTransformer = (options: QuoteTransformerOptions = {}) => {
-  const { enableAnnotations, colorMap } = options;
-  return createQuoteTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(
-      block.quote.rich_text,
-      enableAnnotations,
-      colorMap,
-    );
+export const createMarkdownQuoteTransformer = () => {
+  return createQuoteTransformerFactory(({ block, children, context }) => {
+    const text = context.tools.richTextFormatter.format(block.quote.rich_text);
     let result = text;
     if (children !== "") {
       result += `\n${children}`;

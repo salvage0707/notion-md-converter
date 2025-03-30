@@ -1,4 +1,5 @@
 import type {
+  ApiColor,
   Block,
   BookmarkBlock,
   BreadcrumbBlock,
@@ -21,6 +22,7 @@ import type {
   ParagraphBlock,
   PdfBlock,
   QuoteBlock,
+  RichText,
   SyncedBlock,
   TableBlock,
   TableOfContentsBlock,
@@ -29,11 +31,59 @@ import type {
   VideoBlock,
 } from "./notion";
 
+/**
+ * アノテーションの有効設定
+ */
+export type EnableAnnotations = {
+  bold?: boolean;
+  italic?: boolean;
+  strikethrough?: boolean;
+  underline?: boolean;
+  code?: boolean;
+  equation?: boolean;
+  color?: boolean;
+  link?: boolean;
+};
+
+/**
+ * カラーマッピング
+ */
+export type ColorMap = Record<ApiColor, string | undefined>;
+
+/**
+ * リッチテキストをフォーマットするツールのインターフェース
+ */
+export interface RichTextFormatter {
+  /**
+   * リッチテキストを整形する
+   * @param richTexts リッチテキスト配列
+   * @param enableAnnotations 有効化するアノテーション
+   * @param colorMap カラーマップ
+   * @returns 整形されたテキスト
+   */
+  format(
+    richTexts: RichText[],
+    enableAnnotations?: EnableAnnotations,
+    colorMap?: ColorMap
+  ): string;
+}
+
+/**
+ * 変換に使用するツール群
+ */
+export interface ConverterTools {
+  /**
+   * リッチテキストフォーマッター
+   */
+  richTextFormatter: RichTextFormatter;
+}
+
 export type Context<T extends Block> = {
   execute: (blocks: Block[]) => string;
   blocks: Block[];
   currentBlock: T;
   currentBlockIndex: number;
+  tools: ConverterTools;
 };
 
 export type NotionBlockTransformer<T extends Block> = (context: Context<T>) => string;

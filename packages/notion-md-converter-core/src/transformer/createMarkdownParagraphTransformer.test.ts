@@ -1,6 +1,5 @@
 import { createParagraphBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { MarkdownUtils } from "../utils";
 import { createMarkdownParagraphTransformer } from "./createMarkdownParagraphTransformer";
 
 describe("createMarkdownParagraphTransformer", () => {
@@ -19,6 +18,9 @@ describe("createMarkdownParagraphTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("シンプルなテキストです。");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.paragraph.rich_text,
+    );
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -40,6 +42,9 @@ describe("createMarkdownParagraphTransformer", () => {
       シンプルなテキストです。
       小要素があります
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.paragraph.rich_text,
+    );
   });
 
   it("テキストにスタイルがついている場合はスタイルを適用する", () => {
@@ -62,7 +67,10 @@ describe("createMarkdownParagraphTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("シンプルな**太字**テストテキスト");
+    expect(result).toBe("シンプルな太字テストテキスト");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.paragraph.rich_text,
+    );
   });
 
   describe("brオプションがtrueの場合", () => {
@@ -103,35 +111,9 @@ describe("createMarkdownParagraphTransformer", () => {
       シンプルなテキストです。
       小要素があります<br />
     `);
-    });
-  });
-
-  describe("annotationオプションありの場合", () => {
-    const transformer = createMarkdownParagraphTransformer({
-      enableAnnotations: {
-        color: true,
-      },
-    });
-
-    it("colorがtrueの場合、テキストの色を変更できる", () => {
-      const block = createParagraphBlock({
-        richText: [
-          createTextRichText({
-            content: "シンプルなテキストです。",
-            annotations: {
-              color: "red",
-            },
-          }),
-        ],
-      });
-      const context = createTransformerContext({
-        blocks: [block],
-      });
-
-      const result = transformer(context);
-
-      const redColor = MarkdownUtils.COLOR_MAP.red as string;
-      expect(result).toBe(`<span style="color: ${redColor};">シンプルなテキストです。</span>`);
+      expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+        block.paragraph.rich_text,
+      );
     });
   });
 });

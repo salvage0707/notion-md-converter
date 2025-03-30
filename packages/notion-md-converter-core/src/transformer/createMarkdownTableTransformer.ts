@@ -1,21 +1,14 @@
-import { MarkdownUtils } from "../utils";
-import type { ColorMap, EnableAnnotations, TableCell, TableHeader } from "../utils";
+import { MarkdownUtils, type TableCell, type TableHeader } from "../utils";
 import { createTableTransformerFactory } from "./transformerFactory";
 
-type TableTransformerOptions = {
-  enableAnnotations?: EnableAnnotations;
-  colorMap?: ColorMap;
-};
-
-export const createMarkdownTableTransformer = (options: TableTransformerOptions = {}) => {
-  const { enableAnnotations, colorMap } = options;
-  return createTableTransformerFactory(({ header, rows }) => {
+export const createMarkdownTableTransformer = () => {
+  return createTableTransformerFactory(({ header, rows, context }) => {
     const headerCells: TableHeader[] = header.table_row.cells.map((cell) => ({
-      content: MarkdownUtils.richTextsToMarkdown(cell, enableAnnotations, colorMap),
+      content: context.tools.richTextFormatter.format(cell),
     }));
     const rowsCells: TableCell[][] = rows.map((row) =>
       row.table_row.cells.map((cell) => ({
-        content: MarkdownUtils.richTextsToMarkdown(cell, enableAnnotations, colorMap),
+        content: context.tools.richTextFormatter.format(cell),
       })),
     );
     // 改行の数を出力

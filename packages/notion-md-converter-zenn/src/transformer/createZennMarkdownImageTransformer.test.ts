@@ -23,6 +23,7 @@ describe("createZennMarkdownImageTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("![example](https://example.com)");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.image.caption);
   });
 
   it("captionがない場合、urlを含めてimageブロックを変換できる", () => {
@@ -49,5 +50,8 @@ describe("createZennMarkdownImageTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("![example](https://example.com =100x)");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      [createTextRichText({ content: "example" })],
+    );
   });
 });

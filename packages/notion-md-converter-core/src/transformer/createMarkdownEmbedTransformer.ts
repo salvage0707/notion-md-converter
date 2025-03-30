@@ -1,24 +1,20 @@
 import {
-  type ColorMap,
-  type EnableAnnotations,
+  type SupportedEmbedProviders,
   MarkdownUtils,
   ProviderUtils,
-  type SupportedEmbedProviders,
   TransformerUtils,
 } from "../utils";
 import { createEmbedTransformerFactory } from "./transformerFactory";
 
 type EmbedTransformerOptions = {
-  enableAnnotations?: EnableAnnotations;
-  colorMap?: ColorMap;
   enableEmbed?: boolean;
   supportedEmbedProviders?: SupportedEmbedProviders;
 };
 
 export const createMarkdownEmbedTransformer = (options: EmbedTransformerOptions = {}) => {
-  const { enableAnnotations, colorMap, enableEmbed = true, supportedEmbedProviders } = options;
+  const { enableEmbed = true, supportedEmbedProviders } = options;
 
-  return createEmbedTransformerFactory(({ block, metadata }) => {
+  return createEmbedTransformerFactory(({ block, metadata, context }) => {
     if (enableEmbed && supportedEmbedProviders) {
       const result = ProviderUtils.embedByUrl(block.embed.url, metadata, {
         supportedEmbedProviders,
@@ -28,10 +24,8 @@ export const createMarkdownEmbedTransformer = (options: EmbedTransformerOptions 
       }
     }
 
-    const caption = TransformerUtils.getCaptionText(block.embed.caption, {
-      enableAnnotations,
-      colorMap,
-    });
+    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(block.embed.caption);
+    const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
     const url = block.embed.url;
     return MarkdownUtils.link(caption || url, url);
   });

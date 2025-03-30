@@ -4,7 +4,6 @@ import {
   dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { MarkdownUtils } from "../utils";
 import { createMarkdownBulletedListItemTransformer } from "./createMarkdownBulletedListItemTransformer";
 
 describe("createMarkdownBulletedListItemTransformer", () => {
@@ -25,6 +24,9 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     const result = transformer(context);
 
     expect(result).toBe("- テストテキスト");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
+      block.bulleted_list_item.rich_text,
+    );
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -62,34 +64,5 @@ describe("createMarkdownBulletedListItemTransformer", () => {
     `;
     expect(result).toBe(expected);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
-  });
-
-  describe("annotationオプションありの場合", () => {
-    const transformer = createMarkdownBulletedListItemTransformer({
-      enableAnnotations: {
-        color: true,
-      },
-    });
-
-    it("colorがtrueの場合、テキストの色を変更できる", () => {
-      const block = createBulletedListItemBlock({
-        richText: [
-          createTextRichText({
-            content: "テストテキスト",
-            annotations: {
-              color: "red",
-            },
-          }),
-        ],
-      });
-      const context = createTransformerContext({
-        blocks: [block],
-      });
-
-      const result = transformer(context);
-
-      const redColor = MarkdownUtils.COLOR_MAP.red as string;
-      expect(result).toBe(`- <span style="color: ${redColor};">テストテキスト</span>`);
-    });
   });
 });

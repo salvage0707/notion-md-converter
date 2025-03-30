@@ -1,6 +1,5 @@
 import { CHAR, createQuoteBlock, createTextRichText, dedent } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { MarkdownUtils } from "../utils";
 import { createMarkdownQuoteTransformer } from "./createMarkdownQuoteTransformer";
 
 describe("createMarkdownQuoteTransformer", () => {
@@ -27,6 +26,7 @@ describe("createMarkdownQuoteTransformer", () => {
       > テストメッセージ
       > テストメッセージ2
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.quote.rich_text);
   });
 
   it("空のquoteブロックを変換する", () => {
@@ -42,6 +42,7 @@ describe("createMarkdownQuoteTransformer", () => {
     expect(result).toBe(dedent({ wrap: true })`
       >${CHAR.SPACE}
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.quote.rich_text);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -74,40 +75,6 @@ describe("createMarkdownQuoteTransformer", () => {
       > > 子メッセージ
     `);
     expect(context.mockedExecute).toHaveBeenCalledWith(block.children);
-  });
-
-  describe("annotationオプションありの場合", () => {
-    const transformer = createMarkdownQuoteTransformer({
-      enableAnnotations: {
-        color: true,
-      },
-    });
-
-    it("colorがtrueの場合、テキストの色を変更できる", () => {
-      const block = createQuoteBlock({
-        richText: [
-          createTextRichText({
-            content: dedent`
-              テストメッセージ
-              テストメッセージ2
-            `,
-            annotations: {
-              color: "red",
-            },
-          }),
-        ],
-      });
-      const context = createTransformerContext({
-        blocks: [block],
-      });
-
-      const result = transformer(context);
-
-      const redColor = MarkdownUtils.COLOR_MAP.red as string;
-      expect(result).toBe(dedent({ wrap: true })`
-        > <span style="color: ${redColor};">テストメッセージ
-        > テストメッセージ2</span>
-      `);
-    });
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.quote.rich_text);
   });
 });
