@@ -1,6 +1,6 @@
 import type { RichText } from "@notion-md-converter/types";
-
-export type CaptionMetadata = Record<string, string | undefined>;
+import type { CaptionMetadataType } from "../rich-text/CaptionMetadata";
+import { CaptionMetadata } from "../rich-text/CaptionMetadata";
 
 /**
  * キャプションからメタデータを抽出する
@@ -26,82 +26,22 @@ export type CaptionMetadata = Record<string, string | undefined>;
  * @param caption キャプション
  * @returns メタデータとテキスト
  */
-const getCaptionMetadata = (caption: RichText[]): { metadata: CaptionMetadata; text: string } => {
-  const captionText = caption.map((richText) => richText.plain_text).join("");
-  const captionTexts = captionText.split(":");
-
-  if (captionTexts.length === 1) {
-    return { metadata: {}, text: captionText };
-  }
-
-  const metaText = captionTexts[0];
-  const metadata = metaText.split("&").reduce(
-    (acc, meta) => {
-      const [key, value] = meta.split("=");
-      acc[key] = value || undefined;
-      return acc;
-    },
-    {} as Record<string, string | undefined>,
-  );
-  const text = captionTexts.slice(1).join(":");
-  return { metadata, text };
-};
-
-/**
- * キャプションからテキストを抽出する
- *
- * @param caption キャプション
- * @returns RichText[]
- */
-const getExtractedMetadataRichText = (caption: RichText[]): RichText[] => {
-  const captionText = caption.map((richText) => richText.plain_text).join("");
-  const captionTexts = captionText.split(":");
-
-  if (captionTexts.length === 1) {
-    return caption;
-  }
-
-  // メタデータを除去したRichTextを作成
-  const text = captionTexts.slice(1).join(":");
-  const textStartIndex = captionText.indexOf(text);
-
-  // テキストが空の場合は空配列を返す
-  if (text === "") {
-    return [];
-  }
-
-  // メタデータ部分を除いたRichTextを作成
-  let currentIndex = 0;
-  const textRichTexts = caption.reduce((acc: RichText[], richText) => {
-    const plainText = richText.plain_text;
-    const textIndex = currentIndex;
-    currentIndex += plainText.length;
-
-    // テキスト部分が開始位置以降にある場合は追加
-    if (textIndex >= textStartIndex) {
-      acc.push(richText);
-    }
-    // テキスト部分が開始位置をまたぐ場合は、該当部分のみを抽出
-    else if (textIndex + plainText.length > textStartIndex) {
-      const startOffset = textStartIndex - textIndex;
-      if (richText.type === "text") {
-        acc.push({
-          ...richText,
-          plain_text: plainText.slice(startOffset),
-          text: {
-            ...richText.text,
-            content: richText.text.content.slice(startOffset),
-          },
-        });
-      }
-    }
-    return acc;
-  }, []);
-
-  return textRichTexts;
-};
-
 export const TransformerUtils = {
-  getCaptionMetadata,
-  getExtractedMetadataRichText,
+  /**
+   * @deprecated Use CaptionMetadata.fromRichText() instead
+   */
+  getCaptionMetadata(caption: RichText[]): { metadata: CaptionMetadataType; text: string } {
+    const captionMetadata = CaptionMetadata.fromRichText(caption);
+    return {
+      metadata: captionMetadata.getMetadata(),
+      text: captionMetadata.getText().map(rt => rt.plain_text).join("")
+    };
+  },
+
+  /**
+   * @deprecated Use CaptionMetadata.fromRichText() instead
+   */
+  getExtractedMetadataRichText(caption: RichText[]): RichText[] {
+    return CaptionMetadata.fromRichText(caption).getText();
+  },
 };
