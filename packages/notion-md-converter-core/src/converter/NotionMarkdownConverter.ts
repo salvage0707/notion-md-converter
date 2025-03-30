@@ -1,6 +1,10 @@
-import type { Context, PdfBlock, TransformerMapping } from "@notion-md-converter/types";
 import type {
   Block,
+  Context,
+  ConverterTools,
+  TransformerMapping,
+} from "@notion-md-converter/types";
+import type {
   BookmarkBlock,
   BreadcrumbBlock,
   BulletedListItemBlock,
@@ -17,6 +21,7 @@ import type {
   LinkPreviewBlock,
   NumberedListItemBlock,
   ParagraphBlock,
+  PdfBlock,
   QuoteBlock,
   SyncedBlock,
   TableBlock,
@@ -25,6 +30,7 @@ import type {
   ToggleBlock,
   VideoBlock,
 } from "@notion-md-converter/types";
+import { BasicRichTextFormatter } from "../rich-text";
 import {
   createMarkdownBookmarkTransformer,
   createMarkdownBreadcrumbTransformer,
@@ -83,11 +89,38 @@ export class NotRootBlockError extends Error {
   }
 }
 
+export interface NotionMarkdownConverterOptions {
+  /**
+   * カスタムトランスフォーマーマッピング
+   */
+  transformers?: TransformerMapping;
+
+  /**
+   * 変換ツール
+   */
+  tools?: Partial<ConverterTools>;
+}
+
 export class NotionMarkdownConverter {
   protected transformers: TransformerMapping;
+  protected tools: ConverterTools;
 
-  constructor(transformers: TransformerMapping = {}) {
-    this.transformers = {
+  constructor(options: NotionMarkdownConverterOptions = {}) {
+    // ツールの初期化
+    this.tools = {
+      richTextFormatter: new BasicRichTextFormatter(),
+      ...(options.tools || {}),
+    };
+
+    // トランスフォーマーの初期化
+    this.transformers = this.initializeTransformers(options.transformers || {});
+  }
+
+  /**
+   * トランスフォーマーの初期化
+   */
+  private initializeTransformers(customTransformers: TransformerMapping): TransformerMapping {
+    return {
       bookmark: createMarkdownBookmarkTransformer(),
       breadcrumb: createMarkdownBreadcrumbTransformer(),
       bulleted_list_item: createMarkdownBulletedListItemTransformer(),
@@ -111,7 +144,7 @@ export class NotionMarkdownConverter {
       pdf: createMarkdownPDFTransformer(),
       video: createMarkdownVideoTransformer(),
       embed: createMarkdownEmbedTransformer(),
-      ...transformers,
+      ...customTransformers,
     };
   }
 
@@ -126,6 +159,7 @@ export class NotionMarkdownConverter {
       blocks,
       currentBlock: blocks[0],
       currentBlockIndex: 0,
+      tools: this.tools,
     };
     const transformedBlocks = blocks.map((block, index) => {
       context.currentBlock = block;

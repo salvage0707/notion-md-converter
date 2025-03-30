@@ -8,17 +8,10 @@ type ZennCodeMetadata = {
 
 export const createZennMarkdownCodeTransformer = (): CodeTransformer => {
   return createCodeTransformerFactory(
-    ({ block, metadata: { language, filename, ...metadata } }) => {
+    ({ block, metadata: { language, filename, ...metadata }, context }) => {
       const { diff } = metadata as ZennCodeMetadata;
 
-      const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {
-        bold: false,
-        italic: false,
-        strikethrough: false,
-        underline: false,
-        code: false,
-        color: false,
-      });
+      const text = context.tools.richTextFormatter.plainText(block.code.rich_text);
 
       return MarkdownUtils.wrapWithNewLines(
         ZennMarkdownUtils.codeBlock(text, diff === "true", language, filename),

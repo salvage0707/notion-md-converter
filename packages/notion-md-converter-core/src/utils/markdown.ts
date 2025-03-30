@@ -1,6 +1,5 @@
-import type { ApiColor, RichText } from "@notion-md-converter/types";
+import type { ApiColor, ColorMap } from "@notion-md-converter/types";
 import { HTMLUtils } from "./html";
-import { isURL } from "./utils";
 
 /**
  * @see https://www.markdownguide.org/basic-syntax/#reference-style-links
@@ -28,10 +27,6 @@ const heading = (text: string, level: 1 | 2 | 3 | 4 | 5 | 6): string => {
 /**
  * テキストスタイル変換
  */
-export type ColorMap = {
-  [key in ApiColor]: string | undefined;
-};
-
 const COLOR_MAP: ColorMap = {
   default: undefined,
   default_background: undefined,
@@ -132,18 +127,17 @@ const color = (text: string, color: ApiColor, colorMap: ColorMap = COLOR_MAP): s
   const spanProps: {
     style?: string;
   } = {};
-  if (BACKGROUND_COLOR_KEY.includes(color)) {
-    const bgColor = colorMap[color];
-    if (bgColor) {
-      spanProps.style = `background-color: ${bgColor};`;
-    }
+
+  // カラーコードが得られる場合のみスタイルを適用
+  const colorCode = colorMap[color];
+  if (!colorCode) {
+    return text;
   }
 
-  if (TEXT_COLOR_KEY.includes(color)) {
-    const textColor = colorMap[color];
-    if (textColor) {
-      spanProps.style = `color: ${textColor};`;
-    }
+  if (BACKGROUND_COLOR_KEY.includes(color)) {
+    spanProps.style = `background-color: ${colorCode};`;
+  } else if (TEXT_COLOR_KEY.includes(color)) {
+    spanProps.style = `color: ${colorCode};`;
   }
 
   if (Object.keys(spanProps).length > 0) {
@@ -322,73 +316,6 @@ const comment = (text: string): string => {
   return `<!-- ${text} -->`;
 };
 
-/**
- * リッチテキストをMarkdownに変換
- */
-export type EnableAnnotations = {
-  bold?: boolean;
-  italic?: boolean;
-  strikethrough?: boolean;
-  underline?: boolean;
-  code?: boolean;
-  equation?: boolean;
-  color?: boolean | ColorMap;
-  link?: boolean;
-};
-
-const richTextsToMarkdown = (
-  richTexts: RichText[],
-  enableAnnotations?: EnableAnnotations,
-  colorMap?: ColorMap,
-): string => {
-  const toMarkdown = (text: RichText, enableAnnotations: EnableAnnotations): string => {
-    let markdown = text.plain_text;
-
-    if (text.annotations.code && enableAnnotations.code) {
-      markdown = inlineCode(markdown);
-    }
-    if (text.type === "equation" && enableAnnotations.equation) {
-      markdown = inlineEquation(markdown);
-    }
-    if (text.annotations.bold && enableAnnotations.bold) {
-      markdown = bold(markdown);
-    }
-    if (text.annotations.italic && enableAnnotations.italic) {
-      markdown = italic(markdown);
-    }
-    if (text.annotations.strikethrough && enableAnnotations.strikethrough) {
-      markdown = strikethrough(markdown);
-    }
-    if (text.annotations.underline && enableAnnotations.underline) {
-      markdown = underline(markdown);
-    }
-    if (text.annotations.color && enableAnnotations.color) {
-      markdown = color(markdown, text.annotations.color, colorMap);
-    }
-    if (text.href && isURL(text.href) && enableAnnotations.link) {
-      markdown = link(markdown, text.href);
-    }
-
-    return markdown;
-  };
-
-  const options = {
-    bold: true,
-    italic: true,
-    strikethrough: true,
-    underline: true,
-    code: true,
-    equation: true,
-    color: false,
-    link: true,
-    ...enableAnnotations,
-  };
-  return richTexts
-    .map((text) => toMarkdown(text, options))
-    .join("")
-    .trim();
-};
-
 export const MarkdownUtils = {
   heading,
   bold,
@@ -412,7 +339,6 @@ export const MarkdownUtils = {
   indent,
   details,
   video,
-  richTextsToMarkdown,
   comment,
   decoration,
   COLOR_MAP,

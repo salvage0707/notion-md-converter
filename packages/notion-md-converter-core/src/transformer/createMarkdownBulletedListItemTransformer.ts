@@ -1,20 +1,9 @@
-import { type ColorMap, type EnableAnnotations, MarkdownUtils } from "../utils";
+import { MarkdownUtils } from "../utils";
 import { createBulletedListItemTransformerFactory } from "./transformerFactory";
 
-type BulletedListItemTransformerOptions = {
-  enableAnnotations?: EnableAnnotations;
-  colorMap?: ColorMap;
-};
-
-export const createMarkdownBulletedListItemTransformer = (
-  options: BulletedListItemTransformerOptions = {},
-) => {
-  return createBulletedListItemTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(
-      block.bulleted_list_item.rich_text,
-      options.enableAnnotations,
-      options.colorMap,
-    );
+export const createMarkdownBulletedListItemTransformer = () => {
+  return createBulletedListItemTransformerFactory(({ block, children, context }) => {
+    const text = context.tools.richTextFormatter.format(block.bulleted_list_item.rich_text);
     const formattedChildren = MarkdownUtils.indent(children);
     const bulletText = MarkdownUtils.bulletList(text);
 

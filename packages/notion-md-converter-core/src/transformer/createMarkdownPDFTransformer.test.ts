@@ -1,6 +1,5 @@
 import { createPdfBlock, createTextRichText } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
-import { MarkdownUtils } from "../utils";
 import { createMarkdownPDFTransformer } from "./createMarkdownPDFTransformer";
 
 describe("createMarkdownPDFTransformer", () => {
@@ -32,6 +31,7 @@ describe("createMarkdownPDFTransformer", () => {
       const result = transformer(context);
 
       expect(result).toBe("[example.pdf](https://example.com/test.pdf)");
+      expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.pdf.caption);
     });
 
     it("captionがない場合、urlを含めてpdfブロックを変換できる", () => {
@@ -48,35 +48,6 @@ describe("createMarkdownPDFTransformer", () => {
       const result = transformer(context);
 
       expect(result).toBe("[https://example.com/test.pdf](https://example.com/test.pdf)");
-    });
-
-    describe("annotationオプションありの場合", () => {
-      const transformer = createMarkdownPDFTransformer({
-        fileAdapter: mockAdapter,
-        outputType: "markdown-link",
-        enableAnnotations: {
-          color: true,
-        },
-      });
-
-      it("colorがtrueの場合、テキストの色を変更できる", () => {
-        const block = createPdfBlock({
-          caption: [createTextRichText({ content: "example.pdf", annotations: { color: "red" } })],
-        });
-        const context = createTransformerContext({
-          blocks: [block],
-        });
-
-        mockAdapter.mockReturnValue({
-          url: "https://example.com/test.pdf",
-        });
-        const result = transformer(context);
-
-        const redColor = MarkdownUtils.COLOR_MAP.red as string;
-        expect(result).toBe(
-          `[<span style="color: ${redColor};">example.pdf</span>](https://example.com/test.pdf)`,
-        );
-      });
     });
   });
 

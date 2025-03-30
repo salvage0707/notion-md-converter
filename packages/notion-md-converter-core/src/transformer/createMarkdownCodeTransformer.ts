@@ -7,15 +7,8 @@ type CodeTransformerOptions = {
 };
 export const createMarkdownCodeTransformer = (options: CodeTransformerOptions = {}) => {
   const { languageMapping } = options;
-  return createCodeTransformerFactory(({ block }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {
-      bold: false,
-      italic: false,
-      strikethrough: false,
-      underline: false,
-      code: false,
-      color: false,
-    });
+  return createCodeTransformerFactory(({ block, context }) => {
+    const text = context.tools.richTextFormatter.plainText(block.code.rich_text);
     const lang = languageMapping ? languageMapping[block.code.language] : block.code.language;
     return MarkdownUtils.wrapWithNewLines(MarkdownUtils.codeBlock(text, lang?.replace(" ", "_")));
   });

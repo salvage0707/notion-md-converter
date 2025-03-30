@@ -29,6 +29,7 @@ describe("createZennMarkdownToggleTransformer", () => {
       テストコンテンツ
       :::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.toggle.rich_text);
   });
 
   it("複数行のテキストを持つtoggleブロックを変換できる", () => {
@@ -51,6 +52,7 @@ describe("createZennMarkdownToggleTransformer", () => {
       テストコンテンツ
       :::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.toggle.rich_text);
   });
 
   it("子要素に:::が含まれる場合、内容を<br>でラップする", () => {
@@ -81,6 +83,7 @@ describe("createZennMarkdownToggleTransformer", () => {
 
       ::::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.toggle.rich_text);
   });
 
   it("空のtoggleブロックを変換できる", () => {
@@ -103,5 +106,6 @@ describe("createZennMarkdownToggleTransformer", () => {
 
       :::
     `);
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.toggle.rich_text);
   });
 });

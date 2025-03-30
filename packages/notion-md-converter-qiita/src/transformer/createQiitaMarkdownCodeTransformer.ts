@@ -8,10 +8,10 @@ type QiitaCodeMetadata = {
 
 export const createQiitaMarkdownCodeTransformer = (): CodeTransformer => {
   return createCodeTransformerFactory(
-    ({ block, metadata: { language, filename, ...metadata } }) => {
+    ({ block, metadata: { language, filename, ...metadata }, context }) => {
       const { diff } = metadata as QiitaCodeMetadata;
 
-      const text = MarkdownUtils.richTextsToMarkdown(block.code.rich_text, {
+      const text = context.tools.richTextFormatter.format(block.code.rich_text, {
         bold: false,
         italic: false,
         strikethrough: false,

@@ -11,7 +11,7 @@ export const createQiitaMarkdownCalloutTransformer = (
     alertColors?: ApiColor[];
   } = {},
 ): CalloutTransformer => {
-  return createCalloutTransformerFactory(({ block, children }) => {
+  return createCalloutTransformerFactory(({ block, children, context }) => {
     const warnColors = options.warnColors ?? DEFAULT_WARN_COLORS;
     const alertColors = options.alertColors ?? DEFAULT_ALERT_COLORS;
 
@@ -25,7 +25,7 @@ export const createQiitaMarkdownCalloutTransformer = (
       return "info";
     };
 
-    const text = MarkdownUtils.richTextsToMarkdown(block.callout.rich_text);
+    const text = context.tools.richTextFormatter.format(block.callout.rich_text);
     const color = getColor(block.callout.color);
 
     let result = text;

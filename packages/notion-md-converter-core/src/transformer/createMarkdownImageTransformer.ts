@@ -8,11 +8,13 @@ export const createMarkdownImageTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ) => {
-  return createImageTransformerFactory(({ block }) => {
+  return createImageTransformerFactory(({ block, context }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);
     const caption =
-      block.image.caption.length > 0 ? MarkdownUtils.richTextsToMarkdown(block.image.caption) : url;
+      block.image.caption.length > 0
+        ? context.tools.richTextFormatter.format(block.image.caption)
+        : url;
     return MarkdownUtils.image(caption ?? url, url);
   });
 };

@@ -24,6 +24,7 @@ describe("createZennMarkdownEmbedTransformer", () => {
     const result = transformer(context);
 
     expect(result).toBe("[テストリンク](https://example.com)");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.embed.caption);
   });
 
   it("キャプションが空の場合はURLのみを表示する", () => {
@@ -38,5 +39,6 @@ describe("createZennMarkdownEmbedTransformer", () => {
     const result = transformer(context);
 
     expect(result).toBe("[https://example.com](https://example.com)");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.embed.caption);
   });
 });

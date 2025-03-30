@@ -8,7 +8,7 @@ import type { EmbedByUrlOptions } from "../utils";
 import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
-  return createEmbedTransformerFactory(({ block, metadata }) => {
+  return createEmbedTransformerFactory(({ block, metadata, context }) => {
     const getOptions = () => {
       const options: EmbedByUrlOptions = {};
       if (metadata.id) {
@@ -23,7 +23,10 @@ export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
     if (isEmbed) {
       return result;
     }
-    const caption = TransformerUtils.getCaptionText(block.embed.caption);
+    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
+      block.embed.caption,
+    );
+    const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
     return MarkdownUtils.link(caption || url, url);
   });
 };

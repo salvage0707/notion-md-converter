@@ -9,8 +9,8 @@ export const createZennMarkdownCalloutTransformer = (
     alertColors: ["red", "red_background"],
   },
 ): CalloutTransformer => {
-  return createCalloutTransformerFactory(({ block, children }) => {
-    const text = MarkdownUtils.richTextsToMarkdown(block.callout.rich_text);
+  return createCalloutTransformerFactory(({ block, children, context }) => {
+    const text = context.tools.richTextFormatter.format(block.callout.rich_text);
     const color = block.callout.color;
 
     let result = text;

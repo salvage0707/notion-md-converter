@@ -36,6 +36,7 @@ describe("createZennMarkdownFileTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("[caption_example.pdf](https://example.com/file.pdf)");
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.file.caption);
   });
 
   it("captionがない場合、ファイル名のみを含めて変換できる", () => {

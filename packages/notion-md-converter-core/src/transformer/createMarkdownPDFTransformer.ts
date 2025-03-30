@@ -1,20 +1,12 @@
 import type { FileAdapter } from "@notion-md-converter/types";
 import { createNoChangeFileObjectAdapter } from "../adapter";
-import {
-  type ColorMap,
-  type EnableAnnotations,
-  HTMLUtils,
-  MarkdownUtils,
-  TransformerUtils,
-} from "../utils";
+import { HTMLUtils, TransformerUtils } from "../utils";
 import { createPDFTransformerFactory } from "./transformerFactory";
 
 type PDFTransformerOptions =
   | {
       fileAdapter?: FileAdapter;
       outputType?: "markdown-link";
-      enableAnnotations?: EnableAnnotations;
-      colorMap?: ColorMap;
     }
   | {
       fileAdapter?: FileAdapter;
@@ -26,18 +18,14 @@ export const createMarkdownPDFTransformer = (
     outputType: "markdown-link",
   },
 ) => {
-  return createPDFTransformerFactory(({ block }) => {
+  return createPDFTransformerFactory(({ block, context }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.pdf);
 
     if (options.outputType === "markdown-link") {
       const caption =
         block.pdf.caption.length > 0
-          ? MarkdownUtils.richTextsToMarkdown(
-              block.pdf.caption,
-              options.enableAnnotations,
-              options.colorMap,
-            )
+          ? context.tools.richTextFormatter.format(block.pdf.caption)
           : url;
       return `[${caption}](${url})`;
     }

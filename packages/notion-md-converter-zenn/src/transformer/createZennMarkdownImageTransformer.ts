@@ -15,13 +15,18 @@ export const createZennMarkdownImageTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): ImageTransformer => {
-  return createImageTransformerFactory(({ block, metadata }) => {
+  return createImageTransformerFactory(({ block, metadata, context }) => {
     const { width } = metadata as ZennImageMetadata;
 
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);
-    const caption =
-      block.image.caption.length > 0 ? TransformerUtils.getCaptionText(block.image.caption) : url;
-    return MarkdownUtils.image(caption ?? url, url, { width });
+    if (block.image.caption.length > 0) {
+      const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
+        block.image.caption,
+      );
+      const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
+      return MarkdownUtils.image(caption ?? url, url, { width });
+    }
+    return MarkdownUtils.image(url, url, { width });
   });
 };

@@ -1,4 +1,5 @@
 import {
+  BasicRichTextFormatter,
   NotionMarkdownConverter,
   createMarkdownBookmarkTransformer,
   createMarkdownBulletedListItemTransformer,
@@ -12,7 +13,6 @@ import {
   createMarkdownTableTransformer,
   createMarkdownToggleTransformer,
 } from "@notion-md-converter/core";
-import type { TransformerMapping } from "@notion-md-converter/types";
 import {
   createHatenaBlogMarkdownCalloutTransformer,
   createHatenaBlogMarkdownQuoteTransformer,
@@ -22,53 +22,47 @@ import {
 import { HatenaBlogMarkdownUtils } from "../utils";
 
 export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
-  constructor(transformers: TransformerMapping = {}) {
-    const enableAnnotations = {
-      color: true,
-    };
+  constructor() {
     super({
-      bookmark: createMarkdownBookmarkTransformer({
-        enableAnnotations,
-      }),
-      bulleted_list_item: createMarkdownBulletedListItemTransformer({
-        enableAnnotations,
-      }),
-      callout: createHatenaBlogMarkdownCalloutTransformer(),
-      code: createMarkdownCodeTransformer({
-        languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
-      }),
-      embed: createMarkdownEmbedTransformer({
-        enableAnnotations,
-        enableEmbed: true,
-      }),
-      file: createMarkdownFileTransformer({
-        enableAnnotations,
-      }),
-      heading: createMarkdownHeadingTransformer({
-        enableAnnotations,
-      }),
-      numbered_list_item: createMarkdownNumberedListItemTransformer({
-        enableAnnotations,
-      }),
-      paragraph: createMarkdownParagraphTransformer({
-        br: true,
-        enableAnnotations: {
-          color: true,
-        },
-      }),
-      pdf: createMarkdownPDFTransformer({
-        outputType: "html-object",
-      }),
-      quote: createHatenaBlogMarkdownQuoteTransformer(),
-      table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
-      table: createMarkdownTableTransformer({
-        enableAnnotations,
-      }),
-      to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
-      toggle: createMarkdownToggleTransformer({
-        enableAnnotations,
-      }),
-      ...transformers,
+      transformers: {
+        bookmark: createMarkdownBookmarkTransformer(),
+        bulleted_list_item: createMarkdownBulletedListItemTransformer(),
+        callout: createHatenaBlogMarkdownCalloutTransformer(),
+        code: createMarkdownCodeTransformer({
+          languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
+        }),
+        embed: createMarkdownEmbedTransformer({
+          enableEmbed: true,
+        }),
+        file: createMarkdownFileTransformer(),
+        heading: createMarkdownHeadingTransformer(),
+        numbered_list_item: createMarkdownNumberedListItemTransformer(),
+        paragraph: createMarkdownParagraphTransformer({
+          br: true,
+        }),
+        pdf: createMarkdownPDFTransformer({
+          outputType: "html-object",
+        }),
+        quote: createHatenaBlogMarkdownQuoteTransformer(),
+        table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
+        table: createMarkdownTableTransformer(),
+        to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
+        toggle: createMarkdownToggleTransformer(),
+      },
+      tools: {
+        richTextFormatter: new BasicRichTextFormatter({
+          enableAnnotations: {
+            bold: true,
+            italic: true,
+            underline: true,
+            strikethrough: true,
+            code: true,
+            color: true,
+            link: true,
+            equation: true,
+          },
+        }),
+      },
     });
   }
 
