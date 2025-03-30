@@ -1,7 +1,7 @@
 import {
-  type SupportedEmbedProviders,
   MarkdownUtils,
   ProviderUtils,
+  type SupportedEmbedProviders,
   TransformerUtils,
 } from "../utils";
 import { createEmbedTransformerFactory } from "./transformerFactory";
@@ -24,7 +24,9 @@ export const createMarkdownEmbedTransformer = (options: EmbedTransformerOptions 
       }
     }
 
-    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(block.embed.caption);
+    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
+      block.embed.caption,
+    );
     const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
     const url = block.embed.url;
     return MarkdownUtils.link(caption || url, url);

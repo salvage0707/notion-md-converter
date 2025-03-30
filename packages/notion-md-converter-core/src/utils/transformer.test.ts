@@ -1,6 +1,6 @@
+import { createTextRichText } from "@notion-md-converter/testing";
 import type { RichText } from "@notion-md-converter/types";
 import { TransformerUtils } from "./transformer";
-import { createTextRichText } from "@notion-md-converter/testing";
 
 describe("getCaptionMetadata", () => {
   const createRichText = (text: string): RichText[] => [
@@ -128,9 +128,13 @@ describe("getExtractedMetadataRichText", () => {
   });
 
   it("アノテーション付きのテキストを正しく処理する", () => {
-    const caption = [createTextRichText({ content: "id=1234567890:some text", annotations: { bold: true } })];
+    const caption = [
+      createTextRichText({ content: "id=1234567890:some text", annotations: { bold: true } }),
+    ];
     const result = TransformerUtils.getExtractedMetadataRichText(caption);
-    expect(result).toEqual([createTextRichText({ content: "some text", annotations: { bold: true } })]);
+    expect(result).toEqual([
+      createTextRichText({ content: "some text", annotations: { bold: true } }),
+    ]);
   });
 
   it("複数のRichTextを結合して処理する", () => {
@@ -139,7 +143,9 @@ describe("getExtractedMetadataRichText", () => {
       createTextRichText({ content: "some text", annotations: { bold: true } }),
     ];
     const result = TransformerUtils.getExtractedMetadataRichText(caption);
-    expect(result).toEqual([createTextRichText({ content: "some text", annotations: { bold: true } })]);
+    expect(result).toEqual([
+      createTextRichText({ content: "some text", annotations: { bold: true } }),
+    ]);
   });
 
   it("複数のRichTextでメタデータとテキストのアノテーションがまたがる場合、正しく処理する", () => {

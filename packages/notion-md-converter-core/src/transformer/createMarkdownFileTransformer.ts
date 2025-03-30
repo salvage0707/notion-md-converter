@@ -1,7 +1,7 @@
 import type { FileAdapter } from "@notion-md-converter/types";
+import { createNoChangeFileObjectAdapter } from "../adapter";
 import { MarkdownUtils } from "../utils";
 import { createFileTransformerFactory } from "./transformerFactory";
-import { createNoChangeFileObjectAdapter } from "../adapter";
 
 type FileTransformerOptions = {
   fileAdapter?: FileAdapter;

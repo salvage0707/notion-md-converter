@@ -1,4 +1,3 @@
-
 import { MarkdownUtils } from "../utils";
 import { createQuoteTransformerFactory } from "./transformerFactory";
 

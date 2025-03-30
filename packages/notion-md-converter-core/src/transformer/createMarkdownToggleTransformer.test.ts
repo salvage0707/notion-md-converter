@@ -29,8 +29,6 @@ describe("createMarkdownToggleTransformer", () => {
       test content
       </details>
     `);
-    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
-      block.toggle.rich_text,
-    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.toggle.rich_text);
   });
 });

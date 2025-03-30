@@ -28,9 +28,7 @@ describe("createMarkdownCalloutTransformer", () => {
     expect(result).toBe(dedent({ wrap: true })`
       > テストメッセージ
     `);
-    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
-      block.callout.rich_text,
-    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.callout.rich_text);
   });
 
   it("空のコールアウトブロックを変換する", () => {

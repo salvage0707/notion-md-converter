@@ -61,11 +61,7 @@ export interface RichTextFormatter {
    * @param colorMap カラーマップ
    * @returns 整形されたテキスト
    */
-  format(
-    richTexts: RichText[],
-    enableAnnotations?: EnableAnnotations,
-    colorMap?: ColorMap
-  ): string;
+  format(richTexts: RichText[], enableAnnotations?: EnableAnnotations, colorMap?: ColorMap): string;
 }
 
 /**

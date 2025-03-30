@@ -88,7 +88,11 @@ export const createBreadcrumbTransformerFactory = (
 };
 
 export const createCalloutTransformerFactory = (
-  execute: (args: { block: CalloutBlock; children: string; context: Context<CalloutBlock> }) => string,
+  execute: (args: {
+    block: CalloutBlock;
+    children: string;
+    context: Context<CalloutBlock>;
+  }) => string,
 ): CalloutTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -117,10 +121,10 @@ export const createCodeTransformerFactory = (
 };
 
 export const createColumnListTransformerFactory = (
-  execute: (args: { 
-    block: ColumnListBlock; 
-    columns: string[]; 
-    context: Context<ColumnListBlock> 
+  execute: (args: {
+    block: ColumnListBlock;
+    columns: string[];
+    context: Context<ColumnListBlock>;
   }) => string,
 ): ColumnListTransformer => {
   return (context) => {
@@ -200,8 +204,8 @@ export const createHeadingTransformerFactory = (
 };
 
 export const createImageTransformerFactory = (
-  execute: (args: { 
-    block: ImageBlock; 
+  execute: (args: {
+    block: ImageBlock;
     metadata: CaptionMetadata;
     context: Context<ImageBlock>;
   }) => string,
@@ -227,7 +231,11 @@ export const createLinkPreviewTransformerFactory = (
 };
 
 export const createBulletedListItemTransformerFactory = (
-  execute: (args: { block: BulletedListItemBlock; children: string; context: Context<BulletedListItemBlock> }) => string,
+  execute: (args: {
+    block: BulletedListItemBlock;
+    children: string;
+    context: Context<BulletedListItemBlock>;
+  }) => string,
 ): BulletedListItemTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -269,7 +277,11 @@ export const createTodoTransformerFactory = (
 };
 
 export const createParagraphTransformerFactory = (
-  execute: (args: { block: ParagraphBlock; children: string; context: Context<ParagraphBlock> }) => string,
+  execute: (args: {
+    block: ParagraphBlock;
+    children: string;
+    context: Context<ParagraphBlock>;
+  }) => string,
 ): ParagraphTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -315,7 +327,10 @@ export const createSyncedBlockTransformerFactory = (
 };
 
 export const createTableOfContentsTransformerFactory = (
-  execute: (args: { block: TableOfContentsBlock; context: Context<TableOfContentsBlock> }) => string,
+  execute: (args: {
+    block: TableOfContentsBlock;
+    context: Context<TableOfContentsBlock>;
+  }) => string,
 ): TableOfContentsTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -339,7 +354,11 @@ export const createTableTransformerFactory = (
 };
 
 export const createToggleTransformerFactory = (
-  execute: (args: { block: ToggleBlock; children: string; context: Context<ToggleBlock> }) => string,
+  execute: (args: {
+    block: ToggleBlock;
+    children: string;
+    context: Context<ToggleBlock>;
+  }) => string,
 ): ToggleTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);

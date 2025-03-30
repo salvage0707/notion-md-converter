@@ -25,30 +25,30 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
   constructor() {
     super({
       transformers: {
-      bookmark: createMarkdownBookmarkTransformer(),
-      bulleted_list_item: createMarkdownBulletedListItemTransformer(),
-      callout: createHatenaBlogMarkdownCalloutTransformer(),
-      code: createMarkdownCodeTransformer({
-        languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
-      }),
-      embed: createMarkdownEmbedTransformer({
-        enableEmbed: true,
-      }),
-      file: createMarkdownFileTransformer(),
-      heading: createMarkdownHeadingTransformer(),
-      numbered_list_item: createMarkdownNumberedListItemTransformer(),
-      paragraph: createMarkdownParagraphTransformer({
-        br: true,
-      }),
-      pdf: createMarkdownPDFTransformer({
-        outputType: "html-object",
-      }),
-      quote: createHatenaBlogMarkdownQuoteTransformer(),
-      table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
-      table: createMarkdownTableTransformer(),
-      to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
-      toggle: createMarkdownToggleTransformer(),
-    },
+        bookmark: createMarkdownBookmarkTransformer(),
+        bulleted_list_item: createMarkdownBulletedListItemTransformer(),
+        callout: createHatenaBlogMarkdownCalloutTransformer(),
+        code: createMarkdownCodeTransformer({
+          languageMapping: HatenaBlogMarkdownUtils.CODE_LANGUAGE_MAPPING,
+        }),
+        embed: createMarkdownEmbedTransformer({
+          enableEmbed: true,
+        }),
+        file: createMarkdownFileTransformer(),
+        heading: createMarkdownHeadingTransformer(),
+        numbered_list_item: createMarkdownNumberedListItemTransformer(),
+        paragraph: createMarkdownParagraphTransformer({
+          br: true,
+        }),
+        pdf: createMarkdownPDFTransformer({
+          outputType: "html-object",
+        }),
+        quote: createHatenaBlogMarkdownQuoteTransformer(),
+        table_of_contents: createHatenaBlogMarkdownTableOfContentsTransformer(),
+        table: createMarkdownTableTransformer(),
+        to_do: createHatenaBlogMarkdownTodoListItemTransformer(),
+        toggle: createMarkdownToggleTransformer(),
+      },
       tools: {
         richTextFormatter: new BasicRichTextFormatter({
           enableAnnotations: {
@@ -60,9 +60,9 @@ export class NotionHatenaBlogMarkdownConverter extends NotionMarkdownConverter {
             color: true,
             link: true,
             equation: true,
-          }
-        })
-      }
+          },
+        }),
+      },
     });
   }
 

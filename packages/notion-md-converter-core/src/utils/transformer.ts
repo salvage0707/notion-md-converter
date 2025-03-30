@@ -53,10 +53,7 @@ const getCaptionMetadata = (caption: RichText[]): { metadata: CaptionMetadata; t
  * @param caption キャプション
  * @returns RichText[]
  */
-const getExtractedMetadataRichText = (
-  caption: RichText[],
-): RichText[] => {
-
+const getExtractedMetadataRichText = (caption: RichText[]): RichText[] => {
   const captionText = caption.map((richText) => richText.plain_text).join("");
   const captionTexts = captionText.split(":");
 

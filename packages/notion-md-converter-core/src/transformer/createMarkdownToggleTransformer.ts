@@ -1,4 +1,3 @@
-
 import { MarkdownUtils } from "../utils";
 import { createToggleTransformerFactory } from "./transformerFactory";
 

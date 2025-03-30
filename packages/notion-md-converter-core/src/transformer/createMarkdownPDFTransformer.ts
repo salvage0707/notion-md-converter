@@ -25,9 +25,7 @@ export const createMarkdownPDFTransformer = (
     if (options.outputType === "markdown-link") {
       const caption =
         block.pdf.caption.length > 0
-          ? context.tools.richTextFormatter.format(
-              block.pdf.caption
-            )
+          ? context.tools.richTextFormatter.format(block.pdf.caption)
           : url;
       return `[${caption}](${url})`;
     }

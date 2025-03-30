@@ -1,4 +1,10 @@
-import type { ApiColor, RichText, RichTextFormatter, EnableAnnotations, ColorMap } from "@notion-md-converter/types";
+import type {
+  ApiColor,
+  ColorMap,
+  EnableAnnotations,
+  RichText,
+  RichTextFormatter,
+} from "@notion-md-converter/types";
 import { HTMLUtils } from "./html";
 import { isURL } from "./utils";
 
@@ -128,13 +134,13 @@ const color = (text: string, color: ApiColor, colorMap: ColorMap = COLOR_MAP): s
   const spanProps: {
     style?: string;
   } = {};
-  
+
   // カラーコードが得られる場合のみスタイルを適用
   const colorCode = colorMap[color];
   if (!colorCode) {
     return text;
   }
-  
+
   if (BACKGROUND_COLOR_KEY.includes(color)) {
     spanProps.style = `background-color: ${colorCode};`;
   } else if (TEXT_COLOR_KEY.includes(color)) {
@@ -325,10 +331,12 @@ export class BasicRichTextFormatter implements RichTextFormatter {
   private colorMap: ColorMap;
   private enableAnnotations: EnableAnnotations;
 
-  constructor(options: {
-    colorMap?: ColorMap;
-    enableAnnotations?: EnableAnnotations;
-  } = {}) {
+  constructor(
+    options: {
+      colorMap?: ColorMap;
+      enableAnnotations?: EnableAnnotations;
+    } = {},
+  ) {
     this.colorMap = options.colorMap || COLOR_MAP;
     this.enableAnnotations = options.enableAnnotations || {
       bold: true,

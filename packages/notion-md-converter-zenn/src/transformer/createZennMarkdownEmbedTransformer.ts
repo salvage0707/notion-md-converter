@@ -23,7 +23,9 @@ export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
     if (isEmbed) {
       return result;
     }
-    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(block.embed.caption);
+    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
+      block.embed.caption,
+    );
     const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
     return MarkdownUtils.link(caption || url, url);
   });

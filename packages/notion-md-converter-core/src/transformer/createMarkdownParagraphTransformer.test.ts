@@ -18,9 +18,7 @@ describe("createMarkdownParagraphTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("シンプルなテキストです。");
-    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
-      block.paragraph.rich_text,
-    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.paragraph.rich_text);
   });
 
   it("子要素がある場合は子要素も変換する", () => {
@@ -42,9 +40,7 @@ describe("createMarkdownParagraphTransformer", () => {
       シンプルなテキストです。
       小要素があります
     `);
-    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
-      block.paragraph.rich_text,
-    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.paragraph.rich_text);
   });
 
   it("テキストにスタイルがついている場合はスタイルを適用する", () => {
@@ -68,9 +64,7 @@ describe("createMarkdownParagraphTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe("シンプルな太字テストテキスト");
-    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(
-      block.paragraph.rich_text,
-    );
+    expect(context.tools.richTextFormatter.format).toHaveBeenCalledWith(block.paragraph.rich_text);
   });
 
   describe("brオプションがtrueの場合", () => {
