@@ -1,18 +1,14 @@
-import {
-  MarkdownUtils,
-  TransformerUtils,
-  createEmbedTransformerFactory,
-} from "@notion-md-converter/core";
+import { MarkdownUtils, createEmbedTransformerFactory } from "@notion-md-converter/core";
 import type { EmbedTransformer } from "@notion-md-converter/core/types";
 import type { EmbedByUrlOptions } from "../utils";
 import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
-  return createEmbedTransformerFactory(({ block, metadata, context }) => {
+  return createEmbedTransformerFactory(({ block, captionMetadata, context }) => {
     const getOptions = () => {
       const options: EmbedByUrlOptions = {};
-      if (metadata.id) {
-        options.speakerDeckId = metadata.id;
+      if (captionMetadata.getMetadataValue("id")) {
+        options.speakerDeckId = captionMetadata.getMetadataValue("id");
       }
       return options;
     };
@@ -23,10 +19,7 @@ export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
     if (isEmbed) {
       return result;
     }
-    const extractedMetadataRichText = TransformerUtils.getExtractedMetadataRichText(
-      block.embed.caption,
-    );
-    const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
+    const caption = context.tools.richTextFormatter.format(captionMetadata.getText());
     return MarkdownUtils.link(caption || url, url);
   });
 };

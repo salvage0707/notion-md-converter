@@ -1,6 +1,6 @@
 import type { FileAdapter } from "@notion-md-converter/types";
 import { createNoChangeFileObjectAdapter } from "../adapter";
-import { HTMLUtils, TransformerUtils } from "../utils";
+import { HTMLUtils } from "../utils";
 import { createPDFTransformerFactory } from "./transformerFactory";
 
 type PDFTransformerOptions =
@@ -18,7 +18,7 @@ export const createMarkdownPDFTransformer = (
     outputType: "markdown-link",
   },
 ) => {
-  return createPDFTransformerFactory(({ block, context }) => {
+  return createPDFTransformerFactory(({ block, captionMetadata, context }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.pdf);
 
@@ -31,13 +31,11 @@ export const createMarkdownPDFTransformer = (
     }
 
     if (options.outputType === "html-object") {
-      const { metadata } = TransformerUtils.getCaptionMetadata(block.pdf.caption);
-      const properties = {
-        ...metadata,
-        width: metadata.width,
-        height: metadata.height,
-      };
-      return HTMLUtils.objectTag({ data: url, type: "application/pdf", ...properties });
+      return HTMLUtils.objectTag({
+        data: url,
+        type: "application/pdf",
+        ...captionMetadata.getMetadata(),
+      });
     }
 
     throw new Error(`Invalid output type: ${options.outputType}`);

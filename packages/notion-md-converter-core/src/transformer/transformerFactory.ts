@@ -14,7 +14,6 @@ import type {
   ChildPageBlock,
   ChildPageTransformer,
   CodeBlock,
-  CodeLanguage,
   CodeTransformer,
   ColumnBlock,
   ColumnListBlock,
@@ -59,8 +58,8 @@ import type {
   VideoBlock,
   VideoTransformer,
 } from "@notion-md-converter/types";
-import type { CaptionMetadata } from "../utils";
-import { TransformerUtils, isNumberedListItemBlock } from "../utils";
+import { CaptionMetadata } from "../rich-text";
+import { isNumberedListItemBlock } from "../utils";
 
 export class UnsupportedBlockError extends Error {
   constructor(block: Block) {
@@ -69,13 +68,18 @@ export class UnsupportedBlockError extends Error {
 }
 
 export const createBookmarkTransformerFactory = (
-  execute: (args: { block: BookmarkBlock; context: Context<BookmarkBlock> }) => string,
+  execute: (args: {
+    block: BookmarkBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<BookmarkBlock>;
+  }) => string,
 ): BookmarkTransformer => {
   return (context) => {
     if (context.currentBlock.bookmark.url === "") {
       return "";
     }
-    return execute({ block: context.currentBlock, context });
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.bookmark.caption);
+    return execute({ block: context.currentBlock, captionMetadata, context });
   };
 };
 
@@ -103,18 +107,15 @@ export const createCalloutTransformerFactory = (
 export const createCodeTransformerFactory = (
   execute: (args: {
     block: CodeBlock;
-    metadata: { filename: string; language: CodeLanguage } & CaptionMetadata;
+    captionMetadata: CaptionMetadata;
     context: Context<CodeBlock>;
   }) => string,
 ): CodeTransformer => {
   return (context) => {
-    const { metadata, text } = TransformerUtils.getCaptionMetadata(
-      context.currentBlock.code.caption,
-    );
-    const language = context.currentBlock.code.language;
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.code.caption);
     return execute({
       block: context.currentBlock,
-      metadata: { ...metadata, filename: text, language },
+      captionMetadata,
       context,
     });
   };
@@ -151,10 +152,15 @@ export const createEquationTransformerFactory = (
 };
 
 export const createFileTransformerFactory = (
-  execute: (args: { block: FileBlock; context: Context<FileBlock> }) => string,
+  execute: (args: {
+    block: FileBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<FileBlock>;
+  }) => string,
 ): FileTransformer => {
   return (context) => {
-    return execute({ block: context.currentBlock, context });
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.file.caption);
+    return execute({ block: context.currentBlock, captionMetadata, context });
   };
 };
 
@@ -206,7 +212,7 @@ export const createHeadingTransformerFactory = (
 export const createImageTransformerFactory = (
   execute: (args: {
     block: ImageBlock;
-    metadata: CaptionMetadata;
+    captionMetadata: CaptionMetadata;
     context: Context<ImageBlock>;
   }) => string,
 ): ImageTransformer => {
@@ -216,9 +222,8 @@ export const createImageTransformerFactory = (
     if (!url) {
       return "";
     }
-
-    const { metadata } = TransformerUtils.getCaptionMetadata(context.currentBlock.image.caption);
-    return execute({ block: context.currentBlock, metadata, context });
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.image.caption);
+    return execute({ block: context.currentBlock, captionMetadata, context });
   };
 };
 
@@ -290,10 +295,15 @@ export const createParagraphTransformerFactory = (
 };
 
 export const createPDFTransformerFactory = (
-  execute: (args: { block: PdfBlock; context: Context<PdfBlock> }) => string,
+  execute: (args: {
+    block: PdfBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<PdfBlock>;
+  }) => string,
 ): PDFTransformer => {
   return (context) => {
-    return execute({ block: context.currentBlock, context });
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.pdf.caption);
+    return execute({ block: context.currentBlock, captionMetadata, context });
   };
 };
 
@@ -367,7 +377,11 @@ export const createToggleTransformerFactory = (
 };
 
 export const createVideoTransformerFactory = (
-  execute: (args: { block: VideoBlock; context: Context<VideoBlock> }) => string,
+  execute: (args: {
+    block: VideoBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<VideoBlock>;
+  }) => string,
 ): VideoTransformer => {
   return (context) => {
     const video = context.currentBlock.video;
@@ -375,25 +389,21 @@ export const createVideoTransformerFactory = (
     if (!url) {
       return "";
     }
-    return execute({ block: context.currentBlock, context });
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.video.caption);
+    return execute({ block: context.currentBlock, captionMetadata, context });
   };
 };
 
 export const createEmbedTransformerFactory = (
   execute: (args: {
     block: EmbedBlock;
-    metadata: CaptionMetadata;
+    captionMetadata: CaptionMetadata;
     context: Context<EmbedBlock>;
   }) => string,
 ): EmbedTransformer => {
   return (context) => {
-    const { metadata } = TransformerUtils.getCaptionMetadata(context.currentBlock.embed.caption);
-
-    return execute({
-      block: context.currentBlock,
-      metadata,
-      context,
-    });
+    const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.embed.caption);
+    return execute({ block: context.currentBlock, captionMetadata, context });
   };
 };
 

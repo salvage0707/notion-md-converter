@@ -8,8 +8,6 @@ type FileTransformerOptions = {
 };
 
 export const createMarkdownFileTransformer = (options: FileTransformerOptions = {}) => {
-  const { fileAdapter } = options;
-
   return createFileTransformerFactory(({ block, context }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.file);
