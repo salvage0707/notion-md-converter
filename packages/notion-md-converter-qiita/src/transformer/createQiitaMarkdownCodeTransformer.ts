@@ -3,15 +3,17 @@ import type { CodeTransformer } from "@notion-md-converter/core/types";
 import { QiitaMarkdownUtils } from "../utils";
 
 type QiitaCodeMetadata = {
-  diff?: string;
+  diff: boolean;
 };
 
 export const createQiitaMarkdownCodeTransformer = (): CodeTransformer => {
   return createCodeTransformerFactory(
-    ({ block, metadata: { language, filename, ...metadata }, context }) => {
-      const { diff } = metadata as QiitaCodeMetadata;
+    ({ block, captionMetadata, context }) => {
+      const metadata: QiitaCodeMetadata = {
+        diff: captionMetadata.getMetadataValue("diff") === "true",
+      };
 
-      const text = context.tools.richTextFormatter.format(block.code.rich_text, {
+      const codeText = context.tools.richTextFormatter.format(block.code.rich_text, {
         bold: false,
         italic: false,
         strikethrough: false,
@@ -19,9 +21,11 @@ export const createQiitaMarkdownCodeTransformer = (): CodeTransformer => {
         code: false,
         color: false,
       });
+      const language = block.code.language;
+      const filename = context.tools.richTextFormatter.plainText(captionMetadata.getText());
 
       return MarkdownUtils.wrapWithNewLines(
-        QiitaMarkdownUtils.codeBlock(text, { diff: diff === "true", language, filename }),
+        QiitaMarkdownUtils.codeBlock(codeText, { diff: metadata.diff, language, filename }),
       );
     },
   );

@@ -8,11 +8,11 @@ import type { EmbedByUrlOptions } from "../utils";
 import { ZennMarkdownUtils } from "../utils";
 
 export const createZennMarkdownEmbedTransformer = (): EmbedTransformer => {
-  return createEmbedTransformerFactory(({ block, metadata, context }) => {
+  return createEmbedTransformerFactory(({ block, captionMetadata, context }) => {
     const getOptions = () => {
       const options: EmbedByUrlOptions = {};
-      if (metadata.id) {
-        options.speakerDeckId = metadata.id;
+      if (captionMetadata.getMetadataValue("id")) {
+        options.speakerDeckId = captionMetadata.getMetadataValue("id");
       }
       return options;
     };

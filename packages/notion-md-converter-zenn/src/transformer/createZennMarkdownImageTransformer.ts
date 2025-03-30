@@ -7,7 +7,7 @@ import {
 import type { FileAdapter, ImageTransformer } from "@notion-md-converter/core/types";
 
 type ZennImageMetadata = {
-  width?: string;
+  width: string | undefined;
 };
 
 export const createZennMarkdownImageTransformer = (
@@ -15,8 +15,10 @@ export const createZennMarkdownImageTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): ImageTransformer => {
-  return createImageTransformerFactory(({ block, metadata, context }) => {
-    const { width } = metadata as ZennImageMetadata;
+  return createImageTransformerFactory(({ block, captionMetadata, context }) => {
+    const metadata: ZennImageMetadata = {
+      width: captionMetadata.getMetadataValue("width"),
+    };
 
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.image);
@@ -25,8 +27,8 @@ export const createZennMarkdownImageTransformer = (
         block.image.caption,
       );
       const caption = context.tools.richTextFormatter.format(extractedMetadataRichText);
-      return MarkdownUtils.image(caption ?? url, url, { width });
+      return MarkdownUtils.image(caption ?? url, url, metadata);
     }
-    return MarkdownUtils.image(url, url, { width });
+    return MarkdownUtils.image(url, url, metadata);
   });
 };

@@ -1,5 +1,5 @@
 import { HTMLUtils } from "./html";
-import type { CaptionMetadata } from "./transformer";
+import { CaptionMetadata } from "../rich-text/CaptionMetadata";
 
 const getType = (url: string) => {
   const urlObj = new URL(url);
@@ -166,7 +166,7 @@ const isSupportedProvider = (provider: ProviderType): provider is SupportedProvi
 };
 const embedByUrl = (
   url: string,
-  metadata: CaptionMetadata = {},
+  metadata: CaptionMetadata = CaptionMetadata.fromRichText([]),
   options: { supportedEmbedProviders?: SupportedEmbedProviders } = {},
 ) => {
   const supportedEmbedProviders = options.supportedEmbedProviders || {
@@ -184,9 +184,9 @@ const embedByUrl = (
 
   switch (providerType) {
     case "youtube":
-      return ProviderYoutubeUtils.embed(url, metadata);
+      return ProviderYoutubeUtils.embed(url, metadata.getMetadata());
     case "codepen":
-      return ProviderCodePenUtils.embed(url, metadata);
+      return ProviderCodePenUtils.embed(url, metadata.getMetadata());
     case "asciinema":
       return ProviderAsciinemaUtils.embed(url);
     default:
