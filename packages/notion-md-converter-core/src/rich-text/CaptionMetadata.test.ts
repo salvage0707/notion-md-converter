@@ -1,5 +1,5 @@
-import { CaptionMetadata } from "./CaptionMetadata";
 import { createTextRichText } from "@notion-md-converter/testing";
+import { CaptionMetadata } from "./CaptionMetadata";
 
 describe("CaptionMetadata", () => {
   describe("fromRichText", () => {

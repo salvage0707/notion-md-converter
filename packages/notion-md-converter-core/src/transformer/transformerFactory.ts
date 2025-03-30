@@ -68,7 +68,11 @@ export class UnsupportedBlockError extends Error {
 }
 
 export const createBookmarkTransformerFactory = (
-  execute: (args: { block: BookmarkBlock; captionMetadata: CaptionMetadata, context: Context<BookmarkBlock> }) => string,
+  execute: (args: {
+    block: BookmarkBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<BookmarkBlock>;
+  }) => string,
 ): BookmarkTransformer => {
   return (context) => {
     if (context.currentBlock.bookmark.url === "") {
@@ -148,7 +152,11 @@ export const createEquationTransformerFactory = (
 };
 
 export const createFileTransformerFactory = (
-  execute: (args: { block: FileBlock; captionMetadata: CaptionMetadata, context: Context<FileBlock> }) => string,
+  execute: (args: {
+    block: FileBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<FileBlock>;
+  }) => string,
 ): FileTransformer => {
   return (context) => {
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.file.caption);
@@ -287,7 +295,11 @@ export const createParagraphTransformerFactory = (
 };
 
 export const createPDFTransformerFactory = (
-  execute: (args: { block: PdfBlock; captionMetadata: CaptionMetadata, context: Context<PdfBlock> }) => string,
+  execute: (args: {
+    block: PdfBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<PdfBlock>;
+  }) => string,
 ): PDFTransformer => {
   return (context) => {
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.pdf.caption);
@@ -365,7 +377,11 @@ export const createToggleTransformerFactory = (
 };
 
 export const createVideoTransformerFactory = (
-  execute: (args: { block: VideoBlock; captionMetadata: CaptionMetadata, context: Context<VideoBlock> }) => string,
+  execute: (args: {
+    block: VideoBlock;
+    captionMetadata: CaptionMetadata;
+    context: Context<VideoBlock>;
+  }) => string,
 ): VideoTransformer => {
   return (context) => {
     const video = context.currentBlock.video;

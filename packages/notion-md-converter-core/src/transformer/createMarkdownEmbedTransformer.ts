@@ -1,8 +1,4 @@
-import {
-  MarkdownUtils,
-  ProviderUtils,
-  type SupportedEmbedProviders,
-} from "../utils";
+import { MarkdownUtils, ProviderUtils, type SupportedEmbedProviders } from "../utils";
 import { createEmbedTransformerFactory } from "./transformerFactory";
 
 type EmbedTransformerOptions = {

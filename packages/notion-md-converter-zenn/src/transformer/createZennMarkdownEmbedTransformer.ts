@@ -1,7 +1,4 @@
-import {
-  MarkdownUtils,
-  createEmbedTransformerFactory,
-} from "@notion-md-converter/core";
+import { MarkdownUtils, createEmbedTransformerFactory } from "@notion-md-converter/core";
 import type { EmbedTransformer } from "@notion-md-converter/core/types";
 import type { EmbedByUrlOptions } from "../utils";
 import { ZennMarkdownUtils } from "../utils";

@@ -1,5 +1,5 @@
-import { HTMLUtils } from "./html";
 import { CaptionMetadata } from "../rich-text/CaptionMetadata";
+import { HTMLUtils } from "./html";
 
 const getType = (url: string) => {
   const urlObj = new URL(url);

@@ -7,19 +7,17 @@ type ZennCodeMetadata = {
 };
 
 export const createZennMarkdownCodeTransformer = (): CodeTransformer => {
-  return createCodeTransformerFactory(
-    ({ block, captionMetadata, context }) => {
-      const metadata: ZennCodeMetadata = {
-        diff: captionMetadata.getMetadataValue("diff") === "true",
-      }
+  return createCodeTransformerFactory(({ block, captionMetadata, context }) => {
+    const metadata: ZennCodeMetadata = {
+      diff: captionMetadata.getMetadataValue("diff") === "true",
+    };
 
-      const codeText = context.tools.richTextFormatter.plainText(block.code.rich_text);
-      const language = block.code.language;
-      const filename = context.tools.richTextFormatter.plainText(captionMetadata.getText());
+    const codeText = context.tools.richTextFormatter.plainText(block.code.rich_text);
+    const language = block.code.language;
+    const filename = context.tools.richTextFormatter.plainText(captionMetadata.getText());
 
-      return MarkdownUtils.wrapWithNewLines(
-        ZennMarkdownUtils.codeBlock(codeText, metadata.diff, language, filename),
-      );
-    },
-  );
+    return MarkdownUtils.wrapWithNewLines(
+      ZennMarkdownUtils.codeBlock(codeText, metadata.diff, language, filename),
+    );
+  });
 };
