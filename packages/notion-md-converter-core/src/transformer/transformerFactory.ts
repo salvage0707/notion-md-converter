@@ -67,16 +67,17 @@ export class UnsupportedBlockError extends Error {
   }
 }
 
+type BaseBlockArg<T extends Block> = { block: T; context: Context<T> };
+export type ExecuteFunction<T extends Block, TExtra = Record<string, unknown>> = (
+  arg: BaseBlockArg<T> & TExtra,
+) => string | null;
+
 export const createBookmarkTransformerFactory = (
-  execute: (args: {
-    block: BookmarkBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<BookmarkBlock>;
-  }) => string,
+  execute: ExecuteFunction<BookmarkBlock, { captionMetadata: CaptionMetadata }>,
 ): BookmarkTransformer => {
   return (context) => {
     if (context.currentBlock.bookmark.url === "") {
-      return "";
+      return null;
     }
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.bookmark.caption);
     return execute({ block: context.currentBlock, captionMetadata, context });
@@ -84,7 +85,7 @@ export const createBookmarkTransformerFactory = (
 };
 
 export const createBreadcrumbTransformerFactory = (
-  execute: (args: { block: BreadcrumbBlock; context: Context<BreadcrumbBlock> }) => string,
+  execute: ExecuteFunction<BreadcrumbBlock>,
 ): BreadcrumbTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -92,11 +93,7 @@ export const createBreadcrumbTransformerFactory = (
 };
 
 export const createCalloutTransformerFactory = (
-  execute: (args: {
-    block: CalloutBlock;
-    children: string;
-    context: Context<CalloutBlock>;
-  }) => string,
+  execute: ExecuteFunction<CalloutBlock, { children: string }>,
 ): CalloutTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -105,11 +102,7 @@ export const createCalloutTransformerFactory = (
 };
 
 export const createCodeTransformerFactory = (
-  execute: (args: {
-    block: CodeBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<CodeBlock>;
-  }) => string,
+  execute: ExecuteFunction<CodeBlock, { captionMetadata: CaptionMetadata }>,
 ): CodeTransformer => {
   return (context) => {
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.code.caption);
@@ -122,11 +115,7 @@ export const createCodeTransformerFactory = (
 };
 
 export const createColumnListTransformerFactory = (
-  execute: (args: {
-    block: ColumnListBlock;
-    columns: string[];
-    context: Context<ColumnListBlock>;
-  }) => string,
+  execute: ExecuteFunction<ColumnListBlock, { columns: string[] }>,
 ): ColumnListTransformer => {
   return (context) => {
     const columns = context.currentBlock.children as ColumnBlock[];
@@ -136,7 +125,7 @@ export const createColumnListTransformerFactory = (
 };
 
 export const createDividerTransformerFactory = (
-  execute: (args: { block: DividerBlock; context: Context<DividerBlock> }) => string,
+  execute: ExecuteFunction<DividerBlock>,
 ): DividerTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -144,7 +133,7 @@ export const createDividerTransformerFactory = (
 };
 
 export const createEquationTransformerFactory = (
-  execute: (args: { block: EquationBlock; context: Context<EquationBlock> }) => string,
+  execute: ExecuteFunction<EquationBlock>,
 ): EquationTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -152,11 +141,7 @@ export const createEquationTransformerFactory = (
 };
 
 export const createFileTransformerFactory = (
-  execute: (args: {
-    block: FileBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<FileBlock>;
-  }) => string,
+  execute: ExecuteFunction<FileBlock, { captionMetadata: CaptionMetadata }>,
 ): FileTransformer => {
   return (context) => {
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.file.caption);
@@ -165,14 +150,10 @@ export const createFileTransformerFactory = (
 };
 
 export const createHeadingTransformerFactory = (
-  execute: (args: {
-    block: Heading1Block | Heading2Block | Heading3Block;
-    level: 1 | 2 | 3;
-    richText: RichText[];
-    isToggleable: boolean;
-    color: ApiColor;
-    context: Context<Heading1Block | Heading2Block | Heading3Block>;
-  }) => string,
+  execute: ExecuteFunction<
+    Heading1Block | Heading2Block | Heading3Block,
+    { level: 1 | 2 | 3; richText: RichText[]; isToggleable: boolean; color: ApiColor }
+  >,
 ): HeadingTransformer => {
   return (context) => {
     switch (context.currentBlock.type) {
@@ -210,17 +191,13 @@ export const createHeadingTransformerFactory = (
 };
 
 export const createImageTransformerFactory = (
-  execute: (args: {
-    block: ImageBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<ImageBlock>;
-  }) => string,
+  execute: ExecuteFunction<ImageBlock, { captionMetadata: CaptionMetadata }>,
 ): ImageTransformer => {
   return (context) => {
     const image = context.currentBlock.image;
     const url = image.type === "external" ? image.external.url : image.file.url;
     if (!url) {
-      return "";
+      return null;
     }
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.image.caption);
     return execute({ block: context.currentBlock, captionMetadata, context });
@@ -228,7 +205,7 @@ export const createImageTransformerFactory = (
 };
 
 export const createLinkPreviewTransformerFactory = (
-  execute: (args: { block: LinkPreviewBlock; context: Context<LinkPreviewBlock> }) => string,
+  execute: ExecuteFunction<LinkPreviewBlock>,
 ): LinkPreviewTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -236,11 +213,7 @@ export const createLinkPreviewTransformerFactory = (
 };
 
 export const createBulletedListItemTransformerFactory = (
-  execute: (args: {
-    block: BulletedListItemBlock;
-    children: string;
-    context: Context<BulletedListItemBlock>;
-  }) => string,
+  execute: ExecuteFunction<BulletedListItemBlock, { children: string }>,
 ): BulletedListItemTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -249,12 +222,7 @@ export const createBulletedListItemTransformerFactory = (
 };
 
 export const createNumberedListItemTransformerFactory = (
-  execute: (args: {
-    block: NumberedListItemBlock;
-    children: string;
-    index: number;
-    context: Context<NumberedListItemBlock>;
-  }) => string,
+  execute: ExecuteFunction<NumberedListItemBlock, { children: string; index: number }>,
 ): NumberedListItemTransformer => {
   return (context) => {
     const beforeBlocks = context.blocks.slice(0, context.currentBlockIndex);
@@ -273,7 +241,7 @@ export const createNumberedListItemTransformerFactory = (
 };
 
 export const createTodoTransformerFactory = (
-  execute: (args: { block: ToDoBlock; children: string; context: Context<ToDoBlock> }) => string,
+  execute: ExecuteFunction<ToDoBlock, { children: string }>,
 ): ToDoTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -282,11 +250,7 @@ export const createTodoTransformerFactory = (
 };
 
 export const createParagraphTransformerFactory = (
-  execute: (args: {
-    block: ParagraphBlock;
-    children: string;
-    context: Context<ParagraphBlock>;
-  }) => string,
+  execute: ExecuteFunction<ParagraphBlock, { children: string }>,
 ): ParagraphTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -295,11 +259,7 @@ export const createParagraphTransformerFactory = (
 };
 
 export const createPDFTransformerFactory = (
-  execute: (args: {
-    block: PdfBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<PdfBlock>;
-  }) => string,
+  execute: ExecuteFunction<PdfBlock, { captionMetadata: CaptionMetadata }>,
 ): PDFTransformer => {
   return (context) => {
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.pdf.caption);
@@ -308,7 +268,7 @@ export const createPDFTransformerFactory = (
 };
 
 export const createQuoteTransformerFactory = (
-  execute: (args: { block: QuoteBlock; children: string; context: Context<QuoteBlock> }) => string,
+  execute: ExecuteFunction<QuoteBlock, { children: string }>,
 ): QuoteTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -317,12 +277,7 @@ export const createQuoteTransformerFactory = (
 };
 
 export const createSyncedBlockTransformerFactory = (
-  execute: (args: {
-    block: SyncedBlock;
-    isSynchronizationSource: boolean;
-    children: string;
-    context: Context<SyncedBlock>;
-  }) => string,
+  execute: ExecuteFunction<SyncedBlock, { isSynchronizationSource: boolean; children: string }>,
 ): SyncedBlockTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -337,10 +292,7 @@ export const createSyncedBlockTransformerFactory = (
 };
 
 export const createTableOfContentsTransformerFactory = (
-  execute: (args: {
-    block: TableOfContentsBlock;
-    context: Context<TableOfContentsBlock>;
-  }) => string,
+  execute: ExecuteFunction<TableOfContentsBlock>,
 ): TableOfContentsTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -348,12 +300,7 @@ export const createTableOfContentsTransformerFactory = (
 };
 
 export const createTableTransformerFactory = (
-  execute: (args: {
-    block: TableBlock;
-    header: TableRowBlock;
-    rows: TableRowBlock[];
-    context: Context<TableBlock>;
-  }) => string,
+  execute: ExecuteFunction<TableBlock, { header: TableRowBlock; rows: TableRowBlock[] }>,
 ): TableTransformer => {
   return (context) => {
     const block = context.currentBlock;
@@ -364,11 +311,7 @@ export const createTableTransformerFactory = (
 };
 
 export const createToggleTransformerFactory = (
-  execute: (args: {
-    block: ToggleBlock;
-    children: string;
-    context: Context<ToggleBlock>;
-  }) => string,
+  execute: ExecuteFunction<ToggleBlock, { children: string }>,
 ): ToggleTransformer => {
   return (context) => {
     const children = context.execute(context.currentBlock.children);
@@ -377,17 +320,13 @@ export const createToggleTransformerFactory = (
 };
 
 export const createVideoTransformerFactory = (
-  execute: (args: {
-    block: VideoBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<VideoBlock>;
-  }) => string,
+  execute: ExecuteFunction<VideoBlock, { captionMetadata: CaptionMetadata }>,
 ): VideoTransformer => {
   return (context) => {
     const video = context.currentBlock.video;
     const url = video.type === "external" ? video.external.url : video.file.url;
     if (!url) {
-      return "";
+      return null;
     }
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.video.caption);
     return execute({ block: context.currentBlock, captionMetadata, context });
@@ -395,11 +334,7 @@ export const createVideoTransformerFactory = (
 };
 
 export const createEmbedTransformerFactory = (
-  execute: (args: {
-    block: EmbedBlock;
-    captionMetadata: CaptionMetadata;
-    context: Context<EmbedBlock>;
-  }) => string,
+  execute: ExecuteFunction<EmbedBlock, { captionMetadata: CaptionMetadata }>,
 ): EmbedTransformer => {
   return (context) => {
     const captionMetadata = CaptionMetadata.fromRichText(context.currentBlock.embed.caption);
@@ -408,7 +343,7 @@ export const createEmbedTransformerFactory = (
 };
 
 export const createChildDatabaseTransformerFactory = (
-  execute: (args: { block: ChildDatabaseBlock; context: Context<ChildDatabaseBlock> }) => string,
+  execute: ExecuteFunction<ChildDatabaseBlock>,
 ): ChildDatabaseTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });
@@ -416,7 +351,7 @@ export const createChildDatabaseTransformerFactory = (
 };
 
 export const createChildPageTransformerFactory = (
-  execute: (args: { block: ChildPageBlock; context: Context<ChildPageBlock> }) => string,
+  execute: ExecuteFunction<ChildPageBlock>,
 ): ChildPageTransformer => {
   return (context) => {
     return execute({ block: context.currentBlock, context });

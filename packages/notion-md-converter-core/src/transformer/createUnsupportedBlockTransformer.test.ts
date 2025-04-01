@@ -20,6 +20,6 @@ describe("createUnsupportedBlockTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe("");
+    expect(result).toBeNull();
   });
 });
