@@ -1,5 +1,4 @@
 import {
-  MarkdownUtils,
   createNoChangeFileObjectAdapter,
   createVideoTransformerFactory,
   isURL,
@@ -24,6 +23,6 @@ export const createZennMarkdownVideoTransformer = (
       }
     }
 
-    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.video(url));
+    return null;
   });
 };
