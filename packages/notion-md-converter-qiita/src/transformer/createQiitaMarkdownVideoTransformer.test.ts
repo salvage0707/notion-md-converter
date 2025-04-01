@@ -31,7 +31,7 @@ describe("createQiitaMarkdownVideoTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe(dedent({ wrap: true })`
-      <video controls src="https://example.com/test.mp4"></video>
+      <video src="https://example.com/test.mp4" controls></video>
     `);
   });
 
