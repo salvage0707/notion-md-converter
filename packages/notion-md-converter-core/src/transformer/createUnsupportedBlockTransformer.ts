@@ -9,6 +9,6 @@ export const createUnsupportedBlockTransformer = (
     if (log) {
       console.log("Unsupported block", context.currentBlock);
     }
-    return "";
+    return null;
   };
 };

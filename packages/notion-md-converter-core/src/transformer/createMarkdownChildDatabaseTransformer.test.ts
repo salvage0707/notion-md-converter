@@ -14,6 +14,6 @@ describe("createMarkdownChildDatabaseTransformer", () => {
 
     const result = transformer(context);
 
-    expect(result).toBe("");
+    expect(result).toBeNull();
   });
 });

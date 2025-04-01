@@ -89,7 +89,7 @@ export type Context<T extends Block> = {
   tools: ConverterTools;
 };
 
-export type NotionBlockTransformer<T extends Block> = (context: Context<T>) => string;
+export type NotionBlockTransformer<T extends Block> = (context: Context<T>) => string | null;
 
 export type BookmarkTransformer = NotionBlockTransformer<BookmarkBlock>;
 export type BreadcrumbTransformer = NotionBlockTransformer<BreadcrumbBlock>;
