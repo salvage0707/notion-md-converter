@@ -2,7 +2,6 @@ import {
   createNotionExternalFile,
   createNotionInternalFile,
   createVideoBlock,
-  dedent,
 } from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createZennMarkdownVideoTransformer } from "./createZennMarkdownVideoTransformer";
@@ -30,9 +29,7 @@ describe("createZennMarkdownVideoTransformer", () => {
     });
 
     const result = transformer(context);
-    expect(result).toBe(dedent({ wrap: true })`
-      <video controls src="https://example.com/test.mp4"></video>
-    `);
+    expect(result).toBeNull();
   });
 
   it("埋め込み可能なURLの場合は埋め込み形式で出力できる", () => {

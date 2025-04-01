@@ -1,6 +1,6 @@
 import type { FileAdapter } from "@notion-md-converter/types";
 import { createNoChangeFileObjectAdapter } from "../adapter";
-import { MarkdownUtils } from "../utils";
+import { HTMLUtils, MarkdownUtils } from "../utils";
 import { createVideoTransformerFactory } from "./transformerFactory";
 
 export const createMarkdownVideoTransformer = (
@@ -8,9 +8,11 @@ export const createMarkdownVideoTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ) => {
-  return createVideoTransformerFactory(({ block }) => {
+  return createVideoTransformerFactory(({ block, captionMetadata }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
-    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.video(url));
+    return MarkdownUtils.wrapWithNewLines(
+      HTMLUtils.videoTag({ src: url, ...captionMetadata.getMetadata() }),
+    );
   });
 };

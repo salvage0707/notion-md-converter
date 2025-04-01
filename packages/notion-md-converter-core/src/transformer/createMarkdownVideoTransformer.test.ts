@@ -1,4 +1,9 @@
-import { createNotionInternalFile, createVideoBlock, dedent } from "@notion-md-converter/testing";
+import {
+  createNotionInternalFile,
+  createTextRichText,
+  createVideoBlock,
+  dedent,
+} from "@notion-md-converter/testing";
 import { createTransformerContext } from "@notion-md-converter/testing";
 import { createMarkdownVideoTransformer } from "./createMarkdownVideoTransformer";
 
@@ -26,7 +31,28 @@ describe("VideoTransformer", () => {
 
     const result = transformer(context);
     expect(result).toBe(dedent({ wrap: true })`
-      <video controls src="https://example.com/test.mp4"></video>
+      <video src="https://example.com/test.mp4" controls></video>
+    `);
+  });
+
+  it("キャプションがある場合はキャプションを追加できる", () => {
+    const block = createVideoBlock({
+      fileObject: createNotionInternalFile({
+        url: "https://example.com/test.mp4",
+      }),
+      caption: [
+        createTextRichText({
+          content: "width=100px&height=200px:",
+        }),
+      ],
+    });
+    const context = createTransformerContext({
+      blocks: [block],
+    });
+
+    const result = transformer(context);
+    expect(result).toBe(dedent({ wrap: true })`
+      <video src="https://example.com/test.mp4" controls width="100px" height="200px"></video>
     `);
   });
 });

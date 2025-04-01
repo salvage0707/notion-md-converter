@@ -1,4 +1,5 @@
 import {
+  HTMLUtils,
   MarkdownUtils,
   ProviderUtils,
   createNoChangeFileObjectAdapter,
@@ -13,7 +14,7 @@ export const createQiitaMarkdownVideoTransformer = (
     fileAdapter?: FileAdapter;
   } = {},
 ): VideoTransformer => {
-  return createVideoTransformerFactory(({ block }) => {
+  return createVideoTransformerFactory(({ block, captionMetadata }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
 
@@ -24,6 +25,8 @@ export const createQiitaMarkdownVideoTransformer = (
       }
     }
 
-    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.video(url));
+    return MarkdownUtils.wrapWithNewLines(
+      HTMLUtils.videoTag({ src: url, ...captionMetadata.getMetadata() }),
+    );
   });
 };

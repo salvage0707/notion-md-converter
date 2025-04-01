@@ -303,18 +303,6 @@ describe("details", () => {
   });
 });
 
-describe("video", () => {
-  it("URLからvideoタグに変換できること", () => {
-    expect(MarkdownUtils.video("https://example.com/video.mp4")).toBe(
-      '<video controls src="https://example.com/video.mp4"></video>',
-    );
-  });
-
-  it("空のURLを処理できること", () => {
-    expect(MarkdownUtils.video("")).toBe('<video controls src=""></video>');
-  });
-});
-
 describe("blockEquation", () => {
   it("数式を正しく変換できること", () => {
     expect(MarkdownUtils.blockEquation("E = mc^2")).toBe("$$\nE = mc^2\n$$");

@@ -303,13 +303,6 @@ const details = (title: string, content: string): string => {
 };
 
 /**
- * videoタグに変換
- */
-const video = (url: string): string => {
-  return `<video controls src="${url}"></video>`;
-};
-
-/**
  * コメント
  */
 const comment = (text: string): string => {
@@ -338,7 +331,6 @@ export const MarkdownUtils = {
   wrapWithNewLines,
   indent,
   details,
-  video,
   comment,
   decoration,
   COLOR_MAP,

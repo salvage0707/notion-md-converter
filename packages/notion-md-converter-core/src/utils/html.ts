@@ -1,7 +1,7 @@
-const objectToPropertiesStr = (object: Record<string, string | boolean>) => {
+const objectToPropertiesStr = (object: Record<string, string | boolean | undefined | null>) => {
   return Object.entries(object)
     .map(([key, value]) => {
-      if (value === undefined) {
+      if (value === undefined || value === null) {
         return null;
       }
       if (typeof value === "boolean") {
@@ -29,7 +29,23 @@ const objectTag = (options: ObjectTagOptions) => {
   return `<object ${properties}></object>`;
 };
 
+type VideoTagOptions = {
+  src: string;
+  controls?: boolean;
+  width?: string;
+  height?: string;
+};
+const videoTag = (options: VideoTagOptions) => {
+  const properties = objectToPropertiesStr({
+    src: options.src,
+    controls: options.controls ?? true,
+    width: options.width,
+    height: options.height,
+  });
+  return `<video ${properties}></video>`;
+};
 export const HTMLUtils = {
   objectToPropertiesStr,
   objectTag,
+  videoTag,
 };
