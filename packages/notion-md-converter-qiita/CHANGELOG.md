@@ -1,5 +1,23 @@
 # @notion-md-converter/qiita
 
+## 0.9.0
+
+### Minor Changes
+
+- [#76](https://github.com/salvage0707/notion-md-converter/pull/76) [`0ced8db`](https://github.com/salvage0707/notion-md-converter/commit/0ced8dbf0b8dc1dd56ad3504181cade1a09455f7) Thanks [@salvage0707](https://github.com/salvage0707)! - - CaptionMetada クラスを追加
+
+  - TransformerUtils を削除
+
+- [#74](https://github.com/salvage0707/notion-md-converter/pull/74) [`113347b`](https://github.com/salvage0707/notion-md-converter/commit/113347bf649320a48b580ce1b08d429305950680) Thanks [@salvage0707](https://github.com/salvage0707)! - - MarkdownUtils.richTextsToMarkdown を削除
+  - 各 Factory に context を追加し、tools プロパティから共通的な formatter を使う実装に変更
+  - BasicRichTextFormatter クラスを追加
+    - リッチテキストの変換処理を実行するクラス
+
+### Patch Changes
+
+- Updated dependencies [[`5c68c7b`](https://github.com/salvage0707/notion-md-converter/commit/5c68c7bf2a9062bd800b634116f274587a95d4f2), [`0ced8db`](https://github.com/salvage0707/notion-md-converter/commit/0ced8dbf0b8dc1dd56ad3504181cade1a09455f7), [`113347b`](https://github.com/salvage0707/notion-md-converter/commit/113347bf649320a48b580ce1b08d429305950680), [`9a908e6`](https://github.com/salvage0707/notion-md-converter/commit/9a908e69928125f5efbaaf9347fefbb16f9f3425)]:
+  - @notion-md-converter/core@0.9.0
+
 ## 0.8.0
 
 ### Minor Changes
