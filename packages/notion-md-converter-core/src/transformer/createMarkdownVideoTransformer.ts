@@ -11,6 +11,8 @@ export const createMarkdownVideoTransformer = (
   return createVideoTransformerFactory(({ block, captionMetadata }) => {
     const fileAdapter = options.fileAdapter ?? createNoChangeFileObjectAdapter();
     const { url } = fileAdapter(block.video);
-    return MarkdownUtils.wrapWithNewLines(HTMLUtils.videoTag({ src: url, ...captionMetadata.getMetadata() }));
+    return MarkdownUtils.wrapWithNewLines(
+      HTMLUtils.videoTag({ src: url, ...captionMetadata.getMetadata() }),
+    );
   });
 };
