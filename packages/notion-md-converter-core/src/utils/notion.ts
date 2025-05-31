@@ -188,7 +188,6 @@ export const isEmbedBlock = (block: Block): block is EmbedBlock => {
 };
 
 /**
- * @deprecated This function will be removed in a future release as we plan to remove the dependency on @notionhq/client.
  * Please be aware that the API specification may change significantly.
  */
 export const $getPageFullContent = async (client: Client, blockId: string) => {
@@ -243,3 +242,22 @@ export const $getDatabasePages = async (client: Client, databaseId: string) => {
   }
   return results;
 };
+
+export function extractPageId(pageInput: string): string {
+  if (pageInput.includes("notion.so")) {
+    const match = pageInput.match(
+      /([a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/,
+    );
+    if (!match) {
+      throw new Error("Invalid Notion page URL format");
+    }
+    return match[1].replace(/-/g, "");
+  }
+
+  const cleanId = pageInput.replace(/-/g, "");
+  if (!/^[a-f0-9]{32}$/i.test(cleanId)) {
+    throw new Error("Invalid page ID format");
+  }
+
+  return cleanId;
+}
