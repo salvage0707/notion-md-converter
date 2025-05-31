@@ -5,9 +5,6 @@
   "description": "Notion to Markdown Converter",
   "packageManager": "pnpm@9.15.1",
   "license": "MIT",
-  "engines": {
-    "node": ">=24.0.0"
-  },
   "author": "salvage0707",
   "keywords": [
     "notion-md-converter",

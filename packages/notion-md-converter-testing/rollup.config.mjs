@@ -5,7 +5,7 @@ import terser from "@rollup/plugin-terser";
 import { defineConfig } from "rollup";
 import typescript from "rollup-plugin-typescript2";
 import { visualizer } from "rollup-plugin-visualizer";
-import pkg from "./package.json" with { type: "json" };
+import pkg from "./package.json" assert { type: "json" };
 
 const external = [
   ...Object.keys(pkg.dependencies || {}),

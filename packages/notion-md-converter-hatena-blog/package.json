@@ -4,9 +4,6 @@
   "description": "Notion to Hatena Blog Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
-  "engines": {
-    "node": ">=24.0.0"
-  },
   "keywords": [
     "notion-md-converter",
     "notion",
