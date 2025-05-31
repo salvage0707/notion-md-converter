@@ -286,7 +286,7 @@ export class NotionMarkdownConverter {
       }
     });
 
-    return transformedBlocks.filter((b) => b !== null).join("\n");
+    return transformedBlocks.filter((b) => b !== null && b !== undefined).join("\n");
   }
 
   protected onComplete(markdown: string): string {
