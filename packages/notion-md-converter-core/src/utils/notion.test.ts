@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractPageId } from "./notion.js";
+import { extractPageId } from "./notion";
 
 describe("extractPageId", () => {
   it("should extract page ID from Notion URL", () => {

@@ -1,6 +1,10 @@
-import { $getPageFullContent, NotionMarkdownConverter } from "@notion-md-converter/core";
+import {
+  $getPageFullContent,
+  NotionMarkdownConverter,
+  extractPageId,
+} from "@notion-md-converter/core";
 import { Command } from "commander";
-import { createNotionClient, extractPageId } from "../utils/notion.js";
+import { createNotionClient } from "../utils/notion.js";
 import { outputMarkdown } from "../utils/output.js";
 
 export const convertCommand = new Command("convert")
