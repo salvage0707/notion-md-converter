@@ -1,10 +1,10 @@
 ---
-"@notion-md-converter/core": miner
-"@notion-md-converter/types": miner
-"@notion-md-converter/testing": miner
-"@notion-md-converter/zenn": miner
-"@notion-md-converter/qiita": miner
-"@notion-md-converter/hatena-blog": miner
+"@notion-md-converter/core": major
+"@notion-md-converter/types": major
+"@notion-md-converter/testing": major
+"@notion-md-converter/zenn": major
+"@notion-md-converter/qiita": major
+"@notion-md-converter/hatena-blog": major
 ---
 
 feat: upgrade to Node.js v24 requirement
