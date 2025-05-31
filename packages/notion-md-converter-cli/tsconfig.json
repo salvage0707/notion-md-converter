@@ -1,0 +1,3 @@
+{
+  "extends": "@notion-md-converter/config/tsconfig/tsconfig.json"
+}

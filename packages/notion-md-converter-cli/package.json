@@ -1,0 +1,59 @@
+{
+  "name": "@notion-md-converter/cli",
+  "version": "0.1.0",
+  "description": "CLI tool for converting Notion pages to Markdown",
+  "license": "MIT",
+  "author": "malvageee (https://github.com/salvage0707)",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "keywords": [
+    "notion",
+    "notion-api", 
+    "markdown",
+    "md",
+    "converter",
+    "cli"
+  ],
+  "repository": {
+    "url": "https://github.com/salvage0707/notion-md-converter.git",
+    "type": "git",
+    "directory": "packages/notion-md-converter-cli"
+  },
+  "bin": {
+    "notion-md-cli": "bin/notion-md-cli"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "test:once": "vitest run",
+    "check-types": "tsc --noEmit",
+    "build": "rollup -c",
+    "prepublishOnly": "pnpm run build"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "dependencies": {
+    "@notion-md-converter/core": "workspace:*",
+    "@notion-md-converter/types": "workspace:*",
+    "@notionhq/client": "catalog:",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@notion-md-converter/config": "workspace:*",
+    "@notion-md-converter/testing": "workspace:*",
+    "@types/node": "^22.13.4"
+  }
+}

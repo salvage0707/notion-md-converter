@@ -188,7 +188,6 @@ export const isEmbedBlock = (block: Block): block is EmbedBlock => {
 };
 
 /**
- * @deprecated This function will be removed in a future release as we plan to remove the dependency on @notionhq/client.
  * Please be aware that the API specification may change significantly.
  */
 export const $getPageFullContent = async (client: Client, blockId: string) => {
