@@ -5,6 +5,9 @@
   "license": "MIT",
   "type": "module",
   "author": "malvageee (https://github.com/salvage0707)",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "keywords": [
     "notion",
     "notion-api",
