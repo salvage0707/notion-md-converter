@@ -60,6 +60,10 @@ Try out **notion-md-converter** in action! Visit our [live demo](https://nmc-dem
 
 ## 🚀 Installation
 
+### **Prerequisites**
+
+- Node.js 24.0.0 or higher
+
 ### **Install via npm**
 
 ```shell

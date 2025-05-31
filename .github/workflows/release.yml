@@ -27,7 +27,7 @@ jobs:
 
       - uses: ./.github/actions/setup-node-pnpm
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Create Release Pull Request or Publish
         id: changesets
