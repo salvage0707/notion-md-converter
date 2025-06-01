@@ -187,12 +187,12 @@ export const isEmbedBlock = (block: Block): block is EmbedBlock => {
   return block.type === "embed";
 };
 
-export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const retryWithBackoff = async <T>(
   fn: () => Promise<T>,
   maxRetries = 3,
-  baseDelay = 1000
+  baseDelay = 1000,
 ): Promise<T> => {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
@@ -208,7 +208,7 @@ export const retryWithBackoff = async <T>(
         throw error;
       }
 
-      const delayMs = baseDelay * (2 ** attempt);
+      const delayMs = baseDelay * 2 ** attempt;
       await delay(delayMs);
     }
   }
@@ -229,7 +229,7 @@ class Semaphore {
       return;
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.waiting.push(resolve);
     });
   }
@@ -259,7 +259,7 @@ class Semaphore {
 export const $getPageFullContent = async (
   client: Client,
   blockId: string,
-  semaphore?: Semaphore
+  semaphore?: Semaphore,
 ) => {
   const apiSemaphore = semaphore || new Semaphore(3);
   // biome-ignore lint/suspicious/noExplicitAny: Notion API returns any
@@ -268,12 +268,12 @@ export const $getPageFullContent = async (
 
   while (true) {
     const res = await apiSemaphore.withLock(() =>
-      retryWithBackoff(
-        () => client.blocks.children.list({
+      retryWithBackoff(() =>
+        client.blocks.children.list({
           block_id: blockId,
           start_cursor: nextCursor,
-        })
-      )
+        }),
+      ),
     );
 
     results.push(...res.results);
@@ -318,11 +318,11 @@ export const $getDatabasePages = async (client: Client, databaseId: string) => {
   let nextCursor: string | undefined = undefined;
 
   while (true) {
-    const res = await retryWithBackoff(
-      () => client.databases.query({
+    const res = await retryWithBackoff(() =>
+      client.databases.query({
         database_id: databaseId,
         start_cursor: nextCursor,
-      })
+      }),
     );
 
     results.push(...res.results);

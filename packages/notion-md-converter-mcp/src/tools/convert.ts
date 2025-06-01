@@ -1,15 +1,19 @@
+import {
+  $getPageFullContent,
+  NotionMarkdownConverter,
+  extractPageId,
+} from "@notion-md-converter/core";
 import { Client } from "@notionhq/client";
-import { NotionMarkdownConverter, $getPageFullContent, extractPageId } from "@notion-md-converter/core";
 import type { MCPToolResponse } from "../types/index.js";
 
-export async function convertNotionToMarkdown(
-  notionId: string
-): Promise<MCPToolResponse> {
+export async function convertNotionToMarkdown(notionId: string): Promise<MCPToolResponse> {
   try {
     // Notion APIトークンの取得（環境変数からのみ）
     const token = process.env.NOTION_TOKEN;
     if (!token) {
-      throw new Error("Notion APIトークンが環境変数に設定されていません。NOTION_TOKEN環境変数を設定してください。");
+      throw new Error(
+        "Notion APIトークンが環境変数に設定されていません。NOTION_TOKEN環境変数を設定してください。",
+      );
     }
 
     // Notion IDの正規化（URLからIDを抽出）
@@ -28,19 +32,23 @@ export async function convertNotionToMarkdown(
     const markdown = converter.execute(blocks);
 
     return {
-      content: [{
-        type: "text",
-        text: markdown
-      }]
+      content: [
+        {
+          type: "text",
+          text: markdown,
+        },
+      ],
     };
   } catch (error) {
     // エラーハンドリング
     const errorMessage = error instanceof Error ? error.message : "不明なエラーが発生しました";
     return {
-      content: [{
-        type: "text",
-        text: `エラー: ${errorMessage}`
-      }]
+      content: [
+        {
+          type: "text",
+          text: `エラー: ${errorMessage}`,
+        },
+      ],
     };
   }
 }
