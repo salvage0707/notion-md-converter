@@ -45,7 +45,8 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
     "@notion-md-converter/core": "workspace:*",
-    "@notionhq/client": "catalog:"
+    "@notionhq/client": "catalog:",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@notion-md-converter/config": "workspace:*",

@@ -136,6 +136,9 @@ importers:
       '@notionhq/client':
         specifier: 'catalog:'
         version: 2.2.16
+      zod:
+        specifier: ^3.22.4
+        version: 3.25.42
     devDependencies:
       '@notion-md-converter/config':
         specifier: workspace:*

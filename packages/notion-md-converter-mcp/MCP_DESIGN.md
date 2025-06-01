@@ -48,10 +48,6 @@ notion-md-converter-mcp/
       notionId: {
         type: "string",
         description: "Notion page ID or URL"
-      },
-      notionToken: {
-        type: "string",
-        description: "Notion API token (optional, can use NOTION_TOKEN env var)"
       }
     },
     required: ["notionId"]
@@ -112,8 +108,7 @@ NOTION_TOKEN=your-token npx @notion-md-converter/mcp
 {
   "tool": "convertNotionToMarkdown",
   "arguments": {
-    "notionId": "abc123def456",
-    "notionToken": "secret_xxx" // オプション
+    "notionId": "abc123def456"
   }
 }
 ```
