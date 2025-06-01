@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/types",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Notion to Markdown Converter Types",
   "license": "MIT",
   "type": "module",
