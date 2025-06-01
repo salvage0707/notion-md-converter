@@ -1,5 +1,23 @@
 # @notion-md-converter/cli
 
+## 0.12.1
+
+### Patch Changes
+
+- [#92](https://github.com/salvage0707/notion-md-converter/pull/92) [`b36dd62`](https://github.com/salvage0707/notion-md-converter/commit/b36dd629626548643e484384266550e748d332bf) Thanks [@salvage0707](https://github.com/salvage0707)! - ドキュメントを日本語に翻訳
+
+  - すべての README ファイルを日本語に翻訳しました
+  - 技術用語とテーブルヘッダーは英語のまま維持
+  - note.com の対応予定を削除（今後対応しないため）
+  - はてなブログの対応ステータスを「対応済み」に更新
+  - CLAUDE.md に README 作成ガイドラインを追加
+
+  この変更は、日本語圏のユーザーにとってライブラリの理解と使用を容易にすることを目的としています。
+
+- Updated dependencies [[`b36dd62`](https://github.com/salvage0707/notion-md-converter/commit/b36dd629626548643e484384266550e748d332bf)]:
+  - @notion-md-converter/core@0.12.1
+  - @notion-md-converter/types@0.12.1
+
 ## 0.12.0
 
 ### Minor Changes

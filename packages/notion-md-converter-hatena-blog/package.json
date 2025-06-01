@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/hatena-blog",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Notion to Hatena Blog Markdown Converter",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",

@@ -1,6 +1,6 @@
 {
   "name": "@notion-md-converter/cli",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "CLI tool for converting Notion pages to Markdown",
   "license": "MIT",
   "author": "malvageee (https://github.com/salvage0707)",
