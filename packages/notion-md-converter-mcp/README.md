@@ -1,40 +1,40 @@
 # @notion-md-converter/mcp
 
-MCP (Model Context Protocol) server for Notion to Markdown conversion.
+NotionからMarkdownへの変換用MCP（Model Context Protocol）サーバー。
 
-## Overview
+## 概要
 
-This package provides an MCP server that exposes the functionality of `@notion-md-converter/core` to AI assistants, enabling them to convert Notion content to Markdown directly.
+このパッケージは、`@notion-md-converter/core`の機能をAIアシスタントに公開するMCPサーバーを提供し、Notionコンテンツを直接Markdownに変換できるようにします。
 
-## Installation
+## インストール
 
 ```bash
 npm install @notion-md-converter/mcp
 ```
 
-## Usage
+## 使い方
 
-### Running the MCP Server
+### MCPサーバーの実行
 
 ```bash
-# Start the MCP server
+# MCPサーバーを起動
 npx @notion-md-converter/mcp
 
-# Or with environment variable
+# または環境変数を使用
 NOTION_TOKEN=your-token npx @notion-md-converter/mcp
 ```
 
-### Available Tools
+### 利用可能なツール
 
 #### `convertNotionToMarkdown`
 
-Converts a Notion page to Markdown format.
+NotionページをMarkdown形式に変換します。
 
-**Input Schema:**
-- `notionId` (string, required): Notion page ID or URL
-- `notionToken` (string, optional): Notion API token (can also use NOTION_TOKEN environment variable)
+**入力スキーマ：**
+- `notionId` (string, 必須): NotionページIDまたはURL
+- `notionToken` (string, オプション): Notion APIトークン（NOTION_TOKEN環境変数も使用可能）
 
-**Example:**
+**例：**
 ```json
 {
   "tool": "convertNotionToMarkdown",
@@ -45,33 +45,33 @@ Converts a Notion page to Markdown format.
 }
 ```
 
-**Output:**
+**出力：**
 ```json
 {
   "content": [
     {
       "type": "text",
-      "text": "# Page Title\n\nConverted markdown content..."
+      "text": "# ページタイトル\n\n変換されたマークダウンコンテンツ..."
     }
   ]
 }
 ```
 
-## Configuration
+## 設定
 
-### Environment Variables
+### 環境変数
 
-- `NOTION_TOKEN`: Your Notion API token (optional, can be passed as argument)
+- `NOTION_TOKEN`: Notion APIトークン（オプション、引数として渡すことも可能）
 
-## Error Handling
+## エラーハンドリング
 
-The server handles common errors gracefully:
-- Notion API errors
-- Page not found
-- Permission errors
+サーバーは一般的なエラーを適切に処理します：
+- Notion APIエラー
+- ページが見つからない
+- 権限エラー
 
-Errors are returned in the standard MCP format within the content array.
+エラーはコンテンツ配列内の標準MCP形式で返されます。
 
-## License
+## ライセンス
 
 MIT

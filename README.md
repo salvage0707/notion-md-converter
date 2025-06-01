@@ -2,27 +2,26 @@
   <h1>Notion to Markdown Converter</h1>
 </div>
 
-**notion-md-converter** is a library that converts Notion blocks into Markdown text.Markdown syntax varies slightly depending on the platform being used. For example, some platforms recognize equations enclosed in `$$` as equation blocks, while others do not.
-Similarly, checklist syntax (e.g., `- [ ]` or `* [ ]`) may differ, and there may also be variations in how links and images are embedded.
-**notion-md-converter** is designed to be easily extensible, allowing flexible adaptation to these platform-specific differences.
+**notion-md-converter** は、NotionブロックをMarkdownテキストに変換するライブラリです。Markdown構文は使用するプラットフォームによって若干異なります。例えば、`$$`で囲まれた数式を数式ブロックとして認識するプラットフォームもあれば、そうでないプラットフォームもあります。
+同様に、チェックリスト構文（例：`- [ ]` や `* [ ]`）も異なる場合があり、リンクや画像の埋め込み方法にも違いがあります。
+**notion-md-converter** は簡単に拡張できるよう設計されており、これらのプラットフォーム固有の違いに柔軟に対応できます。
 
 <!-- TODO: status badge -->
 <!-- ![Build status](https://github.com/your-username/myproject/actions/workflows/ci.yml/badge.svg) -->
 <!-- TODO: version vadge -->
 <!-- [![npm version](https://badge.fury.io/js/myproject.svg)](https://www.npmjs.com/package/myproject) -->
 
-## 🎮 Demo
+## 🎮 デモ
 
-Try out **notion-md-converter** in action! Visit our [live demo](https://nmc-demo.malvageee.com/) to see how it converts Notion blocks to Markdown in real-time.
+**notion-md-converter** を実際に試してみましょう！[ライブデモ](https://nmc-demo.malvageee.com/)にアクセスして、NotionブロックからMarkdownへのリアルタイム変換をご覧ください。
 
-## 🌐 Supported Platforms
+## 🌐 対応プラットフォーム
 
-| Platform                              | Status      | Library                    |
-| ------------------------------------- | ----------- | -------------------------- |
-| [Zenn](https://zenn.dev)              | ✅           | @notion-md-converter/zenn  |
-| [Qiita](https://qiita.com)            | ✅           | @notion-md-converter/qiita |
-| [note](https://note.com)              | Coming Soon | -                          |
-| [Hatena Blog](https://hatenablog.com) | Coming Soon | -                          |
+| プラットフォーム                      | ステータス  | ライブラリ                       |
+| ------------------------------------- | ----------- | -------------------------------- |
+| [Zenn](https://zenn.dev)              | ✅           | @notion-md-converter/zenn        |
+| [Qiita](https://qiita.com)            | ✅           | @notion-md-converter/qiita       |
+| [はてなブログ](https://hatenablog.com) | ✅           | @notion-md-converter/hatena-blog |
 
 ### Platform-specific Markdown Output
 
@@ -56,31 +55,27 @@ Try out **notion-md-converter** in action! Visit our [live demo](https://nmc-dem
 | Video                  | video tag            | video tag and Embed     | video tag and Embed      |
 
 > [!CAUTION]
-> This library has not yet released a major version (v1.0.0). Therefore, breaking changes may be included in minor version updates. Please be aware that the API is subject to change until we reach v1.0.0.
+> このライブラリはまだメジャーバージョン（v1.0.0）をリリースしていません。そのため、マイナーバージョンの更新に破壊的な変更が含まれる可能性があります。v1.0.0に到達するまでAPIは変更される可能性があることにご注意ください。
 
-## 🚀 Installation
+## 🚀 インストール
 
-### **Prerequisites**
-
-- Node.js 24.0.0 or higher
-
-### **Install via npm**
+### **npmでインストール**
 
 ```shell
-# if JavaScript
+# JavaScriptの場合
 npm install @notion-md-converter/core
 
-# if TypeScript
+# TypeScriptの場合
 npm install @notion-md-converter/core @notion-md-converter/types
 ```
 
-## 📖 Usage
+## 📖 使い方
 
 
-> Follow Notion's Getting Started Guide to obtain an API key.
+> APIキーを取得するには、NotionのGetting Started Guideに従ってください。
 
 
-### Basic Example
+### 基本的な例
 
 
 ```typescript
@@ -95,22 +90,19 @@ const client = new Client({
 });
 
 const pageId = "some-page-id";
-// Notion API helpers in this library.
-// Recursively retrieve the Notion Block's child elements
+// このライブラリのNotion APIヘルパー
+// Notion Blockの子要素を再帰的に取得
 const content = await $getPageFullContent(client, pageId);
 
-// convert to markdwon
+// Markdownに変換
 const executor = new NotionMarkdownConverter();
 const result = executor.execute(content);
 ```
 
-> [!WARNING]
-> The APIs `$getPageFullContent` and `$getDatabasePages` may undergo specification changes in the future as we plan to remove the dependency on `@notionhq/client`.
+### Markdown出力のカスタマイズ
 
-### Customizing Output Markdown
-
-If you want to change the conversion of a Heading Block.
-For example, define a custom transformer that increases the number of `#` in a Markdown heading by one.
+見出しブロックの変換を変更したい場合の例です。
+例えば、Markdown見出しの`#`の数を1つ増やすカスタムトランスフォーマーを定義します。
 
 
 
@@ -118,17 +110,17 @@ For example, define a custom transformer that increases the number of `#` in a M
 import { createHeadingTransformerFactory, MarkdownUtils } from "@notion-md-converter/core";
 
 export const createMarkdownCustomHeadingTransformer = () => {
-	// Use a function to create a transformer
+	// トランスフォーマーを作成する関数を使用
   return createHeadingTransformerFactory(({ level, richText }) => {
     const text = MarkdownUtils.convertRichTextsToMarkdown(richText);
-    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.heading(text, level + 1)); // add 1 level
+    return MarkdownUtils.wrapWithNewLines(MarkdownUtils.heading(text, level + 1)); // レベルを1追加
   });
 };
 ```
 
 
-To simplify writing tests for transformers, we provide the `@notion-md-converter/testing` library.
-This library allows you to easily create Notion block objects and test their conversion results.
+トランスフォーマーのテストを簡単に書けるよう、`@notion-md-converter/testing`ライブラリを提供しています。
+このライブラリを使用すると、Notionブロックオブジェクトを簡単に作成し、変換結果をテストできます。
 
 ```shell
 $ npm install @notion-md-converter/testing
@@ -146,7 +138,7 @@ import { createMarkdownCustomHeadingTransformer } from "./createMarkdownCustomHe
 describe("createMarkdownCustomHeadingTransformer", () => {
   const transformer = createMarkdownCustomHeadingTransformer();
 
-  it("Can convert heading_1 block", () => {
+  it("heading_1ブロックを変換できる", () => {
     const block = createHeading1Block({
       richText: [
         createTextRichText({
@@ -166,7 +158,7 @@ describe("createMarkdownCustomHeadingTransformer", () => {
 });
 ```
 
-Define the created transformer in the options of the converter.
+作成したトランスフォーマーをコンバーターのオプションで定義します。
 
 ```typescript
 const executor = new NotionMarkdownConverter({
@@ -175,43 +167,41 @@ const executor = new NotionMarkdownConverter({
 const result = executor.execute(content);
 ```
 
-## Caption Metadata
+## キャプションメタデータ
 
-You can set metadata for captions in blocks such as images, code blocks, and embeds. Metadata is specified in `key=value` format, and the portion from the beginning of the caption to the first `:` is treated as metadata.
+画像、コードブロック、埋め込みなどのブロックでキャプションにメタデータを設定できます。メタデータは`key=value`形式で指定し、キャプションの先頭から最初の`:`までがメタデータとして扱われます。
 
-### Basic Usage
-
-```
-width=500:This is an image description
-```
-
-In this case:
-- `width=500` is the metadata
-- `This is an image description` is the actual caption
-
-### Multiple Metadata
-
-Multiple metadata can be specified by separating them with `&`:
+### 基本的な使い方
 
 ```
-width=500&height=300:This is an image description
+width=500:これは画像の説明です
 ```
 
-In this case:
-- `width=500` and `height=300` are metadata
-- `This is an image description` is the actual caption
+この場合：
+- `width=500` がメタデータ
+- `これは画像の説明です` が実際のキャプション
 
-### Usage Examples
+### 複数のメタデータ
 
-- Specifying image width: `width=500:Image description`
-- Setting diff for code blocks: `diff=true:filename.js`
+複数のメタデータは`&`で区切って指定できます：
 
-**You got it! 😊**
+```
+width=500&height=300:これは画像の説明です
+```
 
-## 📜 License
+この場合：
+- `width=500` と `height=300` がメタデータ
+- `これは画像の説明です` が実際のキャプション
 
-This project is licensed under the **MIT License**.
-See LICENSE for details.
+### 使用例
+
+- 画像幅の指定： `width=500:画像の説明`
+- コードブロックのdiff設定： `diff=true:filename.js`
+
+## 📜 ライセンス
+
+このプロジェクトは**MITライセンス**の下でライセンスされています。
+詳細はLICENSEをご覧ください。
 
 ## 👥 コミュニティと貢献
 

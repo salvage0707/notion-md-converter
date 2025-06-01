@@ -1,99 +1,99 @@
 # @notion-md-converter/cli
 
-CLI tool for converting Notion pages to Markdown.
+NotionページをMarkdownに変換するCLIツール。
 
-## 🚀 Installation
+## 🚀 インストール
 
-### **Using npx (recommended)**
+### **npxを使用（推奨）**
 
 ```shell
 npx @notion-md-converter/cli convert -p <PAGE_ID_OR_URL> -t <NOTION_TOKEN>
 ```
 
-### **Global installation**
+### **グローバルインストール**
 
 ```shell
 npm install -g @notion-md-converter/cli
 ```
 
-## 📖 Usage
+## 📖 使い方
 
-> Follow Notion's Getting Started Guide to obtain an API key.
+> APIキーを取得するには、Notionのスタートガイドに従ってください。
 
-### Basic Example
+### 基本的な例
 
-Convert a Notion page to Markdown and output to stdout:
+NotionページをMarkdownに変換して標準出力に表示：
 
 ```shell
 npx @notion-md-converter/cli convert --page <PAGE_ID_OR_URL> --token <NOTION_TOKEN>
 ```
 
-### Command Options
+### コマンドオプション
 
-- `-p, --page <pageId>`: Notion page ID or URL (required)
-- `-t, --token <token>`: Notion API token (required)
-- `-h, --help`: Display help for command
-- `-V, --version`: Output the version number
+- `-p, --page <pageId>`: NotionページIDまたはURL（必須）
+- `-t, --token <token>`: Notion APIトークン（必須）
+- `-h, --help`: コマンドのヘルプを表示
+- `-V, --version`: バージョン番号を出力
 
-### Usage Examples
+### 使用例
 
-**Using page ID:**
+**ページIDを使用：**
 ```shell
 npx @notion-md-converter/cli convert -p 12345678901234567890123456789012 -t secret_abc123
 ```
 
-**Using page URL:**
+**ページURLを使用：**
 ```shell
 npx @notion-md-converter/cli convert -p "https://www.notion.so/My-Page-12345678901234567890123456789012" -t secret_abc123
 ```
 
-**Saving to file:**
+**ファイルに保存：**
 ```shell
 npx @notion-md-converter/cli convert -p <PAGE_ID> -t <TOKEN> > output.md
 ```
 
-**Using environment variables:**
+**環境変数を使用：**
 ```shell
 export NOTION_TOKEN="secret_abc123"
 npx @notion-md-converter/cli convert -p <PAGE_ID> -t $NOTION_TOKEN
 ```
 
-## Getting Notion API Token
+## Notion APIトークンの取得
 
-1. Go to [Notion Developers](https://www.notion.so/my-integrations)
-2. Click "New integration"
-3. Give it a name and select the workspace
-4. Copy the "Internal Integration Token"
-5. Share your page with the integration:
-   - Open the page in Notion
-   - Click "Share" → "Invite"
-   - Search for your integration name and invite it
+1. [Notion Developers](https://www.notion.so/my-integrations)にアクセス
+2. 「New integration」をクリック
+3. 名前を付けてワークスペースを選択
+4. 「Internal Integration Token」をコピー
+5. ページをインテグレーションと共有：
+   - Notionでページを開く
+   - 「共有」→「招待」をクリック
+   - インテグレーション名を検索して招待
 
-## Supported Page Formats
+## サポートされているページ形式
 
-The CLI accepts both page IDs and URLs:
+CLIはページIDとURLの両方を受け入れます：
 
-- **Page ID**: `12345678901234567890123456789012`
-- **Page ID with hyphens**: `12345678-9012-3456-7890-123456789012`
+- **ページID**: `12345678901234567890123456789012`
+- **ハイフン付きページID**: `12345678-9012-3456-7890-123456789012`
 - **Notion URL**: `https://www.notion.so/Page-Title-12345678901234567890123456789012`
 
-## Error Handling
+## エラーハンドリング
 
-The CLI provides clear error messages for common issues:
+CLIは一般的な問題に対して明確なエラーメッセージを提供します：
 
-- Invalid page ID or URL format
-- Invalid or expired Notion API token
-- Page not found or access denied
-- Network connectivity issues
+- 無効なページIDまたはURL形式
+- 無効または期限切れのNotion APIトークン
+- ページが見つからない、またはアクセスが拒否された
+- ネットワーク接続の問題
 
-Exit codes:
-- `0`: Success
-- `1`: Error occurred
+終了コード：
+- `0`: 成功
+- `1`: エラー発生
 
-## License
+## ライセンス
 
-Distributed under the MIT License. See [LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE) for more information.
+MITライセンスの下で配布されています。詳細は[LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE)を参照してください。
 
-## Author
+## 作者
 
 malvageee (https://github.com/salvage0707)

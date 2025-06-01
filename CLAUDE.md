@@ -105,3 +105,9 @@ pnpm publish-packages
 ## プロジェクトの進行
 
 日本語でプロジェクトを進めます。
+
+## READMEファイルの作成ガイドライン
+
+### 言語
+- すべてのREADMEファイルは日本語で記述する
+- ただし、プロジェクトのタイトル（例：`Notion to Markdown Converter`）は英語のまま維持

@@ -1,18 +1,18 @@
 # @notion-md-converter/qiita
 
-Qiita package for converting Notion pages to Markdown.
+NotionページをQiitaのMarkdownに変換するためのパッケージです。
 
-## 🚀 Installation
+## 🚀 インストール
 
 ```
-# if JavaScript
+# JavaScriptの場合
 npm install @notion-md-converter/core @notion-md-converter/qiita
 
-# if TypeScript
+# TypeScriptの場合
 npm install @notion-md-converter/core @notion-md-converter/qiita @notion-md-converter/types
 ```
 
-## 📖 Usage
+## 📖 使い方
 
 ```typescript
 import { $getPageFullContent } from "@notion-md-converter/core";
@@ -24,84 +24,84 @@ const client = new Client({
 });
 
 const pageId = "some-page-id";
-// Notion API helpers in this library.
-// Recursively retrieve the Notion Block's child elements
+// このライブラリのNotion APIヘルパー
+// Notion Blockの子要素を再帰的に取得
 const content = await $getPageFullContent(client, pageId);
 
-// convert to markdwon
+// Markdownに変換
 const executor = new NotionQiitaMarkdownConverter();
 const result = executor.execute(content);
 ```
 
-## Block Options
+## ブロックオプション
 
-### Callout
+### コールアウト
 
-You can choose between Qiita note's info, warn, and alert styles based on the background color and text color settings.
+背景色とテキスト色の設定に基づいて、Qiitaノートのinfo、warn、alertスタイルを選択できます。
 
-| color  | note  |
+| 色     | note  |
 | ------ | ----- |
 | yellow | warn  |
 | red    | alert |
-| other  | info  |
+| その他  | info  |
 
-### Code
+### コード
 
-You can enable diff display using Callout Metadata
+コールアウトメタデータを使用してdiff表示を有効にできます
 
-| metadata | value |
+| メタデータ | 値 |
 | ------   | ----  |
-| diff     | Set to `true` to enable diff display  |
+| diff     | `true`に設定するとdiff表示が有効になります  |
 
 
-### Embed
+### 埋め込み
 
 
 #### CodePen
 
-| metadata    | value            |
+| メタデータ    | 値            |
 | ----------- | ---------------- |
-| height      | iframe height    |
-| defaultTab  | default tab      |
+| height      | iframeの高さ    |
+| defaultTab  | デフォルトタブ      |
 
 #### Figma
 
-| metadata    | value            |
+| メタデータ    | 値            |
 | ----------- | ---------------- |
-| height      | iframe height    |
-| width       | iframe width     |
+| height      | iframeの高さ    |
+| width       | iframeの幅     |
 
 #### Google Slide
 
-| metadata    | value            |
+| メタデータ    | 値            |
 | ----------- | ---------------- |
-| height      | iframe height    |
-| width       | iframe width     |
+| height      | iframeの高さ    |
+| width       | iframeの幅     |
 
 #### YouTube
 
-| metadata    | value            |
+| メタデータ    | 値            |
 | ----------- | ---------------- |
-| height      | iframe height    |
-| width       | iframe width     |
+| height      | iframeの高さ    |
+| width       | iframeの幅     |
 
 #### Speaker Deck
 
-| metadata    | value            |
+| メタデータ    | 値            |
 | ----------- | ---------------- |
 | id          | Speaker Deck ID  |
 
-If no ID is specified, it will be displayed as a link card.
+IDが指定されていない場合は、リンクカードとして表示されます。
 
 
-### Video
+### ビデオ
 
-YouTube videos will be displayed as embeds. Other videos will use the video tag.
+YouTube動画は埋め込みとして表示されます。その他の動画はvideoタグを使用します。
 
-## License
+## ライセンス
 
-Distributed under the MIT License. See [LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE) for more information.
+MITライセンスの下で配布されています。詳細は[LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE)をご覧ください。
 
-## Author
+## 作者
 
 malvageee (https://github.com/salvage0707)

@@ -1,30 +1,30 @@
-# @notion-md-converter/zenn Usage Examples
+# @notion-md-converter/zenn 使用例
 
-This directory contains examples demonstrating how to use the @notion-md-converter/zenn library. The examples show how to convert Notion content to Zenn-compatible Markdown format.
+このディレクトリには、@notion-md-converter/zennライブラリの使用方法を示す例が含まれています。これらの例は、NotionコンテンツをZenn互換のMarkdown形式に変換する方法を示しています。
 
-## Prerequisites
+## 前提条件
 
-1. **Environment Variables Setup**
-   Copy the `.env.example` file to `.env` and set the following variables:
+1. **環境変数の設定**
+   `.env.example`ファイルを`.env`にコピーし、以下の変数を設定してください：
    ```
    NOTION_API_SECRET=your_notion_api_secret
    NOTION_PAGE_ID=your_notion_page_id
    ```
-   - `NOTION_API_SECRET`: Your Notion API integration token ([Get your token here](https://developers.notion.com/docs/authorization#internal-integration-auth-flow-set-up))
-   - `NOTION_PAGE_ID`: The ID of the Notion page you want to convert
+   - `NOTION_API_SECRET`: Notion APIインテグレーショントークン（[トークンの取得はこちら](https://developers.notion.com/docs/authorization#internal-integration-auth-flow-set-up)）
+   - `NOTION_PAGE_ID`: 変換したいNotionページのID
 
-2. **Install Dependencies**
+2. **依存関係のインストール**
    ```sh
    $ pnpm install
    ```
 
-## Examples
+## 例
 
-### Simple Export
+### シンプルなエクスポート
 
-A basic example showing how to export Notion content to Zenn-compatible Markdown format. This example demonstrates the fundamental usage of the library.
+NotionコンテンツをZenn互換のMarkdown形式にエクスポートする基本的な例。この例はライブラリの基本的な使用方法を示しています。
 
 ```sh
-# Run the simple export example
+# シンプルなエクスポートの例を実行
 $ pnpm run zenn:simple-export
 ```

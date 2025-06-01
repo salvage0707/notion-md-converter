@@ -1,18 +1,18 @@
 # @notion-md-converter/hatena-blog
 
-Hatena Blog package for converting Notion pages to Markdown.
+NotionページをはてなブログのMarkdownに変換するためのパッケージです。
 
-## 🚀 Installation
+## 🚀 インストール
 
 ```
-# if JavaScript
+# JavaScriptの場合
 npm install @notion-md-converter/core @notion-md-converter/hatena-blog
 
-# if TypeScript
+# TypeScriptの場合
 npm install @notion-md-converter/core @notion-md-converter/hatena-blog @notion-md-converter/types
 ```
 
-## 📖 Usage
+## 📖 使い方
 
 ```typescript
 import { $getPageFullContent } from "@notion-md-converter/core";
@@ -24,21 +24,21 @@ const client = new Client({
 });
 
 const pageId = "some-page-id";
-// Notion API helpers in this library.
-// Recursively retrieve the Notion Block's child elements
+// このライブラリのNotion APIヘルパー
+// Notion Blockの子要素を再帰的に取得
 const content = await $getPageFullContent(client, pageId);
 
-// convert to markdwon
+// Markdownに変換
 const executor = new NotionHatenaBlogMarkdownConverter();
 const result = executor.execute(content);
 ```
 
-## Block Options
+## ブロックオプション
 
-## License
+## ライセンス
 
-Distributed under the MIT License. See [LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE) for more information.
+MITライセンスの下で配布されています。詳細は[LICENSE](https://github.com/salvage0707/notion-md-converter/blob/main/LICENSE)をご覧ください。
 
-## Author
+## 作者
 
 malvageee (https://github.com/salvage0707)

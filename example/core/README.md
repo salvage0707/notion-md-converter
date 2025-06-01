@@ -1,50 +1,50 @@
-# @notion-md-converter/core Usage Examples
+# @notion-md-converter/core 使用例
 
-This directory contains examples demonstrating how to use the @notion-md-converter/core library. The examples show various ways to convert Notion content to Markdown format.
+このディレクトリには、@notion-md-converter/coreライブラリの使用方法を示す例が含まれています。これらの例は、NotionコンテンツをMarkdown形式に変換する様々な方法を示しています。
 
-## Prerequisites
+## 前提条件
 
-1. **Environment Variables Setup**
-   Copy the `.env.example` file to `.env` and set the following variables:
+1. **環境変数の設定**
+   `.env.example`ファイルを`.env`にコピーし、以下の変数を設定してください：
    ```
    NOTION_API_SECRET=your_notion_api_secret
    NOTION_PAGE_ID=your_notion_page_id
    NOTION_DATABASE_ID=your_notion_database_id
    ```
-   - `NOTION_API_SECRET`: Your Notion API integration token ([Get your token here](https://developers.notion.com/docs/authorization#internal-integration-auth-flow-set-up))
-   - `NOTION_PAGE_ID`: The ID of the Notion page you want to convert
-   - `NOTION_DATABASE_ID`: The ID of the Notion database you want to export
+   - `NOTION_API_SECRET`: Notion APIインテグレーショントークン（[トークンの取得はこちら](https://developers.notion.com/docs/authorization#internal-integration-auth-flow-set-up)）
+   - `NOTION_PAGE_ID`: 変換したいNotionページのID
+   - `NOTION_DATABASE_ID`: エクスポートしたいNotionデータベースのID
 
-2. **Install Dependencies**
+2. **依存関係のインストール**
    ```sh
    $ pnpm install
    ```
 
-## Examples
+## 例
 
-### Simple Export
+### シンプルなエクスポート
 
-A basic example showing how to export Notion content to Markdown format. This example demonstrates the fundamental usage of the library.
+NotionコンテンツをMarkdown形式にエクスポートする基本的な例。この例はライブラリの基本的な使用方法を示しています。
 
 ```sh
-# Run the simple export example
+# シンプルなエクスポートの例を実行
 $ pnpm run core:simple-export
 ```
 
-### Custom Export
+### カスタムエクスポート
 
-An example demonstrating how to customize the Markdown conversion process. This example shows how to create and use custom transformers to modify the output format.
+Markdown変換プロセスをカスタマイズする方法を示す例。この例では、出力形式を変更するためのカスタムトランスフォーマーの作成と使用方法を示しています。
 
 ```sh
-# Run the custom export example
+# カスタムエクスポートの例を実行
 $ pnpm run core:custom-export
 ```
 
-### Database Page Exports
+### データベースページのエクスポート
 
-An example showing how to export all pages from a Notion database. This example demonstrates how to convert multiple pages by specifying a database ID.
+Notionデータベースからすべてのページをエクスポートする方法を示す例。この例では、データベースIDを指定して複数のページを変換する方法を示しています。
 
 ```sh
-# Run the database page exports example
+# データベースページのエクスポートの例を実行
 $ pnpm run core:database-page-exports
 ```
