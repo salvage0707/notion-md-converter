@@ -187,18 +187,95 @@ export const isEmbedBlock = (block: Block): block is EmbedBlock => {
   return block.type === "embed";
 };
 
+export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+export const retryWithBackoff = async <T>(
+  fn: () => Promise<T>,
+  maxRetries = 3,
+  baseDelay = 1000
+): Promise<T> => {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error: unknown) {
+      if (
+        attempt === maxRetries - 1 ||
+        !error ||
+        typeof error !== "object" ||
+        !("code" in error) ||
+        error.code !== "rate_limited"
+      ) {
+        throw error;
+      }
+
+      const delayMs = baseDelay * (2 ** attempt);
+      await delay(delayMs);
+    }
+  }
+  throw new Error("Max retries reached");
+};
+
+class Semaphore {
+  private permits: number;
+  private waiting: (() => void)[] = [];
+
+  constructor(permits: number) {
+    this.permits = permits;
+  }
+
+  async acquire(): Promise<void> {
+    if (this.permits > 0) {
+      this.permits--;
+      return;
+    }
+
+    return new Promise(resolve => {
+      this.waiting.push(resolve);
+    });
+  }
+
+  release(): void {
+    this.permits++;
+    const next = this.waiting.shift();
+    if (next) {
+      this.permits--;
+      next();
+    }
+  }
+
+  async withLock<T>(fn: () => Promise<T>): Promise<T> {
+    await this.acquire();
+    try {
+      return await fn();
+    } finally {
+      this.release();
+    }
+  }
+}
+
 /**
  * Please be aware that the API specification may change significantly.
  */
-export const $getPageFullContent = async (client: Client, blockId: string) => {
+export const $getPageFullContent = async (
+  client: Client,
+  blockId: string,
+  semaphore?: Semaphore
+) => {
+  const apiSemaphore = semaphore || new Semaphore(3);
   // biome-ignore lint/suspicious/noExplicitAny: Notion API returns any
   const results: any[] = [];
   let nextCursor: string | undefined = undefined;
+
   while (true) {
-    const res = await client.blocks.children.list({
-      block_id: blockId,
-      start_cursor: nextCursor,
-    });
+    const res = await apiSemaphore.withLock(() =>
+      retryWithBackoff(
+        () => client.blocks.children.list({
+          block_id: blockId,
+          start_cursor: nextCursor,
+        })
+      )
+    );
+
     results.push(...res.results);
     if (!res.has_more) {
       break;
@@ -206,17 +283,27 @@ export const $getPageFullContent = async (client: Client, blockId: string) => {
     nextCursor = res.next_cursor ?? undefined;
   }
 
-  for await (const [index, block] of results.entries()) {
+  // Validate blocks first
+  for (const block of results) {
     if (!isFullBlock(block)) {
       throw new Error("Block is not full");
     }
+  }
 
+  // Process children recursively (pass semaphore to maintain concurrency control)
+  const childrenPromises = results.map(async (block, index) => {
     if (block.has_children) {
-      const children = await $getPageFullContent(client, block.id);
-      results[index].children = children;
-    } else {
-      results[index].children = [];
+      const children = await $getPageFullContent(client, block.id, apiSemaphore);
+      return { index, children };
     }
+    return { index, children: [] };
+  });
+
+  const childrenResults = await Promise.all(childrenPromises);
+
+  // Apply results and handle failures
+  for (const result of childrenResults) {
+    results[result.index].children = result.children;
   }
 
   return results as Block[];
@@ -229,11 +316,15 @@ export const $getPageFullContent = async (client: Client, blockId: string) => {
 export const $getDatabasePages = async (client: Client, databaseId: string) => {
   const results: QueryDatabaseResponse["results"] = [];
   let nextCursor: string | undefined = undefined;
+
   while (true) {
-    const res = await client.databases.query({
-      database_id: databaseId,
-      start_cursor: nextCursor,
-    });
+    const res = await retryWithBackoff(
+      () => client.databases.query({
+        database_id: databaseId,
+        start_cursor: nextCursor,
+      })
+    );
+
     results.push(...res.results);
     nextCursor = res.next_cursor ?? undefined;
     if (!nextCursor) {
