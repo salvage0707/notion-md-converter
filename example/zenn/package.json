@@ -9,8 +9,8 @@
     "zenn:simple-export": "tsx src/simple-export/main.ts"
   },
   "dependencies": {
-    "@notion-md-converter/core": "^0.10.0",
-    "@notion-md-converter/zenn": "^0.10.0",
+    "@notion-md-converter/core": "^0.12.0",
+    "@notion-md-converter/zenn": "^0.12.0",
     "@notionhq/client": "^2.2.16"
   },
   "devDependencies": {
