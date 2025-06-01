@@ -20,6 +20,7 @@
   },
   "scripts": {
     "dev": "rollup -c -w",
+    "inspect": "pnpm run build & pnpx @modelcontextprotocol/inspector",
     "check-types": "tsc --noEmit",
     "build": "rollup -c",
     "build:size": "find dist -type f -exec ls -l {} \\; | awk '{total += $5} END {print \"Total size in KB:\", total/1024}'",
